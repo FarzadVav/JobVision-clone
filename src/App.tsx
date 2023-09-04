@@ -1,7 +1,7 @@
 const App = () => {
 	return (
 		<div className={'bg-primary p-3'}>
-      div
+      فرزاد واو
 		</div>
 	);
 };

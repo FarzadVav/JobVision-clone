@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'dana';
+  src: url("/fonts/dana.woff"), url("/fonts/dana.woff2");
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'dana-bold';
+  src: url("/fonts/dana-bold.woff"), url("/fonts/dana-bold.woff2");
+  font-weight: bold;
+  font-display: swap;
+}
+
 :root {
   --whiteColor: #fff;
   --blackColor: #121315;
@@ -17,12 +31,30 @@
 @layer base {
   * {
     @apply p-0 m-0 border-0 outline-0 decoration-0 list-none box-border transition-all duration-150;
+    font-family: 'dana';
   }
 
   body {
     @apply bg-jv-white w-full max-w-full h-screen min-h-screen relative;
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'dana-bold';
+  }
+}
+
+@layer utilities {
+  .dana-bold {
+    font-family: 'dana-bold';
+  }
+}
+
+@layer components {
   #root {
     @apply bg-jv-white w-full max-w-full h-full relative;
   }
