@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --whiteColor: #fff;
+  --blackColor: #121315;
+  --primaryColor: #5660f2;
+  --lightColor: #F8F9FA;
+  --darkColor: #4A4E57;
+  --dangerColor: #fa5555;
+  --successColor: #45c26f;
+  --warningColor: #E1BC29;
+  --blueColor: #0fa5e9;
+}
+
+@layer base {
+  * {
+    @apply p-0 m-0 border-0 outline-0 decoration-0 list-none box-border transition-all duration-150;
+  }
+
+  body {
+    @apply bg-jv-white w-full max-w-full h-screen min-h-screen relative;
+  }
+
+  #root {
+    @apply bg-jv-white w-full max-w-full h-full relative;
+  }
+}
