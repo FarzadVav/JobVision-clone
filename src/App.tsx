@@ -1,7 +1,13 @@
+import {Button} from "antd";
+
 const App = () => {
 	return (
 		<div className={'bg-primary p-3'}>
-      فرزاد واو
+      <Button
+				type={'primary'}
+			>
+				ورود / ثبت نام کارجو
+			</Button>
 		</div>
 	);
 };
