@@ -71,6 +71,15 @@
   .current-height {
     height: calc(100dvh - 4.5rem);
   }
+
+  .mega-menu li:last-child span {
+    border: none;
+  }
+
+  .mega-menu > li:first-child ul {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 @layer components {

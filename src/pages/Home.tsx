@@ -1,6 +1,6 @@
 const Home = () => {
 	return (
-		<div>
+		<div className={`p-9 text-center`}>
 			home page
 		</div>
 	);

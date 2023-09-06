@@ -31,7 +31,7 @@ const CustomNavLink = ({
 		clickHandler()
 		scrollToTop && window.scrollTo(0, 0)
 		if (path !== location.pathname) {
-			loadingContext.setPageLoadingHandler(true)
+			console.log(loadingContext)
 			to(path)
 		}
 	}
