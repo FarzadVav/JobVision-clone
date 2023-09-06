@@ -8,6 +8,10 @@ export default {
       screen: {
         'sm': '540px'
       },
+      container: {
+        center: true,
+        padding: '0.5rem'
+      },
       colors: {
         'jv-white': 'var(--whiteColor)',
         'jv-black': 'var(--blackColor)',
