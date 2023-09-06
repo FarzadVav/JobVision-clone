@@ -1,5 +1,6 @@
 import CustomNavLink from './CustomNavLink.tsx';
 import {useState} from "react";
+import tokenGenerator from "../utils/tokenGenerator.ts";
 
 interface LinkTypes {
 	title: string;
@@ -46,7 +47,327 @@ const megaMenus: MegaMenusTypes[] = [
 				title: 'مهندسی معدن',
 				link: 'mine-engineer',
 				subLinks: []
-			}
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					}
+				]
+			},
+			{
+				title: 'مدیر محصول / مالک محصول',
+				link: 'product-management',
+				subLinks: []
+			},
+			{
+				title: 'مهندسی معدن',
+				link: 'mine-engineer',
+				subLinks: []
+			},
+			{
+				title: 'مهندسی معدن',
+				link: 'mine-engineer',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					}
+				]
+			},
+			{
+				title: 'مدیر محصول / مالک محصول',
+				link: 'product-management',
+				subLinks: []
+			},
+			{
+				title: 'مهندسی معدن',
+				link: 'mine-engineer',
+				subLinks: []
+			},
+			{
+				title: 'مدیر محصول / مالک محصول',
+				link: 'product-management',
+				subLinks: []
+			},
+			{
+				title: 'مهندسی معدن',
+				link: 'mine-engineer',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					}
+				]
+			},
+			{
+				title: 'مدیر محصول / مالک محصول',
+				link: 'product-management',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					}
+				]
+			},
+			{
+				title: 'مدیر محصول / مالک محصول',
+				link: 'product-management',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					}
+				]
+			},
+			{
+				title: 'مهندسی معدن',
+				link: 'mine-engineer',
+				subLinks: []
+			},
+			{
+				title: 'مدیر محصول / مالک محصول',
+				link: 'product-management',
+				subLinks: []
+			},
+			{
+				title: 'مهندسی معدن',
+				link: 'mine-engineer',
+				subLinks: []
+			},
+			{
+				title: 'مهندسی معدن',
+				link: 'mine-engineer',
+				subLinks: []
+			},
+			{
+				title: 'مهندسی معدن',
+				link: 'mine-engineer',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					}
+				]
+			},
+			{
+				title: 'مهندسی معدن',
+				link: 'mine-engineer',
+				subLinks: []
+			},
+			{
+				title: 'مهندسی معدن',
+				link: 'mine-engineer',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					}
+				]
+			},
+			{
+				title: 'مدیر محصول / مالک محصول',
+				link: 'product-management',
+				subLinks: []
+			},
+			{
+				title: 'مهندسی معدن',
+				link: 'mine-engineer',
+				subLinks: []
+			},
+			{
+				title: 'مدیر محصول / مالک محصول',
+				link: 'product-management',
+				subLinks: []
+			},
+			{
+				title: 'مهندسی معدن',
+				link: 'mine-engineer',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					}
+				]
+			},
+			{
+				title: 'مدیر محصول / مالک محصول',
+				link: 'product-management',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					}
+				]
+			},
+			{
+				title: 'مدیر محصول / مالک محصول',
+				link: 'product-management',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					}
+				]
+			},
+			{
+				title: 'مهندسی معدن',
+				link: 'mine-engineer',
+				subLinks: []
+			},
+			{
+				title: 'مدیر محصول / مالک محصول',
+				link: 'product-management',
+				subLinks: []
+			},
+			{
+				title: 'مهندسی معدن',
+				link: 'mine-engineer',
+				subLinks: []
+			},
+			{
+				title: 'مدیر محصول / مالک محصول',
+				link: 'product-management',
+				subLinks: []
+			},
+			{
+				title: 'مهندسی معدن',
+				link: 'mine-engineer',
+				subLinks: []
+			},
+			{
+				title: 'مدیر محصول / مالک محصول',
+				link: 'product-management',
+				subLinks: []
+			},
 		]
 	},
 	{
@@ -100,8 +421,6 @@ const megaMenus: MegaMenusTypes[] = [
 
 const Header = () => {
 	const [showMegaMenu, setShowMegaMenu] = useState<boolean>(false)
-
-	console.log(megaMenus)
 
 	return (
 		<>
@@ -181,8 +500,7 @@ const Header = () => {
 				</div>
 				<div className={`bg-jv-primary w-full h-full flex justify-between items-center px-6 lg:hidden`}>
 					<menu className={`h-full flex justify-center items-center px-3`}>
-						<svg className="stroke-white w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-								 strokeWidth={1.5} stroke="currentColor">
+						<svg className="stroke-white w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
 							<path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5"/>
 						</svg>
 					</menu>
@@ -203,27 +521,30 @@ const Header = () => {
 				</div>
 			</header>
 
-			<div className={`current-height bg-black bg-opacity-25 backdrop-blur-sm pb-9 absolute
-				top-[4.5rem] left-0 right-0 ${showMegaMenu ? 'opacity-100' : 'opacity-0'}`}>
+			<div className={`current-height bg-black bg-opacity-25 backdrop-blur-sm pb-9 fixed
+				top-[4.5rem] left-0 right-0 ${showMegaMenu ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
 				<div className={`bg-white w-11/12 h-full mx-auto rounded-b-xl
 					relative duration-300 ${showMegaMenu ? 'translate-0' : '-translate-y-9 scale-x-[0.975]'}`}>
 					<ul className={`mega-menu light-shadow w-full h-16 flex px-6`}>
 						{
 							megaMenus.map(menu => (
 								<li
+									key={tokenGenerator()}
 									className={`h-full flex items-center cursor-pointer group last:ml-0 last:border-0 hover:text-jv-primary`}>
 									<span
 										className={`border-l border-solid border-slate-200 h-1/2 flex items-center pt-1 px-6 dana-bold`}>
 										{menu.title}
 									</span>
-									<ul className={`bg-white flex flex-wrap absolute top-16 bottom-0 left-0 right-0 cursor-default p-3
-										duration-0 invisible opacity-0 group-hover:opacity-100 group-hover:visible`}>
+									<ul className={`bg-white flex flex-col flex-wrap absolute top-16 bottom-0 left-0 right-0 cursor-default p-3
+										rounded-b-xl overflow-y-auto duration-0 opacity-0 invisible ${showMegaMenu && 'group-hover:visible group-hover:opacity-100'}`}>
 										{
 											menu.links.map(link => (
-												<li className={`w-1/3 h-max`}>
+												<li
+													key={tokenGenerator()}
+													className={`w-max h-max max-h-max m-1`}
+												>
 													<CustomNavLink
-														className={`text-jv-dark w-full h-full flex flex-col justify-center px-3 py-1
-															group hover:text-jv-primary`}
+														className={`text-jv-dark dana-bold w-full h-full flex flex-col px-3 py-1 hover:text-jv-primary`}
 														path={`#${link.link}`}
 													>
 														{link.title}
@@ -232,11 +553,12 @@ const Header = () => {
 																<ul className={`w-full p-3 cursor-default`}>
 																	{
 																		link.subLinks.map(subLink => (
-																			<li className={`w-full flex items-center mt-2 first:mt-0`}>
-																				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-																						 strokeWidth={1.5} stroke="currentColor" className="w-3 h-3 ml-1.5">
-																					<path strokeLinecap="round" strokeLinejoin="round"
-																								d="M15.75 19.5L8.25 12l7.5-7.5"/>
+																			<li
+																				key={tokenGenerator()}
+																				className={`w-full flex items-center mt-2 first:mt-0`}
+																			>
+																				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3 h-3 ml-1.5">
+																					<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
 																				</svg>
 																				<CustomNavLink
 																					className={`text-jv-dark w-full inline-block hover:text-jv-primary`}
@@ -259,8 +581,10 @@ const Header = () => {
 							))
 						}
 					</ul>
-
-					<div className={`bg-slate-300 w-12 h-1 rounded-full absolute left-1/2 bottom-1.5 -translate-x-1/2`}>
+					<div className={`w-full h-full flex justify-center items-center text-3xl p-3`}>
+						JOB Vision
+					</div>
+					<div className={`bg-slate-300 w-12 h-1 rounded-full absolute left-1/2 bottom-3 -translate-x-1/2`}>
 					</div>
 				</div>
 			</div>
