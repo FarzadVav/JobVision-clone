@@ -30,7 +30,7 @@
 
 @layer base {
   * {
-    @apply p-0 m-0 border-0 outline-0 decoration-0 list-none box-border z-0 transition-all duration-150;
+    @apply p-0 m-0 border-0 outline-0 decoration-0 list-none box-border transition-all duration-150 ease-linear;
     font-family: 'dana';
     font-size: 0.95rem;
   }
@@ -51,6 +51,10 @@
   button {
     background: none;
   }
+
+  svg * {
+    transition: none !important;
+  }
 }
 
 @layer utilities {
@@ -64,6 +68,12 @@
     @apply bg-white w-full max-w-full h-full relative;
   }
 
+  .current-height {
+    height: calc(100dvh - 4.5rem);
+  }
+}
+
+@layer components {
   header nav li {
     @apply ml-7 last:ml-0;
   }
@@ -72,10 +82,8 @@
     @apply h-full flex justify-center items-center select-none hover:text-jv-primary;
   }
 
-  .nav-link.mega-nav-link {
-    @apply relative hover:before:opacity-100 hover:before:scale-100;
-    @apply before:bg-jv-primary before:h-[0.1rem] before:absolute before:bottom-0 before:left-0 before:right-0
-    before:rounded-full before:opacity-0 before:scale-x-90 before:duration-150 before:content-[''];
+  .nav-link * {
+    @apply mr-1.5;
   }
 
   .btn {
@@ -107,6 +115,6 @@
 
 @layer components {
   .light-shadow {
-    @apply shadow shadow-slate-100;
+    @apply shadow shadow-[#00000010];
   }
 }
