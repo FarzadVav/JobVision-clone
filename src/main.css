@@ -30,12 +30,13 @@
 
 @layer base {
   * {
-    @apply p-0 m-0 border-0 outline-0 decoration-0 list-none box-border transition-all duration-150;
+    @apply p-0 m-0 border-0 outline-0 decoration-0 list-none box-border z-0 transition-all duration-150;
     font-family: 'dana';
+    font-size: 0.95rem;
   }
 
   body {
-    @apply bg-jv-white w-full max-w-full h-screen min-h-screen relative;
+    @apply bg-white w-full max-w-full h-screen min-h-screen relative;
   }
 
   h1,
@@ -45,6 +46,10 @@
   h5,
   h6 {
     font-family: 'dana-bold';
+  }
+
+  button {
+    background: none;
   }
 }
 
@@ -56,6 +61,52 @@
 
 @layer components {
   #root {
-    @apply bg-jv-white w-full max-w-full h-full relative;
+    @apply bg-white w-full max-w-full h-full relative;
+  }
+
+  header nav li {
+    @apply ml-7 last:ml-0;
+  }
+
+  .nav-link {
+    @apply h-full flex justify-center items-center select-none hover:text-jv-primary;
+  }
+
+  .nav-link.mega-nav-link {
+    @apply relative hover:before:opacity-100 hover:before:scale-100;
+    @apply before:bg-jv-primary before:h-[0.1rem] before:absolute before:bottom-0 before:left-0 before:right-0
+    before:rounded-full before:opacity-0 before:scale-x-90 before:duration-150 before:content-[''];
+  }
+
+  .btn {
+    @apply flex justify-center items-center py-2 px-5 rounded-md select-none cursor-pointer;
+  }
+
+  .btn * {
+    @apply mr-3;
+  }
+
+  .btn-primary {
+    @apply bg-jv-primary text-white
+  }
+}
+
+@layer components {
+  .badge {
+    @apply flex justify-center items-center text-sm px-3 py-1 rounded-md select-none;
+  }
+
+  .badge * {
+    @apply mr-2;
+  }
+
+  .badge-danger {
+    @apply text-white bg-jv-danger hover:brightness-95;
+  }
+}
+
+@layer components {
+  .light-shadow {
+    @apply shadow shadow-slate-100;
   }
 }

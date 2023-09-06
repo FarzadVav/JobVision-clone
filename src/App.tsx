@@ -7,7 +7,7 @@ const App = () => {
 	const router = useRoutes(routes)
 
 	return (
-		<div className={'bg-primary p-3'}>
+		<div>
 			<Header/>
 			{router}
 		</div>

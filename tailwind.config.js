@@ -13,7 +13,7 @@ export default {
         padding: '0.5rem'
       },
       colors: {
-        'jv-white': 'var(--whiteColor)',
+        white: 'var(--whiteColor)',
         'jv-black': 'var(--blackColor)',
         'jv-primary': 'var(--primaryColor)',
         'jv-light': 'var(--lightColor)',
