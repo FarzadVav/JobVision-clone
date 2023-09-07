@@ -573,6 +573,7 @@ const megaMenus: MegaMenusTypes[] = [
 
 const Header = () => {
 	const [showMegaMenu, setShowMegaMenu] = useState<boolean>(false)
+	const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
 
 	const megaMenuButtonLinkHandler = (link: string) => {
 		console.log(link)
@@ -655,26 +656,48 @@ const Header = () => {
 					</div>
 				</div>
 				<div className={`bg-jv-primary w-full h-full flex justify-between items-center px-6 lg:hidden`}>
-					<menu className={`h-full flex justify-center items-center px-3`}>
+					<menu
+						className={`h-full flex justify-center items-center px-3`}
+						onClick={() => setShowMobileMenu(prev => !prev)}
+					>
 						<svg className="stroke-white w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
 								 strokeWidth={1.5} stroke="currentColor">
-							<path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5"/>
+							{
+								showMobileMenu ? (
+									<path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
+								) : (
+									<path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5"/>
+								)
+							}
 						</svg>
 					</menu>
-					<CustomNavLink
-						className={'nav-link'}
-					>
-						<img
-
-							src="/images/logo-white.svg"
-							alt="لوگوی جاب ویژن"
-						/>
-					</CustomNavLink>
-					<CustomNavLink
-						className={'text-white'}
-					>
-						ورود / ثبت نام
-					</CustomNavLink>
+					{
+						showMobileMenu ? (
+							<CustomNavLink
+								className={`btn btn-danger`}
+							>
+								گزارش کارنامه بازار کار
+							</CustomNavLink>
+						) : (
+							<>
+								<CustomNavLink
+									className={`nav-link`}
+									path={`/`}
+								>
+									<img
+										className={`scale-90`}
+										src="/images/logo-white.svg"
+										alt="لوگوی جاب ویژن"
+									/>
+								</CustomNavLink>
+								<CustomNavLink
+									className={'text-white'}
+								>
+									ورود / ثبت نام
+								</CustomNavLink>
+							</>
+						)
+					}
 				</div>
 			</header>
 

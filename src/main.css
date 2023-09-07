@@ -113,7 +113,11 @@
   }
 
   .btn-primary {
-    @apply bg-jv-primary text-white
+    @apply bg-jv-primary text-white;
+  }
+
+  .btn-danger {
+    @apply bg-jv-danger text-white;
   }
 }
 
