@@ -140,3 +140,50 @@
     @apply shadow shadow-[#00000010];
   }
 }
+
+@layer components {
+  .show-mobile-menu {
+    animation: show-mobile-menu 750ms ease-out;
+  }
+
+  @keyframes show-mobile-menu {
+    0% {
+      transform: scaleY(1) translateY(100%);
+    }
+    60% {
+      transform: scaleY(1.02) translateY(0);
+    }
+    80% {
+      transform: scaleY(0.99);
+    }
+    100% {
+      transform: scaleY(1);
+    }
+  }
+
+  .hide-mobile-menu {
+    animation: hide-mobile-menu 250ms ease-in forwards;
+  }
+
+  @keyframes hide-mobile-menu {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+
+  .fade {
+    animation: fade 350ms ease;
+  }
+
+  @keyframes fade {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}

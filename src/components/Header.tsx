@@ -1,5 +1,7 @@
 import CustomNavLink from './CustomNavLink.tsx';
-import {useState} from "react";
+import * as React from "react";
+import {useEffect, useRef, useState} from "react";
+
 import tokenGenerator from "../utils/tokenGenerator.ts";
 
 interface LinkTypes {
@@ -575,6 +577,27 @@ const Header = () => {
 	const [showMegaMenu, setShowMegaMenu] = useState<boolean>(false)
 	const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
 
+	const mobileMenuRef = useRef<HTMLMenuElement>(null)
+
+	useEffect(() => {
+		if (showMobileMenu) {
+			document.body.classList.add('overflow-hidden')
+		} else {
+			document.body.classList.remove('overflow-hidden')
+			mobileMenuRef?.current?.classList.remove('hide-mobile-menu')
+			mobileMenuRef?.current?.classList.add('show-mobile-menu')
+		}
+	}, [showMobileMenu])
+
+	const mobileMenuToggleHandler = () => {
+		if (showMobileMenu) {
+			mobileMenuRef?.current?.classList.remove('show-mobile-menu')
+			mobileMenuRef?.current?.classList.add('hide-mobile-menu')
+		} else {
+			setShowMobileMenu(true)
+		}
+	}
+
 	const megaMenuButtonLinkHandler = (link: string) => {
 		console.log(link)
 	}
@@ -658,46 +681,41 @@ const Header = () => {
 				<div className={`bg-jv-primary w-full h-full flex justify-between items-center px-6 lg:hidden`}>
 					<menu
 						className={`h-full flex justify-center items-center px-3`}
-						onClick={() => setShowMobileMenu(prev => !prev)}
+						onClick={mobileMenuToggleHandler}
 					>
-						<svg className="stroke-white w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-								 strokeWidth={1.5} stroke="currentColor">
-							{
-								showMobileMenu ? (
+						{
+							showMobileMenu ? (
+								<svg
+									className={`stroke-white w-9 h-9`} xmlns="http://www.w3.org/2000/svg" fill="none"
+									viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+								>
 									<path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
-								) : (
+								</svg>
+							) : (
+								<svg
+									className={`stroke-white w-9 h-9`} xmlns="http://www.w3.org/2000/svg" fill="none"
+									viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+								>
 									<path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5"/>
-								)
-							}
-						</svg>
+								</svg>
+							)
+						}
 					</menu>
-					{
-						showMobileMenu ? (
-							<CustomNavLink
-								className={`btn btn-danger`}
-							>
-								گزارش کارنامه بازار کار
-							</CustomNavLink>
-						) : (
-							<>
-								<CustomNavLink
-									className={`nav-link`}
-									path={`/`}
-								>
-									<img
-										className={`scale-90`}
-										src="/images/logo-white.svg"
-										alt="لوگوی جاب ویژن"
-									/>
-								</CustomNavLink>
-								<CustomNavLink
-									className={'text-white'}
-								>
-									ورود / ثبت نام
-								</CustomNavLink>
-							</>
-						)
-					}
+					<CustomNavLink
+						className={`nav-link`}
+						path={`/`}
+					>
+						<img
+							className={`scale-90`}
+							src="/images/logo-white.svg"
+							alt="لوگوی جاب ویژن"
+						/>
+					</CustomNavLink>
+					<CustomNavLink
+						className={'text-white'}
+					>
+						ورود / ثبت نام
+					</CustomNavLink>
 				</div>
 			</header>
 
@@ -802,6 +820,23 @@ const Header = () => {
 					</div>
 				</div>
 			</div>
+
+			{
+				showMobileMenu && (
+					<menu
+						ref={mobileMenuRef}
+						className={`show-mobile-menu bg-jv-primary flex flex-col items-center rounded-t-[2rem] fixed bottom-0 top-32 right-0 left-0 origin-bottom z-50 lg:hidden`}
+						onAnimationEnd={(event: React.AnimationEvent<HTMLElement>) => {
+							if (event.animationName === 'hide-mobile-menu') {
+								setShowMobileMenu(false)
+							}
+						}}
+					>
+						<div className={`bg-jv-primary brightness-125 w-12 h-1 rounded-full absolute top-3`}>
+						</div>
+					</menu>
+				)
+			}
 		</>
 	);
 };
