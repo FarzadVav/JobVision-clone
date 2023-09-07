@@ -13,18 +13,23 @@ type CustomNavLinkProps = {
 	clickHandler?: () => void,
 	children: ReactNode
 }
-const CustomNavLink = ({
-	path = '',
-	activeClassName = '',
-	conditionForActive = true,
-	conditionForAlwaysActive = false,
-	className = '',
-	scrollToTop = true,
-	clickHandler = () => {},
-	children
-}: CustomNavLinkProps) => {
+const CustomNavLink = (props: CustomNavLinkProps) => {
+	const {
+		path = '',
+		activeClassName = '',
+		conditionForActive = true,
+		conditionForAlwaysActive = false,
+		className = '',
+		scrollToTop = true,
+		clickHandler = () => {},
+		children
+	} = props
+
 	const loadingContext = useContext(LoadingContext)
 	const to = useNavigate()
+
+	const classNames = `${((path === location.pathname && activeClassName && conditionForActive) || conditionForAlwaysActive)
+		? activeClassName : className} cursor-pointer select-none`
 
 	const myLinkClickHandler = (event: MouseEvent<HTMLAnchorElement>) => {
 		event.preventDefault()
@@ -38,14 +43,7 @@ const CustomNavLink = ({
 
 	return (
 		<a
-			className={`${
-				(
-					(path === location.pathname && activeClassName && conditionForActive) || conditionForAlwaysActive
-				)
-					? activeClassName
-					: className
-			}
-        cursor-pointer select-none`}
+			className={classNames}
 			onClick={myLinkClickHandler}
 		>
 			{children}
