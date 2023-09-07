@@ -26,6 +26,30 @@ const megaMenus: MegaMenusTypes[] = [
 						link: 'mobile-programming'
 					},
 					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
 						title: 'فرانت اند',
 						link: 'front-end'
 					},
@@ -48,6 +72,124 @@ const megaMenus: MegaMenusTypes[] = [
 					{
 						title: 'برنامه نویسسی موبایل',
 						link: 'mobile-programming'
+					},
+				]
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+				]
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+				]
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+				]
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
 					},
 				]
 			},
@@ -68,34 +210,6 @@ const megaMenus: MegaMenusTypes[] = [
 						title: 'بک اند',
 						link: 'back-end'
 					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
 				]
 			},
 			{
@@ -109,14 +223,6 @@ const megaMenus: MegaMenusTypes[] = [
 					{
 						title: 'بک اند',
 						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
 					},
 				]
 			},
@@ -128,16 +234,7 @@ const megaMenus: MegaMenusTypes[] = [
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
 				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					}
-				]
+				subLinks: []
 			},
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
@@ -147,44 +244,7 @@ const megaMenus: MegaMenusTypes[] = [
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
 				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-				]
+				subLinks: []
 			},
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
@@ -194,122 +254,7 @@ const megaMenus: MegaMenusTypes[] = [
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
 				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-				]
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					}
-				]
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-				]
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-				]
+				subLinks: []
 			},
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
@@ -319,16 +264,7 @@ const megaMenus: MegaMenusTypes[] = [
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
 				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					}
-				]
+				subLinks: []
 			},
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
@@ -338,44 +274,7 @@ const megaMenus: MegaMenusTypes[] = [
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
 				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-				]
+				subLinks: []
 			},
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
@@ -385,16 +284,7 @@ const megaMenus: MegaMenusTypes[] = [
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
 				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					}
-				]
+				subLinks: []
 			},
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
@@ -404,86 +294,7 @@ const megaMenus: MegaMenusTypes[] = [
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
 				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-				]
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-				]
+				subLinks: []
 			},
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
@@ -493,22 +304,63 @@ const megaMenus: MegaMenusTypes[] = [
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
 				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					}
-				]
+				subLinks: []
 			},
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
 				link: 'programming',
 				subLinks: []
 			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			}
 		]
 	},
 	{
