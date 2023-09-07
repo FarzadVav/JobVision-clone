@@ -3,20 +3,7 @@ import * as React from "react";
 import {useEffect, useRef, useState} from "react";
 
 import tokenGenerator from "../utils/tokenGenerator.ts";
-
-interface LinkTypes {
-	title: string;
-	link: string;
-}
-
-interface MenuTypes extends LinkTypes {
-	subLinks: LinkTypes[]
-}
-
-type MegaMenusTypes = {
-	title: string,
-	links: MenuTypes[]
-}
+import MegaMenusTypes from "../types/megaMenu.types.ts";
 
 const megaMenus: MegaMenusTypes[] = [
 	{
