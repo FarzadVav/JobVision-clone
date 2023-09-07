@@ -35,17 +35,36 @@ const megaMenus: MegaMenusTypes[] = [
 					{
 						title: 'برنامه نویسسی موبایل',
 						link: 'mobile-programming'
-					}
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
 				]
 			},
 			{
-				title: 'مدیر محصول / مالک محصول',
-				link: 'product-management',
-				subLinks: []
-			},
-			{
-				title: 'مهندسی معدن',
-				link: 'mine-engineer',
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
 				subLinks: []
 			},
 			{
@@ -63,22 +82,77 @@ const megaMenus: MegaMenusTypes[] = [
 					{
 						title: 'برنامه نویسسی موبایل',
 						link: 'mobile-programming'
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+				]
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+				]
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
 					}
 				]
 			},
 			{
-				title: 'مدیر محصول / مالک محصول',
-				link: 'product-management',
-				subLinks: []
-			},
-			{
-				title: 'مهندسی معدن',
-				link: 'mine-engineer',
-				subLinks: []
-			},
-			{
-				title: 'مهندسی معدن',
-				link: 'mine-engineer',
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
 				subLinks: []
 			},
 			{
@@ -96,27 +170,36 @@ const megaMenus: MegaMenusTypes[] = [
 					{
 						title: 'برنامه نویسسی موبایل',
 						link: 'mobile-programming'
-					}
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
 				]
 			},
 			{
-				title: 'مدیر محصول / مالک محصول',
-				link: 'product-management',
-				subLinks: []
-			},
-			{
-				title: 'مهندسی معدن',
-				link: 'mine-engineer',
-				subLinks: []
-			},
-			{
-				title: 'مدیر محصول / مالک محصول',
-				link: 'product-management',
-				subLinks: []
-			},
-			{
-				title: 'مهندسی معدن',
-				link: 'mine-engineer',
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
 				subLinks: []
 			},
 			{
@@ -134,12 +217,133 @@ const megaMenus: MegaMenusTypes[] = [
 					{
 						title: 'برنامه نویسسی موبایل',
 						link: 'mobile-programming'
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+				]
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
 					}
 				]
 			},
 			{
-				title: 'مدیر محصول / مالک محصول',
-				link: 'product-management',
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+				]
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+				]
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					}
+				]
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
 				subLinks: []
 			},
 			{
@@ -157,12 +361,55 @@ const megaMenus: MegaMenusTypes[] = [
 					{
 						title: 'برنامه نویسسی موبایل',
 						link: 'mobile-programming'
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+				]
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: []
+			},
+			{
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
+				subLinks: [
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
 					}
 				]
 			},
 			{
-				title: 'مدیر محصول / مالک محصول',
-				link: 'product-management',
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
 				subLinks: []
 			},
 			{
@@ -180,33 +427,32 @@ const megaMenus: MegaMenusTypes[] = [
 					{
 						title: 'برنامه نویسسی موبایل',
 						link: 'mobile-programming'
-					}
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
+					{
+						title: 'فرانت اند',
+						link: 'front-end'
+					},
+					{
+						title: 'بک اند',
+						link: 'back-end'
+					},
+					{
+						title: 'برنامه نویسسی موبایل',
+						link: 'mobile-programming'
+					},
 				]
-			},
-			{
-				title: 'مهندسی معدن',
-				link: 'mine-engineer',
-				subLinks: []
-			},
-			{
-				title: 'مدیر محصول / مالک محصول',
-				link: 'product-management',
-				subLinks: []
-			},
-			{
-				title: 'مهندسی معدن',
-				link: 'mine-engineer',
-				subLinks: []
-			},
-			{
-				title: 'مهندسی معدن',
-				link: 'mine-engineer',
-				subLinks: []
-			},
-			{
-				title: 'مهندسی معدن',
-				link: 'mine-engineer',
-				subLinks: []
 			},
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
@@ -223,23 +469,7 @@ const megaMenus: MegaMenusTypes[] = [
 					{
 						title: 'برنامه نویسسی موبایل',
 						link: 'mobile-programming'
-					}
-				]
-			},
-			{
-				title: 'مهندسی معدن',
-				link: 'mine-engineer',
-				subLinks: []
-			},
-			{
-				title: 'مهندسی معدن',
-				link: 'mine-engineer',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: [
+					},
 					{
 						title: 'فرانت اند',
 						link: 'front-end'
@@ -251,33 +481,7 @@ const megaMenus: MegaMenusTypes[] = [
 					{
 						title: 'برنامه نویسسی موبایل',
 						link: 'mobile-programming'
-					}
-				]
-			},
-			{
-				title: 'مدیر محصول / مالک محصول',
-				link: 'product-management',
-				subLinks: []
-			},
-			{
-				title: 'مهندسی معدن',
-				link: 'mine-engineer',
-				subLinks: []
-			},
-			{
-				title: 'مدیر محصول / مالک محصول',
-				link: 'product-management',
-				subLinks: []
-			},
-			{
-				title: 'مهندسی معدن',
-				link: 'mine-engineer',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: [
+					},
 					{
 						title: 'فرانت اند',
 						link: 'front-end'
@@ -289,12 +493,12 @@ const megaMenus: MegaMenusTypes[] = [
 					{
 						title: 'برنامه نویسسی موبایل',
 						link: 'mobile-programming'
-					}
+					},
 				]
 			},
 			{
-				title: 'مدیر محصول / مالک محصول',
-				link: 'product-management',
+				title: 'برنامه نویسی و توسعه نرم افزار',
+				link: 'programming',
 				subLinks: []
 			},
 			{
@@ -306,66 +510,14 @@ const megaMenus: MegaMenusTypes[] = [
 						link: 'front-end'
 					},
 					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
 						title: 'برنامه نویسسی موبایل',
 						link: 'mobile-programming'
 					}
 				]
-			},
-			{
-				title: 'مدیر محصول / مالک محصول',
-				link: 'product-management',
-				subLinks: []
 			},
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
 				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					}
-				]
-			},
-			{
-				title: 'مهندسی معدن',
-				link: 'mine-engineer',
-				subLinks: []
-			},
-			{
-				title: 'مدیر محصول / مالک محصول',
-				link: 'product-management',
-				subLinks: []
-			},
-			{
-				title: 'مهندسی معدن',
-				link: 'mine-engineer',
-				subLinks: []
-			},
-			{
-				title: 'مدیر محصول / مالک محصول',
-				link: 'product-management',
-				subLinks: []
-			},
-			{
-				title: 'مهندسی معدن',
-				link: 'mine-engineer',
-				subLinks: []
-			},
-			{
-				title: 'مدیر محصول / مالک محصول',
-				link: 'product-management',
 				subLinks: []
 			},
 		]
@@ -421,6 +573,10 @@ const megaMenus: MegaMenusTypes[] = [
 
 const Header = () => {
 	const [showMegaMenu, setShowMegaMenu] = useState<boolean>(false)
+
+	const megaMenuButtonLinkHandler = (link: string) => {
+		console.log(link)
+	}
 
 	return (
 		<>
@@ -500,7 +656,8 @@ const Header = () => {
 				</div>
 				<div className={`bg-jv-primary w-full h-full flex justify-between items-center px-6 lg:hidden`}>
 					<menu className={`h-full flex justify-center items-center px-3`}>
-						<svg className="stroke-white w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+						<svg className="stroke-white w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+								 strokeWidth={1.5} stroke="currentColor">
 							<path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5"/>
 						</svg>
 					</menu>
@@ -523,7 +680,7 @@ const Header = () => {
 
 			<div className={`current-height bg-black bg-opacity-25 backdrop-blur-sm pb-9 fixed
 				top-[4.5rem] left-0 right-0 ${showMegaMenu ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-				<div className={`bg-white w-11/12 h-full mx-auto rounded-b-xl
+				<div className={`bg-white w-11/12 h-full mx-auto rounded-b-xl flex flex-col
 					relative duration-300 ${showMegaMenu ? 'translate-0' : '-translate-y-9 scale-x-[0.975]'}`}>
 					<ul className={`mega-menu light-shadow w-full h-16 flex px-6`}>
 						{
@@ -535,17 +692,17 @@ const Header = () => {
 										className={`border-l border-solid border-slate-200 h-1/2 flex items-center pt-1 px-6 dana-bold`}>
 										{menu.title}
 									</span>
-									<ul className={`bg-white flex flex-col flex-wrap absolute top-16 bottom-0 left-0 right-0 cursor-default p-3
+									<ul className={`bg-white columns-5 absolute top-16 bottom-0 left-0 right-0 cursor-default p-3
 										rounded-b-xl overflow-y-auto duration-0 opacity-0 invisible ${showMegaMenu && 'group-hover:visible group-hover:opacity-100'}`}>
 										{
 											menu.links.map(link => (
 												<li
 													key={tokenGenerator()}
-													className={`w-max h-max max-h-max m-1`}
+													className={`h-max max-h-max m-1`}
 												>
-													<CustomNavLink
-														className={`text-jv-dark dana-bold w-full h-full flex flex-col px-3 py-1 hover:text-jv-primary`}
-														path={`#${link.link}`}
+													<button
+														className={`text-jv-dark dana-bold w-full h-full flex flex-col px-3 py-1 cursor-pointer hover:text-jv-primary`}
+														onClick={() => megaMenuButtonLinkHandler(link.link)}
 													>
 														{link.title}
 														{
@@ -557,11 +714,13 @@ const Header = () => {
 																				key={tokenGenerator()}
 																				className={`w-full flex items-center mt-2 first:mt-0`}
 																			>
-																				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3 h-3 ml-1.5">
-																					<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+																				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+																						 strokeWidth={1.5} stroke="currentColor" className="w-3 h-3 ml-1.5">
+																					<path strokeLinecap="round" strokeLinejoin="round"
+																								d="M15.75 19.5L8.25 12l7.5-7.5"/>
 																				</svg>
 																				<CustomNavLink
-																					className={`text-jv-dark w-full inline-block hover:text-jv-primary`}
+																					className={`text-jv-dark w-full inline-block text-right hover:text-jv-primary`}
 																					path={`#${subLink.link}`}
 																				>
 																					{subLink.title}
@@ -572,7 +731,7 @@ const Header = () => {
 																</ul>
 															) : null
 														}
-													</CustomNavLink>
+													</button>
 												</li>
 											))
 										}
@@ -581,8 +740,40 @@ const Header = () => {
 							))
 						}
 					</ul>
-					<div className={`w-full h-full flex justify-center items-center text-3xl p-3`}>
-						JOB Vision
+					<div className={`flex flex-col justify-center items-center mx-auto mt-5`}>
+						<img
+							className={'w-96'}
+							src="/images/chart.svg"
+							alt="نمودار بازارکار"
+						/>
+						<p className={`text-jv-dark mt-2 text-center`}>
+							در این قسمت، آخرین فرصت‌های استخدام سراسری و دولتی به‌طور مرتب به‌روزرسانی و منتشر می‌شوند. به صفحه
+							<br/>
+							استخدام‌های سراسری سر بزنید و از بررسی روزانه ده‌ها سایت و مرجع خبری دیگر بی‌نیاز شوید.
+						</p>
+						<ul className={`mt-5 flex justify-center items-center`}>
+							<li>
+								<CustomNavLink
+									className={`hover:text-jv-primary`}
+								>
+									لینک پیوست 1
+								</CustomNavLink>
+							</li>
+							<li>
+								<CustomNavLink
+									className={`mx-7 hover:text-jv-primary`}
+								>
+									لینک پیوست 2
+								</CustomNavLink>
+							</li>
+							<li>
+								<CustomNavLink
+									className={`hover:text-jv-primary`}
+								>
+									لینک پیوست 3
+								</CustomNavLink>
+							</li>
+						</ul>
 					</div>
 					<div className={`bg-slate-300 w-12 h-1 rounded-full absolute left-1/2 bottom-3 -translate-x-1/2`}>
 					</div>
