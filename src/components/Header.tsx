@@ -664,7 +664,7 @@ const Header = () => {
 				showMobileMenu && (
 					<menu
 						ref={mobileMenuRef}
-						className={`show-mobile-menu bg-jv-primary flex flex-col items-center rounded-t-[2rem] fixed bottom-0 top-32 right-0 left-0 origin-bottom z-50 lg:hidden`}
+						className={`show-mobile-menu bg-jv-primary flex flex-col items-center pt-3 rounded-t-[2rem] fixed bottom-0 top-32 right-0 left-0 origin-bottom z-50 lg:hidden`}
 						onAnimationEnd={(event: React.AnimationEvent<HTMLElement>) => {
 							if (event.animationName === 'hide-mobile-menu') {
 								setShowMobileMenu(false)
@@ -673,6 +673,61 @@ const Header = () => {
 					>
 						<div className={`bg-jv-primary brightness-125 w-12 h-1 rounded-full absolute top-3`}>
 						</div>
+						<ul className={`w-full flex flex-col p-6`}>
+							<li className={`w-full flex justify-between items-center py-2`}>
+								<span className={`text-white text-xl`}>
+									فرصت های شغلی
+								</span>
+								<svg
+									className={`stroke-white w-5 h-5`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+									strokeWidth={2}
+									stroke="currentColor"
+								>
+									<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+								</svg>
+							</li>
+							<li className={`w-full flex justify-between items-center py-2 mt-3`}>
+								<CustomNavLink
+									className={`text-white text-xl`}
+									path={`/wow`}
+								>
+									محصولات
+								</CustomNavLink>
+							</li>
+							<li className={`w-full flex justify-between items-center py-2 mt-3`}>
+								<CustomNavLink
+									className={`text-white text-xl`}
+									path={`/wow`}
+								>
+									رده بندی شرکت ها
+								</CustomNavLink>
+							</li>
+							<li
+								className={`border-b border-solid border-slate-400 w-full flex justify-between items-center py-2 pb-5 mt-3`}>
+								<CustomNavLink
+									className={`text-white text-xl`}
+									path={`/wow`}
+								>
+									رزومه ساز
+								</CustomNavLink>
+							</li>
+							<li className={`w-full flex justify-between items-center py-2 mt-3`}>
+								<CustomNavLink
+									className={`text-white text-xl`}
+									path={`/wow`}
+								>
+									کارفرمایان
+								</CustomNavLink>
+							</li>
+							<li className={`w-full flex justify-between items-center mt-3`}>
+								<CustomNavLink
+									className={`btn btn-danger text-xl w-full`}
+									path={`/wow`}
+								>
+									گزارش کارنامه بازار کار
+								</CustomNavLink>
+							</li>
+						</ul>
 					</menu>
 				)
 			}
