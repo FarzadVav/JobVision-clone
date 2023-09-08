@@ -8,6 +8,7 @@ interface MenuTypes extends LinkTypes {
 }
 
 type MegaMenusTypes = {
+	id: string,
 	title: string,
 	links: MenuTypes[]
 }

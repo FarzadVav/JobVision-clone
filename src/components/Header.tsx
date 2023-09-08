@@ -7,6 +7,7 @@ import MegaMenusTypes from "../types/megaMenu.types.ts";
 
 const megaMenus: MegaMenusTypes[] = [
 	{
+		id: tokenGenerator(),
 		title: 'پربازدیدترین شغل ها',
 		links: [
 			{
@@ -364,6 +365,7 @@ const megaMenus: MegaMenusTypes[] = [
 		]
 	},
 	{
+		id: tokenGenerator(),
 		title: 'استان و شهر',
 		links: [
 			{
@@ -377,17 +379,41 @@ const megaMenus: MegaMenusTypes[] = [
 					{
 						title: 'نیشابور',
 						link: 'neyshaboor'
+					},
+					{
+						title: 'مشهد',
+						link: 'mashhad'
+					},
+					{
+						title: 'نیشابور',
+						link: 'neyshaboor'
 					}
 				]
 			},
 			{
 				title: 'تهران',
 				link: 'tehran',
-				subLinks: []
+				subLinks: [
+					{
+						title: 'کرج',
+						link: 'karaj',
+					}
+				]
+			},
+			{
+				title: 'مازندران',
+				link: '',
+				subLinks: [
+					{
+						title: 'رشت',
+						link: 'rasht',
+					}
+				]
 			}
 		]
 	},
 	{
+		id: tokenGenerator(),
 		title: 'نوع همکاری',
 		links: [
 			{
@@ -415,6 +441,13 @@ const megaMenus: MegaMenusTypes[] = [
 const Header = () => {
 	const [showMegaMenu, setShowMegaMenu] = useState<boolean>(false)
 	const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
+	const [showMobileMenuJobs, setShowMobileMenuJobs] = useState<boolean>(false)
+	const [showJobInMobileMenu, setShowJobInMobileMenu] = useState<
+		{ state: boolean, id: string }
+	>({
+		state: false,
+		id: ''
+	})
 
 	const mobileMenuRef = useRef<HTMLMenuElement>(null)
 
@@ -456,8 +489,7 @@ const Header = () => {
 								>
 									فرصت های شغلی
 									<svg
-										className={`${showMegaMenu ? 'shadow-jv-primary -scale-y-100' : 'stroke-jv-black'}
-											group-hover:stroke-jv-primary w-4 h-4 duration-200`}
+										className={`${showMegaMenu ? 'shadow-jv-primary -scale-y-100' : 'stroke-jv-black'} group-hover:stroke-jv-primary w-4 h-4 duration-200`}
 										xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
 										stroke="currentColor"
 									>
@@ -507,8 +539,7 @@ const Header = () => {
 							بخش کارفرمایان
 						</CustomNavLink>
 						<CustomNavLink
-							className={`nav-link pr-5 mr-5 relative before:absolute before:w-[1px] before:h-[60%] before:right-0
-							before:content-[''] before:bg-slate-200`}
+							className={`nav-link pr-5 mr-5 relative before:absolute before:w-[1px] before:h-[60%] before:right-0 before:content-[''] before:bg-slate-200`}
 						>
 							<img
 								src="/images/logo.svg"
@@ -558,10 +589,10 @@ const Header = () => {
 				</div>
 			</header>
 
-			<div className={`current-height bg-black bg-opacity-25 backdrop-blur-sm pb-9 fixed
-				top-[4.5rem] left-0 right-0 ${showMegaMenu ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-				<div className={`bg-white w-11/12 h-full mx-auto rounded-b-xl flex flex-col
-					relative duration-300 ${showMegaMenu ? 'translate-0' : '-translate-y-9 scale-x-[0.975]'}`}>
+			<div
+				className={`current-height bg-black bg-opacity-25 backdrop-blur-sm pb-9 fixed top-[4.5rem] left-0 right-0 ${showMegaMenu ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+				<div
+					className={`bg-white w-11/12 h-full mx-auto rounded-b-xl flex flex-col relative duration-300 ${showMegaMenu ? 'translate-0' : '-translate-y-9 scale-x-[0.975]'}`}>
 					<ul className={`mega-menu light-shadow w-full h-16 flex px-6`}>
 						{
 							megaMenus.map(menu => (
@@ -572,8 +603,8 @@ const Header = () => {
 										className={`border-l border-solid border-slate-200 h-1/2 flex items-center pt-1 px-6 dana-bold`}>
 										{menu.title}
 									</span>
-									<ul className={`bg-white columns-5 absolute top-16 bottom-0 left-0 right-0 cursor-default p-3
-										rounded-b-xl overflow-y-auto duration-0 opacity-0 invisible ${showMegaMenu && 'group-hover:visible group-hover:opacity-100'}`}>
+									<ul
+										className={`bg-white columns-5 absolute top-16 bottom-0 left-0 right-0 cursor-default p-3 rounded-b-xl overflow-y-auto duration-0 opacity-0 invisible ${showMegaMenu && 'group-hover:visible group-hover:opacity-100'}`}>
 										{
 											menu.links.map(link => (
 												<li
@@ -594,8 +625,10 @@ const Header = () => {
 																				key={tokenGenerator()}
 																				className={`w-full flex items-center mt-2 first:mt-0`}
 																			>
-																				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-																						 strokeWidth={1.5} stroke="currentColor" className="w-3 h-3 ml-1.5">
+																				<svg
+																					xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+																					strokeWidth={1.5} stroke="currentColor" className="w-3 h-3 ml-1.5"
+																				>
 																					<path strokeLinecap="round" strokeLinejoin="round"
 																								d="M15.75 19.5L8.25 12l7.5-7.5"/>
 																				</svg>
@@ -664,22 +697,27 @@ const Header = () => {
 				showMobileMenu && (
 					<menu
 						ref={mobileMenuRef}
-						className={`show-mobile-menu bg-jv-primary flex flex-col items-center pt-3 rounded-t-[2rem] fixed bottom-0 top-32 right-0 left-0 origin-bottom z-50 lg:hidden`}
+						className={`show-mobile-menu bg-jv-primary flex flex-col items-center rounded-t-[2rem] fixed bottom-0 top-32 right-0 left-0 origin-bottom overflow-hidden z-50 lg:hidden`}
 						onAnimationEnd={(event: React.AnimationEvent<HTMLElement>) => {
 							if (event.animationName === 'hide-mobile-menu') {
 								setShowMobileMenu(false)
 							}
 						}}
 					>
-						<div className={`bg-jv-primary brightness-125 w-12 h-1 rounded-full absolute top-3`}>
+						<div className={`bg-slate-200 bg-opacity-25 w-12 h-1 rounded-full absolute top-3`}>
 						</div>
-						<ul className={`w-full flex flex-col p-6`}>
-							<li className={`w-full flex justify-between items-center py-2`}>
+						<ul
+							className={`w-full flex flex-col px-6 absolute top-9 duration-300 ease-out ${(!showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : '-translate-x-full'}`}>
+							<li
+								className={`w-full flex justify-between items-center py-2 cursor-pointer select-none`}
+								onClick={() => setShowMobileMenuJobs(true)}
+							>
 								<span className={`text-white text-xl`}>
 									فرصت های شغلی
 								</span>
 								<svg
-									className={`stroke-white w-5 h-5`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+									className={`stroke-white w-5 h-5`} xmlns="http://www.w3.org/2000/svg" fill="none"
+									viewBox="0 0 24 24"
 									strokeWidth={2}
 									stroke="currentColor"
 								>
@@ -689,7 +727,7 @@ const Header = () => {
 							<li className={`w-full flex justify-between items-center py-2 mt-3`}>
 								<CustomNavLink
 									className={`text-white text-xl`}
-									path={`/wow`}
+									path={`/`}
 								>
 									محصولات
 								</CustomNavLink>
@@ -697,24 +735,24 @@ const Header = () => {
 							<li className={`w-full flex justify-between items-center py-2 mt-3`}>
 								<CustomNavLink
 									className={`text-white text-xl`}
-									path={`/wow`}
+									path={`/`}
 								>
 									رده بندی شرکت ها
 								</CustomNavLink>
 							</li>
 							<li
-								className={`border-b border-solid border-slate-400 w-full flex justify-between items-center py-2 pb-5 mt-3`}>
+								className={`border-b border-solid border-slate-200 border-opacity-25 w-full flex justify-between items-center pt-2 pb-5 mt-3`}>
 								<CustomNavLink
 									className={`text-white text-xl`}
-									path={`/wow`}
+									path={`/`}
 								>
 									رزومه ساز
 								</CustomNavLink>
 							</li>
-							<li className={`w-full flex justify-between items-center py-2 mt-3`}>
+							<li className={`w-full flex justify-between items-center py-2 mt-4`}>
 								<CustomNavLink
 									className={`text-white text-xl`}
-									path={`/wow`}
+									path={`/`}
 								>
 									کارفرمایان
 								</CustomNavLink>
@@ -722,11 +760,118 @@ const Header = () => {
 							<li className={`w-full flex justify-between items-center mt-3`}>
 								<CustomNavLink
 									className={`btn btn-danger text-xl w-full`}
-									path={`/wow`}
+									path={`/`}
 								>
 									گزارش کارنامه بازار کار
 								</CustomNavLink>
 							</li>
+						</ul>
+						<ul
+							className={`w-full flex flex-col px-6 absolute top-9 duration-300 ease-out ${(showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : (!showMobileMenuJobs && showJobInMobileMenu.state) ? '-translate-x-full' : 'translate-x-full'}`}>
+							<li
+								className={`border-b border-solid border-slate-200 border-opacity-25 w-full flex justify-between items-center pt-2 pb-5 cursor-pointer select-none`}
+								onClick={() => setShowMobileMenuJobs(false)}
+							>
+								<span className={`text-white text-xl`}>
+									بازگشت
+								</span>
+								<svg
+									className={`stroke-white w-5 h-5 rotate-180`} xmlns="http://www.w3.org/2000/svg" fill="none"
+									viewBox="0 0 24 24"
+									strokeWidth={2}
+									stroke="currentColor"
+								>
+									<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+								</svg>
+							</li>
+							{
+								megaMenus.map(menu => (
+									<li
+										key={menu.id}
+										className={`w-full flex justify-between items-center py-2 mt-4 cursor-pointer`}
+										onClick={() => {
+											setShowMobileMenuJobs(false)
+											setShowJobInMobileMenu({state: true, id: menu.id})
+										}}
+									>
+										<span className={`text-white text-xl`}>
+											{menu.title}
+										</span>
+										<svg
+											className={`stroke-white w-5 h-5`} xmlns="http://www.w3.org/2000/svg" fill="none"
+											viewBox="0 0 24 24"
+											strokeWidth={2}
+											stroke="currentColor"
+										>
+											<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+										</svg>
+									</li>
+								))
+							}
+						</ul>
+						<ul
+							className={`w-full h-full flex flex-col px-6 absolute top-9 overflow-y-auto duration-300 ease-out ${(!showMobileMenuJobs && showJobInMobileMenu.state) ? 'translate-x-0' : 'translate-x-full'}`}>
+							<li
+								className={`bg-jv-primary border-b border-solid border-slate-200 border-opacity-25 w-full flex justify-between items-center sticky top-0 pt-2 pb-5 cursor-pointer select-none`}
+								onClick={() => {
+									setShowMobileMenuJobs(true)
+									setShowJobInMobileMenu({state: false, id: ''})
+								}}
+							>
+								<span className={`text-white text-xl`}>
+									بازگشت
+								</span>
+								<svg
+									className={`stroke-white w-5 h-5 rotate-180`} xmlns="http://www.w3.org/2000/svg" fill="none"
+									viewBox="0 0 24 24"
+									strokeWidth={2}
+									stroke="currentColor"
+								>
+									<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+								</svg>
+							</li>
+							{
+								megaMenus.map(menu => {
+									if (menu.id === showJobInMobileMenu.id) {
+										return menu.links.map(link => (
+											<li
+												key={tokenGenerator()}
+												className={`w-full flex flex-col my-2 cursor-pointer`}
+											>
+												<button
+													className={`underline decoration-[#ffffff75] w-full text-white text-xl text-right`}
+													onClick={() => megaMenuButtonLinkHandler(`#${link.link}`)}
+												>
+													{link.title}
+												</button>
+												{
+													link.subLinks.length ? (
+														<ul className={`w-full flex flex-col pr-5 my-4`}>
+															{
+																link.subLinks.map(subLink => (
+																	<li
+																		key={tokenGenerator()}
+																		className={`py-1 my-1 first:pt-0 first:mt-0 last:pb-0 last:mb-0`}
+																	>
+																		<CustomNavLink
+																			className={`dana-base underline decoration-[#ffffff75] w-full block text-white text-base`}
+																			path={`#${subLink.link}`}
+																		>
+																			{subLink.title}
+																		</CustomNavLink>
+																	</li>
+																))
+															}
+														</ul>
+													) : null
+												}
+											</li>
+										))
+									} else {
+										return null
+									}
+								})
+							}
 						</ul>
 					</menu>
 				)

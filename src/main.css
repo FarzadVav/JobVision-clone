@@ -50,7 +50,6 @@
 
   ::-webkit-scrollbar-thumb {
     background: var(--primaryColor);
-    border-radius: 999px;
   }
 
   h1,
@@ -72,6 +71,10 @@
 }
 
 @layer utilities {
+  .dana-base {
+    font-family: 'dana';
+  }
+
   .dana-bold {
     font-family: 'dana-bold';
   }
