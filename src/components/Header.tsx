@@ -476,7 +476,7 @@ const Header = () => {
 
 	return (
 		<>
-			<header className={`light-shadow bg-white w-full h-[4.5rem] sticky top-0 z-50`}>
+			<header className={`light-shadow bg-white w-full h-[4.5rem] sticky top-0 z-40`}>
 				<div className={`container w-full h-full justify-between items-center hidden lg:flex`}>
 					<nav className={'h-full flex'}>
 						<ul className={'h-full flex'}>
@@ -484,9 +484,7 @@ const Header = () => {
 								className={'h-full'}
 								onClick={() => setShowMegaMenu(prev => !prev)}
 							>
-								<CustomNavLink
-									className={`nav-link group ${showMegaMenu && 'text-jv-primary'}`}
-								>
+								<button className={`nav-link cursor-pointer group ${showMegaMenu && 'text-jv-primary'}`}>
 									فرصت های شغلی
 									<svg
 										className={`${showMegaMenu ? 'shadow-jv-primary -scale-y-100' : 'stroke-jv-black'} group-hover:stroke-jv-primary w-4 h-4 duration-200`}
@@ -495,11 +493,12 @@ const Header = () => {
 									>
 										<path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
 									</svg>
-								</CustomNavLink>
+								</button>
 							</li>
 							<li className={'h-full'}>
 								<CustomNavLink
 									className={'nav-link'}
+									path={`/jobs`}
 								>
 									محصولات
 								</CustomNavLink>
@@ -590,7 +589,7 @@ const Header = () => {
 			</header>
 
 			<div
-				className={`current-height bg-black bg-opacity-25 backdrop-blur-sm pb-9 fixed top-[4.5rem] left-0 right-0 ${showMegaMenu ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+				className={`current-height bg-black bg-opacity-25 backdrop-blur-sm pb-9 fixed top-[4.5rem] left-0 right-0  z-40 ${showMegaMenu ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
 				<div
 					className={`bg-white w-11/12 h-full mx-auto rounded-b-xl flex flex-col relative duration-300 ${showMegaMenu ? 'translate-0' : '-translate-y-9 scale-x-[0.975]'}`}>
 					<ul className={`mega-menu light-shadow w-full h-16 flex px-6`}>
@@ -697,7 +696,7 @@ const Header = () => {
 				showMobileMenu && (
 					<menu
 						ref={mobileMenuRef}
-						className={`show-mobile-menu bg-jv-primary flex flex-col items-center rounded-t-[2rem] fixed bottom-0 top-32 right-0 left-0 origin-bottom overflow-hidden z-50 lg:hidden`}
+						className={`show-mobile-menu bg-jv-primary flex flex-col items-center rounded-t-[2rem] fixed bottom-0 top-32 right-0 left-0 origin-bottom overflow-hidden z-40 lg:hidden`}
 						onAnimationEnd={(event: React.AnimationEvent<HTMLElement>) => {
 							if (event.animationName === 'hide-mobile-menu') {
 								setShowMobileMenu(false)

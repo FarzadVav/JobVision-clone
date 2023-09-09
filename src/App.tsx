@@ -1,4 +1,4 @@
-import { useRoutes } from "react-router-dom";
+import {useRoutes} from "react-router-dom";
 
 import routes from "./routs.tsx";
 import Header from "./components/Header.tsx";
