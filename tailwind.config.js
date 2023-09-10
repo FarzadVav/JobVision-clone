@@ -11,6 +11,7 @@ export default {
       container: {
         center: true,
         padding: '0.5rem'
+
       },
       colors: {
         white: 'var(--whiteColor)',

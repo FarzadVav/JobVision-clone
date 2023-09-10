@@ -90,6 +90,16 @@
     height: calc(100dvh - 4.5rem);
   }
 
+  .current-height-md {
+    height: 100%;
+  }
+
+  @media screen and (min-width: 768px) {
+    .current-height-md {
+      height: calc(100dvh - 4.5rem);
+    } 
+  }
+
   .mega-menu li:last-child span {
     border: none;
   }

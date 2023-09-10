@@ -37,18 +37,17 @@ const Home = () => {
 	}
 
 	return (
-		<div className={`container`}>
-			<main className={`current-height w-full grid grid-cols-2 gap-3 grid-rows-[1fr_7.5rem]`}>
-				<div className={`flex flex-col justify-center`}>
-					<h1 className={`text-3xl`}>
-						در <span className={`text-jv-primary text-3xl`}>484</span> شهر <span
-							className={`text-jv-primary text-3xl`}>37,540</span> آگهی شغلی ثبت شده
+		<div className={`container mt-10 sm:mt-0`}>
+			<main className={`current-height-md w-full grid grid-cols-1 gap-3 grid-rows-[1fr_7.5rem] sm:grid-cols-2`}>
+				<div className={`flex flex-col justify-center items-center text-center sm:text-right sm:items-start`}>
+					<h1 className={`text-xl sm:mt-16 lg:text-2xl`}>
+						در <span className={`text-jv-primary dana-bold mx-1 text-xl lg:text-2xl`}>484</span> شهر <span
+							className={`text-jv-primary dana-bold mx-1 text-xl lg:text-2xl`}>37,540</span> آگهی شغلی ثبت شده
 					</h1>
-					<p className={`mt-4`}>
-						لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون
-						بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+					<p className={`text-sm mt-5 md:text-base`}>
+						لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
 					</p>
-					<div className={`flex items-center mt-5`}>
+					<div className={`hidden items-center mt-5 sm:flex`}>
 						<Link
 							className={`text-jv-primary`}
 							to={'/'}
@@ -63,7 +62,7 @@ const Home = () => {
 						</Link>
 					</div>
 				</div>
-				<div className={`flex justify-center items-center`}>
+				<div className={`hidden justify-center items-center sm:flex`}>
 					<svg
 						id="iran-svg"
 						className={`w-full h-full overflow-visible`}
