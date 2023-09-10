@@ -476,7 +476,7 @@ const Header = () => {
 
 	return (
 		<>
-			<header className={`light-shadow bg-white w-full h-[4.5rem] sticky top-0 z-40`}>
+			<header className={`light-shadow bg-white w-full h-[4.5rem] sticky top-0 z-50`}>
 				<div className={`container w-full h-full justify-between items-center hidden lg:flex`}>
 					<nav className={'h-full flex'}>
 						<ul className={'h-full flex'}>

@@ -20,7 +20,7 @@
   --whiteColor: #fff;
   --blackColor: #121315;
   --primaryColor: #5660f2;
-  --lightColor: #F8F9FA;
+  --lightColor: #f8f9fa;
   --darkColor: #4A4E57;
   --dangerColor: #fa5555;
   --successColor: #45c26f;
@@ -30,7 +30,8 @@
 
 @layer base {
   * {
-    @apply p-0 m-0 border-0 outline-0 decoration-0 list-none box-border transition-all duration-150 ease-linear;
+    @apply p-0 m-0 border-0 outline-0 list-none box-border transition-all duration-150 ease-linear;
+    text-decoration: none;
     font-family: 'dana';
     font-size: 0.95rem;
   }
@@ -91,6 +92,14 @@
 
   .mega-menu li:last-child span {
     border: none;
+  }
+
+  .active-circle {
+    fill: var(--primaryColor);
+  }
+
+  #iran-svg circle {
+    transition: 1s ease !important;
   }
 }
 
@@ -180,13 +189,43 @@
   .fade {
     animation: fade 350ms ease;
   }
-
+  
   @keyframes fade {
     0% {
       opacity: 0;
     }
     100% {
       opacity: 1;
+    }
+  }
+  
+  .show-message-box {
+    animation: show-message-box 1s ease forwards;
+  }
+
+  @keyframes show-message-box {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .hidden-message-box {
+    animation: hidden-message-box 1s ease forwards;
+  }
+
+  @keyframes hidden-message-box {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.5);
     }
   }
 }
