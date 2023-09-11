@@ -1,6 +1,6 @@
 import CustomNavLink from './CustomNavLink.tsx';
 import * as React from "react";
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 
 import tokenGenerator from "../utils/tokenGenerator.ts";
 import MegaMenusTypes from "../types/megaMenu.types.ts";
@@ -491,7 +491,7 @@ const Header = () => {
 										xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
 										stroke="currentColor"
 									>
-										<path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+										<path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
 									</svg>
 								</button>
 							</li>
@@ -558,14 +558,14 @@ const Header = () => {
 									className={`stroke-white w-9 h-9`} xmlns="http://www.w3.org/2000/svg" fill="none"
 									viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
 								>
-									<path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
+									<path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
 								</svg>
 							) : (
 								<svg
 									className={`stroke-white w-9 h-9`} xmlns="http://www.w3.org/2000/svg" fill="none"
 									viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
 								>
-									<path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5"/>
+									<path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
 								</svg>
 							)
 						}
@@ -629,7 +629,7 @@ const Header = () => {
 																					strokeWidth={1.5} stroke="currentColor" className="w-3 h-3 ml-1.5"
 																				>
 																					<path strokeLinecap="round" strokeLinejoin="round"
-																								d="M15.75 19.5L8.25 12l7.5-7.5"/>
+																						d="M15.75 19.5L8.25 12l7.5-7.5" />
 																				</svg>
 																				<CustomNavLink
 																					className={`text-jv-dark w-full inline-block text-right hover:text-jv-primary`}
@@ -660,7 +660,7 @@ const Header = () => {
 						/>
 						<p className={`text-jv-dark mt-2 text-center`}>
 							در این قسمت، آخرین فرصت‌های استخدام سراسری و دولتی به‌طور مرتب به‌روزرسانی و منتشر می‌شوند. به صفحه
-							<br/>
+							<br />
 							استخدام‌های سراسری سر بزنید و از بررسی روزانه ده‌ها سایت و مرجع خبری دیگر بی‌نیاز شوید.
 						</p>
 						<ul className={`mt-5 flex justify-center items-center`}>
@@ -705,8 +705,8 @@ const Header = () => {
 					>
 						<div className={`bg-slate-200 bg-opacity-25 w-12 h-1 rounded-full absolute top-3`}>
 						</div>
-						<ul
-							className={`w-full flex flex-col px-6 absolute top-9 duration-300 ease-out ${(!showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : '-translate-x-full'}`}>
+						<ul className={`w-full flex flex-col px-6 absolute top-9 duration-500 cubic-1
+						${(!showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : '-translate-x-full'}`}>
 							<li
 								className={`w-full flex justify-between items-center py-2 cursor-pointer select-none`}
 								onClick={() => setShowMobileMenuJobs(true)}
@@ -720,7 +720,7 @@ const Header = () => {
 									strokeWidth={2}
 									stroke="currentColor"
 								>
-									<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+									<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
 								</svg>
 							</li>
 							<li className={`w-full flex justify-between items-center py-2 mt-3`}>
@@ -765,8 +765,8 @@ const Header = () => {
 								</CustomNavLink>
 							</li>
 						</ul>
-						<ul
-							className={`w-full flex flex-col px-6 absolute top-9 duration-300 ease-out ${(showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : (!showMobileMenuJobs && showJobInMobileMenu.state) ? '-translate-x-full' : 'translate-x-full'}`}>
+						<ul className={`w-full flex flex-col px-6 absolute top-9 duration-500 cubic-1
+						${(showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : (!showMobileMenuJobs && showJobInMobileMenu.state) ? '-translate-x-full' : 'translate-x-full'}`}>
 							<li
 								className={`border-b border-solid border-slate-200 border-opacity-25 w-full flex justify-between items-center pt-2 pb-5 cursor-pointer select-none`}
 								onClick={() => setShowMobileMenuJobs(false)}
@@ -780,7 +780,7 @@ const Header = () => {
 									strokeWidth={2}
 									stroke="currentColor"
 								>
-									<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+									<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
 								</svg>
 							</li>
 							{
@@ -790,7 +790,7 @@ const Header = () => {
 										className={`w-full flex justify-between items-center py-2 mt-4 cursor-pointer`}
 										onClick={() => {
 											setShowMobileMenuJobs(false)
-											setShowJobInMobileMenu({state: true, id: menu.id})
+											setShowJobInMobileMenu({ state: true, id: menu.id })
 										}}
 									>
 										<span className={`text-white text-xl`}>
@@ -802,19 +802,19 @@ const Header = () => {
 											strokeWidth={2}
 											stroke="currentColor"
 										>
-											<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+											<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
 										</svg>
 									</li>
 								))
 							}
 						</ul>
-						<ul
-							className={`w-full h-full flex flex-col px-6 absolute top-9 overflow-y-auto duration-300 ease-out ${(!showMobileMenuJobs && showJobInMobileMenu.state) ? 'translate-x-0' : 'translate-x-full'}`}>
+						<ul className={`w-full h-full flex flex-col px-6 absolute top-9 overflow-y-auto duration-500 cubic-1
+						${(!showMobileMenuJobs && showJobInMobileMenu.state) ? 'translate-x-0' : 'translate-x-full'}`}>
 							<li
 								className={`bg-jv-primary border-b border-solid border-slate-200 border-opacity-25 w-full flex justify-between items-center sticky top-0 pt-2 pb-5 cursor-pointer select-none`}
 								onClick={() => {
 									setShowMobileMenuJobs(true)
-									setShowJobInMobileMenu({state: false, id: ''})
+									setShowJobInMobileMenu({ state: false, id: '' })
 								}}
 							>
 								<span className={`text-white text-xl`}>
@@ -826,7 +826,7 @@ const Header = () => {
 									strokeWidth={2}
 									stroke="currentColor"
 								>
-									<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+									<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
 								</svg>
 							</li>
 							{

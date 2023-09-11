@@ -164,6 +164,10 @@
 }
 
 @layer components {
+  .cubic-1 {
+    transition-timing-function: cubic-bezier(.26,.32,.71,1);
+  }
+
   .show-mobile-menu {
     animation: show-mobile-menu 750ms ease-out;
   }
