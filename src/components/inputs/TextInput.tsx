@@ -1,28 +1,27 @@
-import { ChangeEvent, ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 
 type TextInputProps = {
   customClass?: string;
-  value: string;
-  setValue: (event: ChangeEvent<HTMLInputElement>) => void;
+  register: {};
   placeholder: string;
+  error?: boolean;
   children: ReactNode
 }
 
-const TextInput = ({ customClass, value, setValue, placeholder, children }: TextInputProps) => {
+const TextInput = ({ customClass, register, placeholder, error, children }: TextInputProps) => {
   const [focus, setFocus] = useState<boolean>(false)
 
   return (
-    <div className={`input-bg ${focus ? 'border-jv-primary' : ''} ${customClass}`}>
+    <div className={`input-bg group ${error ? 'border-jv-danger hover:border-jv-danger' : (focus && !error) ? 'border-jv-primary' : ''} ${customClass}`}>
       <input
         className={`input`}
         type="text"
-        value={value}
-        onChange={(event: ChangeEvent<HTMLInputElement>) => setValue(event)}
+        {...register}
         placeholder={placeholder}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
       />
-      <div className={`input-icon ${focus ? 'text-jv-primary' : ''}`}>
+      <div className={`input-icon ${error ? 'text-jv-danger group-hover:text-jv-danger' : (focus && !error) ? 'text-jv-primary' : 'group-hover:text-jv-primary'}`}>
         {children}
       </div>
     </div>

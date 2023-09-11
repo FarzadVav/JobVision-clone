@@ -184,11 +184,7 @@
   }
 
   .input-icon svg {
-    @apply !w-6 !h-6;
-  }
-
-  .input-bg:hover .input-icon svg {
-    @apply text-jv-primary;
+    @apply !w-6 !h-6 duration-0;
   }
 }
 
