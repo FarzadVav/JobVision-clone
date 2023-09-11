@@ -127,7 +127,11 @@
   }
 
   .btn {
-    @apply flex justify-center items-center py-2 px-5 rounded-md select-none cursor-pointer;
+    @apply h-10 flex justify-center items-center px-5 rounded select-none cursor-pointer;
+  }
+
+  form .btn {
+    @apply !h-12;
   }
 
   .btn * {
@@ -145,7 +149,7 @@
 
 @layer components {
   .badge {
-    @apply flex justify-center items-center text-sm px-3 py-1 rounded-md select-none;
+    @apply flex justify-center items-center text-sm px-3 py-1 rounded select-none;
   }
 
   .badge * {
@@ -158,16 +162,39 @@
 }
 
 @layer components {
-  .light-shadow {
-    @apply shadow shadow-[#00000010];
+  .input-bg {
+    @apply bg-white text-jv-dark w-full h-12 border border-solid border-jv-dark flex justify-between items-center
+    rounded relative overflow-hidden hover:border-jv-primary;
+  }
+
+  .input {
+    @apply bg-none absolute top-0 bottom-0 left-0 right-12 py-2 pl-5 placeholder:opacity-75 focus:placeholder:opacity-100;
+  }
+
+  .input-icon {
+    @apply absolute top-0 bottom-0 right-0 w-12 flex justify-center items-center;
+  }
+
+  .input-icon svg {
+    @apply !w-6 !h-6;
+  }
+
+  .input-bg:hover .input-icon svg {
+    @apply text-jv-primary;
   }
 }
 
 @layer components {
+  .light-shadow {
+    @apply shadow shadow-[#00000010];
+  }
+
   .cubic-1 {
     transition-timing-function: cubic-bezier(.26,.32,.71,1);
   }
+}
 
+@layer components {
   .show-mobile-menu {
     animation: show-mobile-menu 750ms ease-out;
   }
