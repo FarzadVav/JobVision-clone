@@ -127,7 +127,7 @@
   }
 
   .btn {
-    @apply h-10 flex justify-center items-center px-5 rounded select-none cursor-pointer;
+    @apply h-10 flex justify-center items-center px-5 rounded select-none cursor-pointer hover:brightness-110;
   }
 
   form .btn {
@@ -142,8 +142,16 @@
     @apply bg-jv-primary text-white;
   }
 
+  form .btn-primary {
+    @apply border border-solid border-jv-primary;
+  }
+
   .btn-danger {
     @apply bg-jv-danger text-white;
+  }
+
+  form .btn-danger {
+    @apply border border-solid border-jv-danger;
   }
 }
 

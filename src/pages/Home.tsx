@@ -1009,7 +1009,7 @@ const Home = () => {
 						}
 					</svg>
 				</div>
-				<form className={`grid grid-cols-5 grid-rows-1 gap-5 justify-center items-center col-span-2`}>
+				<form className={`grid grid-cols-5 grid-rows-1 gap-3 justify-center items-center col-span-2`}>
 					<TextInput
 						customClass={`col-span-2`}
 						value={``}
