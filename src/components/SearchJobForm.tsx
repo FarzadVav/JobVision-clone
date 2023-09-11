@@ -1,6 +1,14 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import TextInput from "./inputs/TextInput";
+
+const schema = z.object({
+  search: z.string().nonempty('لطفا عنوان شغل را خالی نگذارید').min(3).max(128),
+  job: z.string(),
+  city: z.string()
+})
 
 type formTypes = {
   search: string;
@@ -14,7 +22,9 @@ const SearchJobForm = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset
-  } = useForm<formTypes>()
+  } = useForm<formTypes>({
+    resolver: zodResolver(schema)
+  })
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     console.log(data);
@@ -29,7 +39,7 @@ const SearchJobForm = () => {
     >
       <TextInput
         customClass={`col-span-2`}
-        register={{ ...register('search', { required: true, minLength: 3, maxLength: 128 }) }}
+        register={{ ...register('search') }}
         placeholder={`عنوان شغلی یا شرکت`}
         error={!!errors.search}
       >
