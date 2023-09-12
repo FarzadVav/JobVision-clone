@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import SearchJobForm from "../components/SearchJobForm";
+import Title from "../components/Title";
 
 const Home = () => {
 	const [svgPath, setSvgPath] = useState<{ x: number, y: number }>({ x: 0, y: 0 })
@@ -48,7 +49,7 @@ const Home = () => {
 					<p className={`text-sm sm:text-xs mt-3 sm:mt-5 md:text-base`}>
 						لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
 					</p>
-					<div className={`hidden items-center mt-5 lg:flex`}>
+					<div className={`hidden items-center mt-5 select-none lg:flex`}>
 						<Link
 							className={`text-jv-primary`}
 							to={'/'}
@@ -1000,7 +1001,7 @@ const Home = () => {
 										ref={messageBoxRef}
 										className={`show-message-box bg-white border border-solid border-[#00000025] w-full h-full flex justify-center items-center text-center rounded-full px-5 relative test`}>
 										<div className={`bg-white border-t border-l border-solid border-[#00000025] w-3 h-3 rotate-45 absolute -top-[0.39rem] z-0`}></div>
-										<span className={`text-[60%] z-10`}>
+										<span className={`text-[60%] z-10 select-none`}>
 											یک رزومه برای شرکت دیجیکالا در تهران ارسال شد
 										</span>
 									</div>
@@ -1011,7 +1012,13 @@ const Home = () => {
 				</div>
 				<SearchJobForm />
 			</main>
-			<div className={`w-full h-[1000px]`}>app</div>
+			<div className={`w-full h-[1000px] mt-7`}>
+				<Title>
+					<h2>
+						جدید ترین مشاغل
+					</h2>
+				</Title>
+			</div>
 			<div className={`w-full h-[1000px]`}>app</div>
 			<div className={`w-full h-[1000px]`}>app</div>
 			<div className={`w-full h-[1000px]`}>app</div>

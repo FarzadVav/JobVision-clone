@@ -104,6 +104,18 @@
     } 
   }
 
+  .title {
+    @apply w-full flex items-center;
+  }
+
+  .title > *:last-child {
+    @apply dana-bold text-xl;
+  }
+
+  .title svg {
+    @apply w-6 h-6 ml-4;
+  }
+
   .mega-menu li:last-child span {
     border: none;
   }
