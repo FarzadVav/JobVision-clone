@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import SearchJobForm from "../components/SearchJobForm";
 import Title from "../components/Title";
+import JobBox from "../components/JobBox";
 
 const Home = () => {
 	const [svgPath, setSvgPath] = useState<{ x: number, y: number }>({ x: 0, y: 0 })
@@ -41,10 +42,17 @@ const Home = () => {
 	return (
 		<div className={`wrapper mt-5 sm:mt-0`}>
 			<main className={`current-height-lg w-full grid grid-cols-1 grid-rows-2 lg:grid-rows-[1fr_8rem] sm:grid-cols-2`}>
-				<div className={`flex flex-col justify-center items-center text-center sm:mb-9 lg:mb-0 sm:text-right sm:items-start`}>
-					<h1 className={`sm:mt-16 md:text-xl lg:text-2xl`}>
-						در <span className={`text-jv-primary dana-bold md:mx-1 md:text-xl lg:text-2xl`}>484</span> شهر <span
-							className={`text-jv-primary dana-bold md:mx-1 md:text-xl lg:text-2xl`}>37,540</span> آگهی شغلی ثبت شده
+				<div className={`flex flex-col justify-center items-center text-center sm:text-right sm:items-start`}>
+					<h1 className={`text-xl sm:mt-16 sm:text-base md:text-xl lg:text-2xl`}>
+						در
+						<span className={`text-jv-primary dana-bold text-xl mx-1 sm:text-base md:text-xl lg:mx-2 lg:text-2xl`}>
+							484
+						</span>
+						شهر
+						<span className={`text-jv-primary dana-bold text-xl mx-1 sm:text-base md:text-xl lg:mx-2 lg:text-2xl`}>
+							37,540
+						</span>
+						آگهی شغلی ثبت شده
 					</h1>
 					<p className={`text-sm sm:text-xs mt-3 sm:mt-5 md:text-base`}>
 						لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
@@ -1010,21 +1018,23 @@ const Home = () => {
 						}
 					</svg>
 				</div>
-				<SearchJobForm />
+				<SearchJobForm customClass={`mt-3 sm:mt-9 lg:mt-0`} />
 			</main>
-			<div className={`w-full h-[1000px] mt-7`}>
+			<div className={`w-full h-[1000px] mt-10 md:mt-7`}>
 				<Title>
 					<h2>
 						تازه‌ترین آگهی‌های شغلی برای شما
 					</h2>
 				</Title>
+				<div className={`w-full flex justify-center items-center flex-wrap mt-3`}>
+					<JobBox />
+					<JobBox isUrgent />
+					<JobBox />
+					<JobBox />
+					<JobBox />
+					<JobBox isUrgent />
+				</div>
 			</div>
-			<div className={`w-full h-[1000px]`}>app</div>
-			<div className={`w-full h-[1000px]`}>app</div>
-			<div className={`w-full h-[1000px]`}>app</div>
-			<div className={`w-full h-[1000px]`}>app</div>
-			<div className={`w-full h-[1000px]`}>app</div>
-			<div className={`w-full h-[1000px]`}>app</div>
 		</div>
 	);
 };

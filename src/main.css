@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* GUIDES */
+/* -------- space from first element to header => mt-5 md:mt-7 */
+/* -------- space between elements in body => mt-10 md:mt-7 */
+/* -------- space first element to Title => mt-3 */
+/* GUIDES */
+
 @font-face {
   font-family: 'dana';
   src: url("/fonts/dana.woff"), url("/fonts/dana.woff2");
@@ -20,7 +26,7 @@
   --whiteColor: #fff;
   --blackColor: #121315;
   --primaryColor: #5660f2;
-  --lightColor: #f8f9fa;
+  --lightColor: #dde1e6;
   --darkColor: #4A4E57;
   --dangerColor: #fa5555;
   --successColor: #45c26f;
@@ -101,7 +107,7 @@
   }
 
   .current-height-lg {
-    height: unset;
+    height: max-content;
   }
 
   @media screen and (min-width: 1024px) {
@@ -152,12 +158,20 @@
     @apply h-10 flex justify-center items-center px-5 rounded cursor-pointer hover:brightness-110;
   }
 
+  .btn-sm {
+    @apply h-8 flex justify-center items-center px-3 rounded cursor-pointer hover:brightness-110;
+  }
+
   form .btn {
     @apply !h-12;
   }
 
   .btn * {
     @apply mr-3;
+  }
+
+  .btn-sm * {
+    @apply mr-2;
   }
 
   .btn-primary {
@@ -175,19 +189,23 @@
   form .btn-danger {
     @apply border border-solid border-jv-danger;
   }
+
+  .btn-success {
+    @apply bg-jv-success text-white;
+  }
+
+  form .btn-success {
+    @apply border border-solid border-jv-success;
+  }
 }
 
 @layer components {
   .badge {
-    @apply flex justify-center items-center text-sm px-3 py-1 rounded;
-  }
-
-  .badge * {
-    @apply mr-2;
+    @apply w-max text-xs px-3 py-[1px] rounded-full;
   }
 
   .badge-danger {
-    @apply text-white bg-jv-danger hover:brightness-95;
+    @apply bg-red-100 text-jv-danger;
   }
 }
 
@@ -241,17 +259,15 @@
   }
 
   .hide-mobile-menu {
-    animation: hide-mobile-menu 750ms ease-in forwards;
+    animation: hide-mobile-menu 350ms ease-in forwards;
   }
   
   @keyframes hide-mobile-menu {
     0% {
-      transform-origin: top;
-      transform: scaleY(1) translateY(0);
+      transform: translateY(0);
     }
     100% {
-      transform-origin: top;
-      transform: scaleY(3) translateY(100%);
+      transform: translateY(100%);
     }
   }
 

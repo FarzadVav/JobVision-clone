@@ -16,7 +16,7 @@ type formTypes = {
   city: string;
 }
 
-const SearchJobForm = () => {
+const SearchJobForm = ({ customClass }: { customClass: string }) => {
   const {
     register,
     handleSubmit,
@@ -34,7 +34,7 @@ const SearchJobForm = () => {
 
   return (
     <form
-      className={`grid gap-2 grid-cols-2 grid-rows-[3rem_3rem_3rem] justify-center items-center col-span-2 lg:grid-rows-1 lg:grid-cols-5 sm:gap-3`}
+      className={`grid gap-2 grid-cols-2 grid-rows-[3rem_3rem_3rem] justify-center items-center col-span-2 lg:grid-rows-1 lg:grid-cols-5 sm:gap-3 ${customClass}`}
       onSubmit={handleSubmit(onSubmit)}
     >
       <TextInput
