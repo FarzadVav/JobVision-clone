@@ -38,17 +38,17 @@ const Home = () => {
 	}
 
 	return (
-		<div className={`container mt-5 sm:mt-0`}>
-			<main className={`current-height-md w-full grid grid-cols-1 gap-3 grid-rows-2 lg:grid-rows-[1fr_8rem] sm:grid-cols-2`}>
-				<div className={`flex flex-col justify-center items-center text-center sm:mb-9 sm:text-right sm:items-start`}>
+		<div className={`wrapper mt-5 sm:mt-0`}>
+			<main className={`current-height-lg w-full grid grid-cols-1 grid-rows-2 lg:grid-rows-[1fr_8rem] sm:grid-cols-2`}>
+				<div className={`flex flex-col justify-center items-center text-center sm:mb-9 lg:mb-0 sm:text-right sm:items-start`}>
 					<h1 className={`sm:mt-16 md:text-xl lg:text-2xl`}>
-						در <span className={`text-jv-primary dana-bold mx-1 text-xl lg:text-2xl`}>484</span> شهر <span
-							className={`text-jv-primary dana-bold mx-1 text-xl lg:text-2xl`}>37,540</span> آگهی شغلی ثبت شده
+						در <span className={`text-jv-primary dana-bold md:mx-1 md:text-xl lg:text-2xl`}>484</span> شهر <span
+							className={`text-jv-primary dana-bold md:mx-1 md:text-xl lg:text-2xl`}>37,540</span> آگهی شغلی ثبت شده
 					</h1>
 					<p className={`text-sm sm:text-xs mt-3 sm:mt-5 md:text-base`}>
 						لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
 					</p>
-					<div className={`hidden items-center mt-5 sm:flex`}>
+					<div className={`hidden items-center mt-5 lg:flex`}>
 						<Link
 							className={`text-jv-primary`}
 							to={'/'}

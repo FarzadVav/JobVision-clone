@@ -476,8 +476,8 @@ const Header = () => {
 
 	return (
 		<>
-			<header className={`light-shadow bg-white w-full h-[4.5rem] sticky top-0 z-50`}>
-				<div className={`container w-full h-full justify-between items-center hidden lg:flex`}>
+			<header className={`bg-jv-primary light-shadow w-full h-[4.5rem] sticky top-0 z-50 lg:bg-white`}>
+				<div className={`wrapper w-full h-full justify-between items-center hidden lg:flex`}>
 					<nav className={'h-full flex'}>
 						<ul className={'h-full flex'}>
 							<li
@@ -533,12 +533,12 @@ const Header = () => {
 							ورود / ثبت نام کارجو
 						</CustomNavLink>
 						<CustomNavLink
-							className={'nav-link mr-7'}
+							className={'nav-link mr-5 xl:mr-7'}
 						>
 							بخش کارفرمایان
 						</CustomNavLink>
 						<CustomNavLink
-							className={`nav-link pr-5 mr-5 relative before:absolute before:w-[1px] before:h-[60%] before:right-0 before:content-[''] before:bg-slate-200`}
+							className={`nav-link pr-4 mr-5 relative before:absolute before:w-[1px] before:h-10 before:right-0 before:content-[''] before:bg-slate-200 xl:mr-7 xl:pr-5`}
 						>
 							<img
 								src="/images/logo.svg"
@@ -547,7 +547,7 @@ const Header = () => {
 						</CustomNavLink>
 					</div>
 				</div>
-				<div className={`bg-jv-primary w-full h-full flex justify-between items-center px-6 lg:hidden`}>
+				<div className={`wrapper h-full flex justify-between items-center lg:hidden`}>
 					<menu
 						className={`h-full flex justify-center items-center px-3`}
 						onClick={mobileMenuToggleHandler}
