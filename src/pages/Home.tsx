@@ -3,6 +3,20 @@ import { useEffect, useRef, useState } from "react";
 import SearchJobForm from "../components/SearchJobForm";
 import Title from "../components/Title";
 import JobBox from "../components/JobBox";
+import JobsTypes from "../types/Jobs.types";
+
+const job: JobsTypes = {
+  id: '0394hjnkj34509svh',
+  categories: [{ title: 'front-end', id: 'ljsfg__340982r-sdfh1111_01', }],
+  title: 'متخصص برانت اند (React.js)',
+  company: 'ایران بابا',
+  city: 'تهران',
+  location: 'فرشته',
+  salary: [50, 75],
+  remote: true,
+  isUrgent: true,
+  companyScore: 0,
+}
 
 const Home = () => {
 	const [svgPath, setSvgPath] = useState<{ x: number, y: number }>({ x: 0, y: 0 })
@@ -40,8 +54,8 @@ const Home = () => {
 	}
 
 	return (
-		<div className={`wrapper mt-5 sm:mt-0`}>
-			<main className={`current-height-lg w-full grid grid-cols-1 grid-rows-2 lg:grid-rows-[1fr_8rem] sm:grid-cols-2`}>
+		<div className={`wrapper mt-5`}>
+			<main className={`grid grid-cols-1 grid-rows-2 lg:grid-rows-[1fr_8rem] sm:grid-cols-2`}>
 				<div className={`flex flex-col justify-center items-center text-center sm:text-right sm:items-start`}>
 					<h1 className={`text-xl sm:mt-16 sm:text-base md:text-xl lg:text-2xl`}>
 						در
@@ -1020,19 +1034,19 @@ const Home = () => {
 				</div>
 				<SearchJobForm customClass={`mt-3 sm:mt-9 lg:mt-0`} />
 			</main>
-			<div className={`w-full h-[1000px] mt-10 md:mt-7`}>
+			<div className={`mt-10 md:mt-7`}>
 				<Title>
 					<h2>
 						تازه‌ترین آگهی‌های شغلی برای شما
 					</h2>
 				</Title>
-				<div className={`w-full flex justify-center items-center flex-wrap mt-3`}>
-					<JobBox />
-					<JobBox isUrgent />
-					<JobBox />
-					<JobBox />
-					<JobBox />
-					<JobBox isUrgent />
+				<div className={`w-full grid grid-cols-1 mt-3 md:grid-cols-2 lg:grid-cols-3`}>
+					<JobBox {...job} />
+					<JobBox {...job} />
+					<JobBox {...job} />
+					<JobBox {...job} />
+					<JobBox {...job} />
+					<JobBox {...job} />
 				</div>
 			</div>
 		</div>

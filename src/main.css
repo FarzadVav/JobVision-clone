@@ -106,16 +106,6 @@
     height: calc(100dvh - 4.5rem);
   }
 
-  .current-height-lg {
-    height: max-content;
-  }
-
-  @media screen and (min-width: 1024px) {
-    .current-height-lg {
-      height: calc(100dvh - 4.5rem);
-    } 
-  }
-
   .title {
     @apply w-full flex items-center;
   }
