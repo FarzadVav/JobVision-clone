@@ -708,7 +708,7 @@ const Header = () => {
 						<ul className={`w-full flex flex-col px-6 absolute top-9 duration-500 cubic-1
 						${(!showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : '-translate-x-full'}`}>
 							<li
-								className={`w-full flex justify-between items-center py-2 cursor-pointer select-none`}
+								className={`w-full flex justify-between items-center py-2 cursor-pointer`}
 								onClick={() => setShowMobileMenuJobs(true)}
 							>
 								<span className={`text-white text-xl`}>
@@ -768,7 +768,7 @@ const Header = () => {
 						<ul className={`w-full flex flex-col px-6 absolute top-9 duration-500 cubic-1
 						${(showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : (!showMobileMenuJobs && showJobInMobileMenu.state) ? '-translate-x-full' : 'translate-x-full'}`}>
 							<li
-								className={`border-b border-solid border-slate-200 border-opacity-25 w-full flex justify-between items-center pt-2 pb-5 cursor-pointer select-none`}
+								className={`border-b border-solid border-slate-200 border-opacity-25 w-full flex justify-between items-center pt-2 pb-5 cursor-pointer`}
 								onClick={() => setShowMobileMenuJobs(false)}
 							>
 								<span className={`text-white text-xl`}>
@@ -811,7 +811,7 @@ const Header = () => {
 						<ul className={`w-full h-full flex flex-col px-6 absolute top-9 overflow-y-auto duration-500 cubic-1
 						${(!showMobileMenuJobs && showJobInMobileMenu.state) ? 'translate-x-0' : 'translate-x-full'}`}>
 							<li
-								className={`bg-jv-primary border-b border-solid border-slate-200 border-opacity-25 w-full flex justify-between items-center sticky top-0 pt-2 pb-5 cursor-pointer select-none`}
+								className={`bg-jv-primary border-b border-solid border-slate-200 border-opacity-25 w-full flex justify-between items-center sticky top-0 pt-2 pb-5 cursor-pointer`}
 								onClick={() => {
 									setShowMobileMenuJobs(true)
 									setShowJobInMobileMenu({ state: false, id: '' })

@@ -41,7 +41,7 @@ const CustomNavLink = (props: CustomNavLinkProps) => {
 	return (
 		<a
 			className={`${((path === location.pathname && activeClassName && conditionForActive) || conditionForAlwaysActive)
-				? activeClassName : className} cursor-pointer select-none`}
+				? activeClassName : className} cursor-pointer`}
 			onClick={myLinkClickHandler}
 		>
 			{children}

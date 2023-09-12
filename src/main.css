@@ -30,7 +30,7 @@
 
 @layer base {
   * {
-    @apply p-0 m-0 border-0 outline-0 list-none box-border transition-all duration-150 ease-linear;
+    @apply p-0 m-0 border-0 outline-0 list-none box-border transition-all duration-150 ease-linear select-none;
     text-decoration: none;
     font-family: 'dana';
     font-size: 0.95rem;
@@ -68,6 +68,12 @@
 
   svg * {
     transition: none !important;
+  }
+
+  input,
+  p,
+  p * {
+    @apply select-all;
   }
 }
 
@@ -135,7 +141,7 @@
   }
 
   .nav-link {
-    @apply h-full flex justify-center items-center select-none hover:text-jv-primary;
+    @apply h-full flex justify-center items-center hover:text-jv-primary;
   }
 
   .nav-link * {
@@ -143,7 +149,7 @@
   }
 
   .btn {
-    @apply h-10 flex justify-center items-center px-5 rounded select-none cursor-pointer hover:brightness-110;
+    @apply h-10 flex justify-center items-center px-5 rounded cursor-pointer hover:brightness-110;
   }
 
   form .btn {
@@ -173,7 +179,7 @@
 
 @layer components {
   .badge {
-    @apply flex justify-center items-center text-sm px-3 py-1 rounded select-none;
+    @apply flex justify-center items-center text-sm px-3 py-1 rounded;
   }
 
   .badge * {
