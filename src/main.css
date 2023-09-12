@@ -94,7 +94,7 @@
     height: 100%;
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     .current-height-md {
       height: calc(100dvh - 4.5rem);
     } 

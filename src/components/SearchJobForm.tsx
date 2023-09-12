@@ -34,7 +34,7 @@ const SearchJobForm = () => {
 
   return (
     <form
-      className={`grid grid-cols-5 grid-rows-1 gap-3 justify-center items-center col-span-2`}
+      className={`grid gap-2 grid-cols-2 grid-rows-[3rem_3rem_3rem] justify-center items-center col-span-2 lg:grid-rows-1 lg:grid-cols-5 sm:gap-3`}
       onSubmit={handleSubmit(onSubmit)}
     >
       <TextInput
@@ -65,7 +65,7 @@ const SearchJobForm = () => {
         </svg>
       </TextInput>
       <button
-        className={`btn btn-primary ${isSubmitting && 'opacity-25'}`}
+        className={`btn btn-primary col-span-2 ${isSubmitting && 'opacity-25'} lg:col-span-1`}
         type={`submit`}
         onClick={() => {
           console.log(errors.search);
