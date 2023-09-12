@@ -241,15 +241,17 @@
   }
 
   .hide-mobile-menu {
-    animation: hide-mobile-menu 250ms ease-in forwards;
+    animation: hide-mobile-menu 750ms ease-in forwards;
   }
-
+  
   @keyframes hide-mobile-menu {
     0% {
-      transform: translateY(0);
+      transform-origin: top;
+      transform: scaleY(1) translateY(0);
     }
     100% {
-      transform: translateY(100%);
+      transform-origin: top;
+      transform: scaleY(3) translateY(100%);
     }
   }
 
