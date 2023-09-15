@@ -1081,43 +1081,53 @@ const Home = () => {
 				</Title>
 				<div className={`w-full mt-4`}>
 					<Swiper
-						slidesPerView={5}
-						spaceBetween={4}
+						className={`rounded-md`}
+						slidesPerView={'auto'}
+						spaceBetween={16}
+						breakpoints={{
+							540: {
+								slidesPerView: 3,
+							}, 768: {
+								slidesPerView: 3,
+							}, 1024: {
+								slidesPerView: 5,
+							}
+						}}
 						navigation={true}
 						autoplay={{
-							delay: 2500,
+							delay: 3500,
 							disableOnInteraction: false,
 						}}
 						modules={[Autoplay, Navigation]}
 					>
-						<SwiperSlide>
+						<SwiperSlide className={`!w-52`}>
 							<CompanyBox />
 						</SwiperSlide>
-						<SwiperSlide>
+						<SwiperSlide className={`!w-52`}>
 							<CompanyBox />
 						</SwiperSlide>
-						<SwiperSlide>
+						<SwiperSlide className={`!w-52`}>
 							<CompanyBox />
 						</SwiperSlide>
-						<SwiperSlide>
+						<SwiperSlide className={`!w-52`}>
 							<CompanyBox />
 						</SwiperSlide>
-						<SwiperSlide>
+						<SwiperSlide className={`!w-52`}>
 							<CompanyBox />
 						</SwiperSlide>
-						<SwiperSlide>
+						<SwiperSlide className={`!w-52`}>
 							<CompanyBox />
 						</SwiperSlide>
-						<SwiperSlide>
+						<SwiperSlide className={`!w-52`}>
 							<CompanyBox />
 						</SwiperSlide>
-						<SwiperSlide>
+						<SwiperSlide className={`!w-52`}>
 							<CompanyBox />
 						</SwiperSlide>
-						<SwiperSlide>
+						<SwiperSlide className={`!w-52`}>
 							<CompanyBox />
 						</SwiperSlide>
-						<SwiperSlide>
+						<SwiperSlide className={`!w-52`}>
 							<CompanyBox />
 						</SwiperSlide>
 					</Swiper>

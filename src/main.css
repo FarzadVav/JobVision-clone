@@ -37,10 +37,11 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-  width: 4rem !important;
-  height: 4rem !important;
   background: var(--primaryColor);
   color: var(--whiteColor) !important;
+  box-shadow: 0 0 1.5rem var(--primaryColor);
+  width: 4rem !important;
+  height: 4rem !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,14 +52,6 @@
 .swiper-button-next::after,
 .swiper-button-prev::after {
   scale: 0.65;
-}
-
-.swiper-button-next {
-  transform: translateX(-0.5rem)
-}
-
-.swiper-button-prev {
-  transform: translateX(3.2rem)
 }
 
 @layer base {
