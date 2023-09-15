@@ -4,18 +4,19 @@ import SearchJobForm from "../components/SearchJobForm";
 import Title from "../components/Title";
 import JobBox from "../components/JobBox";
 import JobsTypes from "../types/Jobs.types";
+import CompanyBox from "../components/CompanyBox";
 
 const job: JobsTypes = {
-  id: '0394hjnkj34509svh',
-  categories: [{ title: 'front-end', id: 'ljsfg__340982r-sdfh1111_01', }],
-  title: 'متخصص برانت اند (React.js)',
-  company: 'ایران بابا',
-  city: 'تهران',
-  location: 'فرشته',
-  salary: 32,
-  remote: false,
-  isUrgent: false,
-  companyScore: 0,
+	id: '0394hjnkj34509svh',
+	categories: [{ title: 'front-end', id: 'ljsfg__340982r-sdfh1111_01', }],
+	title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
+	company: 'ایران بابا',
+	city: 'تهران',
+	location: 'فرشته',
+	salary: 32,
+	remote: false,
+	isUrgent: false,
+	companyScore: 2,
 }
 
 const Home = () => {
@@ -55,7 +56,8 @@ const Home = () => {
 
 	return (
 		<div className={`wrapper mt-5`}>
-			<main className={`grid grid-cols-1 grid-rows-2 lg:grid-rows-[1fr_8rem] sm:grid-cols-2`}>
+			{/* Hero section */}
+			<main className={`grid grid-cols-1 grid-rows-2 lg:grid-rows-[1fr_7rem] sm:grid-cols-2`}>
 				<div className={`flex flex-col justify-center items-center text-center sm:text-right sm:items-start`}>
 					<h1 className={`text-xl sm:mt-16 sm:text-base md:text-xl lg:text-2xl`}>
 						در
@@ -1034,21 +1036,51 @@ const Home = () => {
 				</div>
 				<SearchJobForm customClass={`mt-3 sm:mt-9 lg:mt-3`} />
 			</main>
-			<div className={`mt-10 md:mt-7`}>
+			{/* Hero section */}
+
+			{/* Suggested jobs */}
+			<div className={`mt-12 md:mt-16`}>
 				<Title>
 					<h2>
 						تازه‌ترین آگهی‌های شغلی برای شما
 					</h2>
 				</Title>
-				<div className={`w-full grid grid-cols-1 mt-3 md:grid-cols-2 lg:grid-cols-3`}>
+				<div className={`w-full grid gap-4 grid-rows-2 grid-cols-1 mt-4 md:grid-cols-2 lg:grid-cols-3`}>
 					<JobBox {...job} />
 					<JobBox {...job} />
 					<JobBox {...job} />
 					<JobBox {...job} />
 					<JobBox {...job} />
 					<JobBox {...job} />
+					<div className={`w-full flex justify-center md:col-span-2 lg:col-span-3`}>
+						<Link
+							className={`btn btn-out-primary`}
+							to={`/jobs`}
+						>
+							همه آگهی ها
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+								<path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+							</svg>
+						</Link>
+					</div>
 				</div>
 			</div>
+			{/* Suggested jobs */}
+
+			{/* Popular companies */}
+			<div className={`mt-12 md:mt-16`}>
+				<Title>
+					<h2>
+						تازه‌ترین آگهی‌های شغلی برای شما
+					</h2>
+				</Title>
+				<div className={`w-full flex justify-center items-center gap-4 mt-4`}>
+					<CompanyBox />
+					<CompanyBox />
+					<CompanyBox />
+				</div>
+			</div>
+			{/* Popular companies */}
 		</div>
 	);
 };

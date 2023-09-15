@@ -4,8 +4,9 @@
 
 /* GUIDES */
 /* -------- space from first element to header => mt-5 md:mt-7 */
-/* -------- space between elements in body => mt-10 md:mt-7 */
-/* -------- space first element to Title => mt-3 */
+/* -------- space between elements in body => mt-12 md:mt-16 */
+/* -------- space between box lists => gap-4 */
+/* -------- space first element to Title => mt-4 */
 /* GUIDES */
 
 @font-face {
@@ -153,7 +154,7 @@
   }
 
   form .btn {
-    @apply !h-12;
+    @apply !h-12 border border-solid;
   }
 
   .btn * {
@@ -165,27 +166,23 @@
   }
 
   .btn-primary {
-    @apply bg-jv-primary text-white;
+    @apply border-jv-primary bg-jv-primary text-white;
   }
 
-  form .btn-primary {
-    @apply border border-solid border-jv-primary;
+  .btn-out-primary {
+    @apply text-jv-primary border border-solid border-jv-primary;
+  }
+
+  .btn-light {
+    @apply border-jv-light bg-jv-light text-jv-dark;
   }
 
   .btn-danger {
-    @apply bg-jv-danger text-white;
-  }
-
-  form .btn-danger {
-    @apply border border-solid border-jv-danger;
+    @apply border-jv-danger bg-jv-danger text-white;
   }
 
   .btn-success {
-    @apply bg-jv-success text-white;
-  }
-
-  form .btn-success {
-    @apply border border-solid border-jv-success;
+    @apply border-jv-success bg-jv-success text-white;
   }
 }
 
