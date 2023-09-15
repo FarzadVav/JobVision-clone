@@ -92,6 +92,7 @@
     background: none;
   }
 
+  svg,
   svg * {
     transition: none !important;
   }
@@ -189,7 +190,15 @@
   }
 
   .btn-out-primary {
-    @apply text-jv-primary border border-solid border-jv-primary;
+    @apply text-jv-primary border border-solid border-jv-primary hover:bg-jv-primary hover:text-white;
+  }
+
+  .btn-out-dark {
+    @apply text-jv-dark border border-solid border-jv-dark hover-dark;
+  }
+
+  .hover-dark {
+    @apply hover:bg-jv-dark hover:text-white;
   }
 
   .btn-light {
