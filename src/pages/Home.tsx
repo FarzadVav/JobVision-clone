@@ -12,9 +12,9 @@ const job: JobsTypes = {
   company: 'ایران بابا',
   city: 'تهران',
   location: 'فرشته',
-  salary: [50, 75],
-  remote: true,
-  isUrgent: true,
+  salary: 32,
+  remote: false,
+  isUrgent: false,
   companyScore: 0,
 }
 
@@ -1032,7 +1032,7 @@ const Home = () => {
 						}
 					</svg>
 				</div>
-				<SearchJobForm customClass={`mt-3 sm:mt-9 lg:mt-0`} />
+				<SearchJobForm customClass={`mt-3 sm:mt-9 lg:mt-3`} />
 			</main>
 			<div className={`mt-10 md:mt-7`}>
 				<Title>

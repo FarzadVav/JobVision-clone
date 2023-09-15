@@ -191,7 +191,11 @@
 
 @layer components {
   .badge {
-    @apply w-max text-xs px-3 py-[1px] rounded-full;
+    @apply w-max flex justify-center items-center text-xs px-3 py-[1px] rounded-full;
+  }
+
+  .badge * {
+    @apply mr-1.5 text-xs;
   }
 
   .badge-danger {
