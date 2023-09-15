@@ -35,6 +35,32 @@
   --blueColor: #0fa5e9;
 }
 
+.swiper-button-next,
+.swiper-button-prev {
+  width: 4rem !important;
+  height: 4rem !important;
+  background: var(--primaryColor);
+  color: var(--whiteColor) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4rem;
+  scale: 0.5;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  scale: 0.65;
+}
+
+.swiper-button-next {
+  transform: translateX(-0.5rem)
+}
+
+.swiper-button-prev {
+  transform: translateX(3.2rem)
+}
+
 @layer base {
   * {
     @apply p-0 m-0 border-0 outline-0 list-none box-border transition-all duration-150 ease-linear select-none;

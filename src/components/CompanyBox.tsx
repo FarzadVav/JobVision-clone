@@ -1,6 +1,11 @@
+import { Link } from "react-router-dom"
+
 const CompanyBox = () => {
   return (
-    <div className={`text-jv-dark border border-solid border-jv-light w-52 p-2 flex flex-col rounded-md`}>
+    <Link
+      className={`text-jv-dark border border-solid border-jv-light w-52 p-2 flex flex-col rounded-md`}
+      to={`/jobs`}
+    >
       <div className={`light-shadow bg-jv-light w-20 h-20 rounded-md`}>
         <img
           className={`w-full h-full object-fill object-center rounded-md`}
@@ -31,7 +36,7 @@ const CompanyBox = () => {
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
         </svg>
       </button>
-    </div>
+    </Link>
   )
 }
 

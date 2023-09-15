@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+
 import SearchJobForm from "../components/SearchJobForm";
 import Title from "../components/Title";
 import JobBox from "../components/JobBox";
@@ -1074,10 +1079,48 @@ const Home = () => {
 						تازه‌ترین آگهی‌های شغلی برای شما
 					</h2>
 				</Title>
-				<div className={`w-full flex justify-center items-center gap-4 mt-4`}>
-					<CompanyBox />
-					<CompanyBox />
-					<CompanyBox />
+				<div className={`w-full mt-4`}>
+					<Swiper
+						slidesPerView={5}
+						spaceBetween={4}
+						navigation={true}
+						autoplay={{
+							delay: 2500,
+							disableOnInteraction: false,
+						}}
+						modules={[Autoplay, Navigation]}
+					>
+						<SwiperSlide>
+							<CompanyBox />
+						</SwiperSlide>
+						<SwiperSlide>
+							<CompanyBox />
+						</SwiperSlide>
+						<SwiperSlide>
+							<CompanyBox />
+						</SwiperSlide>
+						<SwiperSlide>
+							<CompanyBox />
+						</SwiperSlide>
+						<SwiperSlide>
+							<CompanyBox />
+						</SwiperSlide>
+						<SwiperSlide>
+							<CompanyBox />
+						</SwiperSlide>
+						<SwiperSlide>
+							<CompanyBox />
+						</SwiperSlide>
+						<SwiperSlide>
+							<CompanyBox />
+						</SwiperSlide>
+						<SwiperSlide>
+							<CompanyBox />
+						</SwiperSlide>
+						<SwiperSlide>
+							<CompanyBox />
+						</SwiperSlide>
+					</Swiper>
 				</div>
 			</div>
 			{/* Popular companies */}
