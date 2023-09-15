@@ -547,9 +547,9 @@ const Header = () => {
 						</CustomNavLink>
 					</div>
 				</div>
-				<div className={`wrapper h-full flex justify-between items-center lg:hidden`}>
+				<div className={`wrapper h-full flex justify-between items-center px-3 lg:hidden`}>
 					<menu
-						className={`h-full flex justify-center items-center px-3`}
+						className={`h-full flex justify-center items-center`}
 						onClick={mobileMenuToggleHandler}
 					>
 						{
