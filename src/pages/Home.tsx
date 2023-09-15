@@ -21,7 +21,7 @@ const job: JobsTypes = {
 	salary: 32,
 	remote: false,
 	isUrgent: true,
-	companyScore: 2,
+	companyScore: 4.3,
 }
 
 const Home = () => {
@@ -1057,7 +1057,7 @@ const Home = () => {
 					<JobBox {...job} />
 					<JobBox {...job} />
 					<JobBox {...job} />
-					<div className={`w-full flex justify-center md:col-span-2 lg:col-span-3`}>
+					<div className={`w-full flex justify-center md:col-span-2 lg:col-span-3 mt-12`}>
 						<Link
 							className={`btn btn-out-primary`}
 							to={`/jobs`}
@@ -1074,12 +1074,7 @@ const Home = () => {
 
 			{/* Popular companies */}
 			<div className={`mt-12 md:mt-16`}>
-				<Title>
-					<h2>
-						تازه‌ترین آگهی‌های شغلی برای شما
-					</h2>
-				</Title>
-				<div className={`w-full mt-4`}>
+				<div className={`w-full`}>
 					<Swiper
 						className={`rounded-md`}
 						slidesPerView={'auto'}

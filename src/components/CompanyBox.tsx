@@ -6,10 +6,10 @@ const CompanyBox = () => {
       className={`text-jv-dark border border-solid border-jv-light w-52 p-2 flex flex-col rounded-md`}
       to={`/jobs`}
     >
-      <div className={`light-shadow bg-jv-light w-20 h-20 rounded-md`}>
+      <div className={`w-20 h-20 rounded-md`}>
         <img
           className={`w-full h-full object-fill object-center rounded-md`}
-          src={`https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=3518088&width=70&height=70`}
+          src={`https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=834153&width=70&height=70`}
           alt={`لوگوی شرکت ماکسیم`}
         />
       </div>

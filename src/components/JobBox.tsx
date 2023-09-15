@@ -17,7 +17,7 @@ const JobBox = ({ id, categories, title, company, city, location, salary, remote
       >
         <div className={`flex`}>
           <div className={`col-span-3 flex flex-col items-center`}>
-            <div className={`light-shadow bg-jv-light w-20 h-20 flex justify-center items-center rounded-md`}>
+            <div className={`w-20 h-20 flex justify-center items-center rounded-md`}>
               <img
                 className={`w-full h-full object-fill object-center rounded-md`}
                 src={`https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=3518088&width=70&height=70`}
