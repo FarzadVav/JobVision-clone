@@ -174,7 +174,7 @@
   }
 
   .btn-light {
-    @apply border-jv-light bg-jv-light text-jv-dark;
+    @apply border-jv-light bg-jv-light text-jv-dark hover:brightness-105;
   }
 
   .btn-danger {

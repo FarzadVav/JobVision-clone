@@ -15,7 +15,7 @@ const job: JobsTypes = {
 	location: 'فرشته',
 	salary: 32,
 	remote: false,
-	isUrgent: false,
+	isUrgent: true,
 	companyScore: 2,
 }
 
