@@ -37,6 +37,7 @@
 
 .swiper-button-next,
 .swiper-button-prev {
+  display: none !important;
   background: var(--primaryColor);
   color: var(--whiteColor) !important;
   box-shadow: 0 0 1.5rem var(--primaryColor);
@@ -52,6 +53,13 @@
 .swiper-button-next::after,
 .swiper-button-prev::after {
   scale: 0.65;
+}
+
+@media screen and(min-width: 540px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: inline-block !important;
+  }
 }
 
 @layer base {
