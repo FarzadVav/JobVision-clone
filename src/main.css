@@ -170,6 +170,14 @@
   .honor-box svg {
     @apply w-10 h-10 stroke-jv-primary sm:w-14 sm:h-14;
   }
+
+  .accordion {
+    @apply w-full h-9 flex justify-between items-center relative cursor-pointer mt-6 first:mt-0 sm:h-12 sm:mt-9;
+  }
+
+  .accordion div {
+    font-family: sans-serif;
+  }
 }
 
 @layer components {

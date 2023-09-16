@@ -14,6 +14,7 @@ import JobTypes from "../types/Job.types";
 import CompanyTypes from "../types/Company.tepes";
 import HonorBox from "../components/HonorBox";
 import CtaBox from "../components/CtaBox";
+import Accordion from "../components/Accordion";
 
 const TestCompany: CompanyTypes = {
 	id: tokenGenerator(),
@@ -34,6 +35,33 @@ const TestJob: JobTypes = {
 	remote: false,
 	isUrgent: true
 }
+
+const accordions: { title: string; text: string }[] = [
+	{
+		title: 'هوشمندترین سیستم پیشنهاد و اطلاع‌رسانی شغل',
+		text: ''
+	},
+	{
+		title: 'بستری برای ملاقات با مدیران شرکت ها در نمایشگاه کار',
+		text: ''
+	},
+	{
+		title: 'قوی‌ترین شبکه‌های اجتماعی در بین سایت‌های کاریابی ایرانی قوی‌ترین شبکه‌های',
+		text: ''
+	},
+	{
+		title: 'هوشمندترین سیستم پیشنهاد و اطلاع‌رسانی شغل',
+		text: ''
+	},
+	{
+		title: 'بستری برای ملاقات با مدیران شرکت ها در نمایشگاه کار',
+		text: ''
+	},
+	{
+		title: 'قوی‌ترین شبکه‌های اجتماعی در بین سایت‌های کاریابی ایرانی',
+		text: ''
+	}
+]
 
 const Home = () => {
 	const [svgPath, setSvgPath] = useState<{ x: number, y: number }>({ x: 0, y: 0 })
@@ -1240,7 +1268,29 @@ const Home = () => {
 			{/* CTA section */}
 
 			{/* Accordions */}
+			<div className={`flex flex-col justify-center items-center mt-16 md:mt-20`}>
+				<Title withOutIcon customClass={'justify-center'}>
+					<h6 className={`!text-2xl`}>
+						چرا باید <span className={`dana-bold text-jv-primary text-2xl ml-0.5 sm:ml-1`}>جاب‌ویژن</span> را انتخاب کنید
+					</h6>
+				</Title>
+				<ul className={`w-full flex flex-col justify-center items-center pr-12 pl-3 mt-10 relative sm:pl-0 sm:pr-16`}>
+					<div className={`bg-jv-light w-[1px] absolute top-9 bottom-6 right-[18px] translate-x-[1px] sm:right-6`}>
+					</div>
+					{
+						accordions.map((accordion, index) => (
+							<Accordion
+								length={index + 1}
+								title={accordion.title}
+								text={accordion.text}
+							/>
+						))
+					}
+				</ul>
+			</div>
 			{/* Accordions */}
+
+			<div className="mt-16">qewqe</div>
 		</div>
 	);
 };
