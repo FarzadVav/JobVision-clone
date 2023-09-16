@@ -13,6 +13,7 @@ import CompanyBox from "../components/CompanyBox";
 import JobTypes from "../types/Job.types";
 import CompanyTypes from "../types/Company.tepes";
 import HonorBox from "../components/HonorBox";
+import CtaBox from "../components/CtaBox";
 
 const TestCompany: CompanyTypes = {
 	id: tokenGenerator(),
@@ -1173,7 +1174,7 @@ const Home = () => {
 
 			{/* Honors section */}
 			<div className={`mt-12 md:mt-16`}>
-				<Title withOutIcon centered>
+				<Title withOutIcon customClass={'justify-center'}>
 					<h4 className={`!text-2xl`}>
 						<span className={`dana-bold text-jv-primary text-2xl ml-0.5 sm:ml-1`}>جاب‌ویژن</span> دستیار استخدامی شما
 					</h4>
@@ -1181,7 +1182,7 @@ const Home = () => {
 				<div className={`mt-10 flex flex-wrap justify-center items-center gap-y-12 sm:gap-16 lg:gap-24 xl:gap-28 lg:mt-12`}>
 					<HonorBox
 						icon={(
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`w-10 h-10 stroke-jv-primary sm:w-14 sm:h-14`}>
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
 								<path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
 							</svg>
 
@@ -1191,7 +1192,7 @@ const Home = () => {
 					/>
 					<HonorBox
 						icon={(
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`w-10 h-10 stroke-jv-primary sm:w-14 sm:h-14`}>
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
 								<path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
 							</svg>
 
@@ -1201,7 +1202,7 @@ const Home = () => {
 					/>
 					<HonorBox
 						icon={(
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`w-10 h-10 stroke-jv-primary sm:w-14 sm:h-14`}>
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
 								<path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
 							</svg>
 						)}
@@ -1210,7 +1211,7 @@ const Home = () => {
 					/>
 					<HonorBox
 						icon={(
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`w-10 h-10 stroke-jv-primary sm:w-14 sm:h-14`}>
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
 								<path strokeLinecap="round" strokeLinejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
 							</svg>
 						)}
@@ -1221,7 +1222,22 @@ const Home = () => {
 			</div>
 			{/* Honors section */}
 
-			<div className={`mt-16`}>space</div>
+			{/* CTA section */}
+			<div className={`flex flex-col gap-4 mt-12 md:mt-16 lg:flex-row`}>
+				<CtaBox
+					src={`/images/cv.svg`}
+					title={`رزومه ساز جاب ویژن`}
+					text={`رزومه ای استاندارد به دو زبان فارسی و انگلیسی بسازید.`}
+					btn={`ساخت رزومه`}
+				/>
+				<CtaBox
+					src={`/images/salary.svg`}
+					title={`ماشین حساب حقوق و دستمزد`}
+					text={`از حقوق دریافتی افراد در مشاغل مختلف آگاه شوید و تخمین دقیق تری از حقوق منصفانه خود داشته باشید.`}
+					btn={`حقوق خود را محاسبه کنید`}
+				/>
+			</div>
+			{/* CTA section */}
 		</div>
 	);
 };

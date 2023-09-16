@@ -1,15 +1,14 @@
 import { ReactElement } from "react";
 
-type TitleTypes = {
+type TitleProps = {
   customClass?: string;
-  centered?: boolean;
   children: ReactElement;
   withOutIcon?: boolean
 }
 
-const Title = ({ customClass, centered, children, withOutIcon }: TitleTypes) => {
+const Title = ({ customClass, children, withOutIcon }: TitleProps) => {
   return (
-    <div className={`title ${customClass || ''} ${centered ? 'justify-center' : ''}`}>
+    <div className={`title ${customClass || ''}`}>
       {
         !withOutIcon ? (
           <svg viewBox="0 0 39 33" fill="none" xmlns="http://www.w3.org/2000/svg">

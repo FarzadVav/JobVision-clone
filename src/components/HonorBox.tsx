@@ -8,7 +8,7 @@ type HonorBoxTypes = {
 
 const HonorBox = ({ icon, count, text }: HonorBoxTypes) => {
   return (
-    <div className={`w-1/2 flex flex-col justify-center items-center md:w-max`}>
+    <div className={`honor-box`}>
       {icon}
       <span className={`dana-bold sm:text-[1.2rem] mt-2 sm:mt-4`}>
         {count.toLocaleString()} +

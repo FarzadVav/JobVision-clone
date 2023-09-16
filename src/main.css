@@ -64,7 +64,7 @@
 
 @layer base {
   * {
-    @apply p-0 m-0 border-0 outline-0 list-none box-border transition-all duration-150 ease-linear select-none;
+    @apply text-jv-black p-0 m-0 border-0 outline-0 list-none box-border transition-all duration-150 ease-linear select-none;
     text-decoration: none;
     font-family: 'dana';
     font-size: 0.95rem;
@@ -158,6 +158,14 @@
   #iran-svg circle {
     transition: 1s ease !important;
   }
+
+  .honor-box {
+    @apply w-1/2 flex flex-col items-center md:w-max;
+  }
+
+  .honor-box svg {
+    @apply w-10 h-10 stroke-jv-primary sm:w-14 sm:h-14;
+  }
 }
 
 @layer components {
@@ -174,11 +182,11 @@
   }
 
   .btn {
-    @apply h-10 flex justify-center items-center px-5 rounded cursor-pointer hover:brightness-110;
+    @apply w-max h-10 flex justify-center items-center px-5 rounded cursor-pointer hover:brightness-110;
   }
 
   .btn-sm {
-    @apply h-8 flex justify-center items-center px-3 rounded cursor-pointer hover:brightness-110;
+    @apply w-max h-8 flex justify-center items-center px-3 rounded cursor-pointer hover:brightness-110;
   }
 
   form .btn {
