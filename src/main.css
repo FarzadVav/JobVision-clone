@@ -64,7 +64,7 @@
 
 @layer base {
   * {
-    @apply text-jv-black p-0 m-0 border-0 outline-0 list-none box-border transition-all duration-150 ease-linear select-none;
+    @apply p-0 m-0 border-0 outline-0 list-none box-border transition-all duration-150 ease-linear select-none;
     text-decoration: none;
     font-family: 'dana';
     font-size: 0.95rem;
@@ -110,6 +110,10 @@
   p * {
     @apply select-all;
   }
+
+  a {
+    @apply text-black;
+  }
 }
 
 @layer utilities {
@@ -144,7 +148,7 @@
   }
 
   .title svg {
-    @apply w-6 h-6 ml-4;
+    @apply fill-jv-primary w-8 h-8 ml-3;
   }
 
   .mega-menu li:last-child span {

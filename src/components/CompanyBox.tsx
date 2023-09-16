@@ -39,7 +39,7 @@ const CompanyBox = ({ id, logo, title, score, jobs }: CompanyTypes) => {
           ) : null
         }
       </span>
-      <button className={`btn btn-light hover-dark dana-bold mt-4`}>
+      <button className={`btn btn-light hover-dark dana-bold w-full mt-4`}>
         دنبال کردن
       </button>
     </Link>
