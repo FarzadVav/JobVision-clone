@@ -10,7 +10,8 @@ const Accordion = ({ length, title, text }: AccordionProps) => {
   console.log(text);
 
   return (
-    <li className={`accordion group`}>
+    <li className={`w-full h-9 flex justify-between items-center relative cursor-pointer mt-6 first:mt-0
+    sm:h-12 sm:mt-9 group`}>
       <div className={`bg-white border border-solid border-transparent w-9 h-9
       flex justify-center items-center absolute -right-12 top-0 bottom-0 rounded-full group-hover:text-jv-primary
       sm:w-12 sm:h-12 sm:-right-16 sm:text-2xl ${length === 33 ? '!bg-jv-primary !text-white' : ''}`}>

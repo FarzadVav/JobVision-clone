@@ -487,7 +487,7 @@ const Header = () => {
 								<button className={`nav-link cursor-pointer group ${showMegaMenu && 'text-jv-primary'}`}>
 									فرصت های شغلی
 									<svg
-										className={`${showMegaMenu ? 'shadow-jv-primary -scale-y-100' : 'stroke-jv-black'} group-hover:stroke-jv-primary w-4 h-4 duration-200`}
+										className={`svg-duration ${showMegaMenu ? 'shadow-jv-primary -scale-y-100' : 'stroke-jv-black'} group-hover:stroke-jv-primary w-4 h-4`}
 										xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
 										stroke="currentColor"
 									>

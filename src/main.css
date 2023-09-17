@@ -102,7 +102,7 @@
 
   svg,
   svg * {
-    transition: none !important;
+    transition: none;
   }
 
   input,
@@ -169,14 +169,6 @@
 
   .honor-box svg {
     @apply w-10 h-10 stroke-jv-primary sm:w-14 sm:h-14;
-  }
-
-  .accordion {
-    @apply w-full h-9 flex justify-between items-center relative cursor-pointer mt-6 first:mt-0 sm:h-12 sm:mt-9;
-  }
-
-  .accordion div {
-    font-family: sans-serif;
   }
 }
 
@@ -279,13 +271,18 @@
   .light-shadow {
     @apply shadow shadow-[#00000010];
   }
-
-  .cubic-1 {
-    transition-timing-function: cubic-bezier(.26,.32,.71,1);
-  }
 }
 
 @layer components {
+  .cubic-1 {
+    transition-timing-function: cubic-bezier(.26,.32,.71,1);
+  }
+
+  .svg-duration,
+  .svg-duration *  {
+    @apply transition-all duration-200;
+  }
+
   .show-mobile-menu {
     animation: show-mobile-menu 750ms ease-out;
   }
