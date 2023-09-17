@@ -65,7 +65,7 @@ const SearchJobForm = ({ customClass }: { customClass: string }) => {
         </svg>
       </TextInput>
       <button
-        className={`btn btn-primary col-span-2 ${isSubmitting && 'opacity-25'} lg:col-span-1`}
+        className={`btn btn-primary w-full col-span-2 ${isSubmitting && 'opacity-25'} lg:col-span-1`}
         type={`submit`}
         onClick={() => {
           console.log(errors.search);

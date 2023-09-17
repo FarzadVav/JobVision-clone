@@ -23,17 +23,17 @@ const Accordion = ({ length, title, text }: AccordionProps) => {
           {length}
         </div>
         <Title withOutIcon>
-          <span className={`!text-xs group-hover:text-jv-primary ${showText ? 'text-jv-primary' : ''}
+          <span className={`!text-sm group-hover:text-jv-primary ${showText ? 'text-jv-primary' : ''}
           sm:!text-base md:!text-xl`}>
             {title}
           </span>
         </Title>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={`svg-duration group-hover:stroke-jv-primary ${showText ? 'stroke-jv-primary' : ''}
-        w-3 h-3 mr-3 ${showText ? '-scale-y-100' : ''} sm:w-6 sm:h-6`}>
+        w-4 h-4 mr-3 ${showText ? '-scale-y-100' : ''} sm:w-6 sm:h-6`}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
         </svg>
       </div>
-      <p className={`transition-opacity duration-500 cursor-text
+      <p className={`transition-opacity duration-500 cursor-text text-xs sm:text-base
       ${showText ? 'static pt-6' : 'absolute opacity-0 invisible select-none'}`}>
         {text}
       </p>

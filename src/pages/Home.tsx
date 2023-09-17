@@ -1268,13 +1268,13 @@ const Home = () => {
 			{/* CTA section */}
 
 			{/* Accordions */}
-			<div className={`flex flex-col justify-center items-center mt-16 md:mt-20`}>
+			<div className={`flex flex-col justify-center items-center mt-12 md:mt-16`}>
 				<Title withOutIcon customClass={'justify-center'}>
 					<h6 className={`!text-2xl`}>
 						چرا باید <span className={`dana-bold text-jv-primary text-2xl ml-0.5 sm:ml-1`}>جاب‌ویژن</span> را انتخاب کنید
 					</h6>
 				</Title>
-				<ul className={`w-full flex flex-col justify-center items-center pr-12 pl-3 mt-10 relative sm:pl-0 sm:pr-16`}>
+				<ul className={`w-full flex flex-col justify-center items-center pr-12 pl-3 mt-4 relative sm:pl-0 sm:pr-16`}>
 					<div className={`bg-jv-light w-[1px] absolute top-9 bottom-6 right-[18px] translate-x-[1px] sm:right-6`}>
 					</div>
 					{
