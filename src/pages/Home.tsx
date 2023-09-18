@@ -1204,11 +1204,13 @@ const Home = () => {
 				{/* Honors section */}
 				<div className={`mt-12 md:mt-16`}>
 					<Title withOutIcon customClass={'justify-center'}>
-						<h4 className={`!text-2xl`}>
-							<span className={`dana-bold text-jv-primary text-2xl ml-0.5 sm:ml-1`}>جاب‌ویژن</span> دستیار استخدامی شما
+						<h4 className={`!text-xl sm:!text-2xl`}>
+							<span className={`dana-bold text-jv-primary text-xl ml-0.5 sm:ml-1 sm:text-2xl`}>
+								جاب‌ویژن
+							</span> دستیار استخدامی شما
 						</h4>
 					</Title>
-					<div className={`mt-12 flex flex-wrap justify-center items-center gap-y-12 sm:gap-16 lg:gap-24 xl:gap-28`}>
+					<div className={`mt-9 flex flex-wrap justify-center items-center gap-y-12 sm:gap-16 lg:gap-24 xl:gap-28`}>
 						<HonorBox
 							icon={(
 								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -1271,11 +1273,13 @@ const Home = () => {
 				{/* Accordions */}
 				<div className={`flex flex-col justify-center items-center mt-12 md:mt-16`}>
 					<Title withOutIcon customClass={'justify-center'}>
-						<h6 className={`!text-2xl`}>
-							چرا باید <span className={`dana-bold text-jv-primary text-2xl ml-0.5 sm:ml-1`}>جاب‌ویژن</span> را انتخاب کنید
+						<h6 className={`!text-xl sm:!text-2xl`}>
+							چرا باید <span className={`dana-bold text-jv-primary text-xl ml-0.5 sm:ml-1 sm:text-2xl`}>
+								جاب‌ویژن
+							</span> را انتخاب کنید
 						</h6>
 					</Title>
-					<ul className={`w-full flex flex-col justify-center items-center pr-1 mt-10 relative sm:pl-0 sm:pr-16`}>
+					<ul className={`w-full flex flex-col justify-center items-center pr-1 mt-4 relative sm:pl-0 sm:pr-16`}>
 						<div className={`bg-jv-light w-[1px] absolute hidden top-0 bottom-0 translate-x-[1px] right-6 sm:block`}>
 						</div>
 						{
@@ -1292,8 +1296,6 @@ const Home = () => {
 					</ul>
 				</div>
 				{/* Accordions */}
-
-
 			</div>
 
 			{/* CTA section in end */}
@@ -1307,7 +1309,7 @@ const Home = () => {
 						withOutIcon
 					>
 						<h2 className={`!text-2xl text-jv-primary text-center !leading-normal sm:!text-4xl`}>
-							زندگی شغلی رویایی خود را با جاب ویژن بسازید
+							زندگی شغلی رویایی خود را با <br className={`sm:hidden`} /> جاب ویژن بسازید
 						</h2>
 					</Title>
 					<p className={`text-center`}>
