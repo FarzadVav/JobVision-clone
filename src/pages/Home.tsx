@@ -1299,9 +1299,9 @@ const Home = () => {
 			</div>
 
 			{/* CTA section in end */}
-			<div className={`bg-jv-light h-80 relative group mt-12 overflow-hidden md:h-72 md:mt-16`}>
-				<div className={`bg-gradient-to-r from-white via-jv-light to-white absolute
-				top-0 bottom-0 right-0 left-0 duration-300 group-hover:opacity-0`}></div>
+			<div className={`bg-jv-light h-80 relative group mt-7 overflow-hidden sm:mt-12 md:h-72 md:mt-16`}>
+				<div className={`bg-gradient-to-t from-jv-light via-jv-light to-white absolute top-0 bottom-0
+				right-0 left-0 duration-300 sm:group-hover:opacity-0 sm:bg-gradient-to-r sm:from-white`}></div>
 				<div className={`flex flex-col justify-between items-center py-11 px-5 absolute top-0 bottom-0 right-0 left-0
 				z-10 sm:py-12`}>
 					<Title
