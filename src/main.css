@@ -170,6 +170,15 @@
   .honor-box svg {
     @apply w-10 h-10 stroke-jv-primary sm:w-14 sm:h-14;
   }
+
+  .accordion-check:checked ~ .accordion-content {
+    max-height: 100vh;
+  }
+
+  .accordion-content {
+    max-height: 0;
+  }
+
 }
 
 @layer components {
