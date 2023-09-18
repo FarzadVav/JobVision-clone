@@ -24,7 +24,7 @@ const Accordion = ({ length, title, text }: AccordionProps) => {
     <>
       <li
         className={`bg-white w-full h-12 flex justify-between items-center my-2 relative cursor-pointer
-        first:mt-0 group sm:my-6 sm:h-16`}
+        group sm:my-6 sm:h-16 first-of-type:mt-0 last-of-type:mb-0`}
         onClick={() => setShowText(prev => !prev)}
       >
         <div className={`bg-white border border-solid border-transparent w-12 h-16 hidden

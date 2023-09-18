@@ -1276,7 +1276,7 @@ const Home = () => {
 						</h6>
 					</Title>
 					<ul className={`w-full flex flex-col justify-center items-center pr-1 mt-4 relative sm:pl-0 sm:pr-16`}>
-						<div className={`bg-jv-light w-[1px] absolute hidden top-16 bottom-6 translate-x-[1px] right-6 sm:block`}>
+						<div className={`bg-jv-light w-[1px] absolute hidden top-0 bottom-0 translate-x-[1px] right-6 sm:block`}>
 						</div>
 						{
 							useMemo(() => {
