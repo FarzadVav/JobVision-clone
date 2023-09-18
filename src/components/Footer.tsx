@@ -24,7 +24,7 @@ const FooterAccordion = ({ length, title, text }: FooterAccordionProps) => {
   return (
     <li className={`bg-jv-dark brightness-110 w-full rounded-md px-6 py-1 mt-2 first:mt-0 cursor-pointer`}>
       <div
-        className={`h-12 flex items-center`}
+        className={`h-16 flex items-center sm:h-12`}
         onClick={() => setShowText(prev => !prev)}
       >
         <span className={`text-white`}>
@@ -118,7 +118,7 @@ const Footer = () => {
             </span>
           </p>
           <div
-            className={`overflow-hidden`}
+            className={`overflow-hidden duration-300 ${showFooterOtherContent ? 'opacity-100' : 'opacity-0'}`}
             ref={footerOtherContentRef}
           >
             <FooterTitle margin>

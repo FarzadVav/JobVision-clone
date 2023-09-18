@@ -1,22 +1,16 @@
-import {ReactNode, Suspense} from "react";
-import {createPortal} from "react-dom";
+import { ReactNode, Suspense } from "react";
 
 const PageLoader = () => {
-	return createPortal(
-		<>
-			<div className={`bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center fixed top-0 left-0 right-0 bottom-0 z-50`}>
-				<span className={`text-white text-2xl`}>
-					...Loading
-				</span>
-			</div>
-		</>,
-		document.body
+	return (
+		<div className={`bg-jv-light w-full h-96 flex justify-center items-center`}>
+			loading...
+		</div >
 	)
 };
 
-const LazyPage = ({children}: { children: ReactNode }) => {
+const LazyPage = ({ children }: { children: ReactNode }) => {
 	return (
-		<Suspense fallback={<PageLoader/>}>
+		<Suspense fallback={<PageLoader />}>
 			{children}
 		</Suspense>
 	);

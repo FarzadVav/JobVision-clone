@@ -1,4 +1,4 @@
-import {lazy, ReactNode} from "react";
+import { lazy, ReactNode } from "react";
 import LazyPage from "./components/LazyPage.tsx";
 
 const Home = lazy(() => import('./pages/Home.tsx'))
@@ -14,7 +14,7 @@ const routes: routesProps[] = [
 		path: '/',
 		element: (
 			<LazyPage>
-				<Home/>
+				<Home />
 			</LazyPage>
 		)
 	},
@@ -22,7 +22,7 @@ const routes: routesProps[] = [
 		path: '/jobs',
 		element: (
 			<LazyPage>
-				<Jobs/>
+				<Jobs />
 			</LazyPage>
 		)
 	},
