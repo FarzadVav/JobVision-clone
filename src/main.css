@@ -222,6 +222,10 @@
     @apply text-jv-primary border border-solid border-jv-primary hover:bg-jv-primary hover:text-white;
   }
 
+  .btn-dark {
+    @apply border-jv-dark bg-jv-dark text-white;
+  }
+
   .btn-out-dark {
     @apply text-jv-dark border border-solid border-jv-dark hover-dark;
   }
