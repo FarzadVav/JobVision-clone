@@ -1097,7 +1097,7 @@ const Home = () => {
 						<JobBox {...TestJob} />
 						<JobBox {...TestJob} />
 						<JobBox {...TestJob} />
-						<div className={`w-full flex justify-center md:col-span-2 lg:col-span-3 mt-12`}>
+						<div className={`w-full flex justify-center mt-8 md:col-span-2 md:mt-12 lg:col-span-3`}>
 							<Link
 								className={`btn btn-out-primary`}
 								to={`/jobs`}
@@ -1208,7 +1208,7 @@ const Home = () => {
 							<span className={`dana-bold text-jv-primary text-2xl ml-0.5 sm:ml-1`}>جاب‌ویژن</span> دستیار استخدامی شما
 						</h4>
 					</Title>
-					<div className={`mt-10 flex flex-wrap justify-center items-center gap-y-12 sm:gap-16 lg:gap-24 xl:gap-28 lg:mt-12`}>
+					<div className={`mt-12 flex flex-wrap justify-center items-center gap-y-12 sm:gap-16 lg:gap-24 xl:gap-28`}>
 						<HonorBox
 							icon={(
 								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -1275,7 +1275,7 @@ const Home = () => {
 							چرا باید <span className={`dana-bold text-jv-primary text-2xl ml-0.5 sm:ml-1`}>جاب‌ویژن</span> را انتخاب کنید
 						</h6>
 					</Title>
-					<ul className={`w-full flex flex-col justify-center items-center pr-1 mt-4 relative sm:pl-0 sm:pr-16`}>
+					<ul className={`w-full flex flex-col justify-center items-center pr-1 mt-10 relative sm:pl-0 sm:pr-16`}>
 						<div className={`bg-jv-light w-[1px] absolute hidden top-0 bottom-0 translate-x-[1px] right-6 sm:block`}>
 						</div>
 						{
@@ -1314,12 +1314,12 @@ const Home = () => {
 						از آخرین فرصت‌های شغلی معتبرترین شرکت‌های ایران باخبر شده و در آنها استخدام شوید.
 					</p>
 					<Link
-						className={`bg-jv-primary text-white text-xl p-2 pr-7 flex justify-center items-center rounded-md`}
+						className={`bg-jv-primary text-white text-xl p-1.5 pr-7 flex justify-center items-center rounded-md`}
 						to={``}
 					>
 						ثبت نام کنید
 						<div className={`bg-white text-jv-primary w-12 h-12 flex justify-center items-center rounded-md mr-7`}>
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
 								<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
 							</svg>
 						</div>

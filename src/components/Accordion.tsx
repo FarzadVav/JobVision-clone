@@ -33,7 +33,7 @@ const Accordion = ({ length, title, text }: AccordionProps) => {
           {length}
         </div>
         <Title withOutIcon>
-          <span className={`w-[calc(100%-1.5rem)] truncate !text-sm !leading-loose group-hover:text-jv-primary
+          <span className={`w-[calc(100%-2rem)] truncate !text-sm !leading-loose group-hover:text-jv-primary
               ${showText ? 'text-jv-primary' : ''} sm:!text-base md:!text-xl sm:!leading-normal`}>
             {title}
           </span>
@@ -44,8 +44,8 @@ const Accordion = ({ length, title, text }: AccordionProps) => {
         </svg>
       </li>
       <p
-        className={`cursor-text text-xs ${showText ? 'opacity-100 visible' : 'opacity-0 invisible'} text-justify !leading-relaxed
-        sm:text-base`}
+        className={`cursor-text text-xs ${showText ? 'opacity-100 visible' : 'opacity-0 invisible'}
+        text-justify !leading-relaxed sm:text-base`}
         ref={accordionRef}
       >
         <span className={`dana-bold cursor-text text-xs text-justify sm:text-base`}>{title}</span> : {text}
