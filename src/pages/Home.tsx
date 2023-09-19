@@ -1204,7 +1204,7 @@ const Home = () => {
 				{/* Honors section */}
 				<div className={`mt-12 md:mt-16`}>
 					<Title withOutIcon customClass={'justify-center'}>
-						<h4 className={`!text-xl sm:!text-2xl`}>
+						<h4 className={`sm:!text-2xl`}>
 							<span className={`dana-bold text-jv-primary text-xl ml-0.5 sm:ml-1 sm:text-2xl`}>
 								جاب‌ویژن
 							</span> دستیار استخدامی شما
@@ -1273,7 +1273,7 @@ const Home = () => {
 				{/* Accordions */}
 				<div className={`flex flex-col justify-center items-center mt-12 md:mt-16`}>
 					<Title withOutIcon customClass={'justify-center'}>
-						<h6 className={`!text-xl sm:!text-2xl`}>
+						<h6 className={`sm:!text-2xl`}>
 							چرا باید <span className={`dana-bold text-jv-primary text-xl ml-0.5 sm:ml-1 sm:text-2xl`}>
 								جاب‌ویژن
 							</span> را انتخاب کنید

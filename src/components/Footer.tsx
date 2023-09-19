@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import tokenGenerator from "../utils/tokenGenerator";
 import Title from "./Title"
-import FooterAccordion from "./FooterAccordion";
+import FooterAccordion, { FooterLinksAccordion } from "./FooterAccordion";
 
 const accordions = [
   {
@@ -285,7 +285,49 @@ const Footer = () => {
           </Link>
         </div>
 
-        <p className={`border-t border-solid border-[#ffffff10] w-full leading-loose text-sm pt-6 mt-12`}>
+        {
+          footerLinks.length ? (
+            <div className={`w-full flex-col justify-center items-center mt-6 sm:hidden`}>
+              {
+                footerLinks.map((link, index) => {
+                  if (index <= 2) {
+                    return (
+                      <FooterLinksAccordion
+                        key={tokenGenerator()}
+                        title={link.title}
+                        text={link.links.length ? (
+                          <ul className={`w-full flex flex-col justify-center items-center`}>
+                            {
+                              link.links.map((sublink, index) => {
+                                if (index <= 4) {
+                                  return (
+                                    <li
+                                      key={tokenGenerator()}
+                                      className={`w-full mt-3 first:mt-0`}
+                                    >
+                                      <Link
+                                        to={sublink.link}
+                                        className={`text-white underline decoration-[#ffffff35]`}
+                                      >
+                                        {sublink.title}
+                                      </Link>
+                                    </li>
+                                  )
+                                }
+                              })
+                            }
+                          </ul>
+                        ) : ''}
+                      />
+                    )
+                  }
+                })
+              }
+            </div>
+          ) : null
+        }
+
+        <p className={`border-t border-solid border-[#ffffff10] w-full leading-loose text-sm pt-6 mt-6 sm:mt-12`}>
           جاب‌ویژن بعنوان اولین ارائه دهنده بسته جامع خدمات کاریابی و استخدام، تجربه برگزاری موفق ادوار مختلف نمایشگاه‌های کار شریف و ایران را در کارنامه کاری خود دارد. سیستم هوشمند انطباق، رزومه ساز دو زبانه، تست‌های خودشناسی، ارتقای توانمندی‌ها به کمک پیشنهاد دوره‌های آموزشی و همکاری با معتبرترین سازمان‌ها برای استخدام از ویژگی‌های متمایز جاب‌ویژن است.
           <span className={`w-full flex flex-col mt-6 md:flex-row md:items-center`}>
             <span className={`block text-sm`}>

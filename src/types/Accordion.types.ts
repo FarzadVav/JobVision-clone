@@ -1,9 +1,9 @@
-import { RefObject } from "react";
+import { ReactNode, RefObject } from "react";
 
 type AccordionTypes = {
-  length: number;
+  length?: number;
   title: string;
-  text: string;
+  text: string | ReactNode  ;
   toggle: boolean;
   setToggle: (prop: boolean) => void;
   accordionRef: RefObject<HTMLParagraphElement>;
