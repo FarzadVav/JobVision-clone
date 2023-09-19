@@ -144,11 +144,11 @@
   }
 
   .title > *:last-child {
-    @apply dana-bold sm:text-xl;
+    @apply dana-bold text-xl;
   }
 
   .title svg {
-    @apply fill-jv-primary w-6 h-6 ml-3 sm:w-8 sm:h-8;
+    @apply fill-jv-primary w-8 h-8 ml-3;
   }
 
   .mega-menu li:last-child span {

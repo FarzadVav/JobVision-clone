@@ -220,7 +220,8 @@ const Footer = () => {
           </button>
         </div>
 
-        <div className={`w-full grid grid-cols-5 justify-items-end mt-12`}>
+        <div className={`w-full hidden grid-rows-2 grid-cols-3 mt-12 sm:grid lg:grid-rows-1 lg:grid-cols-5 
+        lg:justify-items-end`}>
           {
             footerLinks.length ? footerLinks.map((link, index) => {
               if (index <= 2) {
@@ -264,7 +265,7 @@ const Footer = () => {
           }
           <Link
             to={'/'}
-            className={`bg-white w-44 h-44 flex justify-center items-center rounded-md p-5 hover:-translate-y-1`}
+            className={`bg-white w-44 h-44 flex justify-center items-center rounded-md p-5 mt-6 hover:-translate-y-1 lg:mt-0`}
           >
             <img
               className={`w-full h-full object-cover object-center`}
@@ -274,7 +275,7 @@ const Footer = () => {
           </Link>
           <Link
             to={'/'}
-            className={`bg-white w-44 h-44 flex justify-center items-center rounded-md p-5 hover:-translate-y-1`}
+            className={`bg-white w-44 h-44 flex justify-center items-center rounded-md p-5 mt-6 hover:-translate-y-1 lg:mt-0`}
           >
             <img
               className={`w-full h-full object-cover object-center`}
@@ -284,13 +285,13 @@ const Footer = () => {
           </Link>
         </div>
 
-        <p className={`border-t border-solid border-[#ffffff10] w-full text-sm pt-6 mt-12`}>
+        <p className={`border-t border-solid border-[#ffffff10] w-full leading-loose text-sm pt-6 mt-12`}>
           جاب‌ویژن بعنوان اولین ارائه دهنده بسته جامع خدمات کاریابی و استخدام، تجربه برگزاری موفق ادوار مختلف نمایشگاه‌های کار شریف و ایران را در کارنامه کاری خود دارد. سیستم هوشمند انطباق، رزومه ساز دو زبانه، تست‌های خودشناسی، ارتقای توانمندی‌ها به کمک پیشنهاد دوره‌های آموزشی و همکاری با معتبرترین سازمان‌ها برای استخدام از ویژگی‌های متمایز جاب‌ویژن است.
-          <span className={`w-full flex items-center mt-6`}>
+          <span className={`w-full flex flex-col mt-6 md:flex-row md:items-center`}>
             <span className={`block text-sm`}>
               جاب‌ویژن محصولی دانش بنیان شناخته شده است.
             </span>
-            <span className={`block text-sm mr-6`}>
+            <span className={`block text-sm mt-3 md:mt-0 md:mr-6`}>
               دارای مجوز رسمی کاریابی الکترونیکی از وزارت کار، تعاون و رفاه اجتماعی
             </span>
           </span>
