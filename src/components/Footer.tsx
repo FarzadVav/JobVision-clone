@@ -339,7 +339,7 @@ const Footer = () => {
           </span>
         </p>
 
-        <div className={`w-full flex justify-between items-center py-6 mt-6`}>
+        <div className={`w-full flex justify-between items-center pt-6 pb-2 mt-6 sm:pb-6`}>
           <Link to={`/`}>
             <img
               src={`/images/logo-white.svg`}
