@@ -13,9 +13,11 @@ const FooterAccordion = ({ toggle, accordionRef, toggleHandler, length, title, t
         <span className={``}>
           {length}
         </span>
-        <span className={`mr-6`}>
-          {title}
-        </span>
+        <Title withOutIcon>
+          <span className={`!text-base !dana-base mr-6`}>
+            {title}
+          </span>
+        </Title>
       </div>
       <p
         className={`border-solid border-[#ffffff10] ${toggle ? 'border-t py-3' : ''} 
