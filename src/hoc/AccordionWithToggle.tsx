@@ -2,7 +2,7 @@ import { FC, useEffect, useRef, useState } from "react"
 import AccordionTypes from "../types/Accordion.types";
 
 const AccordionWithToggle = (Component: FC<any>, moreSpace?: number) => {
-  const NewComponent = (props: Omit<AccordionTypes, 'toggle' | 'accordionRef' | 'toggleHandler'>) => {
+  const NewComponent = (props: Omit<AccordionTypes, 'toggle' | 'setToggle' | 'accordionRef' | 'toggleHandler'>) => {
     const [toggle, setToggle] = useState<boolean>(false)
 
     const accordionRef = useRef<HTMLParagraphElement>(null)
@@ -17,7 +17,13 @@ const AccordionWithToggle = (Component: FC<any>, moreSpace?: number) => {
 
     const toggleHandler = () => setToggle(prev => !prev)
 
-    return <Component toggle={toggle} accordionRef={accordionRef} toggleHandler={toggleHandler} {...props} />
+    return <Component
+      {...props}
+      toggle={toggle}
+      setToggle={setToggle}
+      accordionRef={accordionRef}
+      toggleHandler={toggleHandler}
+    />
   }
 
   return NewComponent

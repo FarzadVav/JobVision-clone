@@ -1,8 +1,13 @@
+import { useEffect } from "react"
 import AccordionWithToggle from "../hoc/AccordionWithToggle"
 import AccordionTypes from "../types/Accordion.types"
 import Title from "./Title"
 
-const Accordion = ({ toggle, accordionRef, toggleHandler, length, title, text }: AccordionTypes) => {
+const Accordion = ({ toggle, accordionRef, setToggle, toggleHandler, length, title, text }: AccordionTypes) => {
+  useEffect(() => {
+    setToggle(length === 1)
+  }, [])
+
   return (
     <>
       <li

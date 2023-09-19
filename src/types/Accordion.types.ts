@@ -5,6 +5,7 @@ type AccordionTypes = {
   title: string;
   text: string;
   toggle: boolean;
+  setToggle: (prop: boolean) => void;
   accordionRef: RefObject<HTMLParagraphElement>;
   toggleHandler: () => void;
 }
