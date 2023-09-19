@@ -198,19 +198,22 @@ const Footer = () => {
             <div className={`flex flex-col items-center gap-3 mt-3 sm:flex-row`}>
               <Link
                 to={``}
-                className={`btn btn-dark brightness-110 hover:brightness-125 decoration-[#ffffff35] underline`}
+                className={`btn btn-dark brightness-110 decoration-[#ffffff35] underline w-full
+                hover:brightness-125 sm:w-max`}
               >
                 استخدام بیمه
               </Link>
               <Link
                 to={``}
-                className={`btn btn-dark brightness-110 hover:brightness-125 decoration-[#ffffff35] underline`}
+                className={`btn btn-dark brightness-110 decoration-[#ffffff35] underline w-full
+                hover:brightness-125 sm:w-max`}
               >
                 استخدام کارگزاری
               </Link>
               <Link
                 to={``}
-                className={`btn btn-dark brightness-110 hover:brightness-125 decoration-[#ffffff35] underline`}
+                className={`btn btn-dark brightness-110 decoration-[#ffffff35] underline w-full
+                hover:brightness-125 sm:w-max`}
               >
                 استخدام خودرو
               </Link>
@@ -219,26 +222,26 @@ const Footer = () => {
               آخرین مطالب بلاگ
             </FooterTitle>
             <div className={`flex flex-col items-center gap-3 mt-3 sm:flex-row`}>
-              <article>
+              <article className={`w-full sm:w-max`}>
                 <Link
                   to={``}
-                  className={`btn btn-dark brightness-110 hover:brightness-125`}
+                  className={`btn btn-dark brightness-110 w-full hover:brightness-125`}
                 >
                   راهنمای جامع استخدام
                 </Link>
               </article>
-              <article>
+              <article className={`w-full sm:w-max`}>
                 <Link
                   to={``}
-                  className={`btn btn-dark brightness-110 hover:brightness-125`}
+                  className={`btn btn-dark brightness-110 w-full hover:brightness-125`}
                 >
                   راهنمای جامع رزومه نویسی برای کارجویان
                 </Link>
               </article>
-              <article>
+              <article className={`w-full sm:w-max`}>
                 <Link
                   to={``}
-                  className={`btn btn-dark brightness-110 hover:brightness-125`}
+                  className={`btn btn-dark brightness-110 w-full hover:brightness-125`}
                 >
                   گزارش افزایش حقوق 1402 کارگران
                 </Link>
@@ -329,10 +332,12 @@ const Footer = () => {
         </p>
 
         <div className={`w-full flex justify-between items-center py-6 mt-6`}>
-          <img
-            src={`/images/logo-white.svg`}
-            alt={`لوگوی جاب ویژن`}
-          />
+          <Link to={`/`}>
+            <img
+              src={`/images/logo-white.svg`}
+              alt={`لوگوی جاب ویژن`}
+            />
+          </Link>
           <div className={`flex justify-center items-center`}>
             {
               footerSocials.length ? footerSocials.map((social, index) => {

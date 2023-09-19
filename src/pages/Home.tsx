@@ -11,7 +11,7 @@ import Title from "../components/Title";
 import JobBox from "../components/JobBox";
 import CompanyBox from "../components/CompanyBox";
 import JobTypes from "../types/Job.types";
-import CompanyTypes from "../types/Company.tepes";
+import CompanyTypes from "../types/Company.types";
 import HonorBox from "../components/HonorBox";
 import CtaBox from "../components/CtaBox";
 import Accordion from "../components/Accordion";

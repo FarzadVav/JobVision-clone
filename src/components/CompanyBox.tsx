@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-import CompanyTypes from "../types/Company.tepes"
+import CompanyTypes from "../types/Company.types"
 
 const CompanyBox = ({ id, logo, title, score, jobs }: CompanyTypes) => {
   return (
