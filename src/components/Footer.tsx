@@ -3,48 +3,7 @@ import { Link } from "react-router-dom";
 
 import tokenGenerator from "../utils/tokenGenerator";
 import Title from "./Title"
-
-type FooterAccordionProps = {
-  length: number;
-  title: string;
-  text: string;
-}
-
-const FooterAccordion = ({ length, title, text }: FooterAccordionProps) => {
-  const [showText, setShowText] = useState<boolean>(false)
-  const accordionRef = useRef<HTMLParagraphElement>(null)
-
-  useEffect(() => {
-    if (showText) {
-      accordionRef.current ? accordionRef.current.style.maxHeight = `${accordionRef.current?.scrollHeight + 24}px` : null
-    } else {
-      accordionRef.current ? accordionRef.current.style.maxHeight = '0' : null
-    }
-  }, [showText])
-
-  return (
-    <li className={`bg-jv-dark brightness-110 w-full rounded-md px-6 py-1 mt-2 first:mt-0 cursor-pointer`}>
-      <div
-        className={`h-16 flex items-center sm:h-12`}
-        onClick={() => setShowText(prev => !prev)}
-      >
-        <span className={``}>
-          {length}
-        </span>
-        <span className={` mr-6`}>
-          {title}
-        </span>
-      </div>
-      <p
-        className={`border-solid border-[#ffffff10] ${showText ? 'border-t py-3' : ''} 
-        cursor-text overflow-hidden`}
-        ref={accordionRef}
-      >
-        {text}
-      </p>
-    </li>
-  )
-}
+import FooterAccordion from "./FooterAccordion";
 
 const accordions = [
   {
@@ -266,7 +225,10 @@ const Footer = () => {
             footerLinks.length ? footerLinks.map((link, index) => {
               if (index <= 2) {
                 return (
-                  <div className={`w-full flex flex-col`}>
+                  <div
+                    key={tokenGenerator()}
+                    className={`w-full flex flex-col`}
+                  >
                     <span className={` dana-bold`}>
                       {link.title}
                     </span>
@@ -277,7 +239,10 @@ const Footer = () => {
                             link.links.map((sublink, index) => {
                               if (index <= 4) {
                                 return (
-                                  <li className={`w-full mt-1.5`}>
+                                  <li
+                                    key={tokenGenerator()}
+                                    className={`w-full mt-1.5`}
+                                  >
                                     <Link
                                       className={`text-white underline decoration-[#ffffff35] hover:decoration-[#fff]`}
                                       to={sublink.link}
@@ -321,14 +286,14 @@ const Footer = () => {
 
         <p className={`border-t border-solid border-[#ffffff10] w-full text-sm pt-6 mt-12`}>
           جاب‌ویژن بعنوان اولین ارائه دهنده بسته جامع خدمات کاریابی و استخدام، تجربه برگزاری موفق ادوار مختلف نمایشگاه‌های کار شریف و ایران را در کارنامه کاری خود دارد. سیستم هوشمند انطباق، رزومه ساز دو زبانه، تست‌های خودشناسی، ارتقای توانمندی‌ها به کمک پیشنهاد دوره‌های آموزشی و همکاری با معتبرترین سازمان‌ها برای استخدام از ویژگی‌های متمایز جاب‌ویژن است.
-          <div className={`w-full flex items-center mt-6`}>
-            <p className={`text-sm`}>
+          <span className={`w-full flex items-center mt-6`}>
+            <span className={`block text-sm`}>
               جاب‌ویژن محصولی دانش بنیان شناخته شده است.
-            </p>
-            <p className={`text-sm mr-6`}>
+            </span>
+            <span className={`block text-sm mr-6`}>
               دارای مجوز رسمی کاریابی الکترونیکی از وزارت کار، تعاون و رفاه اجتماعی
-            </p>
-          </div>
+            </span>
+          </span>
         </p>
 
         <div className={`w-full flex justify-between items-center py-6 mt-6`}>
@@ -344,6 +309,7 @@ const Footer = () => {
                 if (index <= 3) {
                   return (
                     <Link
+                      key={tokenGenerator()}
                       className={`text-white mr-6 first:mr-0 hover:-translate-y-0.5`}
                       to={social.link}
                     >
