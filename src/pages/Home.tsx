@@ -65,23 +65,47 @@ const accordions: { title: string; text: string }[] = [
 
 const Home = () => {
 	const [svgPath, setSvgPath] = useState<{ x: number, y: number }>({ x: 0, y: 0 })
+	let runAnimation = false
 
 	const messageBoxRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
-		acticeRandomCircle()
-		setTimeout(() => {
-			messageBoxRef.current?.classList.remove('show-message-box')
-			messageBoxRef.current?.classList.add('hidden-message-box')
-		}, 4000);
-		const interVal = setInterval(() => {
+		const oneAnimate = () => {
 			acticeRandomCircle()
 			setTimeout(() => {
 				messageBoxRef.current?.classList.remove('show-message-box')
 				messageBoxRef.current?.classList.add('hidden-message-box')
 			}, 4000);
-			return () => clearInterval(interVal)
-		}, 5000)
+		}
+
+		const animate = () => {
+			acticeRandomCircle()
+			setTimeout(() => {
+				messageBoxRef.current?.classList.remove('show-message-box')
+				messageBoxRef.current?.classList.add('hidden-message-box')
+			}, 4000);
+		}
+
+		let interVal = 0
+
+		const windowSizeHandler = () => {
+			const width = window.innerWidth
+			if (width < 640 && runAnimation) {
+				setSvgPath({ x: 0, y: 0 })
+				clearInterval(interVal)
+				runAnimation = false
+			} else if (width >= 640 && !runAnimation) {
+				oneAnimate()
+				interVal = setInterval(animate, 5000)
+				runAnimation = true
+			}
+		}
+
+		window.addEventListener('resize', windowSizeHandler)
+
+		windowSizeHandler()
+
+		return () => clearInterval(interVal)
 	}, [])
 
 	const acticeRandomCircle = () => {
