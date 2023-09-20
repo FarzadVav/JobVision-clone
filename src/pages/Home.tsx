@@ -1221,6 +1221,7 @@ const Home = () => {
 						className={`w-44 h-44 md:w-auto md:h-auto`}
 						src={`/images/employment.svg`}
 						alt={`استخدام‌های سراسری و دولتی`}
+						loading={`lazy`}
 					/>
 				</div>
 				{/* Employment baner */}

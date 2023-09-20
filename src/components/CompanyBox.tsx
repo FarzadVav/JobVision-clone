@@ -14,6 +14,7 @@ const CompanyBox = ({ id, logo, title, score, jobs }: CompanyTypes) => {
           className={`w-full h-full object-fill object-center rounded-md`}
           src={logo}
           alt={`لوگوی شرکت ${title}`}
+          loading={`lazy`}
         />
       </div>
       <span className={`block dana-bold mt-4`}>

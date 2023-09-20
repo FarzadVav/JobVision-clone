@@ -20,6 +20,7 @@ const JobBox = ({ id, categories, title, company, city, location, salary, remote
                 className={`w-full h-full object-fill object-center rounded-md`}
                 src={company.logo}
                 alt={`لوگوی شرکت ${company.title}`}
+                loading={`lazy`}
               />
             </div>
           </div>
