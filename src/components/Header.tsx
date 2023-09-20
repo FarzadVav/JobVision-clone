@@ -1,6 +1,7 @@
 import CustomNavLink from './CustomNavLink.tsx';
-import * as React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, AnimationEvent } from "react";
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
+import { MenuRounded, CloseRounded } from '@mui/icons-material';
 
 import tokenGenerator from "../utils/tokenGenerator.ts";
 import MegaMenusTypes from "../types/megaMenu.types.ts";
@@ -486,13 +487,9 @@ const Header = () => {
 							>
 								<button className={`nav-link cursor-pointer group ${showMegaMenu && 'text-jv-primary'}`}>
 									فرصت های شغلی
-									<svg
-										className={`svg-duration ${showMegaMenu ? 'shadow-jv-primary -scale-y-100' : 'stroke-jv-black'} group-hover:stroke-jv-primary w-4 h-4`}
-										xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-										stroke="currentColor"
-									>
-										<path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-									</svg>
+									<KeyboardArrowDownRoundedIcon
+										className={`${showMegaMenu ? 'text-jv-primary rotate-180' : 'text-jv-dark'} mr-1 group-hover:text-jv-primary`}
+									/>
 								</button>
 							</li>
 							<li className={'h-full'}>
@@ -549,26 +546,13 @@ const Header = () => {
 				</div>
 				<div className={`wrapper h-full flex justify-between items-center px-3 lg:hidden`}>
 					<menu
-						className={`h-full flex justify-center items-center`}
+						className={`h-full w-[4.5rem] flex items-center relative`}
 						onClick={mobileMenuToggleHandler}
 					>
-						{
-							showMobileMenu ? (
-								<svg
-									className={`stroke-white w-9 h-9`} xmlns="http://www.w3.org/2000/svg" fill="none"
-									viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-								>
-									<path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-								</svg>
-							) : (
-								<svg
-									className={`stroke-white w-9 h-9`} xmlns="http://www.w3.org/2000/svg" fill="none"
-									viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-								>
-									<path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
-								</svg>
-							)
-						}
+						<MenuRounded className={`text-white text-3xl absolute 
+							${showMobileMenu ? 'opacity-0 -translate-y-6' : ''}`} />
+						<CloseRounded className={`text-white text-3xl absolute
+							${!showMobileMenu ? 'opacity-0 translate-y-6' : ''}`} />
 					</menu>
 					<CustomNavLink
 						className={`nav-link`}
@@ -697,7 +681,7 @@ const Header = () => {
 					<menu
 						ref={mobileMenuRef}
 						className={`show-mobile-menu bg-jv-primary flex flex-col items-center rounded-t-[2rem] fixed bottom-0 top-32 right-0 left-0 origin-bottom overflow-hidden z-40 lg:hidden`}
-						onAnimationEnd={(event: React.AnimationEvent<HTMLElement>) => {
+						onAnimationEnd={(event: AnimationEvent<HTMLElement>) => {
 							if (event.animationName === 'hide-mobile-menu') {
 								setShowMobileMenu(false)
 							}

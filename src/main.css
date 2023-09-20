@@ -64,7 +64,7 @@
 
 @layer base {
   * {
-    @apply p-0 m-0 border-0 outline-0 list-none box-border transition-all duration-150 ease-linear select-none;
+    @apply p-0 m-0 border-0 outline-0 list-none box-border !transition-all duration-150 ease-linear select-none;
     text-decoration: none;
     font-family: 'dana';
     font-size: 0.95rem;
@@ -98,11 +98,6 @@
 
   button {
     background: none;
-  }
-
-  svg,
-  svg * {
-    transition: none;
   }
 
   input,
@@ -152,7 +147,7 @@
   }
 
   .mega-menu li:last-child span {
-    border: none;
+    @apply !border-transparent;
   }
 
   .active-circle {
@@ -188,10 +183,6 @@
 
   .nav-link {
     @apply h-full flex justify-center items-center hover:text-jv-primary;
-  }
-
-  .nav-link * {
-    @apply mr-1.5;
   }
 
   .btn {
@@ -289,11 +280,6 @@
 @layer components {
   .cubic-1 {
     transition-timing-function: cubic-bezier(.26,.32,.71,1);
-  }
-
-  .svg-duration,
-  .svg-duration *  {
-    @apply transition-all duration-200;
   }
 
   .show-mobile-menu {
