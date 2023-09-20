@@ -1,3 +1,4 @@
+import { KeyboardArrowLeftRounded } from "@mui/icons-material"
 import AccordionWithToggle from "../hoc/AccordionWithToggle"
 import AccordionTypes from "../types/Accordion.types"
 import Title from "./Title"
@@ -23,7 +24,7 @@ const FooterAccordion = ({ toggle, accordionRef, toggleHandler, length, title, t
         cursor-text overflow-hidden text-sm`}
         ref={accordionRef}
       >
-        <span className={`decoration-[#ffffff50] underline`}>{title}</span> {text}
+        <span className={`decoration-[#ffffff50] underline sm:hidden`}>{title} </span> {text}
       </p>
     </li>
   )
@@ -31,19 +32,17 @@ const FooterAccordion = ({ toggle, accordionRef, toggleHandler, length, title, t
 
 const LinksAccordion = ({ toggle, accordionRef, toggleHandler, title, text }: AccordionTypes) => {
   return (
-    <li className={`bg-jv-dark brightness-110 w-full rounded-md px-6 py-1 mt-2 first:mt-0 cursor-pointer`}>
+    <li className={`bg-jv-dark brightness-110 w-full rounded-md pl-3 pr-6 py-1 mt-2 first:mt-0 cursor-pointer`}>
       <div
         className={`h-12 flex justify-between items-center`}
         onClick={toggleHandler}
       >
         <Title withOutIcon>
-          <span className={`!text-base !dana-base mr-6`}>
+          <span className={`!text-base !dana-base`}>
             {title}
           </span>
         </Title>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`svg-duration w-4 h-4 ${toggle ? 'rotate-180' : 'rotate-90'}`}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-        </svg>
+        <KeyboardArrowLeftRounded className={toggle ? 'rotate-90' : ''} />
       </div>
       <div
         className={`border-solid border-[#ffffff10] ${toggle ? 'border-t py-3' : ''} overflow-hidden`}

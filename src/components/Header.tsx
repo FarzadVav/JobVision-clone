@@ -488,7 +488,7 @@ const Header = () => {
 								<button className={`nav-link cursor-pointer group ${showMegaMenu && 'text-jv-primary'}`}>
 									فرصت های شغلی
 									<KeyboardArrowDownRoundedIcon
-										className={`${showMegaMenu ? 'text-jv-primary rotate-180' : 'text-jv-dark'} mr-1 group-hover:text-jv-primary`}
+										className={`${showMegaMenu ? 'text-jv-primary -scale-y-100' : 'text-jv-dark'} mr-1 group-hover:text-jv-primary`}
 									/>
 								</button>
 							</li>
@@ -546,10 +546,10 @@ const Header = () => {
 				</div>
 				<div className={`wrapper h-full flex justify-between items-center px-3 lg:hidden`}>
 					<menu
-						className={`h-full w-[4.5rem] flex items-center relative`}
+						className={`h-full w-8 flex items-center relative`}
 						onClick={mobileMenuToggleHandler}
 					>
-						<MenuRounded className={`text-white text-3xl absolute 
+						<MenuRounded className={`text-white absolute text-3xl
 							${showMobileMenu ? 'opacity-0 -translate-y-6' : ''}`} />
 						<CloseRounded className={`text-white text-3xl absolute
 							${!showMobileMenu ? 'opacity-0 translate-y-6' : ''}`} />
@@ -671,7 +671,7 @@ const Header = () => {
 							</li>
 						</ul>
 					</div>
-					<div className={`bg-slate-300 w-12 h-1 rounded-full absolute left-1/2 bottom-3 -translate-x-1/2`}>
+					<div className={`bg-slate-300 w-12 h-1 rounded-full absolute left-1/2 bottom-1.5 -translate-x-1/2`}>
 					</div>
 				</div>
 			</div>

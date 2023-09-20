@@ -108,8 +108,7 @@
 
   a {
     @apply text-black;
-  }
-}
+  }}
 
 @layer utilities {
   .dana-base {
@@ -163,7 +162,7 @@
   }
 
   .honor-box svg {
-    @apply w-10 h-10 stroke-jv-primary sm:w-14 sm:h-14;
+    @apply w-10 h-10 text-jv-primary sm:w-14 sm:h-14;
   }
 
   .accordion-check:checked ~ .accordion-content {
@@ -203,6 +202,14 @@
 
   .btn-sm * {
     @apply mr-2;
+  }
+
+  .nav-link svg *,
+  .btn svg,
+  .btn-sm svg,
+  .btn svg *,
+  .btn-sm svg * {
+    @apply !transition-none;
   }
 
   .btn-primary {
@@ -267,7 +274,12 @@
   }
 
   .input-icon svg {
-    @apply !w-6 !h-6 duration-0;
+    @apply !w-6 !h-6;
+  }
+
+  .input-icon svg,
+  .input-icon svg * {
+    @apply !transition-none;
   }
 }
 
