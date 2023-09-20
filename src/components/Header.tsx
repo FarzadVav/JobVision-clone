@@ -1,7 +1,7 @@
 import CustomNavLink from './CustomNavLink.tsx';
 import { useEffect, useRef, useState, AnimationEvent } from "react";
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
-import { MenuRounded, CloseRounded } from '@mui/icons-material';
+import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded } from '@mui/icons-material';
 
 import tokenGenerator from "../utils/tokenGenerator.ts";
 import MegaMenusTypes from "../types/megaMenu.types.ts";
@@ -601,20 +601,17 @@ const Header = () => {
 														{link.title}
 														{
 															link.subLinks.length ? (
-																<ul className={`w-full p-3 cursor-default`}>
+																<ul className={`w-full py-2 px-1 cursor-default`}>
 																	{
 																		link.subLinks.map(subLink => (
 																			<li
 																				key={tokenGenerator()}
-																				className={`w-full flex items-center mt-2 first:mt-0`}
+																				className={`w-full flex items-center mt-2 first:mt-0 group/sub`}
 																			>
-																				<svg
-																					xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-																					strokeWidth={1.5} stroke="currentColor" className="w-3 h-3 ml-1.5"
-																				>
-																					<path strokeLinecap="round" strokeLinejoin="round"
-																						d="M15.75 19.5L8.25 12l7.5-7.5" />
-																				</svg>
+																				<KeyboardArrowLeftRounded
+																					className={`no-trans text-jv-dark ml-2 opacity-75 group-hover/sub:text-jv-primary`}
+																					fontSize='small'
+																				/>
 																				<CustomNavLink
 																					className={`text-jv-dark w-full inline-block text-right hover:text-jv-primary`}
 																					path={`#${subLink.link}`}

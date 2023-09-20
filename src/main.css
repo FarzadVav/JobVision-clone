@@ -294,6 +294,10 @@
     transition-timing-function: cubic-bezier(.26,.32,.71,1);
   }
 
+  .no-trans {
+    @apply !transition-none;
+  }
+
   .show-mobile-menu {
     animation: show-mobile-menu 750ms ease-out;
   }
