@@ -125,22 +125,28 @@ const Home = () => {
 
 	return (
 		<>
-			<div className={`wrapper mt-5`}>
+			<div className={`wrapper mt-12 md:mt-3`}>
 				{/* Hero section */}
-				<main className={`grid grid-cols-1 grid-rows-2 lg:grid-rows-[1fr_7rem] sm:grid-cols-2`}>
-					<div className={`flex flex-col justify-center items-center text-center sm:text-right sm:items-start`}>
-						<h1 className={`text-xl sm:mt-16 sm:text-base md:text-xl lg:text-2xl`}>
-							در
-							<span className={`text-jv-primary dana-bold text-xl mx-1 sm:text-base md:text-xl lg:mx-2 lg:text-2xl`}>
-								484
-							</span>
-							شهر
-							<span className={`text-jv-primary dana-bold text-xl mx-1 sm:text-base md:text-xl lg:mx-2 lg:text-2xl`}>
-								37,540
-							</span>
-							آگهی شغلی <br className={`sm:hidden`} /> ثبت شده
-						</h1>
-						<p className={`text-sm sm:text-xs mt-4 sm:mt-5 md:text-base`}>
+				<main className={`h-max grid grid-rows-[1fr_10.5rem] grid-cols-1 gap-y-9 md:grid-cols-2
+				md:grid-rows-[1fr_3rem] md:gap-y-16`}>
+					<div className={`flex flex-col justify-center items-center text-center md:text-right md:items-start`}>
+						<Title
+							customClass={`justify-center md:justify-start`}
+							withOutIcon
+						>
+							<h1 className={`md:mt-16`}>
+								در
+								<span className={`text-jv-primary`}>
+									484
+								</span>
+								شهر
+								<span className={`text-jv-primary`}>
+									37,540
+								</span>
+								آگهی شغلی <br className={`sm:hidden`} /> ثبت شده
+							</h1>
+						</Title>
+						<p className={`text-sm leading-loose mt-3.5 md:text-base md:leading-relaxed`}>
 							لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
 						</p>
 						<div className={`hidden items-center mt-5 lg:flex`}>
@@ -158,7 +164,7 @@ const Home = () => {
 							</Link>
 						</div>
 					</div>
-					<div className={`hidden justify-center items-center sm:flex`}>
+					<div className={`hidden justify-center items-center md:flex`}>
 						<svg
 							id="iran-svg"
 							className={`w-full h-full overflow-visible`}
@@ -1104,7 +1110,7 @@ const Home = () => {
 							}
 						</svg>
 					</div>
-					<SearchJobForm customClass={`mt-4 sm:mt-9 lg:mt-3`} />
+					<SearchJobForm />
 				</main>
 				{/* Hero section */}
 
@@ -1115,7 +1121,7 @@ const Home = () => {
 							تازه‌ترین آگهی‌های شغلی برای شما
 						</h2>
 					</Title>
-					<div className={`w-full grid gap-4 grid-rows-2 grid-cols-1 mt-4 md:grid-cols-2 lg:grid-cols-3`}>
+					<div className={`w-full grid gap-4 grid-rows-2 grid-cols-1 mt-6 md:grid-cols-2 lg:grid-cols-3`}>
 						<JobBox {...TestJob} />
 						<JobBox {...TestJob} />
 						<JobBox {...TestJob} />
@@ -1227,14 +1233,14 @@ const Home = () => {
 
 				{/* Honors section */}
 				<div className={`mt-12 md:mt-16`}>
-					<Title withOutIcon customClass={'justify-center'}>
-						<h4 className={`sm:!text-2xl`}>
-							<span className={`dana-bold text-jv-primary text-xl ml-0.5 sm:ml-1 sm:text-2xl`}>
+					<Title customClass={'justify-center'}>
+						<h4>
+							<span className={`text-jv-primary !mr-0`}>
 								جاب‌ویژن
 							</span> دستیار استخدامی شما
 						</h4>
 					</Title>
-					<div className={`mt-9 flex flex-wrap justify-center items-center gap-y-12 sm:gap-16 lg:gap-24 xl:gap-28`}>
+					<div className={`mt-10 flex flex-wrap justify-center items-center gap-y-12 sm:gap-16 md:mt-12 lg:gap-24 xl:gap-28`}>
 						<HonorBox
 							icon={<Diversity3Rounded />}
 							count={2_000_000}
@@ -1278,14 +1284,14 @@ const Home = () => {
 
 				{/* Accordions */}
 				<div className={`flex flex-col justify-center items-center mt-12 md:mt-16`}>
-					<Title withOutIcon customClass={'justify-center'}>
-						<h6 className={`sm:!text-2xl`}>
-							چرا باید <span className={`dana-bold text-jv-primary text-xl ml-0.5 sm:ml-1 sm:text-2xl`}>
+					<Title customClass={'justify-center'}>
+						<h6>
+							چرا باید <span className={`text-jv-primary`}>
 								جاب‌ویژن
 							</span> را انتخاب کنید
 						</h6>
 					</Title>
-					<ul className={`w-full flex flex-col justify-center items-center pr-1 mt-4 relative sm:pl-0 sm:pr-16`}>
+					<ul className={`w-full flex flex-col justify-center items-center pr-1 mt-8 relative sm:pl-0 sm:pr-16`}>
 						<div className={`bg-jv-light w-[1px] absolute hidden top-0 bottom-0 translate-x-[1px] right-6 sm:block`}>
 						</div>
 						{
@@ -1315,11 +1321,11 @@ const Home = () => {
 						customClass={`justify-center`}
 						withOutIcon
 					>
-						<h2 className={`!text-2xl text-jv-primary text-center !leading-normal sm:!text-4xl`}>
+						<h2 className={`text-jv-primary text-center sm:!text-4xl`}>
 							زندگی شغلی رویایی خود را با <br className={`sm:hidden`} /> جاب ویژن بسازید
 						</h2>
 					</Title>
-					<p className={`text-center`}>
+					<p className={`text-center leading-loose`}>
 						از آخرین فرصت‌های شغلی معتبرترین شرکت‌های ایران باخبر شده و در آنها استخدام شوید.
 					</p>
 					<Link

@@ -2,13 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* GUIDES */
-/* -------- space from first element to header => mt-5 md:mt-7 */
-/* -------- space between elements in body => mt-12 md:mt-16 */
-/* -------- space between box lists => gap-4 */
-/* -------- space first element to Title => mt-4 */
-/* GUIDES */
-
 @font-face {
   font-family: 'dana';
   src: url("/fonts/dana.woff"), url("/fonts/dana.woff2");
@@ -103,7 +96,7 @@
   input,
   p,
   p * {
-    @apply select-all;
+    @apply select-text;
   }
 
   a {
@@ -137,12 +130,13 @@
     @apply w-full flex items-center;
   }
 
-  .title > *:last-child {
-    @apply dana-bold text-xl;
+  .title > *:last-child,
+  .title > *:last-child span {
+    @apply dana-bold text-xl leading-relaxed mx-1 sm:text-2xl md:mx-2;
   }
 
   .title svg {
-    @apply fill-jv-primary w-8 h-8 ml-3;
+    @apply text-jv-primary w-7 h-7 ml-2 md:w-8 md:h-8;
   }
 
   .mega-menu li:last-child span {

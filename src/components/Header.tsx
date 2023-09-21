@@ -1,7 +1,8 @@
 import CustomNavLink from './CustomNavLink.tsx';
 import { useEffect, useRef, useState, AnimationEvent } from "react";
+import { Link } from 'react-router-dom';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
-import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded } from '@mui/icons-material';
+import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded } from '@mui/icons-material';
 
 import tokenGenerator from "../utils/tokenGenerator.ts";
 import MegaMenusTypes from "../types/megaMenu.types.ts";
@@ -544,15 +545,19 @@ const Header = () => {
 						</CustomNavLink>
 					</div>
 				</div>
-				<div className={`wrapper h-full flex justify-between items-center px-3 lg:hidden`}>
+				<div className={`wrapper h-full flex justify-between items-center px-4 lg:hidden`}>
 					<menu
-						className={`h-full w-8 flex items-center relative`}
+						className={`h-full flex items-center relative`}
 						onClick={mobileMenuToggleHandler}
 					>
-						<MenuRounded className={`text-white absolute text-3xl
-							${showMobileMenu ? 'opacity-0 -translate-y-6' : ''}`} />
-						<CloseRounded className={`text-white text-3xl absolute
-							${!showMobileMenu ? 'opacity-0 translate-y-6' : ''}`} />
+						<MenuRounded
+							className={`text-white ${showMobileMenu ? 'opacity-0 -translate-y-3' : ''}`}
+							fontSize='large'
+						/>
+						<CloseRounded
+							className={`text-white absolute ${!showMobileMenu ? 'opacity-0 translate-y-3' : ''}`}
+							fontSize='large'
+						/>
 					</menu>
 					<CustomNavLink
 						className={`nav-link`}
@@ -564,11 +569,12 @@ const Header = () => {
 							alt="لوگوی جاب ویژن"
 						/>
 					</CustomNavLink>
-					<CustomNavLink
-						className={'text-white'}
+					<Link
+						className={`h-full flex items-center`}
+						to={''}
 					>
-						ورود / ثبت نام
-					</CustomNavLink>
+						<PersonRounded className={`text-white`} fontSize='large' />
+					</Link>
 				</div>
 			</header>
 

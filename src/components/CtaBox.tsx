@@ -23,7 +23,7 @@ const CtaBox = ({ src, title, text, btn }: CtaBoxProps) => {
           customClass={`justify-center lg:justify-start`}
           withOutIcon
         >
-          <h5>
+          <h5 className={`!text-xl`}>
             {title}
           </h5>
         </Title>

@@ -17,7 +17,7 @@ type formTypes = {
   city: string;
 }
 
-const SearchJobForm = ({ customClass }: { customClass: string }) => {
+const SearchJobForm = ({ customClass }: { customClass?: string }) => {
   const {
     register,
     handleSubmit,
@@ -35,7 +35,8 @@ const SearchJobForm = ({ customClass }: { customClass: string }) => {
 
   return (
     <form
-      className={`grid gap-2 grid-cols-2 grid-rows-[3rem_3rem_3rem] justify-center items-end col-span-2 lg:grid-rows-1 lg:grid-cols-5 sm:gap-3 ${customClass}`}
+      className={`w-full h-max grid grid-rows-3 grid-cols-2 gap-2 sm:col-span-2 md:grid-rows-1 md:grid-cols-5
+      md:gap-3 ${customClass}`}
       onSubmit={handleSubmit(onSubmit)}
     >
       <TextInput
@@ -59,7 +60,7 @@ const SearchJobForm = ({ customClass }: { customClass: string }) => {
         <LocationOnOutlined />
       </TextInput>
       <button
-        className={`btn btn-primary w-full col-span-2 ${isSubmitting && 'opacity-25'} lg:col-span-1`}
+        className={`btn btn-primary w-full col-span-2 ${isSubmitting && 'opacity-25'} md:col-span-1`}
         type={`submit`}
         onClick={() => {
           console.log(errors.search);
