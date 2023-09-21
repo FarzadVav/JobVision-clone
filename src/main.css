@@ -291,6 +291,26 @@
   .no-trans {
     @apply !transition-none;
   }
+  
+  .scroll-fade-up {
+    @apply opacity-0 translate-y-12;
+  }
+  
+  .scroll-fade-up__animate {
+    @apply origin-top;
+    animation: scroll-fade-up__animate 450ms ease-out;
+  }
+
+  @keyframes scroll-fade-up__animate {
+    0% {
+      opacity: 0;
+      transform: translateY(3rem);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
   .show-mobile-menu {
     animation: show-mobile-menu 750ms ease-out;

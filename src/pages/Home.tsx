@@ -16,6 +16,7 @@ import CompanyTypes from "../types/Company.types";
 import HonorBox from "../components/HonorBox";
 import CtaBox from "../components/CtaBox";
 import Accordion from "../components/Accordion";
+import useOneScroll from "../hooks/useOnScrool";
 
 const TestCompany: CompanyTypes = {
 	id: tokenGenerator(),
@@ -69,6 +70,8 @@ const Home = () => {
 	let runAnimation = false
 
 	const messageBoxRef = useRef<HTMLDivElement>(null)
+	// const employeeScrolled = useOneScroll('employee-baner')
+	useOneScroll(['employee-baner', 'cta-1', { id: 'cta-2', delay: 150 }])
 
 	useEffect(() => {
 		const oneAnimate = () => {
@@ -1200,8 +1203,11 @@ const Home = () => {
 				{/* Popular companies */}
 
 				{/* Employment baner */}
-				<div className={`bg-jv-light flex flex-col-reverse justify-center items-center mt-12 p-5 pb-9 rounded-md
-				md:flex-row md:justify-evenly md:mt-16 md:px-0 md:py-9`}>
+				<div
+					id={`employee-baner`}
+					className={`bg-jv-light flex flex-col-reverse justify-center items-center mt-12 p-5 pb-9 rounded-md
+					md:flex-row md:justify-evenly md:mt-16 md:px-0 md:py-9`}
+				>
 					<div className={`flex flex-col justify-center items-center md:items-start md:w-1/2`}>
 						<Title
 							customClass={`justify-center md:justify-start`}
@@ -1268,12 +1274,14 @@ const Home = () => {
 				{/* CTA section */}
 				<div className={`flex flex-col gap-4 mt-12 md:mt-16 lg:flex-row`}>
 					<CtaBox
+						id={`cta-1`}
 						src={`/images/cv.svg`}
 						title={`رزومه ساز جاب ویژن`}
 						text={`رزومه ای استاندارد به دو زبان فارسی و انگلیسی بسازید.`}
 						btn={`ساخت رزومه`}
 					/>
 					<CtaBox
+						id={`cta-2`}
 						src={`/images/salary.svg`}
 						title={`ماشین حساب حقوق و دستمزد`}
 						text={`از حقوق دریافتی افراد در مشاغل مختلف آگاه شوید و تخمین دقیق تری از حقوق منصفانه خود داشته باشید.`}

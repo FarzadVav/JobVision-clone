@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useRef } from "react"
 import AccordionWithToggle from "../hoc/AccordionWithToggle"
 import AccordionTypes from "../types/Accordion.types"
 import Title from "./Title"
@@ -9,7 +9,7 @@ const Accordion = ({ toggle, accordionRef, setToggle, toggleHandler, length, tit
 
   window.addEventListener('scroll', () => {
     if (
-      ((accordionParrentRef.current?.getBoundingClientRect().top || 0) <= (window.innerHeight / 1.5))
+      ((accordionParrentRef.current?.getBoundingClientRect().top || 0) <= (window.innerHeight / 1.6))
       && length === 1
     ) {
       setToggle(true)
@@ -19,10 +19,10 @@ const Accordion = ({ toggle, accordionRef, setToggle, toggleHandler, length, tit
   return (
     <>
       <li
-        className={`bg-white w-full h-12 flex justify-between items-center my-2 relative cursor-pointer
+        className={`bg-white w-full h-12 flex justify-between items-center my-2 relative ${length !== 1 ? 'cursor-pointer' : ''}
         group sm:my-6 sm:h-16 first-of-type:mt-0 last-of-type:mb-0`}
         ref={accordionParrentRef}
-        onClick={toggleHandler}
+        onClick={() => length !== 1 && toggleHandler()}
       >
         <div className={`bg-white border border-solid border-transparent w-12 h-16 hidden
           justify-center items-center absolute -right-16 top-0 bottom-0 group-hover:text-jv-primary
