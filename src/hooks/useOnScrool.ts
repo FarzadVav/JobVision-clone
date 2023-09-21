@@ -1,45 +1,42 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 type ElementsTypes = (string | { id: string; delay: number })[]
 
 const useOneScroll = (elements: ElementsTypes) => {
-
-  const [scrolled, setScrolled] = useState<boolean>(false)
-
   useEffect(() => {
     elements.forEach(elem => {
       let element: HTMLElement | null = null;
+
       if (typeof elem === 'string' && elem.length > 0) {
         element = document.querySelector(`#${elem}`)
       } else if (typeof elem === 'object') {
         element = document.querySelector(`#${elem.id}`)
-        element.style.animationDelay = `${elem.delay}ms`
       }
-      element?.addEventListener('animationend', (event) => {
-        console.log(event.animationName);
-        if (event.animationName === 'scroll-fade-up__animate') {
-          element?.classList.remove('scroll-fade-up')
-        }
-      })
+
+      element?.classList.add('duration-500')
 
       window.addEventListener('scroll', () => {
-        if ((element?.getBoundingClientRect().top || 0) <= (window.innerHeight / 1.25)) {
-          element?.classList.add('scroll-fade-up__animate')
-          setScrolled(true)
+        if ((element?.getBoundingClientRect().top || 0) <= (window.innerHeight / 1.35)) {
+          if (typeof elem === 'object') {
+            setTimeout(() => {
+              element?.classList.remove('scroll-fade-down')
+            }, elem.delay);
+          } else {
+            element?.classList.remove('scroll-fade-down')
+          }
         } else {
-          element?.classList.add('scroll-fade-up')
-          element?.classList.remove('scroll-fade-up__animate')
-          setScrolled(false)
+          if (typeof elem === 'object') {
+            setTimeout(() => {
+              element?.classList.add('scroll-fade-down')
+            }, elem.delay);
+          } else {
+            element?.classList.add('scroll-fade-down')
+          }
         }
       })
     })
 
   }, [])
-
-
-
-
-  return scrolled
 }
 
 export default useOneScroll
