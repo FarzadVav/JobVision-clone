@@ -2,7 +2,7 @@ import CustomNavLink from './CustomNavLink.tsx';
 import { useEffect, useRef, useState, AnimationEvent } from "react";
 import { Link } from 'react-router-dom';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
-import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded } from '@mui/icons-material';
+import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded, NavigateBeforeRounded } from '@mui/icons-material';
 
 import tokenGenerator from "../utils/tokenGenerator.ts";
 import MegaMenusTypes from "../types/megaMenu.types.ts";
@@ -701,14 +701,7 @@ const Header = () => {
 								<span className={`text-white text-xl`}>
 									فرصت های شغلی
 								</span>
-								<svg
-									className={`stroke-white w-5 h-5`} xmlns="http://www.w3.org/2000/svg" fill="none"
-									viewBox="0 0 24 24"
-									strokeWidth={2}
-									stroke="currentColor"
-								>
-									<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-								</svg>
+								<NavigateBeforeRounded className={`text-white`} />
 							</li>
 							<li className={`w-full flex justify-between items-center py-2 mt-3`}>
 								<CustomNavLink
@@ -758,17 +751,10 @@ const Header = () => {
 								className={`border-b border-solid border-slate-200 border-opacity-25 w-full flex justify-between items-center pt-2 pb-5 cursor-pointer`}
 								onClick={() => setShowMobileMenuJobs(false)}
 							>
-								<span className={`text-white text-xl`}>
+								<button className={`text-white text-xl`}>
 									بازگشت
-								</span>
-								<svg
-									className={`stroke-white w-5 h-5 rotate-180`} xmlns="http://www.w3.org/2000/svg" fill="none"
-									viewBox="0 0 24 24"
-									strokeWidth={2}
-									stroke="currentColor"
-								>
-									<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-								</svg>
+								</button>
+								<NavigateBeforeRounded className={`text-white rotate-180`} />
 							</li>
 							{
 								megaMenus.map(menu => (
@@ -783,14 +769,7 @@ const Header = () => {
 										<span className={`text-white text-xl`}>
 											{menu.title}
 										</span>
-										<svg
-											className={`stroke-white w-5 h-5`} xmlns="http://www.w3.org/2000/svg" fill="none"
-											viewBox="0 0 24 24"
-											strokeWidth={2}
-											stroke="currentColor"
-										>
-											<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-										</svg>
+										<NavigateBeforeRounded className={`text-white`} />
 									</li>
 								))
 							}
@@ -798,23 +777,16 @@ const Header = () => {
 						<ul className={`w-full h-full flex flex-col px-6 absolute top-9 overflow-y-auto duration-500 cubic-1
 						${(!showMobileMenuJobs && showJobInMobileMenu.state) ? 'translate-x-0' : 'translate-x-full'}`}>
 							<li
-								className={`bg-jv-primary border-b border-solid border-slate-200 border-opacity-25 w-full flex justify-between items-center sticky top-0 pt-2 pb-5 cursor-pointer`}
+								className={`bg-jv-primary border-b border-solid border-slate-200 border-opacity-25 w-full flex justify-between items-center sticky top-0 pt-2 pb-5 mb-4 cursor-pointer`}
 								onClick={() => {
 									setShowMobileMenuJobs(true)
 									setShowJobInMobileMenu({ state: false, id: '' })
 								}}
 							>
-								<span className={`text-white text-xl`}>
+								<button className={`text-white text-xl`}>
 									بازگشت
-								</span>
-								<svg
-									className={`stroke-white w-5 h-5 rotate-180`} xmlns="http://www.w3.org/2000/svg" fill="none"
-									viewBox="0 0 24 24"
-									strokeWidth={2}
-									stroke="currentColor"
-								>
-									<path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-								</svg>
+								</button>
+								<NavigateBeforeRounded className={`text-white rotate-180`} />
 							</li>
 							{
 								megaMenus.map(menu => {
@@ -825,14 +797,14 @@ const Header = () => {
 												className={`w-full flex flex-col my-2 cursor-pointer`}
 											>
 												<button
-													className={`underline decoration-[#ffffff75] w-full text-white text-xl text-right`}
+													className={`w-full text-white text-xl text-right`}
 													onClick={() => megaMenuButtonLinkHandler(`#${link.link}`)}
 												>
 													{link.title}
 												</button>
 												{
 													link.subLinks.length ? (
-														<ul className={`w-full flex flex-col pr-5 my-4`}>
+														<ul className={`w-full flex flex-col my-4`}>
 															{
 																link.subLinks.map(subLink => (
 																	<li
@@ -840,10 +812,10 @@ const Header = () => {
 																		className={`py-1 my-1 first:pt-0 first:mt-0 last:pb-0 last:mb-0`}
 																	>
 																		<CustomNavLink
-																			className={`dana-base underline decoration-[#ffffff75] w-full block text-white text-base`}
+																			className={`dana-base w-full block text-white text-base`}
 																			path={`#${subLink.link}`}
 																		>
-																			{subLink.title}
+																			<span className={`ml-1.5`}>-</span> {subLink.title}
 																		</CustomNavLink>
 																	</li>
 																))
