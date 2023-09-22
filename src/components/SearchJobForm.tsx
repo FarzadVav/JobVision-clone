@@ -7,7 +7,7 @@ import TextInput from "./inputs/TextInput";
 import AutoComplete from "./inputs/AutoComplete";
 
 const schema = z.object({
-  search: z.string().nonempty('لطفا عنوان شغل را خالی نگذارید').min(3).max(128),
+  search: z.string().nonempty('لطفا عنوان شغل را خالی نگذارید').min(2).max(128),
   job: z.string(),
   city: z.string()
 })
@@ -18,11 +18,18 @@ type formTypes = {
   city: string;
 }
 
+const datas = [
+  { name: 'برنامه نویسی' },
+  { name: 'بازاریابی' },
+  { name: 'فتوشاپ' },
+]
+
 const SearchJobForm = ({ customClass }: { customClass?: string }) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setValue,
     reset
   } = useForm<formTypes>({
     resolver: zodResolver(schema)
@@ -51,23 +58,24 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
       <AutoComplete
         customClass={`md:col-span-2`}
         register={{ ...register('job') }}
+        setValue={setValue}
         placeholder={`گروه شغلی`}
+        datas={datas}
       >
         <WorkOutlineRounded />
       </AutoComplete>
       <AutoComplete
         customClass={`md:col-span-2`}
         register={{ ...register('city') }}
+        setValue={setValue}
         placeholder={`شهر`}
+        datas={datas}
       >
         <LocationOnOutlined />
       </AutoComplete>
       <button
         className={`btn btn-primary w-full ${isSubmitting && 'opacity-25'} sm:col-span-2 md:col-span-1`}
         type={`submit`}
-        onClick={() => {
-          console.log(errors.search);
-        }}
       >
         جستجو
       </button>
