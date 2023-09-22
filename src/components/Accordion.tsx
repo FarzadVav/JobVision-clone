@@ -20,7 +20,7 @@ const Accordion = ({ toggle, accordionRef, setToggle, toggleHandler, length, tit
     <>
       <li
         className={`bg-white w-full h-12 flex justify-between items-center my-2 relative ${length !== 1 ? 'cursor-pointer' : ''}
-        group sm:my-6 sm:h-16 first-of-type:mt-0 last-of-type:mb-0`}
+        group sm:my-6 sm:h-16 first-of-type:mt-0`}
         ref={accordionParrentRef}
         onClick={() => length !== 1 && toggleHandler()}
       >

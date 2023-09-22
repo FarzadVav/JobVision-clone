@@ -674,7 +674,7 @@ const Header = () => {
 							</li>
 						</ul>
 					</div>
-					<div className={`bg-slate-300 w-12 h-1 rounded-full absolute left-1/2 bottom-1.5 -translate-x-1/2`}>
+					<div className={`bg-jv-light w-12 h-1 rounded-full absolute left-1/2 bottom-1.5 -translate-x-1/2`}>
 					</div>
 				</div>
 			</div>

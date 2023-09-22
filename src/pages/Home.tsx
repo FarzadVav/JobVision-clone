@@ -1205,7 +1205,7 @@ const Home = () => {
 				{/* Employment baner */}
 				<div
 					id={`employee-baner`}
-					className={`bg-jv-light flex flex-col-reverse justify-center items-center mt-12 p-5 pb-9 rounded-md
+					className={`bg-jv-bright flex flex-col-reverse justify-center items-center mt-12 p-5 pb-9 rounded-md
 					md:flex-row md:justify-evenly md:mt-16 md:px-0 md:py-9`}
 				>
 					<div className={`flex flex-col justify-center items-center md:items-start md:w-1/2`}>
@@ -1319,10 +1319,10 @@ const Home = () => {
 			</div>
 
 			{/* CTA section in end */}
-			<div className={`bg-jv-light h-80 relative group mt-7 overflow-hidden sm:mt-12 md:h-72 md:mt-16`}>
-				<div className={`bg-gradient-to-t from-jv-light via-jv-light to-white absolute top-0 bottom-0
+			<div className={`bg-jv-bright h-80 relative group mt-7 overflow-hidden sm:mt-12 md:h-72 md:mt-16`}>
+				<div className={`bg-gradient-to-t from-jv-bright via-jv-bright to-white absolute top-0 bottom-0
 				right-0 left-0 duration-300 sm:group-hover:opacity-0 sm:bg-gradient-to-r
-				sm:from-white sm:via-jv-light sm:to-white`}></div>
+				sm:from-white sm:via-jv-bright sm:to-white`}></div>
 				<div className={`flex flex-col justify-between items-center py-11 px-5 absolute top-0 bottom-0 right-0 left-0
 				z-10 sm:py-12`}>
 					<Title

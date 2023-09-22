@@ -13,6 +13,7 @@ export default {
         'jv-black': 'var(--blackColor)',
         'jv-primary': 'var(--primaryColor)',
         'jv-light': 'var(--lightColor)',
+        'jv-bright': 'var(--brightColor)',
         'jv-dark': 'var(--darkColor)',
         'jv-danger': 'var(--dangerColor)',
         'jv-success': 'var(--successColor)',

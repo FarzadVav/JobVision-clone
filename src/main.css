@@ -21,6 +21,7 @@
   --blackColor: #121315;
   --primaryColor: #5660f2;
   --lightColor: #dde1e6;
+  --brightColor: #F6F7F9;
   --darkColor: #4A4E57;
   --dangerColor: #fa5555;
   --successColor: #45c26f;
@@ -166,7 +167,11 @@
   .accordion-content {
     max-height: 0;
   }
-
+  
+  .list-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--lightColor);
+    border-radius: 5px;
+  }
 }
 
 @layer components {
@@ -256,11 +261,12 @@
 @layer components {
   .input-bg {
     @apply bg-white text-jv-dark w-full h-12 border border-solid border-jv-dark flex justify-between items-center
-    rounded relative overflow-hidden hover:border-jv-primary;
+    rounded relative hover:border-jv-primary;
   }
 
   .input {
-    @apply bg-none absolute top-0 bottom-0 left-0 right-12 py-2 pl-5 placeholder:opacity-75 focus:placeholder:opacity-100;
+    @apply bg-none absolute top-0 bottom-0 left-0 right-12 py-2 pl-5 rounded placeholder:opacity-75 
+    focus:placeholder:opacity-100;
   }
 
   .input-icon {

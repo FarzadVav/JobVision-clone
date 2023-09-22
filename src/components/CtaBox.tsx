@@ -14,7 +14,7 @@ const CtaBox = ({ id, src, title, text, btn }: CtaBoxProps) => {
   return (
     <Link
       id={id}
-      className={`bg-jv-light w-full flex flex-col justify-center items-center rounded-md p-3 lg:p-6 lg:justify-start lg:flex-row lg:w-1/2`}
+      className={`bg-jv-bright w-full flex flex-col justify-center items-center rounded-md p-3 lg:p-6 lg:justify-start lg:flex-row lg:w-1/2`}
       to={'/'}
     >
       <img

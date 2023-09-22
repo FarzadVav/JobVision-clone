@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { WorkOutlineRounded, SearchRounded, LocationOnOutlined } from "@mui/icons-material";
 
 import TextInput from "./inputs/TextInput";
+import AutoComplete from "./inputs/AutoComplete";
 
 const schema = z.object({
   search: z.string().nonempty('لطفا عنوان شغل را خالی نگذارید').min(3).max(128),
@@ -35,30 +36,32 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
 
   return (
     <form
-      className={`w-full h-max grid grid-rows-3 grid-cols-2 gap-2 sm:col-span-2 md:grid-rows-1 md:grid-cols-5
+      className={`w-full h-max grid grid-rows-3 grid-cols-2 gap-2 sm:col-span-2 md:grid-rows-1 md:grid-cols-8
       md:gap-3 ${customClass}`}
       onSubmit={handleSubmit(onSubmit)}
     >
       <TextInput
-        customClass={`col-span-2`}
+        customClass={`col-span-3`}
         register={{ ...register('search') }}
         placeholder={`عنوان شغلی یا شرکت`}
         error={!!errors.search}
       >
         <SearchRounded />
       </TextInput>
-      <TextInput
+      <AutoComplete
+        customClass={`col-span-2`}
         register={{ ...register('job') }}
         placeholder={`گروه شغلی`}
       >
         <WorkOutlineRounded />
-      </TextInput>
-      <TextInput
+      </AutoComplete>
+      <AutoComplete
+        customClass={`col-span-2`}
         register={{ ...register('city') }}
         placeholder={`شهر`}
       >
         <LocationOnOutlined />
-      </TextInput>
+      </AutoComplete>
       <button
         className={`btn btn-primary w-full col-span-2 ${isSubmitting && 'opacity-25'} md:col-span-1`}
         type={`submit`}
@@ -66,7 +69,7 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
           console.log(errors.search);
         }}
       >
-        جستجو در مشاغل
+        جستجو
       </button>
     </form>
   )
