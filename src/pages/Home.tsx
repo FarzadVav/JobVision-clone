@@ -130,7 +130,7 @@ const Home = () => {
 		<>
 			<div className={`wrapper mt-12 md:mt-3`}>
 				{/* Hero section */}
-				<main className={`h-max grid grid-rows-[1fr_10.5rem] grid-cols-1 gap-y-9 md:grid-cols-2
+				<main className={`h-max grid grid-rows-[1fr_13.5rem] grid-cols-1 gap-y-9 md:grid-cols-2
 				md:grid-rows-[1fr_3rem] md:gap-y-16`}>
 					<div className={`flex flex-col justify-center items-center text-center md:text-right md:items-start`}>
 						<Title
