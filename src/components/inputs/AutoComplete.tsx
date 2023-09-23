@@ -42,12 +42,12 @@ const AutoComplete = ({ customClass, register, setValue, placeholder, error, chi
       />
       <div className={`input-icon ${error ? 'text-jv-danger group-hover:text-jv-danger' : (focus && !error) ? 'text-jv-primary' : 'group-hover:text-jv-primary'}`}>
         <div className={`w-6 h-6 relative`}>
-          <svg className={`absolute transition-transform !duration-150 ${focus ? 'opacity-0 -translate-y-5' : ''}`}>
+          <svg className={`absolute transition-transform !duration-150 ${focus ? 'opacity-0 -translate-y-5 invisible' : ''}`}>
             {children}
           </svg>
           <div onMouseDown={() => setValue(register.name, '')}>
             <CloseRounded className={`cursor-pointer absolute transition-transform !duration-150
-              ${focus ? '' : 'opacity-0 translate-y-5'}`} />
+              ${focus ? '' : 'opacity-0 translate-y-5 invisible'}`} />
           </div>
         </div>
       </div>
