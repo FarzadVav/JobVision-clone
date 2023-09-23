@@ -1,4 +1,3 @@
-import CustomNavLink from './CustomNavLink.tsx';
 import { useEffect, useRef, useState, AnimationEvent } from "react";
 import { Link } from 'react-router-dom';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
@@ -494,55 +493,61 @@ const Header = () => {
 								</button>
 							</li>
 							<li className={'h-full'}>
-								<CustomNavLink
+								<Link
 									className={'nav-link'}
-									path={`/jobs`}
+									to={`/jobs`}
 								>
 									محصولات
-								</CustomNavLink>
+								</Link>
 							</li>
 							<li className={'h-full'}>
-								<CustomNavLink
+								<Link
 									className={'nav-link'}
+									to={``}
 								>
 									رده بندی شرکت ها
-								</CustomNavLink>
+								</Link>
 							</li>
 							<li className={'h-full'}>
-								<CustomNavLink
+								<Link
 									className={'nav-link'}
+									to={``}
 								>
 									رزومه ساز
-								</CustomNavLink>
+								</Link>
 							</li>
 							<li className={'h-full'}>
-								<CustomNavLink
+								<Link
 									className={'nav-link text-jv-danger hover:text-jv-danger hover:brightness-90'}
+									to={``}
 								>
 									گزارش کارنامه بازار کار
-								</CustomNavLink>
+								</Link>
 							</li>
 						</ul>
 					</nav>
 					<div className={`h-full flex justify-center items-center`}>
-						<CustomNavLink
+						<Link
 							className={`btn btn-primary`}
+							to={``}
 						>
 							ورود / ثبت نام کارجو
-						</CustomNavLink>
-						<CustomNavLink
+						</Link>
+						<Link
 							className={'nav-link mr-5 xl:mr-7'}
+							to={``}
 						>
 							بخش کارفرمایان
-						</CustomNavLink>
-						<CustomNavLink
+						</Link>
+						<Link
 							className={`nav-link pr-4 mr-5 relative before:absolute before:w-[1px] before:h-10 before:right-0 before:content-[''] before:bg-slate-200 xl:mr-7 xl:pr-5`}
+							to={``}
 						>
 							<img
 								src="/images/logo.svg"
 								alt="لوگوی جاب ویژن"
 							/>
-						</CustomNavLink>
+						</Link>
 					</div>
 				</div>
 				<div className={`wrapper h-full flex justify-between items-center px-4 lg:hidden`}>
@@ -559,16 +564,16 @@ const Header = () => {
 							fontSize='large'
 						/>
 					</menu>
-					<CustomNavLink
+					<Link
 						className={`nav-link`}
-						path={`/`}
+						to={`/`}
 					>
 						<img
 							className={`scale-90`}
 							src="/images/logo-white.svg"
 							alt="لوگوی جاب ویژن"
 						/>
-					</CustomNavLink>
+					</Link>
 					<Link
 						className={`h-full flex items-center`}
 						to={''}
@@ -587,9 +592,9 @@ const Header = () => {
 							megaMenus.map(menu => (
 								<li
 									key={tokenGenerator()}
-									className={`h-full flex items-center cursor-pointer group last:ml-0 last:border-0 hover:text-jv-primary`}>
+									className={`h-full flex items-center cursor-pointer group hover:text-jv-primary`}>
 									<span
-										className={`border-l border-solid border-slate-200 h-1/2 flex items-center pt-1 px-6 dana-bold`}>
+										className={`border-l border-solid border-jv-light h-1/2 flex items-center px-6 dana-bold`}>
 										{menu.title}
 									</span>
 									<ul
@@ -618,12 +623,12 @@ const Header = () => {
 																					className={`no-trans text-jv-dark ml-2 opacity-75 group-hover/sub:text-jv-primary`}
 																					fontSize='small'
 																				/>
-																				<CustomNavLink
+																				<Link
 																					className={`text-jv-dark w-full inline-block text-right hover:text-jv-primary`}
-																					path={`#${subLink.link}`}
+																					to={`#${subLink.link}`}
 																				>
 																					{subLink.title}
-																				</CustomNavLink>
+																				</Link>
 																			</li>
 																		))
 																	}
@@ -638,6 +643,12 @@ const Header = () => {
 								</li>
 							))
 						}
+						<Link
+							className={`text-jv-primary underline decoration-jv-light h-full flex items-center mr-6`}
+							to={'/jobs'}
+						>
+							همه آگهی ها
+						</Link>
 					</ul>
 					<div className={`flex flex-col justify-center items-center mx-auto mt-5`}>
 						<img
@@ -652,25 +663,28 @@ const Header = () => {
 						</p>
 						<ul className={`mt-5 flex justify-center items-center`}>
 							<li>
-								<CustomNavLink
+								<Link
 									className={`hover:text-jv-primary`}
+									to={``}
 								>
 									لینک پیوست 1
-								</CustomNavLink>
+								</Link>
 							</li>
 							<li>
-								<CustomNavLink
+								<Link
 									className={`mx-7 hover:text-jv-primary`}
+									to={``}
 								>
 									لینک پیوست 2
-								</CustomNavLink>
+								</Link>
 							</li>
 							<li>
-								<CustomNavLink
+								<Link
 									className={`hover:text-jv-primary`}
+									to={``}
 								>
 									لینک پیوست 3
-								</CustomNavLink>
+								</Link>
 							</li>
 						</ul>
 					</div>
@@ -690,8 +704,8 @@ const Header = () => {
 							}
 						}}
 					>
-						<div className={`bg-slate-200 bg-opacity-25 w-12 h-1 rounded-full absolute top-3`}>
-						</div>
+						<div className={`bg-jv-primary brightness-110 w-12 h-1 rounded-full absolute top-3`}></div>
+
 						<ul className={`w-full flex flex-col px-6 absolute top-9 duration-500 cubic-1
 						${(!showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : '-translate-x-full'}`}>
 							<li
@@ -704,57 +718,64 @@ const Header = () => {
 								<NavigateBeforeRounded className={`text-white`} />
 							</li>
 							<li className={`w-full flex justify-between items-center py-2 mt-3`}>
-								<CustomNavLink
+								<Link
 									className={`text-white text-xl`}
-									path={`/`}
+									to={`/`}
 								>
 									محصولات
-								</CustomNavLink>
+								</Link>
 							</li>
 							<li className={`w-full flex justify-between items-center py-2 mt-3`}>
-								<CustomNavLink
+								<Link
 									className={`text-white text-xl`}
-									path={`/`}
+									to={`/`}
 								>
 									رده بندی شرکت ها
-								</CustomNavLink>
+								</Link>
 							</li>
 							<li
-								className={`border-b border-solid border-slate-200 border-opacity-25 w-full flex justify-between items-center pt-2 pb-5 mt-3`}>
-								<CustomNavLink
+								className={`border-b border-solid border-jv-primary border-opacity-25 w-full flex justify-between items-center pt-2 pb-5 mt-3`}>
+								<Link
 									className={`text-white text-xl`}
-									path={`/`}
+									to={`/`}
 								>
 									رزومه ساز
-								</CustomNavLink>
+								</Link>
 							</li>
 							<li className={`w-full flex justify-between items-center py-2 mt-4`}>
-								<CustomNavLink
+								<Link
 									className={`text-white text-xl`}
-									path={`/`}
+									to={`/`}
 								>
 									کارفرمایان
-								</CustomNavLink>
+								</Link>
 							</li>
 							<li className={`w-full flex justify-between items-center mt-3`}>
-								<CustomNavLink
+								<Link
 									className={`btn btn-danger text-xl w-full`}
-									path={`/`}
+									to={`/`}
 								>
 									گزارش کارنامه بازار کار
-								</CustomNavLink>
+								</Link>
 							</li>
 						</ul>
+
 						<ul className={`w-full flex flex-col px-6 absolute top-9 duration-500 cubic-1
 						${(showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : (!showMobileMenuJobs && showJobInMobileMenu.state) ? '-translate-x-full' : 'translate-x-full'}`}>
 							<li
-								className={`border-b border-solid border-slate-200 border-opacity-25 w-full flex justify-between items-center pt-2 pb-5 cursor-pointer`}
+								className={`border-b border-solid border-jv-primary brightness-125 w-full flex justify-between items-center 
+								pt-2 pb-5 cursor-pointer`}
 								onClick={() => setShowMobileMenuJobs(false)}
 							>
 								<button className={`text-white text-xl`}>
 									بازگشت
 								</button>
 								<NavigateBeforeRounded className={`text-white rotate-180`} />
+							</li>
+							<li className={`w-full flex justify-between items-center py-2 mt-4 cursor-pointer`}>
+								<span className={`text-jv-warning text-xl`}>
+									فرصت های شغلی
+								</span>
 							</li>
 							{
 								megaMenus.map(menu => (
@@ -774,10 +795,11 @@ const Header = () => {
 								))
 							}
 						</ul>
+
 						<ul className={`w-full h-full flex flex-col px-6 absolute top-9 overflow-y-auto duration-500 cubic-1
 						${(!showMobileMenuJobs && showJobInMobileMenu.state) ? 'translate-x-0' : 'translate-x-full'}`}>
 							<li
-								className={`bg-jv-primary border-b border-solid border-slate-200 border-opacity-25 w-full flex justify-between items-center sticky top-0 pt-2 pb-5 mb-4 cursor-pointer`}
+								className={`border-b border-solid border-jv-primary brightness-125 w-full flex justify-between items-center sticky top-0 pt-2 pb-5 mb-4 cursor-pointer`}
 								onClick={() => {
 									setShowMobileMenuJobs(true)
 									setShowJobInMobileMenu({ state: false, id: '' })
@@ -811,12 +833,12 @@ const Header = () => {
 																		key={tokenGenerator()}
 																		className={`py-1 my-1 first:pt-0 first:mt-0 last:pb-0 last:mb-0`}
 																	>
-																		<CustomNavLink
+																		<Link
 																			className={`dana-base w-full block text-white text-base`}
-																			path={`#${subLink.link}`}
+																			to={`#${subLink.link}`}
 																		>
 																			<span className={`ml-1.5`}>-</span> {subLink.title}
-																		</CustomNavLink>
+																		</Link>
 																	</li>
 																))
 															}

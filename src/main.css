@@ -140,10 +140,6 @@
     @apply text-jv-primary w-7 h-7 ml-2 md:w-8 md:h-8;
   }
 
-  .mega-menu li:last-child span {
-    @apply !border-transparent;
-  }
-
   .active-circle {
     fill: var(--primaryColor);
   }
