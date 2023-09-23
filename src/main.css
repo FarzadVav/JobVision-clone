@@ -277,9 +277,8 @@
     @apply !w-6 !h-6;
   }
 
-  .input-icon svg,
-  .input-icon svg * {
-    @apply !transition-none;
+  .input-icon * {
+    @apply duration-0;
   }
 }
 
