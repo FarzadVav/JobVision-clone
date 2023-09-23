@@ -453,6 +453,10 @@ const Header = () => {
 	const mobileMenuRef = useRef<HTMLMenuElement>(null)
 
 	useEffect(() => {
+		setShowMobileMenu(false)
+	}, [location.pathname])
+
+	useEffect(() => {
 		if (showMobileMenu) {
 			document.body.classList.add('overflow-hidden')
 		} else {
@@ -773,9 +777,12 @@ const Header = () => {
 								<NavigateBeforeRounded className={`text-white rotate-180`} />
 							</li>
 							<li className={`w-full flex justify-between items-center py-2 mt-4 cursor-pointer`}>
-								<span className={`text-jv-warning text-xl`}>
-									فرصت های شغلی
-								</span>
+								<Link
+									className={`text-jv-warning underline w-full text-xl`}
+									to={'/jobs'}
+								>
+									همه آگهی ها
+								</Link>
 							</li>
 							{
 								megaMenus.map(menu => (
