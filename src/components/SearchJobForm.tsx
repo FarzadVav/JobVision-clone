@@ -47,12 +47,12 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
 
   return (
     <form
-      className={`w-full h-max grid grid-rows-3 grid-cols-1 gap-2 sm:col-span-2 md:grid-rows-1 md:grid-cols-8
-      md:gap-3 ${customClass}`}
+      className={`w-full h-max grid grid-rows-3 grid-cols-1 gap-2 sm:col-span-2 sm:grid-cols-2 lg:grid-rows-1 lg:grid-cols-8
+      lg:gap-3 ${customClass}`}
       onSubmit={handleSubmit(onSubmit)}
     >
       <TextInput
-        customClass={`sm:col-span-2 md:col-span-3`}
+        customClass={`sm:col-span-2 lg:col-span-3`}
         register={{ ...register('search') }}
         placeholder={`عنوان شغلی یا شرکت`}
         error={!!errors.search}
@@ -60,7 +60,7 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
         <SearchRounded />
       </TextInput>
       <AutoComplete
-        customClass={`md:col-span-2`}
+        customClass={`lg:col-span-2`}
         register={{ ...register('job') }}
         setValue={setValue}
         placeholder={`گروه شغلی`}
@@ -69,7 +69,7 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
         <WorkOutlineRounded />
       </AutoComplete>
       <AutoComplete
-        customClass={`md:col-span-2`}
+        customClass={`lg:col-span-2`}
         register={{ ...register('city') }}
         setValue={setValue}
         placeholder={`شهر`}
@@ -78,7 +78,7 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
         <LocationOnOutlined />
       </AutoComplete>
       <button
-        className={`btn btn-primary w-full ${isSubmitting && 'opacity-25'} sm:col-span-2 md:col-span-1`}
+        className={`btn btn-primary w-full ${isSubmitting && 'opacity-25'} sm:col-span-2 lg:col-span-1`}
         type={`submit`}
       >
         جستجو
