@@ -107,17 +107,19 @@
   input:-webkit-autofill,
   input:-webkit-autofill:hover, 
   input:-webkit-autofill:focus {
-    transition: background 10000s linear;
+    box-shadow: 0 0 0px 1000px var(--whiteColor) inset;
   }
 }
 
 @layer utilities {
   .dana-base {
     font-family: 'dana';
+    font-weight: normal;
   }
 
   .dana-bold {
     font-family: 'dana-bold';
+    font-weight: bold;
   }
 }
 

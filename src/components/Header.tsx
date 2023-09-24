@@ -622,14 +622,16 @@ const Header = () => {
 																		link.subLinks.map(subLink => (
 																			<li
 																				key={tokenGenerator()}
-																				className={`w-full flex items-center mt-2 first:mt-0 group/sub`}
+																				className={`dana-base w-full flex items-center mt-2 first:mt-0 group/sub`}
 																			>
 																				<KeyboardArrowLeftRounded
-																					className={`no-trans text-jv-dark ml-2 opacity-75 group-hover/sub:text-jv-primary`}
+																					className={`no-trans text-jv-dark ml-1 opacity-60 group-hover/sub:text-jv-primary
+																					group-hover/sub:opacity-100`}
 																					fontSize='small'
 																				/>
 																				<Link
-																					className={`text-jv-dark w-full inline-block text-right hover:text-jv-primary`}
+																					className={`text-jv-dark w-full inline-block text-sm text-right
+																					hover:text-jv-primary`}
 																					to={`#${subLink.link}`}
 																				>
 																					{subLink.title}

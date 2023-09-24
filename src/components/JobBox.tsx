@@ -3,7 +3,11 @@ import { Star } from "@mui/icons-material"
 
 import JobTypes from "../types/Job.types"
 
-const JobBox = ({ id, categories, title, company, city, location, salary, remote, isUrgent }: JobTypes) => {
+interface JobBoxProps extends JobTypes {
+  selected?: boolean;
+}
+
+const JobBox = ({ id, categories, title, company, city, location, salary, remote, isUrgent, selected }: JobBoxProps) => {
   return (
     <article
       className={`bg-white w-full group`}
@@ -11,7 +15,8 @@ const JobBox = ({ id, categories, title, company, city, location, salary, remote
       data-category={categories}
     >
       <Link
-        className={`text-jv-dark border border-solid border-jv-light w-full h-full flex flex-col justify-between rounded-md p-3`}
+        className={`border border-solid w-full h-full flex flex-col justify-between rounded-md
+        p-3 ${selected ? 'border-jv-primary text-jv-primary' : 'border-jv-light text-jv-dark'}`}
         to={`/jobs`}
       >
         <div className={`flex`}>
@@ -69,7 +74,8 @@ const JobBox = ({ id, categories, title, company, city, location, salary, remote
             </div>
           </div>
         </div>
-        <div className={`border-t border-solid border-jv-light col-span-12 flex justify-between items-center pt-3 mt-5`}>
+        <div className={`border-t border-dashed col-span-12 flex justify-between items-center pt-3 mt-5
+        ${selected ? 'border-jv-primary' : 'border-jv-light'}`}>
           {
             isUrgent ? (
               <span className={`badge badge-danger`}>
@@ -83,7 +89,7 @@ const JobBox = ({ id, categories, title, company, city, location, salary, remote
           }
           {
             company.score ? (
-              <div className={`badge ml-auto lg:opacity-0 group-hover:opacity-100`}>
+              <div className={`badge ${selected ? 'mr-auto' : 'ml-auto lg:opacity-0 group-hover:opacity-100'}`}>
                 <Star className={`text-jv-warning`} fontSize="small" />
                 <span className={`text-jv-dark inline-block h-3`}>
                   {company.score}
@@ -91,11 +97,15 @@ const JobBox = ({ id, categories, title, company, city, location, salary, remote
               </div>
             ) : null
           }
-          <button
-            className={`btn-sm btn-success`}
-          >
-            ارسال رزومه
-          </button>
+          {
+            !selected && (
+              <button
+                className={`btn-sm btn-success`}
+              >
+                ارسال رزومه
+              </button>
+            )
+          }
         </div>
       </Link>
     </article>
