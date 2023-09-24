@@ -453,6 +453,7 @@ const Header = () => {
 	const mobileMenuRef = useRef<HTMLMenuElement>(null)
 
 	useEffect(() => {
+		setShowMegaMenu(false)
 		setShowMobileMenu(false)
 	}, [location.pathname])
 

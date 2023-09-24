@@ -41,8 +41,8 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
     await new Promise((resolve) => setTimeout(() => {
       console.log(resolve);
       redirect(`/jobs?search=${data.search}${data.job ? `?job=${data.job}` : ''}${data.city ? `?city=${data.city}` : ''}`)
+      reset()
     }, 1500));
-    reset()
   }
 
   return (
