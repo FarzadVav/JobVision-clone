@@ -741,7 +741,7 @@ const Header = () => {
 								</Link>
 							</li>
 							<li
-								className={`border-b border-solid border-jv-primary border-opacity-25 w-full flex justify-between items-center pt-2 pb-5 mt-3`}>
+								className={`border-b border-solid border-[#ffffff25] border-opacity-25 w-full flex justify-between items-center pt-2 pb-5 mt-3`}>
 								<Link
 									className={`text-white text-xl`}
 									to={`/`}
@@ -770,7 +770,7 @@ const Header = () => {
 						<ul className={`w-full flex flex-col px-6 absolute top-9 duration-500 cubic-1
 						${(showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : (!showMobileMenuJobs && showJobInMobileMenu.state) ? '-translate-x-full' : 'translate-x-full'}`}>
 							<li
-								className={`border-b border-solid border-jv-primary brightness-125 w-full flex justify-between items-center 
+								className={`border-b border-solid border-[#ffffff25] brightness-125 w-full flex justify-between items-center 
 								pt-2 pb-5 cursor-pointer`}
 								onClick={() => setShowMobileMenuJobs(false)}
 							>
@@ -809,7 +809,7 @@ const Header = () => {
 						<ul className={`w-full h-full flex flex-col px-6 absolute top-9 overflow-y-auto duration-500 cubic-1
 						${(!showMobileMenuJobs && showJobInMobileMenu.state) ? 'translate-x-0' : 'translate-x-full'}`}>
 							<li
-								className={`border-b border-solid border-jv-primary brightness-125 w-full flex justify-between items-center sticky top-0 pt-2 pb-5 mb-4 cursor-pointer`}
+								className={`bg-jv-primary border-b border-solid border-[#ffffff25] w-full flex justify-between items-center sticky top-0 pt-2 pb-5 mb-4 cursor-pointer`}
 								onClick={() => {
 									setShowMobileMenuJobs(true)
 									setShowJobInMobileMenu({ state: false, id: '' })

@@ -109,6 +109,10 @@
   input:-webkit-autofill:focus {
     box-shadow: 0 0 0px 1000px var(--whiteColor) inset;
   }
+
+  input:focus {
+    outline: none;
+  }
 }
 
 @layer utilities {
@@ -275,12 +279,12 @@
   }
 
   .input {
-    @apply bg-none absolute top-0 bottom-0 left-0 right-12 py-2 pl-5 rounded placeholder:opacity-75 
+    @apply bg-none w-[calc(100%-3rem)] h-full absolute left-0 top-0 py-2 pl-5 rounded placeholder:opacity-75 
     focus:placeholder:opacity-100;
   }
 
   .input-icon {
-    @apply absolute top-0 bottom-0 right-0 w-12 flex justify-center items-center;
+    @apply absolute top-0 right-0 w-12 h-12 flex justify-center items-center;
   }
 
   .input-icon svg {
