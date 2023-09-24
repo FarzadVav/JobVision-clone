@@ -1,4 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { WorkOutlineRounded, SearchRounded, LocationOnOutlined } from "@mui/icons-material";
@@ -34,10 +35,13 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
   } = useForm<formTypes>({
     resolver: zodResolver(schema)
   })
+  const redirect = useNavigate()
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
-    console.log(data);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(() => {
+      console.log(resolve);
+      redirect(`/jobs?search=${data.search}${data.job ? `?job=${data.job}` : ''}${data.city ? `?city=${data.city}` : ''}`)
+    }, 1500));
     reset()
   }
 

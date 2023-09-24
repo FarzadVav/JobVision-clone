@@ -102,7 +102,14 @@
 
   a {
     @apply text-black;
-  }}
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus {
+    transition: background 10000s linear;
+  }
+}
 
 @layer utilities {
   .dana-base {
