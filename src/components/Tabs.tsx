@@ -12,8 +12,6 @@ type TabsProps = {
 
 const Tabs = ({ customClass, tabs }: TabsProps) => {
   const [selectedTab, setSelectedTab] = useState<string>(tabs[0]?.id || '')
-  console.log(selectedTab);
-
 
   return (
     <div className={`w-full ${customClass}`}>

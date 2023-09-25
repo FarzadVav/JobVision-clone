@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactNode, useState, useMemo } from 'react'
 import { CloseRounded, FavoriteBorderRounded, HelpRounded, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined } from "@mui/icons-material";
 
 import SearchJobForm from "../components/SearchJobForm";
@@ -30,25 +30,28 @@ const TestJob: JobsTypes = {
 	isUrgent: true
 }
 
-const testTabs = [
-	{
-		id: tokenGenerator(),
-		title: 'تب 1',
-		content: (<p className={`text-red-500`}>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, debitis?
-		</p>)
-	},
-	{
-		id: tokenGenerator(),
-		title: 'تب 2',
-		content: (<p className={`text-purple-500`}>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, debitis?
-		</p>)
-	}
-]
-
 const Jobs = () => {
 	const [showAlert, setShowAlert] = useState<boolean>(false)
+	const [testTabs] = useState<{
+		id: string;
+		title: string;
+		content: ReactNode
+	}[]>([
+		{
+			id: tokenGenerator(),
+			title: 'تب 1',
+			content: (<p className={`text-red-500`}>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, debitis?
+			</p>)
+		},
+		{
+			id: tokenGenerator(),
+			title: 'تب 2',
+			content: (<p className={`text-purple-500`}>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, debitis?
+			</p>)
+		}
+	])
 
 	return (
 		<>
@@ -149,11 +152,17 @@ const Jobs = () => {
 										</h2>
 									</Title>
 									<div className={`flex items-center mt-6`}>
-										<span className={`text-jv-primary border-l border-solid border-l-jv-light pl-3`}>
+										<span className={`text-jv-primary`}>
 											ایران فاوا گسترش
 										</span>
-										<span className={`italic mr-3`}>
+										<span className={`border-r border-solid border-jv-light italic pr-3 mr-3`}>
 											تهران ، یوسف اباد
+										</span>
+										<span className={`border-r border-solid border-jv-light italic pr-3 mr-3`}>
+											امکان دورکاری
+										</span>
+										<span className={`text-jv-danger border-r border-solid border-jv-light italic pr-3 mr-3`}>
+											فوری
 										</span>
 									</div>
 									<div className={`w-full flex items-center justify-between mt-3`}>
@@ -185,10 +194,14 @@ const Jobs = () => {
 									</div>
 								</div>
 
-								<Tabs
-									customClass={`mt-6`}
-									tabs={testTabs}
-								/>
+								{
+									useMemo(() => (
+										<Tabs
+											customClass={`mt-6`}
+											tabs={testTabs}
+										/>
+									), [testTabs])
+								}
 							</div>
 						</main>
 					</div>
