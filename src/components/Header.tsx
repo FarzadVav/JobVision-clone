@@ -457,16 +457,6 @@ const Header = () => {
 		setShowMobileMenu(false)
 	}, [location.pathname])
 
-	useEffect(() => {
-		if (showMobileMenu) {
-			document.body.classList.add('overflow-hidden')
-		} else {
-			document.body.classList.remove('overflow-hidden')
-			mobileMenuRef?.current?.classList.remove('hide-mobile-menu')
-			mobileMenuRef?.current?.classList.add('show-mobile-menu')
-		}
-	}, [showMobileMenu])
-
 	const mobileMenuToggleHandler = () => {
 		if (showMobileMenu) {
 			mobileMenuRef?.current?.classList.remove('show-mobile-menu')
@@ -704,7 +694,7 @@ const Header = () => {
 				showMobileMenu && (
 					<menu
 						ref={mobileMenuRef}
-						className={`show-mobile-menu bg-jv-primary flex flex-col items-center rounded-t-[2rem] fixed bottom-0 top-32 right-0 left-0 origin-bottom overflow-hidden z-40 lg:hidden`}
+						className={`show-mobile-menu bg-jv-primary flex flex-col items-center rounded-t-[2rem] fixed bottom-0 top-32 right-0 left-0 origin-bottom overflow-hidden z-50 lg:hidden`}
 						onAnimationEnd={(event: AnimationEvent<HTMLElement>) => {
 							if (event.animationName === 'hide-mobile-menu') {
 								setShowMobileMenu(false)

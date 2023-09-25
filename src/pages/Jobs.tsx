@@ -1,6 +1,6 @@
 import SearchJobForm from "../components/SearchJobForm";
 import JobsFiltersBar from "../components/FilterJob";
-import { NotificationAddRounded, Send } from "@mui/icons-material";
+import { CloseRounded, NotificationAddRounded, Send } from "@mui/icons-material";
 
 import Title from "../components/Title";
 import JobsTypes from "../types/Job.types";
@@ -44,11 +44,12 @@ const Jobs = () => {
 			<div className={`bg-jv-bright py-3`}>
 				<div className={`wrapper`}>
 					<div
-						className={`bg-jv-primary w-full h-12 flex justify-center items-center p-2 pr-5 fixed z-50
-						bottom-0 left-0 md:static md:z-0 md:justify-between md:rounded`}
-						onClick={() => setShowAlert(prev => !prev)}
+						className={`bg-jv-primary w-full h-12 flex justify-center items-center fixed z-40 bottom-0 left-0
+						md:static md:z-0 md:justify-between md:pl-1 md:pr-5 md:rounded`}
+						onClick={() => !showAlert && setShowAlert(prev => !prev)}
 					>
-						<div className={`flex items-center absolute ${showAlert ? '' : 'opacity-0 translate-x-full'} md:static`}>
+						<div className={`h-full flex items-center absolute ${showAlert ? 'opacity-0 translate-x-full' : ''}
+						md:opacity-100 md:translate-x-0 md:static`}>
 							<NotificationAddRounded className={`text-white ml-3`} />
 							<Title withOutIcon>
 								<h1 className={`!dana-base text-white !text-base`}>
@@ -57,13 +58,18 @@ const Jobs = () => {
 							</Title>
 						</div>
 						<div
-							className={`flex justify-center items-center absolute ${showAlert ? 'opacity-0 -translate-x-full' : ''} 
-								md:static`}
+							className={`w-full h-full flex items-center pr-6 pl-1 ${showAlert ? 'justify-between' : 'opacity-0 -translate-x-full justify-center'} absolute md:w-max md:p-0 md:opacity-100 md:translate-x-0 md:static`}
 							data-name="email-alert"
 						>
+							<div
+								className={`flex items-center md:hidden`}
+								onClick={() => setShowAlert(false)}
+							>
+								<CloseRounded className={`text-white`} />
+							</div>
 							<input
 								dir="ltr"
-								className={`bg-jv-primary text-white placeholder:text-white max-w-72 py-2 md:w-72`}
+								className={`bg-jv-primary text-white placeholder:text-white max-w-72 py-2 mr-auto md:w-72`}
 								type="text"
 								placeholder="example@gmail.com"
 								data-name="email-alert"
