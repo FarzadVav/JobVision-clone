@@ -1,13 +1,14 @@
+import { useState } from "react";
+import { CloseRounded, FavoriteBorderRounded, HelpRounded, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined } from "@mui/icons-material";
+
 import SearchJobForm from "../components/SearchJobForm";
 import JobsFiltersBar from "../components/FilterJob";
-import { CloseRounded, NotificationAddRounded, Send } from "@mui/icons-material";
-
 import Title from "../components/Title";
 import JobsTypes from "../types/Job.types";
 import tokenGenerator from "../utils/tokenGenerator";
 import CompanyTypes from "../types/Company.types";
 import JobBox from "../components/JobBox";
-import { useState } from "react";
+import Tabs from '../components/Tabs'
 
 const TestCompany: CompanyTypes = {
 	id: tokenGenerator(),
@@ -28,6 +29,23 @@ const TestJob: JobsTypes = {
 	remote: false,
 	isUrgent: true
 }
+
+const testTabs = [
+	{
+		id: tokenGenerator(),
+		title: 'تب 1',
+		content: (<p className={`text-red-500`}>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, debitis?
+		</p>)
+	},
+	{
+		id: tokenGenerator(),
+		title: 'تب 2',
+		content: (<p className={`text-purple-500`}>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, debitis?
+		</p>)
+	}
+]
 
 const Jobs = () => {
 	const [showAlert, setShowAlert] = useState<boolean>(false)
@@ -120,9 +138,57 @@ const Jobs = () => {
 								<JobBox {...TestJob} />
 							</div>
 						</aside>
+
 						<main className={`current-height w-full top-[calc(4.5rem+0.75rem)] pb-6 overflow-y-auto absolute opacity-0
 						invisible translate-y-full lg:opacity-100 lg:visible lg:translate-y-0 lg:w-7/12 lg:sticky xl:w-8/12`}>
-							<div className={`w-full h-full bg-white p-3 rounded`}>
+							<div className={`bg-white w-full h-full flex flex-col px-3 py-4 rounded`}>
+								<div className={`w-full`}>
+									<Title withOutIcon>
+										<h2>
+											برنامه نویس Front-End (ReactJs)
+										</h2>
+									</Title>
+									<div className={`flex items-center mt-6`}>
+										<span className={`text-jv-primary border-l border-solid border-l-jv-light pl-3`}>
+											ایران فاوا گسترش
+										</span>
+										<span className={`italic mr-3`}>
+											تهران ، یوسف اباد
+										</span>
+									</div>
+									<div className={`w-full flex items-center justify-between mt-3`}>
+										<span className={`italic`}>
+											7 روز پیش
+										</span>
+										<div className={`flex items-center`}>
+											<ShareOutlined className={`text-jv-primary cursor-pointer`} />
+											<FavoriteBorderRounded className={`text-jv-danger mr-3 cursor-pointer`} />
+											<button className={`btn btn-success mr-6`}>
+												ارسال رزومه
+											</button>
+										</div>
+									</div>
+								</div>
+
+								<div className={`bg-jv-bright w-full flex items-center px-5 py-2 mt-6 rounded`}>
+									<div className={`flex items-center`}>
+										<PeopleAltRounded className={`text-jv-light brightness-75`} />
+										<span className={`mr-3`}>
+											201 تا 500 نفر
+										</span>
+									</div>
+									<div className={`flex items-center mr-6`}>
+										<HelpRounded className={`text-jv-light brightness-75`} />
+										<span className={`mr-3`}>
+											شرکت ایران فاوا گسترش، وابسته به گروه صنعتی ایران خودرو
+										</span>
+									</div>
+								</div>
+
+								<Tabs
+									customClass={`mt-6`}
+									tabs={testTabs}
+								/>
 							</div>
 						</main>
 					</div>
