@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom"
 import { Star } from "@mui/icons-material"
 
-import JobTypes from "../types/Job.types"
+import JobBoxTypes from "../types/Job.types"
 
-interface JobBoxProps extends JobTypes {
-  selected?: boolean;
-}
-
-const JobBox = ({ id, categories, title, company, city, location, salary, remote, isUrgent, selected }: JobBoxProps) => {
+const JobBox = (
+  { id, categories, title, company, city, location, salary, remote, knowledgeBasedCompany, isUrgent, selected }: JobBoxTypes
+) => {
   return (
     <article
       className={`bg-white w-full group`}
@@ -41,7 +39,14 @@ const JobBox = ({ id, categories, title, company, city, location, salary, remote
               {
                 remote ? (
                   <span className={`italic border-r border-solid border-jv-light text-xs pr-2 mr-2`}>
-                    امکان دورکاری
+                    دورکاری
+                  </span>
+                ) : null
+              }
+              {
+                knowledgeBasedCompany ? (
+                  <span className={`italic border-r border-solid border-jv-light text-xs pr-2 mr-2`}>
+                    امریه سربازی
                   </span>
                 ) : null
               }

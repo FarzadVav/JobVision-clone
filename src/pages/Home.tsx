@@ -11,7 +11,7 @@ import SearchJobForm from "../components/SearchJobForm";
 import Title from "../components/Title";
 import JobBox from "../components/JobBox";
 import CompanyBox from "../components/CompanyBox";
-import JobTypes from "../types/Job.types";
+import JobBoxTypes from "../types/Job.types";
 import CompanyTypes from "../types/Company.types";
 import HonorBox from "../components/HonorBox";
 import CtaBox from "../components/CtaBox";
@@ -26,7 +26,7 @@ const TestCompany: CompanyTypes = {
 	jobs: []
 }
 
-const TestJob: JobTypes = {
+const TestJob: JobBoxTypes = {
 	id: tokenGenerator(),
 	categories: [{ title: 'front-end', id: tokenGenerator(), }],
 	title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
@@ -34,8 +34,10 @@ const TestJob: JobTypes = {
 	city: 'تهران',
 	location: 'فرشته',
 	salary: 32,
-	remote: false,
-	isUrgent: true
+	remote: true,
+	isUrgent: true,
+	selected: false,
+	knowledgeBasedCompany: true
 }
 
 const accordions: { title: string; text: string }[] = [

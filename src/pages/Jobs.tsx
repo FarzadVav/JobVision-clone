@@ -27,7 +27,9 @@ const TestJob: JobsTypes = {
 	location: 'فرشته',
 	salary: 32,
 	remote: false,
-	isUrgent: true
+	isUrgent: true,
+	selected: false,
+	knowledgeBasedCompany: true
 }
 
 const Jobs = () => {
