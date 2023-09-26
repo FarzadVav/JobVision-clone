@@ -14,17 +14,19 @@ type MainJobTypes = {
 }
 
 export interface JobAdsTypes extends MainJobTypes {
+  workTimes: string;
   cooperationType: 'full-time' | 'part-time' | 'as-projects';
-  businessTrips: [number, ('month' | 'year')] | 'ever';
+  businessTrips: [number, ('month' | 'year')] | 'ever' | 'some-times' | 'none';
   benefits: string[];
   abilityForBoss: string[];
   description: string;
   employmentConditions: {
     age: [number, number];
-    gender: 'male' | 'female' | 'custom' | 'none';
+    gender: 'male' | 'female' | 'none';
     endOfMilitaryService: boolean;
-    education: string;
-    applications: string[]
+    education: string[];
+    languages: { name: string; power: number }[];
+    techs: { name: string; power: number }[]
   }
 }
 

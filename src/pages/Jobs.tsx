@@ -1,5 +1,5 @@
 import { ReactNode, useState, useMemo, useEffect } from 'react'
-import { CloseRounded, FavoriteBorderRounded, HelpRounded, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined } from "@mui/icons-material";
+import { CloseRounded, FavoriteBorderRounded, HelpRounded, Language, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined, Verified } from "@mui/icons-material";
 
 import SearchJobForm from "../components/SearchJobForm";
 import JobsFiltersBar from "../components/FilterJob";
@@ -55,16 +55,24 @@ const Jobs = () => {
 			isUrgent: true,
 			knowledgeBasedCompany: true,
 			cooperationType: 'full-time',
+			workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
 			businessTrips: [7, 'month'],
-			benefits: ['بیمه', 'ناهار'],
+			benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
 			abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
 			description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
 			employmentConditions: {
 				age: [18, 32],
-				gender: 'custom',
+				gender: 'male',
 				endOfMilitaryService: false,
-				education: 'لیسانس مهندسی نرم افزار',
-				applications: ['vs code', 'js', 'ts', 'react', 'next', 'bun']
+				education: ['لیسانس مهندسی نرم افزار'],
+				languages: [
+					{ name: 'english', power: 90 }
+				],
+				techs: [
+					{ name: 'Javascript', power: 100 },
+					{ name: 'React.js', power: 90 },
+					{ name: 'Typescript', power: 75 },
+				]
 			}
 		}
 
@@ -73,9 +81,196 @@ const Jobs = () => {
 				id: testJobAds.id,
 				title: 'درباره شغل',
 				content: (
-					<p>
-						{testJobAds.description}
-					</p>
+					<div className={`w-full flex flex-col`}>
+						<Title withOutIcon>
+							<span className='!text-xl'>
+								مشخصات موقعیت شغلی
+							</span>
+						</Title>
+						<div className={`w-full flex flex-wrap gap-y-3 mt-3`}>
+							<div className={`w-1/2 px-3`}>
+								<span className={`block`}>
+									روز و ساعت کاری
+								</span>
+								<span className={`opacity-75 block text-sm mt-1`}>
+									{testJobAds.workTimes}
+								</span>
+							</div>
+							<div className={`w-1/2 px-3`}>
+								<span className={`block`}>
+									نوع همکاری
+								</span>
+								<span className={`opacity-75 block text-sm mt-1`}>
+									{
+										testJobAds.cooperationType === 'full-time' ? 'تمام وقت'
+											: testJobAds.cooperationType === 'part-time' ? 'پاره وقت'
+												: 'پروژه ای'
+									}
+								</span>
+							</div>
+							<div className={`w-1/2 px-3`}>
+								<span className={`block`}>
+									سفر های کاری
+								</span>
+								<span className={`opacity-75 block text-sm mt-1`}>
+									{
+										testJobAds.businessTrips === 'ever' ? 'همیشه در سفر'
+											: testJobAds.businessTrips === 'some-times' ? 'در صورت نیاز'
+												: testJobAds.businessTrips === 'none' ? '---'
+													: `${testJobAds.businessTrips[0]}
+														${testJobAds.businessTrips[1] === 'month' ? 'روز' : 'ماه'}
+														در
+														${testJobAds.businessTrips[1] === 'month' ? 'ماه' : 'سال'}`
+									}
+								</span>
+							</div>
+							<div className={`w-1/2 px-3`}>
+								<span className={`block`}>
+									مزایا و تسهیلات
+								</span>
+								<span className={`opacity-75 block text-sm mt-1`}>
+									{
+										testJobAds.benefits.length ? testJobAds.benefits.map((benefit, i) => {
+											if (i < testJobAds.benefits.length - 1) {
+												return (
+													<span className={`inline-block ml-2`}>
+														{benefit}
+														<span className={`inline-block mr-2 opacity-25`}>
+															/
+														</span>
+													</span>
+												)
+											} else {
+												return (
+													<span className={`inline-block`}>
+														{benefit}
+													</span>
+												)
+
+											}
+										}) : '---'
+									}
+								</span>
+							</div>
+						</div>
+
+						<Title
+							customClass={`mt-3`}
+							withOutIcon
+						>
+							<span className='!text-xl'>
+								شاخص های کلیدی از نظر کارفرما
+							</span>
+						</Title>
+						<ul className={`w-full flex flex-col`}>
+							{
+								testJobAds.abilityForBoss.length ? testJobAds.abilityForBoss.map(ability => (
+									<li className={`flex items-center mt-2 pr-2 first:mt-3`}>
+										<Verified className='text-jv-primary ml-3' fontSize='small' />
+										{ability}
+									</li>
+								)) : '---'
+							}
+						</ul>
+
+						<Title
+							customClass={`mt-6`}
+							withOutIcon
+						>
+							<span className='!text-xl'>
+								شرح شغل و وظایف
+							</span>
+						</Title>
+						<p className={`w-full mt-3 px-3`}>
+							{testJobAds.description}
+						</p>
+
+						<Title
+							customClass={`mt-6`}
+							withOutIcon
+						>
+							<span className='!text-xl'>
+								شرایط احراز شغل
+							</span>
+						</Title>
+						<ul className={`w-full flex flex-col mt-3`}>
+							<li className={`w-full flex items-center`}>
+								<span className={`bg-jv-bright block w-2/12 px-3 py-1.5 ml-2`}>
+									سن
+								</span>
+								<span className={`bg-jv-bright block w-10/12 px-3 py-1.5`}>
+									{`${testJobAds.employmentConditions.age[0]} - ${testJobAds.employmentConditions.age[1]}`}
+									<span className={`mr-1.5`}>
+										سال
+									</span>
+								</span>
+							</li>
+							<li className={`w-full flex items-center mt-2`}>
+								<span className={`bg-jv-bright block w-2/12 px-3 py-1.5 ml-2`}>
+									جنسیت
+								</span>
+								<span className={`bg-jv-bright block w-10/12 px-3 py-1.5`}>
+									{
+										testJobAds.employmentConditions.gender === 'male' ? 'مرد'
+											: testJobAds.employmentConditions.gender === 'female' ? 'زن'
+												: 'فرقی ندارد'
+									}
+								</span>
+							</li>
+							<li className={`w-full flex items-center mt-2`}>
+								<span className={`bg-jv-bright block w-2/12 px-3 py-1.5 ml-2`}>
+									سربازی
+								</span>
+								<span className={`bg-jv-bright block w-10/12 px-3 py-1.5`}>
+									{
+										testJobAds.employmentConditions.endOfMilitaryService ? 'پایان خدمت یا معاف از سربازی' : 'مهم نیست'
+									}
+								</span>
+							</li>
+							<li className={`w-full flex items-center mt-2`}>
+								<span className={`bg-jv-bright block w-2/12 px-3 py-1.5 ml-2`}>
+									تحصیلات
+								</span>
+								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
+									{
+										testJobAds.employmentConditions.education.length ? testJobAds.employmentConditions.education.map(education => (
+											<div className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-2 rounded last:ml-0`}>
+												{education}
+											</div>
+										)) : 'فرقی ندارد'
+									}
+								</span>
+							</li>
+							<li className={`w-full flex items-center mt-2`}>
+								<span className={`bg-jv-bright block w-2/12 px-3 py-1.5 ml-2`}>
+									زبان ها
+								</span>
+								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
+									{
+										testJobAds.employmentConditions.languages.length ? testJobAds.employmentConditions.languages.map(language => (
+											<div className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-2 rounded last:ml-0`}>
+												{`${language.name} - ${language.power}%`}
+											</div>
+										)) : 'فرقی ندارد'
+									}
+								</span>
+							</li>
+							<li className={`w-full flex items-center mt-2`}>
+								<span className={`bg-jv-bright block w-2/12 px-3 py-1.5 ml-2`}>
+									تکنولوژی ها
+								</span>
+								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
+									{
+										testJobAds.employmentConditions.techs.length ? testJobAds.employmentConditions.techs.map(tech => (
+											<div className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-2 rounded last:ml-0`}>
+												{`${tech.name} - ${tech.power}%`}
+											</div>
+										)) : 'فرقی ندارد'
+									}
+								</span>
+							</li>
+						</ul>
+					</div>
 				)
 			},
 			{
@@ -179,10 +374,9 @@ const Jobs = () => {
 							</div>
 						</aside>
 
-						<main className={`current-height list-scrollbar w-full top-[calc(4.5rem+0.75rem)] pb-6 overflow-y-auto
-						absolute opacity-0 invisible translate-y-full lg:opacity-100 lg:visible lg:translate-y-0 lg:w-7/12 lg:sticky
-						xl:w-8/12`}>
-							<div className={`bg-white w-full h-full flex flex-col px-3 py-4 rounded`}>
+						<main className={`current-height w-full top-[calc(4.5rem+0.75rem)] pb-6 absolute opacity-0 invisible
+						translate-y-full lg:opacity-100 lg:visible lg:translate-y-0 lg:w-7/12 lg:sticky xl:w-8/12`}>
+							<div className={`list-scrollbar bg-white w-full h-full flex flex-col px-3 py-4 rounded overflow-y-auto`}>
 								<div className={`w-full`}>
 									<Title withOutIcon>
 										<h2>

@@ -39,7 +39,7 @@ const Tabs = ({ customClass, tabs }: TabsProps) => {
         tabs.length ? tabs.map(tab => {
           if (tab.id === selectedTab) {
             return (
-              <div className={`w-full mt-3`}>
+              <div className={`w-full pt-6`}>
                 {tab.content}
               </div>
             )
