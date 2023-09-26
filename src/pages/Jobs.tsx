@@ -1,30 +1,30 @@
-import { ReactNode, useState, useMemo } from 'react'
+import { ReactNode, useState, useMemo, useEffect } from 'react'
 import { CloseRounded, FavoriteBorderRounded, HelpRounded, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined } from "@mui/icons-material";
 
 import SearchJobForm from "../components/SearchJobForm";
 import JobsFiltersBar from "../components/FilterJob";
 import Title from "../components/Title";
-import JobsTypes from "../types/Job.types";
+import JobsTypes, { JobAdsTypes } from "../types/Job.types";
 import tokenGenerator from "../utils/tokenGenerator";
 import CompanyTypes from "../types/Company.types";
 import JobBox from "../components/JobBox";
 import Tabs from '../components/Tabs'
 
-const TestCompany: CompanyTypes = {
+const testCompany: CompanyTypes = {
 	id: tokenGenerator(),
 	logo: 'https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=3518088&width=70&height=70',
 	title: 'تاکسی ماکسیم',
 	score: 4.9,
 	jobs: [],
-	aboutCompany: 'lorem',
+	aboutCompany: 'ما به عنوان سازمانی یادگیرنده، همه تلاش خود را برای ارتقاء کیفیت و عدالت آموزشی بکار می گیریم. دانش و تخصصمان به ما کمک می کند در کنار حامیان خیرخواه و نیکوکار، راه حلهای کارآمدی برای یادگیری دانش آموزان، معلمان و والدین خلق کنیم. ما با بکارگیری فناوری های روز و دستاوردهای علمی نهاد آموزش را به عنوان یکی از الزامات توسعه پایدار تقویت می نماییم تا در مسیر شکل گیری جامعه یادگیرنده قدم برداریم.',
 	employees: [10, 30]
 }
 
-const TestJob: JobsTypes = {
+const testJob: JobsTypes = {
 	id: tokenGenerator(),
 	categories: [{ title: 'front-end', id: tokenGenerator(), }],
 	title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
-	company: TestCompany,
+	company: testCompany,
 	city: 'تهران',
 	location: 'فرشته',
 	salary: 32,
@@ -36,26 +36,59 @@ const TestJob: JobsTypes = {
 
 const Jobs = () => {
 	const [showAlert, setShowAlert] = useState<boolean>(false)
-	const [testTabs] = useState<{
+	const [testTabs, setTestTabs] = useState<{
 		id: string;
 		title: string;
 		content: ReactNode
-	}[]>([
-		{
+	}[]>([])
+
+	useEffect(() => {
+		const testJobAds: JobAdsTypes = {
 			id: tokenGenerator(),
-			title: 'تب 1',
-			content: (<p className={`text-red-500`}>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, debitis?
-			</p>)
-		},
-		{
-			id: tokenGenerator(),
-			title: 'تب 2',
-			content: (<p className={`text-purple-500`}>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, debitis?
-			</p>)
+			categories: [{ title: 'front-end', id: tokenGenerator(), }],
+			title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
+			company: testCompany,
+			city: 'تهران',
+			location: 'فرشته',
+			salary: 32,
+			remote: false,
+			isUrgent: true,
+			knowledgeBasedCompany: true,
+			cooperationType: 'full-time',
+			businessTrips: [7, 'month'],
+			benefits: ['بیمه', 'ناهار'],
+			abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
+			description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
+			employmentConditions: {
+				age: [18, 32],
+				gender: 'custom',
+				endOfMilitaryService: false,
+				education: 'لیسانس مهندسی نرم افزار',
+				applications: ['vs code', 'js', 'ts', 'react', 'next', 'bun']
+			}
 		}
-	])
+
+		setTestTabs([
+			{
+				id: testJobAds.id,
+				title: 'درباره شغل',
+				content: (
+					<p>
+						{testJobAds.description}
+					</p>
+				)
+			},
+			{
+				id: '1234',
+				title: 'درباره شرکت',
+				content: (
+					<p>
+						{testCompany.aboutCompany}
+					</p>
+				)
+			}
+		])
+	}, [])
 
 	return (
 		<>
@@ -122,32 +155,33 @@ const Jobs = () => {
 								</select>
 							</div>
 							<div className={`w-full flex flex-col justify-center items-center gap-3 mt-3`}>
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
-								<JobBox {...TestJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
+								<JobBox {...testJob} />
 							</div>
 						</aside>
 
-						<main className={`current-height w-full top-[calc(4.5rem+0.75rem)] pb-6 overflow-y-auto absolute opacity-0
-						invisible translate-y-full lg:opacity-100 lg:visible lg:translate-y-0 lg:w-7/12 lg:sticky xl:w-8/12`}>
+						<main className={`current-height list-scrollbar w-full top-[calc(4.5rem+0.75rem)] pb-6 overflow-y-auto
+						absolute opacity-0 invisible translate-y-full lg:opacity-100 lg:visible lg:translate-y-0 lg:w-7/12 lg:sticky
+						xl:w-8/12`}>
 							<div className={`bg-white w-full h-full flex flex-col px-3 py-4 rounded`}>
 								<div className={`w-full`}>
 									<Title withOutIcon>

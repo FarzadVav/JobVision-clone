@@ -13,7 +13,7 @@ type MainJobTypes = {
   salary: [number, number] | number | null,
 }
 
-interface JobAdsTypes extends MainJobTypes {
+export interface JobAdsTypes extends MainJobTypes {
   cooperationType: 'full-time' | 'part-time' | 'as-projects';
   businessTrips: [number, ('month' | 'year')] | 'ever';
   benefits: string[];

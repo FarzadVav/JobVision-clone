@@ -1,5 +1,4 @@
-import { ReactNode, useState } from 'react'
-import tokenGenerator from '../utils/tokenGenerator';
+import { ReactNode, useEffect, useState } from 'react'
 
 type TabsProps = {
   customClass?: string;
@@ -11,7 +10,11 @@ type TabsProps = {
 }
 
 const Tabs = ({ customClass, tabs }: TabsProps) => {
-  const [selectedTab, setSelectedTab] = useState<string>(tabs[0]?.id || '')
+  const [selectedTab, setSelectedTab] = useState<string>('')
+
+  useEffect(() => {
+    setSelectedTab(tabs[0]?.id)
+  }, [tabs])
 
   return (
     <div className={`w-full ${customClass}`}>
@@ -19,10 +22,10 @@ const Tabs = ({ customClass, tabs }: TabsProps) => {
         {
           tabs.length ? tabs.map(tab => (
             <li
-              key={tokenGenerator()}
+              key={tab.id}
               className={`border-b border-solid h-full flex items-center px-6 ${tab.id === selectedTab ?
-                'border-jv-primary text-jv-primary' : 'border-transparent'} cursor-pointer hover:text-jv-primary 
-                hover:border-jv-primary`}
+                'border-jv-primary text-jv-primary' : 'border-transparent'} rounded-t-md cursor-pointer hover:text-jv-primary 
+                active:bg-slate-50`}
               onClick={() => setSelectedTab(tab.id)}
             >
               {tab.title}

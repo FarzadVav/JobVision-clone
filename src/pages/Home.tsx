@@ -18,7 +18,7 @@ import CtaBox from "../components/CtaBox";
 import Accordion from "../components/Accordion";
 import useOneScroll from "../hooks/useOnScrool";
 
-const TestCompany: CompanyTypes = {
+const testCompany: CompanyTypes = {
 	id: tokenGenerator(),
 	logo: 'https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=3518088&width=70&height=70',
 	title: 'تاکسی ماکسیم',
@@ -28,11 +28,11 @@ const TestCompany: CompanyTypes = {
 	employees: [10, 30]
 }
 
-const TestJob: JobBoxTypes = {
+const testJob: JobBoxTypes = {
 	id: tokenGenerator(),
 	categories: [{ title: 'front-end', id: tokenGenerator(), }],
 	title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
-	company: TestCompany,
+	company: testCompany,
 	city: 'تهران',
 	location: 'فرشته',
 	salary: 32,
@@ -1129,12 +1129,12 @@ const Home = () => {
 						</h2>
 					</Title>
 					<div className={`w-full grid gap-4 grid-rows-2 grid-cols-1 mt-6 md:grid-cols-2 lg:grid-cols-3`}>
-						<JobBox {...TestJob} />
-						<JobBox {...TestJob} />
-						<JobBox {...TestJob} />
-						<JobBox {...TestJob} />
-						<JobBox {...TestJob} />
-						<JobBox {...TestJob} />
+						<JobBox {...testJob} />
+						<JobBox {...testJob} />
+						<JobBox {...testJob} />
+						<JobBox {...testJob} />
+						<JobBox {...testJob} />
+						<JobBox {...testJob} />
 						<div className={`w-full flex justify-center mt-8 md:col-span-2 md:mt-12 lg:col-span-3`}>
 							<Link
 								className={`btn btn-out-primary`}
@@ -1172,34 +1172,34 @@ const Home = () => {
 							modules={[Autoplay, Navigation]}
 						>
 							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...TestCompany} />
+								<CompanyBox {...testCompany} />
 							</SwiperSlide>
 							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...TestCompany} />
+								<CompanyBox {...testCompany} />
 							</SwiperSlide>
 							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...TestCompany} />
+								<CompanyBox {...testCompany} />
 							</SwiperSlide>
 							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...TestCompany} />
+								<CompanyBox {...testCompany} />
 							</SwiperSlide>
 							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...TestCompany} />
+								<CompanyBox {...testCompany} />
 							</SwiperSlide>
 							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...TestCompany} />
+								<CompanyBox {...testCompany} />
 							</SwiperSlide>
 							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...TestCompany} />
+								<CompanyBox {...testCompany} />
 							</SwiperSlide>
 							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...TestCompany} />
+								<CompanyBox {...testCompany} />
 							</SwiperSlide>
 							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...TestCompany} />
+								<CompanyBox {...testCompany} />
 							</SwiperSlide>
 							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...TestCompany} />
+								<CompanyBox {...testCompany} />
 							</SwiperSlide>
 						</Swiper>
 					</div>
