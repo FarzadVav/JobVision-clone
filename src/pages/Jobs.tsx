@@ -15,7 +15,9 @@ const TestCompany: CompanyTypes = {
 	logo: 'https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=3518088&width=70&height=70',
 	title: 'تاکسی ماکسیم',
 	score: 4.9,
-	jobs: []
+	jobs: [],
+	aboutCompany: 'lorem',
+	employees: [10, 30]
 }
 
 const TestJob: JobsTypes = {

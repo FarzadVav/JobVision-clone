@@ -15,7 +15,7 @@ type MainJobTypes = {
 
 interface JobAdsTypes extends MainJobTypes {
   cooperationType: 'full-time' | 'part-time' | 'as-projects';
-  businessTrips: number;
+  businessTrips: [number, ('month' | 'year')] | 'ever';
   benefits: string[];
   abilityForBoss: string[];
   description: string;

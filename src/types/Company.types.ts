@@ -6,6 +6,8 @@ type CompanyTypes = {
   title: string;
   score: number | null;
   jobs: JobsTypes[]
+  aboutCompany: string;
+  employees: [number, number]
 }
 
 export default CompanyTypes
