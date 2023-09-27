@@ -1,5 +1,5 @@
 import { ReactNode, useState, useMemo, useEffect } from 'react'
-import { CloseRounded, FavoriteBorderRounded, HelpRounded, Language, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined, Verified } from "@mui/icons-material";
+import { CloseRounded, FavoriteBorderRounded, HelpRounded, Info, InfoOutlined, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined, Verified } from "@mui/icons-material";
 
 import SearchJobForm from "../components/SearchJobForm";
 import JobsFiltersBar from "../components/FilterJob";
@@ -234,7 +234,7 @@ const Jobs = () => {
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
 									{
 										testJobAds.employmentConditions.education.length ? testJobAds.employmentConditions.education.map(education => (
-											<div className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-2 rounded last:ml-0`}>
+											<div className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}>
 												{education}
 											</div>
 										)) : 'فرقی ندارد'
@@ -248,7 +248,7 @@ const Jobs = () => {
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
 									{
 										testJobAds.employmentConditions.languages.length ? testJobAds.employmentConditions.languages.map(language => (
-											<div className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-2 rounded last:ml-0`}>
+											<div className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}>
 												{`${language.name} - ${language.power}%`}
 											</div>
 										)) : 'فرقی ندارد'
@@ -262,7 +262,7 @@ const Jobs = () => {
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
 									{
 										testJobAds.employmentConditions.techs.length ? testJobAds.employmentConditions.techs.map(tech => (
-											<div className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-2 rounded last:ml-0`}>
+											<div className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}>
 												{`${tech.name} - ${tech.power}%`}
 											</div>
 										)) : 'فرقی ندارد'
@@ -270,6 +270,30 @@ const Jobs = () => {
 								</span>
 							</li>
 						</ul>
+
+						<div className={`border-t border-b border-solid border-jv-light w-full flex items-center py-1.5 mt-6`}>
+							<button className={`btn underline decoration-jv-light`}>
+								<InfoOutlined
+									className={`opacity-25`}
+									fontSize='small'
+								/>
+								ثبت مشکل و تخلف آگهی
+							</button>
+						</div>
+
+						<Title
+							customClass={`mt-6`}
+							withOutIcon
+						>
+							<span className='!text-xl'>
+								فرصت‌های شغلی مشابه
+							</span>
+						</Title>
+						<div className={`w-full flex flex-col gap-3 mt-3`}>
+							<JobBox {...testJob} />
+							<JobBox {...testJob} />
+							<JobBox {...testJob} />
+						</div>
 					</div>
 				)
 			},

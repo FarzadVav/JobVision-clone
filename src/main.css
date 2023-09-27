@@ -198,23 +198,15 @@
   }
 
   .btn {
-    @apply w-max h-10 flex justify-center items-center px-5 rounded cursor-pointer hover:brightness-110;
+    @apply w-max h-10 flex justify-center items-center gap-3 px-5 rounded cursor-pointer hover:brightness-110;
   }
 
   .btn-sm {
-    @apply w-max h-8 flex justify-center items-center px-3 rounded cursor-pointer hover:brightness-110;
+    @apply w-max h-8 flex justify-center items-center gap-2 px-3 rounded cursor-pointer hover:brightness-110;
   }
 
   form .btn {
     @apply !h-12 border border-solid;
-  }
-
-  .btn * {
-    @apply mr-3;
-  }
-
-  .btn-sm * {
-    @apply mr-2;
   }
 
   .nav-link svg *,
@@ -260,11 +252,7 @@
 
 @layer components {
   .badge {
-    @apply w-max flex justify-center items-center text-xs px-3 py-[1px] rounded-full;
-  }
-
-  .badge * {
-    @apply mr-1.5 text-xs;
+    @apply w-max flex justify-center items-center gap-1.5 text-xs px-3 py-[1px] rounded-full;
   }
 
   .badge-danger {
