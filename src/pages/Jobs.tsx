@@ -9,6 +9,7 @@ import tokenGenerator from "../utils/tokenGenerator";
 import CompanyTypes from "../types/Company.types";
 import JobBox from "../components/JobBox";
 import Tabs from '../components/Tabs'
+import PopularCompanies from '../components/PopularCompanies';
 
 const testCompany: CompanyTypes = {
 	id: tokenGenerator(),
@@ -571,6 +572,10 @@ const Jobs = () => {
 								}
 							</div>
 						</main>
+					</div>
+
+					<div className={`my-12 md:my-16`}>
+						<PopularCompanies />
 					</div>
 				</div>
 			</div>

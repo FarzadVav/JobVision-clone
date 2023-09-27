@@ -6,7 +6,7 @@ import CompanyTypes from "../types/Company.types"
 const CompanyBox = ({ id, logo, name, score, jobs }: CompanyTypes) => {
   return (
     <Link
-      className={`text-jv-dark border border-solid border-jv-light w-52 p-2 flex flex-col rounded-md`}
+      className={`bg-white text-jv-dark border border-solid border-jv-light w-52 p-2 flex flex-col rounded-md`}
       to={`/jobs`}
       data-id={id}
     >

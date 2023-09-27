@@ -1,22 +1,18 @@
 import { Link } from "react-router-dom";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
 import { ApartmentOutlined, AssignmentTurnedIn, BusinessCenter, Diversity3Rounded, KeyboardArrowLeftRounded, KeyboardBackspaceRounded } from "@mui/icons-material";
 
 import tokenGenerator from "../utils/tokenGenerator";
 import SearchJobForm from "../components/SearchJobForm";
 import Title from "../components/Title";
 import JobBox from "../components/JobBox";
-import CompanyBox from "../components/CompanyBox";
 import JobBoxTypes from "../types/Job.types";
 import CompanyTypes from "../types/Company.types";
 import HonorBox from "../components/HonorBox";
 import CtaBox from "../components/CtaBox";
 import Accordion from "../components/Accordion";
 import useOneScroll from "../hooks/useOnScrool";
+import PopularCompanies from "../components/PopularCompanies";
 
 const testCompany: CompanyTypes = {
 	id: tokenGenerator(),
@@ -1153,59 +1149,7 @@ const Home = () => {
 
 				{/* Popular companies */}
 				<div className={`mt-12 md:mt-16`}>
-					<div className={`w-full`}>
-						<Swiper
-							className={`rounded-md`}
-							slidesPerView={'auto'}
-							spaceBetween={16}
-							breakpoints={{
-								540: {
-									slidesPerView: 3,
-								}, 768: {
-									slidesPerView: 3,
-								}, 1024: {
-									slidesPerView: 5,
-								}
-							}}
-							navigation={true}
-							autoplay={{
-								delay: 3500,
-								disableOnInteraction: false,
-							}}
-							modules={[Autoplay, Navigation]}
-						>
-							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...testCompany} />
-							</SwiperSlide>
-							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...testCompany} />
-							</SwiperSlide>
-							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...testCompany} />
-							</SwiperSlide>
-							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...testCompany} />
-							</SwiperSlide>
-							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...testCompany} />
-							</SwiperSlide>
-							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...testCompany} />
-							</SwiperSlide>
-							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...testCompany} />
-							</SwiperSlide>
-							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...testCompany} />
-							</SwiperSlide>
-							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...testCompany} />
-							</SwiperSlide>
-							<SwiperSlide className={`!w-52`}>
-								<CompanyBox {...testCompany} />
-							</SwiperSlide>
-						</Swiper>
-					</div>
+					<PopularCompanies />
 				</div>
 				{/* Popular companies */}
 
