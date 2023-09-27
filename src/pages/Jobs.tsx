@@ -1,5 +1,5 @@
 import { ReactNode, useState, useMemo, useEffect } from 'react'
-import { CloseRounded, FavoriteBorderRounded, HelpRounded, Info, InfoOutlined, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined, Verified } from "@mui/icons-material";
+import { CloseRounded, FavoriteBorderRounded, HelpRounded, InfoOutlined, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined, StarRateRounded, Verified } from "@mui/icons-material";
 
 import SearchJobForm from "../components/SearchJobForm";
 import JobsFiltersBar from "../components/FilterJob";
@@ -13,11 +13,14 @@ import Tabs from '../components/Tabs'
 const testCompany: CompanyTypes = {
 	id: tokenGenerator(),
 	logo: 'https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=3518088&width=70&height=70',
-	title: 'تاکسی ماکسیم',
-	score: 4.9,
+	name: 'تاکسی ماکسیم',
+	score: 4.1,
 	jobs: [],
 	aboutCompany: 'ما به عنوان سازمانی یادگیرنده، همه تلاش خود را برای ارتقاء کیفیت و عدالت آموزشی بکار می گیریم. دانش و تخصصمان به ما کمک می کند در کنار حامیان خیرخواه و نیکوکار، راه حلهای کارآمدی برای یادگیری دانش آموزان، معلمان و والدین خلق کنیم. ما با بکارگیری فناوری های روز و دستاوردهای علمی نهاد آموزش را به عنوان یکی از الزامات توسعه پایدار تقویت می نماییم تا در مسیر شکل گیری جامعه یادگیرنده قدم برداریم.',
-	employees: [10, 30]
+	employees: [10, 30],
+	year: 1397,
+	activity: 'تاکسی رانی اینترنتی',
+	ownership: 'pv'
 }
 
 const testJob: JobsTypes = {
@@ -301,9 +304,91 @@ const Jobs = () => {
 				id: '1234',
 				title: 'درباره شرکت',
 				content: (
-					<p>
-						{testCompany.aboutCompany}
-					</p>
+					<div className={`w-full flex flex-col`}>
+						<Title withOutIcon>
+							<span className='!text-xl'>
+								امتیاز سازمان
+							</span>
+						</Title>
+						<div className={`w-full flex items-center mt-3`}>
+							<span className={`dana-bold h-5 ml-3`}>
+								{testJobAds.company.score}
+							</span>
+							{
+								Array(Math.floor(testJobAds.company.score || 0)).fill('').map(() => (
+									<StarRateRounded
+										key={tokenGenerator()}
+										className={`text-jv-warning`}
+									/>
+								))
+							}
+							{
+								Array(Math.ceil(5 - (testJobAds.company.score || 0))).fill('').map(() => (
+									<StarRateRounded
+										key={tokenGenerator()}
+										className={`text-jv-dark opacity-25`}
+									/>
+								))
+							}
+						</div>
+
+						<Title
+							customClass={`mt-6`}
+							withOutIcon
+						>
+							<span className='!text-xl'>
+								درباره {testJobAds.company.name}
+							</span>
+						</Title>
+						<p className={`w-full mt-3`}>
+							{testJobAds.company.aboutCompany}
+						</p>
+
+						<Title
+							customClass={`mt-6`}
+							withOutIcon
+						>
+							<span className='!text-xl'>
+								{testJobAds.company.name} در یک نگاه
+							</span>
+						</Title>
+						<div className={`w-full flex flex-wrap gap-y-3 mt-3`}>
+							<div className={`w-1/2 px-3`}>
+								<span className={`block`}>
+									سال تاسیس
+								</span>
+								<span className={`opacity-75 block text-sm mt-1`}>
+									{testJobAds.company.year}
+								</span>
+							</div>
+							<div className={`w-1/2 px-3`}>
+								<span className={`block`}>
+									اندازه سازمان
+								</span>
+								<span className={`opacity-75 block text-sm mt-1`}>
+									{testJobAds.company.employees[0]} تا {testJobAds.company.employees[1]} نفر
+								</span>
+							</div>
+							<div className={`w-1/2 px-3`}>
+								<span className={`block`}>
+									حوزه فعالیت
+								</span>
+								<span className={`opacity-75 block text-sm mt-1`}>
+									{testJobAds.company.activity}
+								</span>
+							</div>
+							<div className={`w-1/2 px-3`}>
+								<span className={`block`}>
+									نوع مالکیت
+								</span>
+								<span className={`opacity-75 block text-sm mt-1`}>
+									{
+										testJobAds.company.ownership === 'pv' ? 'خصوصی' : 'دولتی'
+									}
+								</span>
+							</div>
+						</div>
+					</div>
 				)
 			}
 		])
@@ -402,11 +487,16 @@ const Jobs = () => {
 						translate-y-full lg:opacity-100 lg:visible lg:translate-y-0 lg:w-7/12 lg:sticky xl:w-8/12`}>
 							<div className={`list-scrollbar bg-white w-full h-full flex flex-col px-3 py-4 rounded overflow-y-auto`}>
 								<div className={`w-full`}>
-									<Title withOutIcon>
-										<h2>
-											برنامه نویس Front-End (ReactJs)
-										</h2>
-									</Title>
+									<div className={`w-full flex justify-between`}>
+										<Title withOutIcon>
+											<h2>
+												برنامه نویس Front-End (ReactJs)
+											</h2>
+										</Title>
+										<span className={`min-w-max italic text-xs`}>
+											31 روز پیش
+										</span>
+									</div>
 									<div className={`flex items-center mt-6`}>
 										<span className={`text-jv-primary`}>
 											ایران فاوا گسترش
@@ -422,12 +512,12 @@ const Jobs = () => {
 										</span>
 									</div>
 									<div className={`w-full flex items-center justify-between mt-3`}>
-										<span className={`italic`}>
-											7 روز پیش
+										<span className={`text-jv-success`}>
+											20 - 30 میلیون تومان
 										</span>
 										<div className={`flex items-center`}>
 											<ShareOutlined className={`text-jv-primary cursor-pointer`} />
-											<FavoriteBorderRounded className={`text-jv-danger mr-3 cursor-pointer`} />
+											<FavoriteBorderRounded className={`text-jv-danger mr-6 cursor-pointer`} />
 											<button className={`btn btn-success mr-6`}>
 												ارسال رزومه
 											</button>

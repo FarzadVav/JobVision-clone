@@ -23,7 +23,7 @@ const JobBox = (
               <img
                 className={`w-full h-full object-fill object-center rounded-md`}
                 src={company.logo}
-                alt={`لوگوی شرکت ${company.title}`}
+                alt={`لوگوی شرکت ${company.name}`}
                 loading={`lazy`}
               />
             </div>
@@ -34,7 +34,7 @@ const JobBox = (
             </span>
             <div className={`flex items-center mt-2`}>
               <span className={`text-xs`}>
-                {company.title}
+                {company.name}
               </span>
               {
                 remote ? (

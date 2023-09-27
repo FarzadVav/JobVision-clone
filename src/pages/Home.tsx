@@ -21,11 +21,14 @@ import useOneScroll from "../hooks/useOnScrool";
 const testCompany: CompanyTypes = {
 	id: tokenGenerator(),
 	logo: 'https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=3518088&width=70&height=70',
-	title: 'تاکسی ماکسیم',
+	name: 'تاکسی ماکسیم',
 	score: 4.9,
 	jobs: [],
 	aboutCompany: 'lorem',
-	employees: [10, 30]
+	employees: [10, 30],
+	year: 1397,
+	activity: 'تاکسی رانی اینترنتی',
+	ownership: 'pv'
 }
 
 const testJob: JobBoxTypes = {

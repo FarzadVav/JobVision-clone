@@ -3,7 +3,7 @@ import { Star } from "@mui/icons-material"
 
 import CompanyTypes from "../types/Company.types"
 
-const CompanyBox = ({ id, logo, title, score, jobs }: CompanyTypes) => {
+const CompanyBox = ({ id, logo, name, score, jobs }: CompanyTypes) => {
   return (
     <Link
       className={`text-jv-dark border border-solid border-jv-light w-52 p-2 flex flex-col rounded-md`}
@@ -14,12 +14,12 @@ const CompanyBox = ({ id, logo, title, score, jobs }: CompanyTypes) => {
         <img
           className={`w-full h-full object-fill object-center rounded-md`}
           src={logo}
-          alt={`لوگوی شرکت ${title}`}
+          alt={`لوگوی شرکت ${name}`}
           loading={`lazy`}
         />
       </div>
       <span className={`block dana-bold mt-4`}>
-        {title}
+        {name}
       </span>
       <div className={`badge pr-0 mt-2`}>
         <Star className={`text-jv-warning`} fontSize="small" />
