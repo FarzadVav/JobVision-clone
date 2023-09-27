@@ -136,7 +136,10 @@ const Jobs = () => {
 										testJobAds.benefits.length ? testJobAds.benefits.map((benefit, i) => {
 											if (i < testJobAds.benefits.length - 1) {
 												return (
-													<span className={`inline-block ml-2`}>
+													<span
+														key={tokenGenerator()}
+														className={`inline-block ml-2`}
+													>
 														{benefit}
 														<span className={`inline-block mr-2 opacity-25`}>
 															/
@@ -168,7 +171,10 @@ const Jobs = () => {
 						<ul className={`w-full flex flex-col`}>
 							{
 								testJobAds.abilityForBoss.length ? testJobAds.abilityForBoss.map(ability => (
-									<li className={`flex items-center mt-2 pr-2 first:mt-3`}>
+									<li
+										key={tokenGenerator()}
+										className={`flex items-center mt-2 pr-2 first:mt-3`}
+									>
 										<Verified className='text-jv-primary ml-3' fontSize='small' />
 										{ability}
 									</li>
@@ -458,7 +464,7 @@ const Jobs = () => {
 					</div>
 
 					<div className={`flex mt-3 relative`}>
-						<aside className={`bg-white w-full flex flex-col justify-center items-center p-3 rounded lg:ml-3 lg:w-5/12
+						<aside className={`bg-white w-full flex flex-col justify-center items-center p-3 mb-6 rounded lg:ml-3 lg:w-5/12
 						xl:w-4/12`}>
 							<div className={`w-full flex justify-between items-center`}>
 								<span>2291 آگهی</span>
