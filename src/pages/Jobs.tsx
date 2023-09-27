@@ -292,7 +292,7 @@ const Jobs = () => {
 								فرصت‌های شغلی مشابه
 							</span>
 						</Title>
-						<div className={`w-full flex flex-col gap-3 mt-3`}>
+						<div className={`w-full grid grid-cols-2 gap-3 mt-3`}>
 							<JobBox {...testJob} />
 							<JobBox {...testJob} />
 							<JobBox {...testJob} />
@@ -388,6 +388,17 @@ const Jobs = () => {
 								</span>
 							</div>
 						</div>
+					</div>
+				)
+			},
+			{
+				id: '456',
+				title: 'سایر آگهی های این شرکت',
+				content: (
+					<div className={`w-full grid grid-cols-2 gap-3`}>
+						<JobBox {...testJob} />
+						<JobBox {...testJob} />
+						<JobBox {...testJob} />
 					</div>
 				)
 			}
@@ -517,10 +528,14 @@ const Jobs = () => {
 										</span>
 										<div className={`flex items-center`}>
 											<ShareOutlined className={`text-jv-primary cursor-pointer`} />
-											<FavoriteBorderRounded className={`text-jv-danger mr-6 cursor-pointer`} />
+											<FavoriteBorderRounded className={`text-jv-danger mr-3 cursor-pointer`} />
 											<button className={`btn btn-success mr-6`}>
 												ارسال رزومه
 											</button>
+											<img
+												className={`w-10 h-10 mr-3 rounded-full`}
+												src={testJob.company.logo}
+											/>
 										</div>
 									</div>
 								</div>
