@@ -144,7 +144,7 @@ const Jobs = () => {
 				id: jobAds.id,
 				title: 'درباره شغل',
 				content: (
-					<div className={`w-full flex flex-col`}>
+					<div key={1} className={`w-full flex flex-col`}>
 						<Title withOutIcon>
 							<span className='!text-xl'>
 								مشخصات موقعیت شغلی
@@ -197,7 +197,7 @@ const Jobs = () => {
 											if (i < jobAds.benefits.length - 1) {
 												return (
 													<div
-														key={tokenGenerator()}
+														key={i}
 														className={`inline-block ml-2`}
 													>
 														{benefit}
@@ -208,7 +208,10 @@ const Jobs = () => {
 												)
 											} else {
 												return (
-													<span className={`inline-block`}>
+													<span
+														key={i}
+														className={`inline-block`}
+													>
 														{benefit}
 													</span>
 												)
@@ -302,8 +305,11 @@ const Jobs = () => {
 								</span>
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
 									{
-										jobAds.employmentConditions.education.length ? jobAds.employmentConditions.education.map(education => (
-											<div className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}>
+										jobAds.employmentConditions.education.length ? jobAds.employmentConditions.education.map((education, i) => (
+											<div
+												key={i}
+												className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}
+											>
 												{education}
 											</div>
 										)) : 'فرقی ندارد'
@@ -316,8 +322,11 @@ const Jobs = () => {
 								</span>
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
 									{
-										jobAds.employmentConditions.languages.length ? jobAds.employmentConditions.languages.map(language => (
-											<div className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}>
+										jobAds.employmentConditions.languages.length ? jobAds.employmentConditions.languages.map((language, i) => (
+											<div
+												key={i}
+												className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}
+											>
 												{`${language.name} - ${language.power}%`}
 											</div>
 										)) : 'فرقی ندارد'
@@ -330,8 +339,11 @@ const Jobs = () => {
 								</span>
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
 									{
-										jobAds.employmentConditions.techs.length ? jobAds.employmentConditions.techs.map(tech => (
-											<div className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}>
+										jobAds.employmentConditions.techs.length ? jobAds.employmentConditions.techs.map((tech, i) => (
+											<div
+												key={i}
+												className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}
+											>
 												{`${tech.name} - ${tech.power}%`}
 											</div>
 										)) : 'فرقی ندارد'
@@ -362,7 +374,7 @@ const Jobs = () => {
 							{
 								testJobs.length ? testJobs.map((job, i) => {
 									if (i < 6) {
-										return <JobBox {...job} />
+										return <JobBox key={i} {...job} />
 									}
 								}) : 'آگهی وجود ندارد'
 							}
@@ -371,7 +383,7 @@ const Jobs = () => {
 				)
 			},
 			{
-				id: '1234',
+				id: jobAds.company.id,
 				title: 'درباره شرکت',
 				content: (
 					<div className={`w-full flex flex-col`}>
@@ -462,13 +474,13 @@ const Jobs = () => {
 				)
 			},
 			{
-				id: '456',
+				id: 'other-jobAds',
 				title: 'سایر آگهی های این شرکت',
 				content: (
 					<div className={`w-full grid grid-cols-2 gap-3`}>
 						{
-							testJobs.length ? testJobs.map(job => (
-								<JobBox {...job} />
+							testJobs.length ? testJobs.map((job, i) => (
+								<JobBox key={i} {...job} />
 							)) : 'آگهی وجود ندارد'
 						}
 					</div>
@@ -545,6 +557,7 @@ const Jobs = () => {
 								{
 									testJobs.length ? testJobs.map(job => (
 										<div
+											key={job.id}
 											className={`w-full`}
 											onClick={() => {
 												jobAdsSelectHandler(job)
