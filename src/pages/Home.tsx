@@ -34,11 +34,32 @@ const testJob: JobBoxTypes = {
 	company: testCompany,
 	city: 'تهران',
 	location: 'فرشته',
-	salary: 32,
+	salary: [15, 20],
 	remote: true,
 	isUrgent: true,
+	knowledgeBasedCompany: true,
+	cooperationType: 'full-time',
+	workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
+	businessTrips: [7, 'month'],
+	benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
+	abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
+	description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
+	employmentConditions: {
+		age: [18, 32],
+		gender: 'male',
+		endOfMilitaryService: false,
+		education: ['لیسانس مهندسی نرم افزار'],
+		languages: [
+			{ name: 'english', power: 90 }
+		],
+		techs: [
+			{ name: 'Javascript', power: 100 },
+			{ name: 'React.js', power: 90 },
+			{ name: 'Typescript', power: 75 },
+		]
+	},
 	selected: false,
-	knowledgeBasedCompany: true
+	createAt: new Date()
 }
 
 const accordions: { title: string; text: string }[] = [
@@ -70,10 +91,9 @@ const accordions: { title: string; text: string }[] = [
 
 const Home = () => {
 	const [svgPath, setSvgPath] = useState<{ x: number, y: number }>({ x: 0, y: 0 })
-	let runAnimation = false
+	const runAnimationRef = useRef<boolean>(false)
 
 	const messageBoxRef = useRef<HTMLDivElement>(null)
-	// const employeeScrolled = useOneScroll('employee-baner')
 	useOneScroll(['employee-baner', 'cta-1', { id: 'cta-2', delay: 150 }])
 
 	useEffect(() => {
@@ -97,14 +117,14 @@ const Home = () => {
 
 		const windowSizeHandler = () => {
 			const width = window.innerWidth
-			if (width < 640 && runAnimation) {
+			if (width < 768 && runAnimationRef.current) {
 				setSvgPath({ x: 0, y: 0 })
 				clearInterval(interVal)
-				runAnimation = false
-			} else if (width >= 640 && !runAnimation) {
+				runAnimationRef.current = false
+			} else if (width >= 768 && !runAnimationRef.current) {
 				oneAnimate()
 				interVal = setInterval(animate, 5000)
-				runAnimation = true
+				runAnimationRef.current = true
 			}
 		}
 
