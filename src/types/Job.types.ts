@@ -10,7 +10,7 @@ type JobAdsTypes = {
   remote: boolean;
   isUrgent: boolean;
   knowledgeBasedCompany: boolean;
-  salary: [number, number] | number | null;
+  salary: [number, number] | number | 'none';
   workTimes: string;
   cooperationType: 'full-time' | 'part-time' | 'as-projects';
   businessTrips: [number, ('month' | 'year')] | 'ever' | 'some-times' | 'none';
@@ -26,6 +26,7 @@ type JobAdsTypes = {
     techs: { name: string; power: number }[]
   };
   selected: boolean;
+  createAt: Date;
 }
 
 export default JobAdsTypes

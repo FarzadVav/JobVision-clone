@@ -1,4 +1,4 @@
-import { ReactNode, useState, useMemo, useEffect } from 'react'
+import { ReactNode, useState } from 'react'
 import { CloseRounded, FavoriteBorderRounded, HelpRounded, InfoOutlined, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined, StarRateRounded, Verified } from "@mui/icons-material";
 
 import SearchJobForm from "../components/SearchJobForm";
@@ -32,8 +32,8 @@ const testJobs: JobAdsTypes[] = [
 		company: testCompany,
 		city: 'تهران',
 		location: 'فرشته',
-		salary: 32,
-		remote: false,
+		salary: [15, 20],
+		remote: true,
 		isUrgent: true,
 		knowledgeBasedCompany: true,
 		cooperationType: 'full-time',
@@ -56,7 +56,8 @@ const testJobs: JobAdsTypes[] = [
 				{ name: 'Typescript', power: 75 },
 			]
 		},
-		selected: false
+		selected: false,
+		createAt: new Date()
 	},
 	{
 		id: tokenGenerator(),
@@ -89,7 +90,8 @@ const testJobs: JobAdsTypes[] = [
 				{ name: 'Typescript', power: 75 },
 			]
 		},
-		selected: false
+		selected: false,
+		createAt: new Date()
 	},
 	{
 		id: tokenGenerator(),
@@ -122,7 +124,8 @@ const testJobs: JobAdsTypes[] = [
 				{ name: 'Typescript', power: 75 },
 			]
 		},
-		selected: false
+		selected: false,
+		createAt: new Date()
 	},
 ]
 
@@ -133,13 +136,12 @@ const Jobs = () => {
 		title: string;
 		content: ReactNode
 	}[]>([])
+	const [selectedJobAds, setSelectedJobAds] = useState<JobAdsTypes>({} as JobAdsTypes)
 
-	useEffect(() => {
-		const testJobAds: JobAdsTypes = testJobs[0]
-
+	const jobAdsSelectHandler = (jobAds: JobAdsTypes) => {
 		setTestTabs([
 			{
-				id: testJobAds.id,
+				id: jobAds.id,
 				title: 'درباره شغل',
 				content: (
 					<div className={`w-full flex flex-col`}>
@@ -154,7 +156,7 @@ const Jobs = () => {
 									روز و ساعت کاری
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
-									{testJobAds.workTimes}
+									{jobAds.workTimes}
 								</span>
 							</div>
 							<div className={`w-1/2 px-3`}>
@@ -163,8 +165,8 @@ const Jobs = () => {
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
 									{
-										testJobAds.cooperationType === 'full-time' ? 'تمام وقت'
-											: testJobAds.cooperationType === 'part-time' ? 'پاره وقت'
+										jobAds.cooperationType === 'full-time' ? 'تمام وقت'
+											: jobAds.cooperationType === 'part-time' ? 'پاره وقت'
 												: 'پروژه ای'
 									}
 								</span>
@@ -175,13 +177,13 @@ const Jobs = () => {
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
 									{
-										testJobAds.businessTrips === 'ever' ? 'همیشه در سفر'
-											: testJobAds.businessTrips === 'some-times' ? 'در صورت نیاز'
-												: testJobAds.businessTrips === 'none' ? '---'
-													: `${testJobAds.businessTrips[0]}
-														${testJobAds.businessTrips[1] === 'month' ? 'روز' : 'ماه'}
+										jobAds.businessTrips === 'ever' ? 'همیشه در سفر'
+											: jobAds.businessTrips === 'some-times' ? 'در صورت نیاز'
+												: jobAds.businessTrips === 'none' ? '---'
+													: `${jobAds.businessTrips[0]}
+														${jobAds.businessTrips[1] === 'month' ? 'روز' : 'ماه'}
 														در
-														${testJobAds.businessTrips[1] === 'month' ? 'ماه' : 'سال'}`
+														${jobAds.businessTrips[1] === 'month' ? 'ماه' : 'سال'}`
 									}
 								</span>
 							</div>
@@ -191,8 +193,8 @@ const Jobs = () => {
 								</span>
 								<div className={`opacity-75 text-sm mt-1`}>
 									{
-										testJobAds.benefits.length ? testJobAds.benefits.map((benefit, i) => {
-											if (i < testJobAds.benefits.length - 1) {
+										jobAds.benefits.length ? jobAds.benefits.map((benefit, i) => {
+											if (i < jobAds.benefits.length - 1) {
 												return (
 													<div
 														key={tokenGenerator()}
@@ -228,7 +230,7 @@ const Jobs = () => {
 						</Title>
 						<ul className={`w-full flex flex-col`}>
 							{
-								testJobAds.abilityForBoss.length ? testJobAds.abilityForBoss.map(ability => (
+								jobAds.abilityForBoss.length ? jobAds.abilityForBoss.map(ability => (
 									<li
 										key={tokenGenerator()}
 										className={`flex items-center mt-2 pr-2 first:mt-3`}
@@ -249,7 +251,7 @@ const Jobs = () => {
 							</span>
 						</Title>
 						<p className={`w-full mt-3 px-3`}>
-							{testJobAds.description}
+							{jobAds.description}
 						</p>
 
 						<Title
@@ -266,7 +268,7 @@ const Jobs = () => {
 									سن
 								</span>
 								<span className={`bg-jv-bright block w-10/12 px-3 py-1.5`}>
-									{`${testJobAds.employmentConditions.age[0]} - ${testJobAds.employmentConditions.age[1]}`}
+									{`${jobAds.employmentConditions.age[0]} - ${jobAds.employmentConditions.age[1]}`}
 									<span className={`mr-1.5`}>
 										سال
 									</span>
@@ -278,8 +280,8 @@ const Jobs = () => {
 								</span>
 								<span className={`bg-jv-bright block w-10/12 px-3 py-1.5`}>
 									{
-										testJobAds.employmentConditions.gender === 'male' ? 'مرد'
-											: testJobAds.employmentConditions.gender === 'female' ? 'زن'
+										jobAds.employmentConditions.gender === 'male' ? 'مرد'
+											: jobAds.employmentConditions.gender === 'female' ? 'زن'
 												: 'فرقی ندارد'
 									}
 								</span>
@@ -290,7 +292,7 @@ const Jobs = () => {
 								</span>
 								<span className={`bg-jv-bright block w-10/12 px-3 py-1.5`}>
 									{
-										testJobAds.employmentConditions.endOfMilitaryService ? 'پایان خدمت یا معاف از سربازی' : 'مهم نیست'
+										jobAds.employmentConditions.endOfMilitaryService ? 'پایان خدمت یا معاف از سربازی' : 'مهم نیست'
 									}
 								</span>
 							</li>
@@ -300,7 +302,7 @@ const Jobs = () => {
 								</span>
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
 									{
-										testJobAds.employmentConditions.education.length ? testJobAds.employmentConditions.education.map(education => (
+										jobAds.employmentConditions.education.length ? jobAds.employmentConditions.education.map(education => (
 											<div className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}>
 												{education}
 											</div>
@@ -314,7 +316,7 @@ const Jobs = () => {
 								</span>
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
 									{
-										testJobAds.employmentConditions.languages.length ? testJobAds.employmentConditions.languages.map(language => (
+										jobAds.employmentConditions.languages.length ? jobAds.employmentConditions.languages.map(language => (
 											<div className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}>
 												{`${language.name} - ${language.power}%`}
 											</div>
@@ -328,7 +330,7 @@ const Jobs = () => {
 								</span>
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
 									{
-										testJobAds.employmentConditions.techs.length ? testJobAds.employmentConditions.techs.map(tech => (
+										jobAds.employmentConditions.techs.length ? jobAds.employmentConditions.techs.map(tech => (
 											<div className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}>
 												{`${tech.name} - ${tech.power}%`}
 											</div>
@@ -380,10 +382,10 @@ const Jobs = () => {
 						</Title>
 						<div className={`w-full flex items-center mt-3`}>
 							<span className={`dana-bold h-5 ml-3`}>
-								{testJobAds.company.score}
+								{jobAds.company.score}
 							</span>
 							{
-								Array(Math.floor(testJobAds.company.score || 0)).fill('').map(() => (
+								Array(Math.floor(jobAds.company.score || 0)).fill('').map(() => (
 									<StarRateRounded
 										key={tokenGenerator()}
 										className={`text-jv-warning`}
@@ -391,7 +393,7 @@ const Jobs = () => {
 								))
 							}
 							{
-								Array(Math.ceil(5 - (testJobAds.company.score || 0))).fill('').map(() => (
+								Array(Math.ceil(5 - (jobAds.company.score || 0))).fill('').map(() => (
 									<StarRateRounded
 										key={tokenGenerator()}
 										className={`text-jv-dark opacity-25`}
@@ -405,11 +407,11 @@ const Jobs = () => {
 							withOutIcon
 						>
 							<span className='!text-xl'>
-								درباره {testJobAds.company.name}
+								درباره {jobAds.company.name}
 							</span>
 						</Title>
 						<p className={`w-full mt-3`}>
-							{testJobAds.company.aboutCompany}
+							{jobAds.company.aboutCompany}
 						</p>
 
 						<Title
@@ -417,7 +419,7 @@ const Jobs = () => {
 							withOutIcon
 						>
 							<span className='!text-xl'>
-								{testJobAds.company.name} در یک نگاه
+								{jobAds.company.name} در یک نگاه
 							</span>
 						</Title>
 						<div className={`w-full flex flex-wrap gap-y-3 mt-3`}>
@@ -426,7 +428,7 @@ const Jobs = () => {
 									سال تاسیس
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
-									{testJobAds.company.year}
+									{jobAds.company.year}
 								</span>
 							</div>
 							<div className={`w-1/2 px-3`}>
@@ -434,7 +436,7 @@ const Jobs = () => {
 									اندازه سازمان
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
-									{testJobAds.company.employees[0]} تا {testJobAds.company.employees[1]} نفر
+									{jobAds.company.employees[0]} تا {jobAds.company.employees[1]} نفر
 								</span>
 							</div>
 							<div className={`w-1/2 px-3`}>
@@ -442,7 +444,7 @@ const Jobs = () => {
 									حوزه فعالیت
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
-									{testJobAds.company.activity}
+									{jobAds.company.activity}
 								</span>
 							</div>
 							<div className={`w-1/2 px-3`}>
@@ -451,7 +453,7 @@ const Jobs = () => {
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
 									{
-										testJobAds.company.ownership === 'pv' ? 'خصوصی' : 'دولتی'
+										jobAds.company.ownership === 'pv' ? 'خصوصی' : 'دولتی'
 									}
 								</span>
 							</div>
@@ -473,7 +475,7 @@ const Jobs = () => {
 				)
 			}
 		])
-	}, [])
+	}
 
 	return (
 		<>
@@ -542,7 +544,15 @@ const Jobs = () => {
 							<div className={`w-full flex flex-col justify-center items-center gap-3 mt-3`}>
 								{
 									testJobs.length ? testJobs.map(job => (
-										<JobBox {...job} />
+										<div
+											className={`w-full`}
+											onClick={() => {
+												jobAdsSelectHandler(job)
+												setSelectedJobAds(job)
+											}}
+										>
+											<JobBox {...job} />
+										</div>
 									)) : 'آگهی وجود ندارد'
 								}
 							</div>
@@ -551,71 +561,91 @@ const Jobs = () => {
 						<main className={`current-height w-full top-[calc(4.5rem+0.75rem)] pb-6 absolute opacity-0 invisible
 						translate-y-full lg:opacity-100 lg:visible lg:translate-y-0 lg:w-7/12 lg:sticky xl:w-8/12`}>
 							<div className={`list-scrollbar bg-white w-full h-full flex flex-col px-3 py-4 rounded overflow-y-auto`}>
-								<div className={`w-full`}>
-									<div className={`w-full flex justify-between`}>
-										<Title withOutIcon>
-											<h2>
-												برنامه نویس Front-End (ReactJs)
-											</h2>
-										</Title>
-										<span className={`min-w-max italic text-xs`}>
-											31 روز پیش
-										</span>
-									</div>
-									<div className={`flex items-center mt-6`}>
-										<span className={`text-jv-primary`}>
-											ایران فاوا گسترش
-										</span>
-										<span className={`border-r border-solid border-jv-light italic pr-3 mr-3`}>
-											تهران ، یوسف اباد
-										</span>
-										<span className={`border-r border-solid border-jv-light italic pr-3 mr-3`}>
-											امکان دورکاری
-										</span>
-										<span className={`text-jv-danger border-r border-solid border-jv-light italic pr-3 mr-3`}>
-											فوری
-										</span>
-									</div>
-									<div className={`w-full flex items-center justify-between mt-3`}>
-										<span className={`text-jv-success`}>
-											20 - 30 میلیون تومان
-										</span>
-										<div className={`flex items-center`}>
-											<ShareOutlined className={`text-jv-primary cursor-pointer`} />
-											<FavoriteBorderRounded className={`text-jv-danger mr-3 cursor-pointer`} />
-											<button className={`btn btn-success mr-6`}>
-												ارسال رزومه
-											</button>
-											<img
-												className={`w-10 h-10 mr-3 rounded-full`}
-												src={testJobs[0].company.logo}
-											/>
-										</div>
-									</div>
-								</div>
-
-								<div className={`bg-jv-bright w-full flex items-center px-5 py-2 mt-6 rounded`}>
-									<div className={`flex items-center`}>
-										<PeopleAltRounded className={`text-jv-light brightness-75`} />
-										<span className={`mr-3`}>
-											201 تا 500 نفر
-										</span>
-									</div>
-									<div className={`flex items-center mr-6`}>
-										<HelpRounded className={`text-jv-light brightness-75`} />
-										<span className={`mr-3`}>
-											شرکت ایران فاوا گسترش، وابسته به گروه صنعتی ایران خودرو
-										</span>
-									</div>
-								</div>
-
 								{
-									useMemo(() => (
-										<Tabs
-											customClass={`mt-6`}
-											tabs={testTabs}
-										/>
-									), [testTabs])
+									Object.keys(selectedJobAds).length ? (
+										<>
+											<div className={`w-full`}>
+												<div className={`w-full flex justify-between`}>
+													<Title withOutIcon>
+														<h2>
+															{selectedJobAds.title}
+														</h2>
+													</Title>
+													<span className={`min-w-max italic text-sm`}>
+														{selectedJobAds.createAt.toLocaleDateString('fa-ir')}
+													</span>
+												</div>
+												<div className={`flex items-center mt-6`}>
+													<span className={`text-jv-primary`}>
+														{selectedJobAds.company.name}
+													</span>
+													<span className={`border-r border-solid border-jv-light italic pr-3 mr-3`}>
+														{selectedJobAds.city} ، {selectedJobAds.location}
+													</span>
+													{
+														selectedJobAds.remote && (
+															<span className={`border-r border-solid border-jv-light italic pr-3 mr-3`}>
+																امکان دورکاری
+															</span>
+														)
+													}
+													{
+														selectedJobAds.isUrgent && (
+															<span className={`text-jv-danger border-r border-solid border-jv-light italic pr-3 mr-3`}>
+																فوری
+															</span>
+														)
+													}
+												</div>
+												<div className={`w-full flex items-center justify-between mt-3`}>
+													<span className={`text-jv-success`}>
+														{
+															typeof selectedJobAds.salary === 'number' ? `${selectedJobAds.salary} میلیون`
+																: selectedJobAds.salary === 'none' ? 'حقوق توافقی'
+																	: selectedJobAds.salary?.length ? selectedJobAds.salary?.map((price, index) => {
+																		if (index > 0) {
+																			return ` تا ${price} میلیون`
+																		} else {
+																			return `${price}`
+																		}
+																	}) : null
+														}
+													</span>
+													<div className={`flex items-center`}>
+														<ShareOutlined className={`text-jv-primary cursor-pointer`} />
+														<FavoriteBorderRounded className={`text-jv-danger mr-3 cursor-pointer`} />
+														<button className={`btn btn-success mr-6`}>
+															ارسال رزومه
+														</button>
+														<img
+															className={`w-10 h-10 mr-3 rounded-full`}
+															src={testJobs[0].company.logo}
+														/>
+													</div>
+												</div>
+											</div>
+
+											<div className={`bg-jv-bright w-full flex items-center px-5 py-2 mt-6 rounded`}>
+												<div className={`flex items-center`}>
+													<PeopleAltRounded className={`text-jv-light brightness-75`} />
+													<span className={`mr-3`}>
+														201 تا 500 نفر
+													</span>
+												</div>
+												<div className={`flex items-center mr-6`}>
+													<HelpRounded className={`text-jv-light brightness-75`} />
+													<span className={`mr-3`}>
+														شرکت ایران فاوا گسترش، وابسته به گروه صنعتی ایران خودرو
+													</span>
+												</div>
+											</div>
+
+											<Tabs
+												customClass={`mt-6`}
+												tabs={testTabs}
+											/>
+										</>
+									) : 'آگهی انتخاب نشده است'
 								}
 							</div>
 						</main>

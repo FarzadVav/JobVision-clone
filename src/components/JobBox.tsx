@@ -55,27 +55,19 @@ const JobBox = (
               <span className={`text-xs`}>
                 {city} {location}
               </span>
-              {
-                typeof salary === 'number' ? (
-                  <span className={`text-jv-success border-r border-solid border-jv-light text-xs pr-2 mr-2`}>
-                    {salary} میلیون
-                  </span>
-                ) : salary?.length ? (
-                  <span className={`text-jv-success border-r border-solid border-jv-light text-xs pr-2 mr-2`}>
-                    {salary?.map((price, index) => {
-                      if (index > 0) {
-                        return ` - ${price}`
-                      } else {
-                        return price
-                      }
-                    })} میلیون
-                  </span>
-                ) : (
-                  <span className={`italic border-r border-solid border-jv-light text-xs pr-2 mr-2`}>
-                    حقوق تواقفی
-                  </span>
-                )
-              }
+              <span className={`text-jv-success border-r border-solid border-jv-light text-xs pr-2 mr-2`}>
+                {
+                  typeof salary === 'number' ? `${salary} میلیون`
+                    : salary === 'none' ? 'حقوق توافقی'
+                      : salary?.length ? salary?.map((price, index) => {
+                        if (index > 0) {
+                          return ` تا ${price} میلیون`
+                        } else {
+                          return `${price}`
+                        }
+                      }) : null
+                }
+              </span>
             </div>
           </div>
         </div>
