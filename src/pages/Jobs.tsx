@@ -27,7 +27,7 @@ const testCompany: CompanyTypes = {
 const testJobAds: JobAdsTypes[] = [
 	{
 		id: tokenGenerator(),
-		categories: [{ title: 'front-end', id: tokenGenerator(), }],
+		categories: [{ title: 'full-stack', id: tokenGenerator(), }],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
 		company: testCompany,
 		city: 'تهران',
@@ -375,7 +375,15 @@ const Jobs = () => {
 							{
 								jobAds.length ? jobAds.map((job, i) => {
 									if (i < 6) {
-										return <JobBox key={i} {...job} />
+										return job.categories.map(cat => {
+											return jobAd.categories.map(cat2 => {
+												if (cat.title === cat2.title && job.id !== jobAd.id) {
+													return <JobBox key={i} {...job} />
+												} else {
+													return null
+												}
+											})
+										})
 									}
 								}) : 'آگهی وجود ندارد'
 							}
