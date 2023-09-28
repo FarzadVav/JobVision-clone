@@ -4,7 +4,7 @@ import { Star } from "@mui/icons-material"
 import JobBoxTypes from "../types/Job.types"
 
 const JobBox = (
-  { id, categories, title, company, city, location, salary, remote, knowledgeBasedCompany, isUrgent, selected }: JobBoxTypes
+  { id, categories, title, company, city, location, salary, remote, knowledgeBasedCompany, isUrgent, createAt, selected }: JobBoxTypes
 ) => {
   return (
     <article
@@ -79,8 +79,8 @@ const JobBox = (
                 فوری
               </span>
             ) : (
-              <span className={`text-xs italic opacity-75`}>
-                39 روز پیش
+              <span className={`text-xs h-3`}>
+                {createAt.toLocaleDateString('fa-ir').split('/').reverse().join(' / ')}
               </span>
             )
           }
@@ -88,7 +88,7 @@ const JobBox = (
             company.score ? (
               <div className={`badge ${selected ? 'mr-auto' : 'ml-auto lg:opacity-0 group-hover:opacity-100'}`}>
                 <Star className={`text-jv-warning`} fontSize="small" />
-                <span className={`text-jv-dark inline-block h-3`}>
+                <span className={`text-jv-dark text-xs inline-block h-3`}>
                   {company.score}
                 </span>
               </div>

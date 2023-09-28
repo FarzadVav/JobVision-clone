@@ -24,7 +24,7 @@ const testCompany: CompanyTypes = {
 	ownership: 'pv'
 }
 
-const testJobs: JobAdsTypes[] = [
+const testJobAds: JobAdsTypes[] = [
 	{
 		id: tokenGenerator(),
 		categories: [{ title: 'front-end', id: tokenGenerator(), }],
@@ -34,7 +34,7 @@ const testJobs: JobAdsTypes[] = [
 		location: 'فرشته',
 		salary: [15, 20],
 		remote: true,
-		isUrgent: true,
+		isUrgent: false,
 		knowledgeBasedCompany: true,
 		cooperationType: 'full-time',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
@@ -131,17 +131,18 @@ const testJobs: JobAdsTypes[] = [
 
 const Jobs = () => {
 	const [showAlert, setShowAlert] = useState<boolean>(false)
-	const [testTabs, setTestTabs] = useState<{
+	const [jobAds, setJobAds] = useState<JobAdsTypes[]>(testJobAds)
+	const [jobAdsTabs, setJobAdsTabs] = useState<{
 		id: string;
 		title: string;
 		content: ReactNode
 	}[]>([])
 	const [selectedJobAds, setSelectedJobAds] = useState<JobAdsTypes>({} as JobAdsTypes)
 
-	const jobAdsSelectHandler = (jobAds: JobAdsTypes) => {
-		setTestTabs([
+	const jobAdsSelectHandler = (jobAd: JobAdsTypes) => {
+		setJobAdsTabs([
 			{
-				id: jobAds.id,
+				id: jobAd.id,
 				title: 'درباره شغل',
 				content: (
 					<div key={1} className={`w-full flex flex-col`}>
@@ -156,7 +157,7 @@ const Jobs = () => {
 									روز و ساعت کاری
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
-									{jobAds.workTimes}
+									{jobAd.workTimes}
 								</span>
 							</div>
 							<div className={`w-1/2 px-3`}>
@@ -165,8 +166,8 @@ const Jobs = () => {
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
 									{
-										jobAds.cooperationType === 'full-time' ? 'تمام وقت'
-											: jobAds.cooperationType === 'part-time' ? 'پاره وقت'
+										jobAd.cooperationType === 'full-time' ? 'تمام وقت'
+											: jobAd.cooperationType === 'part-time' ? 'پاره وقت'
 												: 'پروژه ای'
 									}
 								</span>
@@ -177,13 +178,13 @@ const Jobs = () => {
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
 									{
-										jobAds.businessTrips === 'ever' ? 'همیشه در سفر'
-											: jobAds.businessTrips === 'some-times' ? 'در صورت نیاز'
-												: jobAds.businessTrips === 'none' ? '---'
-													: `${jobAds.businessTrips[0]}
-														${jobAds.businessTrips[1] === 'month' ? 'روز' : 'ماه'}
+										jobAd.businessTrips === 'ever' ? 'همیشه در سفر'
+											: jobAd.businessTrips === 'some-times' ? 'در صورت نیاز'
+												: jobAd.businessTrips === 'none' ? '---'
+													: `${jobAd.businessTrips[0]}
+														${jobAd.businessTrips[1] === 'month' ? 'روز' : 'ماه'}
 														در
-														${jobAds.businessTrips[1] === 'month' ? 'ماه' : 'سال'}`
+														${jobAd.businessTrips[1] === 'month' ? 'ماه' : 'سال'}`
 									}
 								</span>
 							</div>
@@ -193,8 +194,8 @@ const Jobs = () => {
 								</span>
 								<div className={`opacity-75 text-sm mt-1`}>
 									{
-										jobAds.benefits.length ? jobAds.benefits.map((benefit, i) => {
-											if (i < jobAds.benefits.length - 1) {
+										jobAd.benefits.length ? jobAd.benefits.map((benefit, i) => {
+											if (i < jobAd.benefits.length - 1) {
 												return (
 													<div
 														key={i}
@@ -233,7 +234,7 @@ const Jobs = () => {
 						</Title>
 						<ul className={`w-full flex flex-col`}>
 							{
-								jobAds.abilityForBoss.length ? jobAds.abilityForBoss.map(ability => (
+								jobAd.abilityForBoss.length ? jobAd.abilityForBoss.map(ability => (
 									<li
 										key={tokenGenerator()}
 										className={`flex items-center mt-2 pr-2 first:mt-3`}
@@ -254,7 +255,7 @@ const Jobs = () => {
 							</span>
 						</Title>
 						<p className={`w-full mt-3 px-3`}>
-							{jobAds.description}
+							{jobAd.description}
 						</p>
 
 						<Title
@@ -271,7 +272,7 @@ const Jobs = () => {
 									سن
 								</span>
 								<span className={`bg-jv-bright block w-10/12 px-3 py-1.5`}>
-									{`${jobAds.employmentConditions.age[0]} - ${jobAds.employmentConditions.age[1]}`}
+									{`${jobAd.employmentConditions.age[0]} - ${jobAd.employmentConditions.age[1]}`}
 									<span className={`mr-1.5`}>
 										سال
 									</span>
@@ -283,8 +284,8 @@ const Jobs = () => {
 								</span>
 								<span className={`bg-jv-bright block w-10/12 px-3 py-1.5`}>
 									{
-										jobAds.employmentConditions.gender === 'male' ? 'مرد'
-											: jobAds.employmentConditions.gender === 'female' ? 'زن'
+										jobAd.employmentConditions.gender === 'male' ? 'مرد'
+											: jobAd.employmentConditions.gender === 'female' ? 'زن'
 												: 'فرقی ندارد'
 									}
 								</span>
@@ -295,7 +296,7 @@ const Jobs = () => {
 								</span>
 								<span className={`bg-jv-bright block w-10/12 px-3 py-1.5`}>
 									{
-										jobAds.employmentConditions.endOfMilitaryService ? 'پایان خدمت یا معاف از سربازی' : 'مهم نیست'
+										jobAd.employmentConditions.endOfMilitaryService ? 'پایان خدمت یا معاف از سربازی' : 'مهم نیست'
 									}
 								</span>
 							</li>
@@ -305,7 +306,7 @@ const Jobs = () => {
 								</span>
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
 									{
-										jobAds.employmentConditions.education.length ? jobAds.employmentConditions.education.map((education, i) => (
+										jobAd.employmentConditions.education.length ? jobAd.employmentConditions.education.map((education, i) => (
 											<div
 												key={i}
 												className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}
@@ -322,7 +323,7 @@ const Jobs = () => {
 								</span>
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
 									{
-										jobAds.employmentConditions.languages.length ? jobAds.employmentConditions.languages.map((language, i) => (
+										jobAd.employmentConditions.languages.length ? jobAd.employmentConditions.languages.map((language, i) => (
 											<div
 												key={i}
 												className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}
@@ -339,7 +340,7 @@ const Jobs = () => {
 								</span>
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
 									{
-										jobAds.employmentConditions.techs.length ? jobAds.employmentConditions.techs.map((tech, i) => (
+										jobAd.employmentConditions.techs.length ? jobAd.employmentConditions.techs.map((tech, i) => (
 											<div
 												key={i}
 												className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}
@@ -372,7 +373,7 @@ const Jobs = () => {
 						</Title>
 						<div className={`w-full grid grid-cols-2 gap-3 mt-3`}>
 							{
-								testJobs.length ? testJobs.map((job, i) => {
+								jobAds.length ? jobAds.map((job, i) => {
 									if (i < 6) {
 										return <JobBox key={i} {...job} />
 									}
@@ -383,7 +384,7 @@ const Jobs = () => {
 				)
 			},
 			{
-				id: jobAds.company.id,
+				id: jobAd.company.id,
 				title: 'درباره شرکت',
 				content: (
 					<div className={`w-full flex flex-col`}>
@@ -394,10 +395,10 @@ const Jobs = () => {
 						</Title>
 						<div className={`w-full flex items-center mt-3`}>
 							<span className={`dana-bold h-5 ml-3`}>
-								{jobAds.company.score}
+								{jobAd.company.score}
 							</span>
 							{
-								Array(Math.floor(jobAds.company.score || 0)).fill('').map(() => (
+								Array(Math.floor(jobAd.company.score || 0)).fill('').map(() => (
 									<StarRateRounded
 										key={tokenGenerator()}
 										className={`text-jv-warning`}
@@ -405,7 +406,7 @@ const Jobs = () => {
 								))
 							}
 							{
-								Array(Math.ceil(5 - (jobAds.company.score || 0))).fill('').map(() => (
+								Array(Math.ceil(5 - (jobAd.company.score || 0))).fill('').map(() => (
 									<StarRateRounded
 										key={tokenGenerator()}
 										className={`text-jv-dark opacity-25`}
@@ -419,11 +420,11 @@ const Jobs = () => {
 							withOutIcon
 						>
 							<span className='!text-xl'>
-								درباره {jobAds.company.name}
+								درباره {jobAd.company.name}
 							</span>
 						</Title>
 						<p className={`w-full mt-3`}>
-							{jobAds.company.aboutCompany}
+							{jobAd.company.aboutCompany}
 						</p>
 
 						<Title
@@ -431,7 +432,7 @@ const Jobs = () => {
 							withOutIcon
 						>
 							<span className='!text-xl'>
-								{jobAds.company.name} در یک نگاه
+								{jobAd.company.name} در یک نگاه
 							</span>
 						</Title>
 						<div className={`w-full flex flex-wrap gap-y-3 mt-3`}>
@@ -440,7 +441,7 @@ const Jobs = () => {
 									سال تاسیس
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
-									{jobAds.company.year}
+									{jobAd.company.year}
 								</span>
 							</div>
 							<div className={`w-1/2 px-3`}>
@@ -448,7 +449,7 @@ const Jobs = () => {
 									اندازه سازمان
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
-									{jobAds.company.employees[0]} تا {jobAds.company.employees[1]} نفر
+									{jobAd.company.employees[0]} تا {jobAd.company.employees[1]} نفر
 								</span>
 							</div>
 							<div className={`w-1/2 px-3`}>
@@ -456,7 +457,7 @@ const Jobs = () => {
 									حوزه فعالیت
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
-									{jobAds.company.activity}
+									{jobAd.company.activity}
 								</span>
 							</div>
 							<div className={`w-1/2 px-3`}>
@@ -465,7 +466,7 @@ const Jobs = () => {
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
 									{
-										jobAds.company.ownership === 'pv' ? 'خصوصی' : 'دولتی'
+										jobAd.company.ownership === 'pv' ? 'خصوصی' : 'دولتی'
 									}
 								</span>
 							</div>
@@ -479,7 +480,7 @@ const Jobs = () => {
 				content: (
 					<div className={`w-full grid grid-cols-2 gap-3`}>
 						{
-							testJobs.length ? testJobs.map((job, i) => (
+							jobAds.length ? jobAds.map((job, i) => (
 								<JobBox key={i} {...job} />
 							)) : 'آگهی وجود ندارد'
 						}
@@ -555,11 +556,22 @@ const Jobs = () => {
 							</div>
 							<div className={`w-full flex flex-col justify-center items-center gap-3 mt-3`}>
 								{
-									testJobs.length ? testJobs.map(job => (
+									jobAds.length ? jobAds.map(job => (
 										<div
 											key={job.id}
 											className={`w-full`}
 											onClick={() => {
+												setJobAds(prev => {
+													const newJobAds = prev.map(jobAd => {
+														if (jobAd.id === job.id) {
+															jobAd.selected = true
+														} else {
+															jobAd.selected = false
+														}
+														return jobAd
+													})
+													return newJobAds
+												})
 												jobAdsSelectHandler(job)
 												setSelectedJobAds(job)
 											}}
@@ -584,8 +596,8 @@ const Jobs = () => {
 															{selectedJobAds.title}
 														</h2>
 													</Title>
-													<span className={`min-w-max italic text-sm`}>
-														{selectedJobAds.createAt.toLocaleDateString('fa-ir')}
+													<span className={`min-w-max text-sm`}>
+														{selectedJobAds.createAt.toLocaleDateString('fa-ir').split('/').reverse().join(' / ')}
 													</span>
 												</div>
 												<div className={`flex items-center mt-6`}>
@@ -632,7 +644,7 @@ const Jobs = () => {
 														</button>
 														<img
 															className={`w-10 h-10 mr-3 rounded-full`}
-															src={testJobs[0].company.logo}
+															src={jobAds[0].company.logo}
 														/>
 													</div>
 												</div>
@@ -642,20 +654,20 @@ const Jobs = () => {
 												<div className={`flex items-center`}>
 													<PeopleAltRounded className={`text-jv-light brightness-75`} />
 													<span className={`mr-3`}>
-														201 تا 500 نفر
+														{selectedJobAds.company.employees[0]} تا {selectedJobAds.company.employees[1]} نفر
 													</span>
 												</div>
 												<div className={`flex items-center mr-6`}>
 													<HelpRounded className={`text-jv-light brightness-75`} />
 													<span className={`mr-3`}>
-														شرکت ایران فاوا گسترش، وابسته به گروه صنعتی ایران خودرو
+														{selectedJobAds.company.activity}
 													</span>
 												</div>
 											</div>
 
 											<Tabs
 												customClass={`mt-6`}
-												tabs={testTabs}
+												tabs={jobAdsTabs}
 											/>
 										</>
 									) : 'آگهی انتخاب نشده است'
