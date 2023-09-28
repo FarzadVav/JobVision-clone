@@ -4,7 +4,7 @@ import { CloseRounded, FavoriteBorderRounded, HelpRounded, InfoOutlined, Notific
 import SearchJobForm from "../components/SearchJobForm";
 import JobsFiltersBar from "../components/FilterJob";
 import Title from "../components/Title";
-import JobsTypes, { JobAdsTypes } from "../types/Job.types";
+import JobAdsTypes from "../types/Job.types";
 import tokenGenerator from "../utils/tokenGenerator";
 import CompanyTypes from "../types/Company.types";
 import JobBox from "../components/JobBox";
@@ -24,19 +24,107 @@ const testCompany: CompanyTypes = {
 	ownership: 'pv'
 }
 
-const testJob: JobsTypes = {
-	id: tokenGenerator(),
-	categories: [{ title: 'front-end', id: tokenGenerator(), }],
-	title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
-	company: testCompany,
-	city: 'تهران',
-	location: 'فرشته',
-	salary: 32,
-	remote: false,
-	isUrgent: true,
-	selected: false,
-	knowledgeBasedCompany: true
-}
+const testJobs: JobAdsTypes[] = [
+	{
+		id: tokenGenerator(),
+		categories: [{ title: 'front-end', id: tokenGenerator(), }],
+		title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
+		company: testCompany,
+		city: 'تهران',
+		location: 'فرشته',
+		salary: 32,
+		remote: false,
+		isUrgent: true,
+		knowledgeBasedCompany: true,
+		cooperationType: 'full-time',
+		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
+		businessTrips: [7, 'month'],
+		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
+		abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
+		description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
+		employmentConditions: {
+			age: [18, 32],
+			gender: 'male',
+			endOfMilitaryService: false,
+			education: ['لیسانس مهندسی نرم افزار'],
+			languages: [
+				{ name: 'english', power: 90 }
+			],
+			techs: [
+				{ name: 'Javascript', power: 100 },
+				{ name: 'React.js', power: 90 },
+				{ name: 'Typescript', power: 75 },
+			]
+		},
+		selected: false
+	},
+	{
+		id: tokenGenerator(),
+		categories: [{ title: 'front-end', id: tokenGenerator(), }],
+		title: 'متخصص فرانت اند و بک اند (full-stack Developer) 2',
+		company: testCompany,
+		city: 'تهران',
+		location: 'فرشته',
+		salary: 32,
+		remote: false,
+		isUrgent: true,
+		knowledgeBasedCompany: true,
+		cooperationType: 'full-time',
+		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
+		businessTrips: [7, 'month'],
+		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
+		abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
+		description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
+		employmentConditions: {
+			age: [18, 32],
+			gender: 'male',
+			endOfMilitaryService: false,
+			education: ['لیسانس مهندسی نرم افزار'],
+			languages: [
+				{ name: 'english', power: 90 }
+			],
+			techs: [
+				{ name: 'Javascript', power: 100 },
+				{ name: 'React.js', power: 90 },
+				{ name: 'Typescript', power: 75 },
+			]
+		},
+		selected: false
+	},
+	{
+		id: tokenGenerator(),
+		categories: [{ title: 'front-end', id: tokenGenerator(), }],
+		title: 'متخصص فرانت اند و بک اند (full-stack Developer) 3',
+		company: testCompany,
+		city: 'تهران',
+		location: 'فرشته',
+		salary: 32,
+		remote: false,
+		isUrgent: true,
+		knowledgeBasedCompany: true,
+		cooperationType: 'full-time',
+		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
+		businessTrips: [7, 'month'],
+		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
+		abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
+		description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
+		employmentConditions: {
+			age: [18, 32],
+			gender: 'male',
+			endOfMilitaryService: false,
+			education: ['لیسانس مهندسی نرم افزار'],
+			languages: [
+				{ name: 'english', power: 90 }
+			],
+			techs: [
+				{ name: 'Javascript', power: 100 },
+				{ name: 'React.js', power: 90 },
+				{ name: 'Typescript', power: 75 },
+			]
+		},
+		selected: false
+	},
+]
 
 const Jobs = () => {
 	const [showAlert, setShowAlert] = useState<boolean>(false)
@@ -47,38 +135,7 @@ const Jobs = () => {
 	}[]>([])
 
 	useEffect(() => {
-		const testJobAds: JobAdsTypes = {
-			id: tokenGenerator(),
-			categories: [{ title: 'front-end', id: tokenGenerator(), }],
-			title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
-			company: testCompany,
-			city: 'تهران',
-			location: 'فرشته',
-			salary: 32,
-			remote: false,
-			isUrgent: true,
-			knowledgeBasedCompany: true,
-			cooperationType: 'full-time',
-			workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
-			businessTrips: [7, 'month'],
-			benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
-			abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
-			description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
-			employmentConditions: {
-				age: [18, 32],
-				gender: 'male',
-				endOfMilitaryService: false,
-				education: ['لیسانس مهندسی نرم افزار'],
-				languages: [
-					{ name: 'english', power: 90 }
-				],
-				techs: [
-					{ name: 'Javascript', power: 100 },
-					{ name: 'React.js', power: 90 },
-					{ name: 'Typescript', power: 75 },
-				]
-			}
-		}
+		const testJobAds: JobAdsTypes = testJobs[0]
 
 		setTestTabs([
 			{
@@ -132,12 +189,12 @@ const Jobs = () => {
 								<span className={`block`}>
 									مزایا و تسهیلات
 								</span>
-								<span className={`opacity-75 block text-sm mt-1`}>
+								<div className={`opacity-75 text-sm mt-1`}>
 									{
 										testJobAds.benefits.length ? testJobAds.benefits.map((benefit, i) => {
 											if (i < testJobAds.benefits.length - 1) {
 												return (
-													<span
+													<div
 														key={tokenGenerator()}
 														className={`inline-block ml-2`}
 													>
@@ -145,7 +202,7 @@ const Jobs = () => {
 														<span className={`inline-block mr-2 opacity-25`}>
 															/
 														</span>
-													</span>
+													</div>
 												)
 											} else {
 												return (
@@ -157,7 +214,7 @@ const Jobs = () => {
 											}
 										}) : '---'
 									}
-								</span>
+								</div>
 							</div>
 						</div>
 
@@ -300,9 +357,13 @@ const Jobs = () => {
 							</span>
 						</Title>
 						<div className={`w-full grid grid-cols-2 gap-3 mt-3`}>
-							<JobBox {...testJob} />
-							<JobBox {...testJob} />
-							<JobBox {...testJob} />
+							{
+								testJobs.length ? testJobs.map((job, i) => {
+									if (i < 6) {
+										return <JobBox {...job} />
+									}
+								}) : 'آگهی وجود ندارد'
+							}
 						</div>
 					</div>
 				)
@@ -403,9 +464,11 @@ const Jobs = () => {
 				title: 'سایر آگهی های این شرکت',
 				content: (
 					<div className={`w-full grid grid-cols-2 gap-3`}>
-						<JobBox {...testJob} />
-						<JobBox {...testJob} />
-						<JobBox {...testJob} />
+						{
+							testJobs.length ? testJobs.map(job => (
+								<JobBox {...job} />
+							)) : 'آگهی وجود ندارد'
+						}
 					</div>
 				)
 			}
@@ -477,27 +540,11 @@ const Jobs = () => {
 								</select>
 							</div>
 							<div className={`w-full flex flex-col justify-center items-center gap-3 mt-3`}>
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
-								<JobBox {...testJob} />
+								{
+									testJobs.length ? testJobs.map(job => (
+										<JobBox {...job} />
+									)) : 'آگهی وجود ندارد'
+								}
 							</div>
 						</aside>
 
@@ -541,7 +588,7 @@ const Jobs = () => {
 											</button>
 											<img
 												className={`w-10 h-10 mr-3 rounded-full`}
-												src={testJob.company.logo}
+												src={testJobs[0].company.logo}
 											/>
 										</div>
 									</div>

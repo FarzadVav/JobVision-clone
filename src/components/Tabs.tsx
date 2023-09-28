@@ -44,7 +44,7 @@ const Tabs = ({ customClass, tabs }: TabsProps) => {
               </div>
             )
           }
-        }) : 'محتوایی وجود ندارد'
+        }) : <div className={`p-3`}>محتوایی وجود ندارد</div>
       }
     </div>
   )

@@ -1,6 +1,6 @@
 import CompanyTypes from "./Company.types"
 
-type MainJobTypes = {
+type JobAdsTypes = {
   id: string;
   categories: { title: string; id: string; }[];
   title: string;
@@ -10,10 +10,7 @@ type MainJobTypes = {
   remote: boolean;
   isUrgent: boolean;
   knowledgeBasedCompany: boolean;
-  salary: [number, number] | number | null,
-}
-
-export interface JobAdsTypes extends MainJobTypes {
+  salary: [number, number] | number | null;
   workTimes: string;
   cooperationType: 'full-time' | 'part-time' | 'as-projects';
   businessTrips: [number, ('month' | 'year')] | 'ever' | 'some-times' | 'none';
@@ -27,11 +24,8 @@ export interface JobAdsTypes extends MainJobTypes {
     education: string[];
     languages: { name: string; power: number }[];
     techs: { name: string; power: number }[]
-  }
-}
-
-interface JobBoxTypes extends MainJobTypes {
+  };
   selected: boolean;
 }
 
-export default JobBoxTypes
+export default JobAdsTypes
