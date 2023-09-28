@@ -1,6 +1,7 @@
 import { ReactNode, useState } from 'react'
 import { CloseRounded, FavoriteBorderRounded, HelpRounded, InfoOutlined, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined, StarRateRounded, Verified } from "@mui/icons-material";
 
+import { FilteringContextProvider } from '../context/FilteringContext';
 import SearchJobForm from "../components/SearchJobForm";
 import JobsFiltersBar from "../components/FilterJob";
 import Title from "../components/Title";
@@ -499,7 +500,7 @@ const Jobs = () => {
 	}
 
 	return (
-		<>
+		<FilteringContextProvider>
 			<div className={`light-shadow w-full pt-9 pb-3 relative z-10`}>
 				<div className={`wrapper`}>
 					<SearchJobForm />
@@ -689,7 +690,7 @@ const Jobs = () => {
 					</div>
 				</div>
 			</div>
-		</>
+		</FilteringContextProvider>
 	);
 };
 
