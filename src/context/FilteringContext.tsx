@@ -1,23 +1,14 @@
 import { ReactNode, createContext, useState } from "react";
 
-type filtersTypes = {
-  remote: boolean;
-  setRemoteHandler: (state?: boolean) => void;
-  knowledgeBasedCompany: boolean;
-  setKnowledgeBasedCompanyHandler: (state?: boolean) => void;
-  cooperationType: 'full-time' | 'part-time' | 'as-projects';
-  setCooperationTypeHandler: (type: 'full-time' | 'part-time' | 'as-projects') => void
-  salary: [number, number]
-  setSalaryHandler: (newSalary: [number, number]) => void
-}
+import filtersTypes, { CooperationTypes, SalaryTypes } from "../types/filtering.types";
 
 const FilteringContext = createContext({} as filtersTypes)
 
 export const FilteringContextProvider = ({ children }: { children: ReactNode }) => {
   const [remote, setRemote] = useState<boolean>(false)
   const [knowledgeBasedCompany, setKnowledgeBasedCompany] = useState<boolean>(false)
-  const [cooperationType, setCooperationType] = useState<'full-time' | 'part-time' | 'as-projects'>('full-time')
-  const [salary, setSalary] = useState<[number, number]>([0, 75])
+  const [cooperationType, setCooperationType] = useState<CooperationTypes>('none')
+  const [salaryType, setSalaryType] = useState<SalaryTypes>('none')
 
   const setRemoteHandler = (state?: boolean) => {
     if (typeof state === 'undefined') {
@@ -35,12 +26,12 @@ export const FilteringContextProvider = ({ children }: { children: ReactNode }) 
     }
   }
 
-  const setCooperationTypeHandler = (type: 'full-time' | 'part-time' | 'as-projects') => {
+  const setCooperationTypeHandler = (type: CooperationTypes) => {
     setCooperationType(type)
   }
 
-  const setSalaryHandler = (newSalary: [number, number]) => {
-    setSalary(newSalary)
+  const setSalaryTypeHandler = (salaryType: SalaryTypes) => {
+    setSalaryType(salaryType)
   }
 
   return (
@@ -52,8 +43,8 @@ export const FilteringContextProvider = ({ children }: { children: ReactNode }) 
         setKnowledgeBasedCompanyHandler,
         cooperationType,
         setCooperationTypeHandler,
-        salary,
-        setSalaryHandler
+        salaryType,
+        setSalaryTypeHandler
       }}
     >
       {children}
