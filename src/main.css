@@ -186,6 +186,15 @@
     background: var(--lightColor);
     border-radius: 3px;
   }
+
+  .none-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  .none-scrollbar::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
 }
 
 @layer components {

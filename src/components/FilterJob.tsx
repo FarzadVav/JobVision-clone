@@ -14,7 +14,7 @@ const FilterJob = ({ title, clickHandler }: FilterJobProps) => {
 
   return (
     <button
-      className={`border border-solid flex justify-center items-center px-4 py-1 ml-3 rounded-full
+      className={`border border-solid min-w-max flex justify-center items-center px-4 py-1 ml-3 rounded-full
       cursor-pointer !transition-colors last:ml-0 ${select ? 'bg-jv-primary text-white border-jv-primary pl-1.5' : 'bg-white border-jv-light hover:text-jv-primary'}`}
       onClick={() => {
         setSelect(prev => !prev)
@@ -49,7 +49,7 @@ const MultiFilterJob = ({ title, filters }: MultiFilterJobProps) => {
 
   return (
     <button
-      className={`border border-solid flex justify-center items-center px-4 py-1 ml-3 rounded-full
+      className={`border border-solid min-w-max flex justify-center items-center px-4 py-1 ml-3 rounded-full
       cursor-pointer !transition-colors last:ml-0 ${selected ? 'bg-jv-primary text-white border-jv-primary pl-1.5' : 'bg-white border-jv-light hover:text-jv-primary'} relative`}
       onClick={() => {
         setShowMultiSelect(prev => !prev)
@@ -80,8 +80,9 @@ const MultiFilterJob = ({ title, filters }: MultiFilterJobProps) => {
             <div className={`bg-white border-t border-l border-solid border-jv-light w-3 h-3 absolute -top-1.5 rotate-45
             rounded-tl`}></div>
             {
-              filters.map(filter => (
+              filters.map((filter, i) => (
                 <li
+                  key={i}
                   className={`text-jv-dark w-full px-5 py-1.5 rounded-md first-of-type:mt-1.5 last-of-type:pb-3
                   hover:bg-jv-bright`}
                   onClick={() => {
@@ -108,7 +109,7 @@ const JobsFiltersBar = () => {
   const filtering = useContext(FilteringContext)
 
   return (
-    <div className={`list-scrollbar w-full mt-6 flex items-center pb-3`}>
+    <div className={`list-scrollbar w-full mt-6 flex items-center pb-3 overflow-x-auto sm:overflow-visible`}>
       <FilterJob
         title='دورکرای'
         clickHandler={() => {

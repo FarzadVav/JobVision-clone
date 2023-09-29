@@ -139,6 +139,7 @@ const Jobs = () => {
 		content: ReactNode
 	}[]>([])
 	const [selectedJobAds, setSelectedJobAds] = useState<JobAdsTypes>({} as JobAdsTypes)
+	const [showJobAd, setShowJobAd] = useState<boolean>(false)
 
 	const jobAdsSelectHandler = (jobAd: JobAdsTypes) => {
 		setJobAdsTabs([
@@ -153,19 +154,19 @@ const Jobs = () => {
 							</span>
 						</Title>
 						<div className={`w-full flex flex-wrap gap-y-3 mt-3`}>
-							<div className={`w-1/2 px-3`}>
-								<span className={`block`}>
+							<div className={`w-full px-3 sm:w-1/2`}>
+								<span className={`dana-bold block`}>
 									روز و ساعت کاری
 								</span>
-								<span className={`opacity-75 block text-sm mt-1`}>
+								<span className={`block text-sm mt-1`}>
 									{jobAd.workTimes}
 								</span>
 							</div>
-							<div className={`w-1/2 px-3`}>
-								<span className={`block`}>
+							<div className={`w-full px-3 sm:w-1/2`}>
+								<span className={`dana-bold block`}>
 									نوع همکاری
 								</span>
-								<span className={`opacity-75 block text-sm mt-1`}>
+								<span className={`block text-sm mt-1`}>
 									{
 										jobAd.cooperationType === 'full-time' ? 'تمام وقت'
 											: jobAd.cooperationType === 'part-time' ? 'پاره وقت'
@@ -173,11 +174,11 @@ const Jobs = () => {
 									}
 								</span>
 							</div>
-							<div className={`w-1/2 px-3`}>
-								<span className={`block`}>
+							<div className={`w-full px-3 sm:w-1/2`}>
+								<span className={`dana-bold block`}>
 									سفر های کاری
 								</span>
-								<span className={`opacity-75 block text-sm mt-1`}>
+								<span className={`block text-sm mt-1`}>
 									{
 										jobAd.businessTrips === 'ever' ? 'همیشه در سفر'
 											: jobAd.businessTrips === 'some-times' ? 'در صورت نیاز'
@@ -189,11 +190,11 @@ const Jobs = () => {
 									}
 								</span>
 							</div>
-							<div className={`w-1/2 px-3`}>
-								<span className={`block`}>
+							<div className={`w-full px-3 sm:w-1/2`}>
+								<span className={`dana-bold block`}>
 									مزایا و تسهیلات
 								</span>
-								<div className={`opacity-75 text-sm mt-1`}>
+								<div className={`text-sm mt-1`}>
 									{
 										jobAd.benefits.length ? jobAd.benefits.map((benefit, i) => {
 											if (i < jobAd.benefits.length - 1) {
@@ -226,7 +227,7 @@ const Jobs = () => {
 						</div>
 
 						<Title
-							customClass={`mt-3`}
+							customClass={`mt-6 sm:mt-3`}
 							withOutIcon
 						>
 							<span className='!text-xl'>
@@ -255,7 +256,7 @@ const Jobs = () => {
 								شرح شغل و وظایف
 							</span>
 						</Title>
-						<p className={`w-full mt-3 px-3`}>
+						<p className={`w-full mt-3 pr-2`}>
 							{jobAd.description}
 						</p>
 
@@ -269,10 +270,10 @@ const Jobs = () => {
 						</Title>
 						<ul className={`w-full flex flex-col mt-3`}>
 							<li className={`w-full flex items-center`}>
-								<span className={`bg-jv-bright block w-2/12 px-3 py-1.5 ml-2`}>
+								<span className={`bg-jv-bright block w-4/12 px-3 py-1.5 ml-2 sm:w-2/12`}>
 									سن
 								</span>
-								<span className={`bg-jv-bright block w-10/12 px-3 py-1.5`}>
+								<span className={`bg-jv-bright block w-8/12 px-3 py-1.5 sm:w-10/12`}>
 									{`${jobAd.employmentConditions.age[0]} - ${jobAd.employmentConditions.age[1]}`}
 									<span className={`mr-1.5`}>
 										سال
@@ -280,10 +281,10 @@ const Jobs = () => {
 								</span>
 							</li>
 							<li className={`w-full flex items-center mt-2`}>
-								<span className={`bg-jv-bright block w-2/12 px-3 py-1.5 ml-2`}>
+								<span className={`bg-jv-bright block w-4/12 px-3 py-1.5 ml-2 sm:w-2/12`}>
 									جنسیت
 								</span>
-								<span className={`bg-jv-bright block w-10/12 px-3 py-1.5`}>
+								<span className={`bg-jv-bright block w-8/12 px-3 py-1.5 sm:w-10/12`}>
 									{
 										jobAd.employmentConditions.gender === 'male' ? 'مرد'
 											: jobAd.employmentConditions.gender === 'female' ? 'زن'
@@ -292,20 +293,20 @@ const Jobs = () => {
 								</span>
 							</li>
 							<li className={`w-full flex items-center mt-2`}>
-								<span className={`bg-jv-bright block w-2/12 px-3 py-1.5 ml-2`}>
+								<span className={`bg-jv-bright block w-4/12 px-3 py-1.5 ml-2 sm:w-2/12`}>
 									سربازی
 								</span>
-								<span className={`bg-jv-bright block w-10/12 px-3 py-1.5`}>
+								<span className={`bg-jv-bright block w-8/12 px-3 py-1.5 sm:w-10/12`}>
 									{
 										jobAd.employmentConditions.endOfMilitaryService ? 'پایان خدمت یا معاف از سربازی' : 'مهم نیست'
 									}
 								</span>
 							</li>
 							<li className={`w-full flex items-center mt-2`}>
-								<span className={`bg-jv-bright block w-2/12 px-3 py-1.5 ml-2`}>
+								<span className={`bg-jv-bright block w-4/12 px-3 py-1.5 ml-2 sm:w-2/12`}>
 									تحصیلات
 								</span>
-								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
+								<span className={`list-scrollbar bg-jv-bright flex items-center w-8/12 p-1.5 overflow-x-auto sm:w-10/12`}>
 									{
 										jobAd.employmentConditions.education.length ? jobAd.employmentConditions.education.map((education, i) => (
 											<div
@@ -319,10 +320,10 @@ const Jobs = () => {
 								</span>
 							</li>
 							<li className={`w-full flex items-center mt-2`}>
-								<span className={`bg-jv-bright block w-2/12 px-3 py-1.5 ml-2`}>
+								<span className={`bg-jv-bright block w-4/12 px-3 py-1.5 ml-2 sm:w-2/12`}>
 									زبان ها
 								</span>
-								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
+								<span className={`list-scrollbar bg-jv-bright flex items-center w-8/12 p-1.5 overflow-x-auto sm:w-10/12`}>
 									{
 										jobAd.employmentConditions.languages.length ? jobAd.employmentConditions.languages.map((language, i) => (
 											<div
@@ -336,10 +337,10 @@ const Jobs = () => {
 								</span>
 							</li>
 							<li className={`w-full flex items-center mt-2`}>
-								<span className={`bg-jv-bright block w-2/12 px-3 py-1.5 ml-2`}>
+								<span className={`bg-jv-bright block w-4/12 px-3 py-1.5 ml-2 sm:w-2/12`}>
 									تکنولوژی ها
 								</span>
-								<span className={`list-scrollbar bg-jv-bright flex items-center w-10/12 p-1.5 overflow-x-auto`}>
+								<span className={`list-scrollbar bg-jv-bright flex items-center w-8/12 p-1.5 overflow-x-auto sm:w-10/12`}>
 									{
 										jobAd.employmentConditions.techs.length ? jobAd.employmentConditions.techs.map((tech, i) => (
 											<div
@@ -372,7 +373,7 @@ const Jobs = () => {
 								فرصت‌های شغلی مشابه
 							</span>
 						</Title>
-						<div className={`w-full grid grid-cols-2 gap-3 mt-3`}>
+						<div className={`w-full grid grid-cols-1 gap-3 mt-3 sm:grid-cols-2`}>
 							{
 								jobAds.length ? jobAds.map((job, i) => {
 									if (i < 6) {
@@ -487,7 +488,7 @@ const Jobs = () => {
 				id: 'other-jobAds',
 				title: 'سایر آگهی های این شرکت',
 				content: (
-					<div className={`w-full grid grid-cols-2 gap-3`}>
+					<div className={`w-full grid grid-cols-1 gap-3 sm:grid-cols-2`}>
 						{
 							jobAds.length ? jobAds.map((job, i) => (
 								<JobBox key={i} {...job} />
@@ -551,7 +552,7 @@ const Jobs = () => {
 						</div>
 					</div>
 
-					<div className={`flex mt-3 relative`}>
+					<div className={`flex mt-3 lg:relative`}>
 						<aside className={`bg-white w-full flex flex-col justify-center items-center p-3 mb-6 rounded lg:ml-3 lg:w-5/12
 						xl:w-4/12`}>
 							<div className={`w-full flex justify-between items-center`}>
@@ -583,6 +584,7 @@ const Jobs = () => {
 												})
 												jobAdsSelectHandler(job)
 												setSelectedJobAds(job)
+												setShowJobAd(true)
 											}}
 										>
 											<JobBox {...job} />
@@ -592,8 +594,9 @@ const Jobs = () => {
 							</div>
 						</aside>
 
-						<main className={`current-height w-full top-[calc(4.5rem+0.75rem)] pb-6 absolute opacity-0 invisible
-						translate-y-full lg:opacity-100 lg:visible lg:translate-y-0 lg:w-7/12 lg:sticky xl:w-8/12`}>
+						<main className={`w-full current-height fixed top-[4.5rem] right-0 duration-500 ${showJobAd ? '' :
+							'translate-y-full opacity-0 invisible'} z-40 lg:pb-6 lg:opacity-100 lg:visible lg:translate-y-0 lg:w-7/12
+						lg:sticky xl:w-8/12 lg:top-[calc(4.5rem+0.75rem)]`}>
 							<div className={`list-scrollbar bg-white w-full h-full flex flex-col px-3 py-4 rounded overflow-y-auto`}>
 								{
 									Object.keys(selectedJobAds).length ? (
@@ -659,18 +662,19 @@ const Jobs = () => {
 												</div>
 											</div>
 
-											<div className={`bg-jv-bright w-full flex items-center px-5 py-2 mt-6 rounded`}>
+											<div className={`bg-jv-bright w-full flex flex-col p-3 mt-6 rounded md:flex-row md:items-center md:px-5
+											md:py-2`}>
 												<div className={`flex items-center`}>
 													<PeopleAltRounded className={`text-jv-light brightness-75`} />
 													<span className={`mr-3`}>
 														{selectedJobAds.company.employees[0]} تا {selectedJobAds.company.employees[1]} نفر
 													</span>
 												</div>
-												<div className={`flex items-center mr-6`}>
+												<div className={`flex items-center mt-1.5 md:mr-6 md:mt-0`}>
 													<HelpRounded className={`text-jv-light brightness-75`} />
-													<span className={`mr-3`}>
+													<p className={`mr-3`}>
 														{selectedJobAds.company.activity}
-													</span>
+													</p>
 												</div>
 											</div>
 

@@ -18,12 +18,12 @@ const Tabs = ({ customClass, tabs }: TabsProps) => {
 
   return (
     <div className={`w-full ${customClass}`}>
-      <ul className={`border-b border-solid border-jv-light w-full h-12 flex items-center`}>
+      <ul className={`none-scrollbar border-b border-solid border-jv-light w-full h-12 flex items-center overflow-x-auto`}>
         {
           tabs.length ? tabs.map(tab => (
             <li
               key={tab.id}
-              className={`border-b border-solid h-full flex items-center px-6 ${tab.id === selectedTab ?
+              className={`border-b border-solid min-w-max h-full flex items-center px-6 ${tab.id === selectedTab ?
                 'border-jv-primary text-jv-primary' : 'border-transparent'} rounded-t-md cursor-pointer hover:text-jv-primary 
                 active:bg-slate-50`}
               onClick={() => setSelectedTab(tab.id)}
