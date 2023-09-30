@@ -1,7 +1,6 @@
 import { ReactNode, useState } from 'react'
 import { CloseRounded, FavoriteBorderRounded, HelpRounded, InfoOutlined, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined, StarRateRounded, Verified } from "@mui/icons-material";
 
-import { FilteringContextProvider } from '../context/FilteringContext';
 import SearchJobForm from "../components/SearchJobForm";
 import JobsFiltersBar from "../components/FilterJob";
 import Title from "../components/Title";
@@ -130,9 +129,17 @@ const testJobAds: JobAdsTypes[] = [
 	},
 ]
 
+// const testFilters = {
+// 	remote: false,
+// 	knowledgeBasedCompany: false,
+// 	cooperationType: ['full-time', 'part-time', 'as-projects', 'none'],
+// 	salary: [[0, 10], [10, 20]]
+// }
+
 const Jobs = () => {
 	const [showAlert, setShowAlert] = useState<boolean>(false)
 	const [jobAds, setJobAds] = useState<JobAdsTypes[]>(testJobAds)
+	const [jobAdsFiltered, setJobAdsFiltered] = useState<JobAdsTypes[]>(jobAds)
 	const [jobAdsTabs, setJobAdsTabs] = useState<{
 		id: string;
 		title: string;
@@ -140,6 +147,10 @@ const Jobs = () => {
 	}[]>([])
 	const [selectedJobAds, setSelectedJobAds] = useState<JobAdsTypes>({} as JobAdsTypes)
 	const [showJobAd, setShowJobAd] = useState<boolean>(false)
+
+	const setJobAdsFilteredHandler = (newJobAds: JobAdsTypes[]) => {
+		setJobAdsFiltered(newJobAds)
+	}
 
 	const jobAdsSelectHandler = (jobAd: JobAdsTypes) => {
 		setJobAdsTabs([
@@ -501,11 +512,14 @@ const Jobs = () => {
 	}
 
 	return (
-		<FilteringContextProvider>
+		<>
 			<div className={`light-shadow w-full pt-9 pb-3 relative z-10`}>
 				<div className={`wrapper`}>
 					<SearchJobForm />
-					<JobsFiltersBar />
+					<JobsFiltersBar
+						jobAds={jobAds}
+						setJobAdsFilteredHandler={setJobAdsFilteredHandler}
+					/>
 				</div>
 			</div>
 
@@ -553,7 +567,7 @@ const Jobs = () => {
 					</div>
 
 					<div className={`flex mt-3 lg:relative`}>
-						<aside className={`bg-white w-full flex flex-col justify-center items-center p-3 mb-6 rounded lg:ml-3 lg:w-5/12
+						<aside className={`bg-white w-full h-max flex flex-col items-center p-3 mb-6 rounded lg:ml-3 lg:w-5/12
 						xl:w-4/12`}>
 							<div className={`w-full flex justify-between items-center`}>
 								<span>2291 آگهی</span>
@@ -564,9 +578,9 @@ const Jobs = () => {
 									<option value="">قدیمی ترین</option>
 								</select>
 							</div>
-							<div className={`w-full flex flex-col justify-center items-center gap-3 mt-3`}>
+							<div className={`w-full flex flex-col items-center gap-3 mt-3`}>
 								{
-									jobAds.length ? jobAds.map(job => (
+									jobAdsFiltered.length ? jobAdsFiltered.map(job => (
 										<div
 											key={job.id}
 											className={`w-full`}
@@ -694,7 +708,7 @@ const Jobs = () => {
 					</div>
 				</div>
 			</div>
-		</FilteringContextProvider>
+		</>
 	);
 };
 

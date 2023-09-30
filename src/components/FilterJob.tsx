@@ -1,15 +1,14 @@
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import { CloseRounded } from '@mui/icons-material'
-
-import FilteringContext from '../context/FilteringContext'
-import { MultiFiltersTypes } from '../types/filtering.types';
+import JobAdsTypes from '../types/Job.types';
 
 type FilterJobProps = {
   title: string;
-  clickHandler: () => void
+  filterHandler: () => void;
+  unFilterHandler: () => void
 }
 
-const FilterJob = ({ title, clickHandler }: FilterJobProps) => {
+const FilterJob = ({ title, filterHandler, unFilterHandler }: FilterJobProps) => {
   const [select, setSelect] = useState<boolean>(false)
 
   return (
@@ -17,8 +16,13 @@ const FilterJob = ({ title, clickHandler }: FilterJobProps) => {
       className={`border border-solid min-w-max flex justify-center items-center px-4 py-1 ml-3 rounded-full
       cursor-pointer !transition-colors last:ml-0 ${select ? 'bg-jv-primary text-white border-jv-primary pl-1.5' : 'bg-white border-jv-light hover:text-jv-primary'}`}
       onClick={() => {
-        setSelect(prev => !prev)
-        clickHandler()
+        if (select) {
+          setSelect(false)
+          unFilterHandler()
+        } else {
+          setSelect(true)
+          filterHandler()
+        }
       }}
     >
       {title}
@@ -38,7 +42,6 @@ type MultiFilterJobProps = {
   title: string;
   filters: {
     title: string;
-    type: MultiFiltersTypes;
     clickHandler: () => void
   }[];
 }
@@ -86,11 +89,6 @@ const MultiFilterJob = ({ title, filters }: MultiFilterJobProps) => {
                   className={`text-jv-dark w-full px-5 py-1.5 rounded-md first-of-type:mt-1.5 last-of-type:pb-3
                   hover:bg-jv-bright`}
                   onClick={() => {
-                    if (filter.type === 'none') {
-                      setSelected(false)
-                    } else {
-                      setSelected(true)
-                    }
                     filter.clickHandler()
                   }}
                 >
@@ -105,99 +103,43 @@ const MultiFilterJob = ({ title, filters }: MultiFilterJobProps) => {
   )
 }
 
-const JobsFiltersBar = () => {
-  const filtering = useContext(FilteringContext)
+type JobsFiltersBarProps = {
+  jobAds: JobAdsTypes[];
+  setJobAdsFilteredHandler: (jobAd: JobAdsTypes[]) => void
+}
 
+const JobsFiltersBar = ({ jobAds, setJobAdsFilteredHandler }: JobsFiltersBarProps) => {
   return (
     <div className={`list-scrollbar w-full mt-6 flex items-center pb-3 overflow-x-auto sm:overflow-visible`}>
       <FilterJob
         title='دورکرای'
-        clickHandler={() => {
-          filtering.setRemoteHandler()
-        }}
-      />
+        filterHandler={() => setJobAdsFilteredHandler(jobAds.filter(job => job.remote))}
+        unFilterHandler={() => setJobAdsFilteredHandler(jobAds)}
+        />
       <FilterJob
         title='امریه سربازی'
-        clickHandler={() => {
-          filtering.setKnowledgeBasedCompanyHandler()
-        }}
+        filterHandler={() => setJobAdsFilteredHandler(jobAds.filter(job => job.knowledgeBasedCompany))}
+        unFilterHandler={() => setJobAdsFilteredHandler(jobAds)}
       />
       <MultiFilterJob
-        title={
-          filtering.cooperationType === 'full-time' ? 'تمام وقت'
-            : filtering.cooperationType === 'as-projects' ? 'پروژه ای'
-              : filtering.cooperationType === 'part-time' ? 'پاره وقت'
-                : 'نوع همکاری'
-        }
+        title={'نوع همکاری'}
         filters={[
           {
-            title: 'پیش فرض',
-            type: 'none',
-            clickHandler: () => filtering.setCooperationTypeHandler('none')
+            title: 'پیش',
+            clickHandler: () => { }
           },
           {
             title: 'تمام وقت',
-            type: 'full-time',
-            clickHandler: () => filtering.setCooperationTypeHandler('full-time')
+            clickHandler: () => { }
           },
           {
             title: 'پاره وقت',
-            type: 'part-time',
-            clickHandler: () => filtering.setCooperationTypeHandler('part-time')
+            clickHandler: () => { }
           },
           {
             title: 'پروژه ای',
-            type: 'as-projects',
-            clickHandler: () => filtering.setCooperationTypeHandler('as-projects')
+            clickHandler: () => { }
           }
-        ]}
-      />
-      <MultiFilterJob
-        title={
-          filtering.salaryType === '0-4' ? '0 تا 4 میلیون'
-            : filtering.salaryType === '4-8' ? '4 تا 8 میلیون'
-              : filtering.salaryType === '8-15' ? '8 تا 15 میلیون'
-                : filtering.salaryType === '15-25' ? '15 تا 25 میلیون'
-                  : filtering.salaryType === '25-40' ? '25 تا 40 میلیون'
-                    : filtering.salaryType === '40-75' ? '40 تا 75 میلیون'
-                      : 'حقوق ماهیانه'
-        }
-        filters={[
-          {
-            title: 'پیش فرض',
-            type: 'none',
-            clickHandler: () => filtering.setSalaryTypeHandler('none')
-          },
-          {
-            title: '0 تا 4 میلیون',
-            type: '0-4',
-            clickHandler: () => filtering.setSalaryTypeHandler('0-4')
-          },
-          {
-            title: '4 تا 8 میلیون',
-            type: '4-8',
-            clickHandler: () => filtering.setSalaryTypeHandler('4-8')
-          },
-          {
-            title: '8 تا 15 میلیون',
-            type: '8-15',
-            clickHandler: () => filtering.setSalaryTypeHandler('8-15')
-          },
-          {
-            title: '15 تا 25 میلیون',
-            type: '15-25',
-            clickHandler: () => filtering.setSalaryTypeHandler('15-25')
-          },
-          {
-            title: '25 تا 40 میلیون',
-            type: '25-40',
-            clickHandler: () => filtering.setSalaryTypeHandler('25-40')
-          },
-          {
-            title: '40 تا 75 میلیون',
-            type: '40-75',
-            clickHandler: () => filtering.setSalaryTypeHandler('40-75')
-          },
         ]}
       />
     </div>
