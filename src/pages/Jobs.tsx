@@ -36,7 +36,7 @@ const testJobAds: JobAdsTypes[] = [
 		remote: true,
 		isUrgent: false,
 		knowledgeBasedCompany: false,
-		cooperationType: 'full-time',
+		cooperationType: 'as-projects',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
 		businessTrips: [7, 'month'],
 		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
@@ -128,13 +128,6 @@ const testJobAds: JobAdsTypes[] = [
 		createAt: new Date()
 	},
 ]
-
-// const testFilters = {
-// 	remote: false,
-// 	knowledgeBasedCompany: false,
-// 	cooperationType: ['full-time', 'part-time', 'as-projects', 'none'],
-// 	salary: [[0, 10], [10, 20]]
-// }
 
 const Jobs = () => {
 	const [showAlert, setShowAlert] = useState<boolean>(false)

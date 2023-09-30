@@ -42,11 +42,13 @@ type MultiFilterJobProps = {
   title: string;
   filters: {
     title: string;
-    clickHandler: () => void
+    filterHandler: () => void;
   }[];
+  unFilterHandler: () => void
 }
 
-const MultiFilterJob = ({ title, filters }: MultiFilterJobProps) => {
+const MultiFilterJob = ({ title, filters, unFilterHandler }: MultiFilterJobProps) => {
+  const [dynamicTitle, setDynamicTitle] = useState<string>('')
   const [selected, setSelected] = useState<boolean>(false)
   const [showMultiSelect, setShowMultiSelect] = useState<boolean>(false)
 
@@ -60,13 +62,19 @@ const MultiFilterJob = ({ title, filters }: MultiFilterJobProps) => {
     >
       {title}
       {
+        dynamicTitle.length ? ' : ' : ''
+      }
+      {dynamicTitle}
+      {
         selected && (
           <div
             className={`h-full flex items-center`}
             onClick={(event) => {
-              filters[0].clickHandler()
-              setSelected(false)
               event.stopPropagation()
+              unFilterHandler()
+              setSelected(false)
+              setShowMultiSelect(false)
+              setDynamicTitle('')
             }}
           >
             <CloseRounded
@@ -89,7 +97,9 @@ const MultiFilterJob = ({ title, filters }: MultiFilterJobProps) => {
                   className={`text-jv-dark w-full px-5 py-1.5 rounded-md first-of-type:mt-1.5 last-of-type:pb-3
                   hover:bg-jv-bright`}
                   onClick={() => {
-                    filter.clickHandler()
+                    setDynamicTitle(filter.title)
+                    setSelected(true)
+                    filter.filterHandler()
                   }}
                 >
                   {filter.title}
@@ -110,6 +120,13 @@ type JobsFiltersBarProps = {
 }
 
 const JobsFiltersBar = ({ jobAds, jobAdsFiltered, setJobAdsFilteredHandler }: JobsFiltersBarProps) => {
+  const unFilterHandlerForCooperationType = () => {
+    return [
+      ...jobAdsFiltered.filter(job => !job.cooperationType),
+      ...jobAds.filter(job => job.cooperationType)
+    ]
+  }
+
   return (
     <div className={`list-scrollbar w-full mt-6 flex items-center pb-3 overflow-x-auto sm:overflow-visible`}>
       <FilterJob
@@ -120,6 +137,7 @@ const JobsFiltersBar = ({ jobAds, jobAdsFiltered, setJobAdsFilteredHandler }: Jo
           setJobAdsFilteredHandler(newJobAds)
         }}
       />
+
       <FilterJob
         title='امریه سربازی'
         filterHandler={() => setJobAdsFilteredHandler(jobAdsFiltered.filter(job => job.knowledgeBasedCompany))}
@@ -128,26 +146,40 @@ const JobsFiltersBar = ({ jobAds, jobAdsFiltered, setJobAdsFilteredHandler }: Jo
           setJobAdsFilteredHandler(newJobAds)
         }}
       />
+
       <MultiFilterJob
         title={'نوع همکاری'}
         filters={[
           {
-            title: 'پیش',
-            clickHandler: () => { }
-          },
-          {
             title: 'تمام وقت',
-            clickHandler: () => { }
+            filterHandler: () => {
+              setJobAdsFilteredHandler(
+                unFilterHandlerForCooperationType().filter(job => job.cooperationType === 'full-time')
+              )
+            }
           },
           {
             title: 'پاره وقت',
-            clickHandler: () => { }
+            filterHandler: () => {
+              setJobAdsFilteredHandler(
+                unFilterHandlerForCooperationType().filter(job => job.cooperationType === 'part-time')
+              )
+            }
           },
           {
             title: 'پروژه ای',
-            clickHandler: () => { }
+            filterHandler: () => {
+              setJobAdsFilteredHandler(
+                unFilterHandlerForCooperationType().filter(job => job.cooperationType === 'as-projects')
+              )
+            }
           }
         ]}
+        unFilterHandler={() => {
+          setJobAdsFilteredHandler(
+            unFilterHandlerForCooperationType()
+          )
+        }}
       />
     </div>
   )
