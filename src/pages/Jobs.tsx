@@ -66,7 +66,7 @@ const testJobAds: JobAdsTypes[] = [
 		company: testCompany,
 		city: 'تهران',
 		location: 'فرشته',
-		salary: 32,
+		salary: 3,
 		remote: false,
 		isUrgent: true,
 		knowledgeBasedCompany: true,
@@ -511,7 +511,6 @@ const Jobs = () => {
 					<SearchJobForm />
 					<JobsFiltersBar
 						jobAds={jobAds}
-						jobAdsFiltered={jobAdsFiltered}
 						setJobAdsFilteredHandler={setJobAdsFilteredHandler}
 					/>
 				</div>
@@ -604,7 +603,7 @@ const Jobs = () => {
 
 						<main className={`w-full current-height fixed top-[4.5rem] right-0 duration-500 ${showJobAd ? '' :
 							'translate-y-full opacity-0 invisible'} z-40 lg:pb-6 lg:opacity-100 lg:visible lg:translate-y-0 lg:w-7/12
-						lg:sticky xl:w-8/12 lg:top-[calc(4.5rem+0.75rem)]`}>
+						lg:sticky lg:top-[calc(4.5rem+0.75rem)] lg:z-0 xl:w-8/12`}>
 							<div className={`list-scrollbar bg-white w-full h-full flex flex-col px-3 py-4 rounded overflow-y-auto`}>
 								{
 									Object.keys(selectedJobAds).length ? (

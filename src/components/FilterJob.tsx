@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { CloseRounded } from '@mui/icons-material'
 import JobAdsTypes from '../types/Job.types';
 
@@ -115,36 +115,112 @@ const MultiFilterJob = ({ title, filters, unFilterHandler }: MultiFilterJobProps
 
 type JobsFiltersBarProps = {
   jobAds: JobAdsTypes[];
-  jobAdsFiltered: JobAdsTypes[];
   setJobAdsFilteredHandler: (jobAd: JobAdsTypes[]) => void
 }
 
-const JobsFiltersBar = ({ jobAds, jobAdsFiltered, setJobAdsFilteredHandler }: JobsFiltersBarProps) => {
-  const unFilterHandlerForCooperationType = () => {
-    return [
-      ...jobAdsFiltered.filter(job => !job.cooperationType),
-      ...jobAds.filter(job => job.cooperationType)
-    ]
-  }
+const JobsFiltersBar = ({ jobAds, setJobAdsFilteredHandler }: JobsFiltersBarProps) => {
+  const [filters, setFilters] = useState<{
+    remote: boolean;
+    knowledgeBasedCompany: boolean;
+    cooprationType: 'full-time' | 'part-time' | 'as-projects' | 'none';
+    salaryType: [number, number] | 'none'
+  }>({
+    remote: false,
+    knowledgeBasedCompany: false,
+    cooprationType: 'none',
+    salaryType: 'none'
+  })
+
+  useEffect(() => {
+    let newFilteredJobAds: JobAdsTypes[] = jobAds
+
+    if (filters.remote) {
+      newFilteredJobAds = newFilteredJobAds.filter(job => job.remote)
+    }
+    if (filters.knowledgeBasedCompany) {
+      newFilteredJobAds = newFilteredJobAds.filter(job => job.knowledgeBasedCompany)
+    }
+    if (filters.salaryType !== 'none') {
+      newFilteredJobAds = newFilteredJobAds.filter(job => {
+        if (typeof job.salary === 'number'
+          && typeof filters.salaryType === 'object'
+          && job.salary >= filters.salaryType[0]
+          && job.salary <= filters.salaryType[1]) {
+          return job
+        } else if (typeof job.salary === 'object'
+          && typeof filters.salaryType === 'object'
+          && job.salary[0] >= filters.salaryType[0]
+          && job.salary[1] <= filters.salaryType[1]) {
+          return job
+        }
+      })
+    }
+    if (filters.cooprationType !== 'none') {
+      newFilteredJobAds = newFilteredJobAds.filter(job => {
+        if (job.cooperationType === filters.cooprationType) {
+          return job
+        }
+      })
+    }
+    setJobAdsFilteredHandler(newFilteredJobAds)
+  }, [filters])
+
+  // const unFilterHandlerForCooperationType = () => {
+  //   return [
+  //     ...jobAdsFiltered.filter(job => !job.cooperationType),
+  //     ...jobAds.filter(job => job.cooperationType)
+  //   ]
+  // }
+
+  // const unFilterHandlerForSalary = () => {
+  //   return [
+  //     ...jobAdsFiltered.filter(job => !job.salary),
+  //     ...jobAds.filter(job => job.salary)
+  //   ]
+  // }
+
+  // const salaryFilterHandler = (salary: [number, number] | number) => {
+  //   setJobAdsFilteredHandler(
+  //     unFilterHandlerForSalary()
+  //       .filter(job => {
+  //         if (typeof job.salary === 'number'
+  //           && typeof salary === 'number'
+  //           && job.salary <= salary) {
+  //           return job
+  //         } else if (typeof job.salary === 'object'
+  //           && typeof salary === 'object'
+  //           && job.salary[0] <= salary[0]
+  //           && job.salary[1] <= salary[1]) {
+  //           return job
+  //         }
+  //       })
+  //   )
+  // }
 
   return (
     <div className={`list-scrollbar w-full mt-6 flex items-center pb-3 overflow-x-auto sm:overflow-visible`}>
       <FilterJob
-        title='دورکرای'
-        filterHandler={() => setJobAdsFilteredHandler(jobAdsFiltered.filter(job => job.remote))}
-        unFilterHandler={() => {
-          const newJobAds = [...jobAdsFiltered, ...jobAds.filter(job => !job.remote)]
-          setJobAdsFilteredHandler(newJobAds)
-        }}
+        title='دورکاری'
+        filterHandler={() => setFilters(prev => ({
+          ...prev,
+          remote: true
+        }))}
+        unFilterHandler={() => setFilters(prev => ({
+          ...prev,
+          remote: false
+        }))}
       />
 
       <FilterJob
         title='امریه سربازی'
-        filterHandler={() => setJobAdsFilteredHandler(jobAdsFiltered.filter(job => job.knowledgeBasedCompany))}
-        unFilterHandler={() => {
-          const newJobAds = [...jobAdsFiltered, ...jobAds.filter(job => !job.knowledgeBasedCompany)]
-          setJobAdsFilteredHandler(newJobAds)
-        }}
+        filterHandler={() => setFilters(prev => ({
+          ...prev,
+          knowledgeBasedCompany: true
+        }))}
+        unFilterHandler={() => setFilters(prev => ({
+          ...prev,
+          knowledgeBasedCompany: false
+        }))}
       />
 
       <MultiFilterJob
@@ -152,34 +228,82 @@ const JobsFiltersBar = ({ jobAds, jobAdsFiltered, setJobAdsFilteredHandler }: Jo
         filters={[
           {
             title: 'تمام وقت',
-            filterHandler: () => {
-              setJobAdsFilteredHandler(
-                unFilterHandlerForCooperationType().filter(job => job.cooperationType === 'full-time')
-              )
-            }
+            filterHandler: () => setFilters(prev => ({
+              ...prev,
+              cooprationType: 'full-time'
+            }))
           },
           {
             title: 'پاره وقت',
-            filterHandler: () => {
-              setJobAdsFilteredHandler(
-                unFilterHandlerForCooperationType().filter(job => job.cooperationType === 'part-time')
-              )
-            }
+            filterHandler: () => setFilters(prev => ({
+              ...prev,
+              cooprationType: 'part-time'
+            }))
           },
           {
             title: 'پروژه ای',
-            filterHandler: () => {
-              setJobAdsFilteredHandler(
-                unFilterHandlerForCooperationType().filter(job => job.cooperationType === 'as-projects')
-              )
-            }
+            filterHandler: () => setFilters(prev => ({
+              ...prev,
+              cooprationType: 'as-projects'
+            }))
           }
         ]}
-        unFilterHandler={() => {
-          setJobAdsFilteredHandler(
-            unFilterHandlerForCooperationType()
-          )
-        }}
+        unFilterHandler={() => setFilters(prev => ({
+          ...prev,
+          cooprationType: 'none'
+        }))}
+      />
+
+      <MultiFilterJob
+        title={'حقوق'}
+        filters={[
+          {
+            title: 'تا 4 میلیون',
+            filterHandler: () => setFilters(prev => ({
+              ...prev,
+              salaryType: [0, 4]
+            }))
+          },
+          {
+            title: '4 تا 8 میلیون',
+            filterHandler: () => setFilters(prev => ({
+              ...prev,
+              salaryType: [4, 8]
+            }))
+          },
+          {
+            title: 'از 8 تا 15 میلیون',
+            filterHandler: () => setFilters(prev => ({
+              ...prev,
+              salaryType: [8, 15]
+            }))
+          },
+          {
+            title: 'از 15 تا 25 میلیون',
+            filterHandler: () => setFilters(prev => ({
+              ...prev,
+              salaryType: [15, 25]
+            }))
+          },
+          {
+            title: 'از 25 تا 40 میلیون',
+            filterHandler: () => setFilters(prev => ({
+              ...prev,
+              salaryType: [25, 40]
+            }))
+          },
+          {
+            title: 'از 40 تا 75 میلیون',
+            filterHandler: () => setFilters(prev => ({
+              ...prev,
+              salaryType: [40, 75]
+            }))
+          },
+        ]}
+        unFilterHandler={() => setFilters(prev => ({
+          ...prev,
+          salaryType: 'none'
+        }))}
       />
     </div>
   )
