@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, AnimationEvent } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded, NavigateBeforeRounded } from '@mui/icons-material';
 
@@ -10,10 +10,12 @@ const megaMenus: MegaMenusTypes[] = [
 	{
 		id: tokenGenerator(),
 		title: 'پربازدیدترین شغل ها',
+		query: 'cat',
 		links: [
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
 				link: 'programming',
+				query2: 'job',
 				subLinks: [
 					{
 						title: 'فرانت اند',
@@ -26,352 +28,20 @@ const megaMenus: MegaMenusTypes[] = [
 					{
 						title: 'برنامه نویسسی موبایل',
 						link: 'mobile-programming'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
+					}
 				]
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
-					},
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-				]
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-				]
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-				]
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-				]
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-				]
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'front-end'
-					},
-					{
-						title: 'بک اند',
-						link: 'back-end'
-					},
-				]
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
-			},
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				subLinks: []
 			}
 		]
 	},
 	{
 		id: tokenGenerator(),
 		title: 'استان و شهر',
+		query: 'province',
 		links: [
 			{
 				title: 'خراسان رضوی',
 				link: 'khorasan-razavi',
+				query2: 'city',
 				subLinks: [
 					{
 						title: 'مشهد',
@@ -382,32 +52,8 @@ const megaMenus: MegaMenusTypes[] = [
 						link: 'neyshaboor'
 					},
 					{
-						title: 'مشهد',
-						link: 'mashhad'
-					},
-					{
-						title: 'نیشابور',
-						link: 'neyshaboor'
-					}
-				]
-			},
-			{
-				title: 'تهران',
-				link: 'tehran',
-				subLinks: [
-					{
-						title: 'کرج',
-						link: 'karaj',
-					}
-				]
-			},
-			{
-				title: 'مازندران',
-				link: '',
-				subLinks: [
-					{
-						title: 'رشت',
-						link: 'rasht',
+						title: 'بیرجند',
+						link: 'birjand'
 					}
 				]
 			}
@@ -416,10 +62,12 @@ const megaMenus: MegaMenusTypes[] = [
 	{
 		id: tokenGenerator(),
 		title: 'نوع همکاری',
+		query: 'cooprationType',
 		links: [
 			{
 				title: 'دورکاری',
 				link: 'remote',
+				query2: 'cooprationType-city',
 				subLinks: [
 					{
 						title: 'در تهران',
@@ -440,6 +88,7 @@ const megaMenus: MegaMenusTypes[] = [
 ]
 
 const Header = () => {
+	const redirect = useNavigate()
 	const [showMegaMenu, setShowMegaMenu] = useState<boolean>(false)
 	const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
 	const [showMobileMenuJobs, setShowMobileMenuJobs] = useState<boolean>(false)
@@ -455,7 +104,7 @@ const Header = () => {
 	useEffect(() => {
 		setShowMegaMenu(false)
 		setShowMobileMenu(false)
-	}, [location.pathname])
+	}, [location.href])
 
 	const mobileMenuToggleHandler = () => {
 		if (showMobileMenu) {
@@ -467,7 +116,7 @@ const Header = () => {
 	}
 
 	const megaMenuButtonLinkHandler = (link: string) => {
-		console.log(link)
+		redirect(link)
 	}
 
 	return (
@@ -602,7 +251,7 @@ const Header = () => {
 												>
 													<button
 														className={`text-jv-dark dana-bold w-full h-full flex flex-col px-3 py-1 cursor-pointer hover:text-jv-primary`}
-														onClick={() => megaMenuButtonLinkHandler(link.link)}
+														onClick={() => megaMenuButtonLinkHandler(`/jobs?${menu.query}=${link.link}`)}
 													>
 														{link.title}
 														{
@@ -622,7 +271,10 @@ const Header = () => {
 																				<Link
 																					className={`text-jv-dark w-full inline-block text-sm text-right
 																					hover:text-jv-primary`}
-																					to={`#${subLink.link}`}
+																					to={`/jobs?${link.query2}=${subLink.link}`}
+																					onClick={event => {
+																						event.stopPropagation()
+																					}}
 																				>
 																					{subLink.title}
 																				</Link>
