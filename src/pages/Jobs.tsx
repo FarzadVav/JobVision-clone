@@ -35,7 +35,7 @@ const testJobAds: JobAdsTypes[] = [
 		salary: [15, 20],
 		remote: true,
 		isUrgent: false,
-		knowledgeBasedCompany: true,
+		knowledgeBasedCompany: false,
 		cooperationType: 'full-time',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
 		businessTrips: [7, 'month'],
@@ -518,6 +518,7 @@ const Jobs = () => {
 					<SearchJobForm />
 					<JobsFiltersBar
 						jobAds={jobAds}
+						jobAdsFiltered={jobAdsFiltered}
 						setJobAdsFilteredHandler={setJobAdsFilteredHandler}
 					/>
 				</div>

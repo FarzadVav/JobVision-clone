@@ -105,21 +105,28 @@ const MultiFilterJob = ({ title, filters }: MultiFilterJobProps) => {
 
 type JobsFiltersBarProps = {
   jobAds: JobAdsTypes[];
+  jobAdsFiltered: JobAdsTypes[];
   setJobAdsFilteredHandler: (jobAd: JobAdsTypes[]) => void
 }
 
-const JobsFiltersBar = ({ jobAds, setJobAdsFilteredHandler }: JobsFiltersBarProps) => {
+const JobsFiltersBar = ({ jobAds, jobAdsFiltered, setJobAdsFilteredHandler }: JobsFiltersBarProps) => {
   return (
     <div className={`list-scrollbar w-full mt-6 flex items-center pb-3 overflow-x-auto sm:overflow-visible`}>
       <FilterJob
         title='دورکرای'
-        filterHandler={() => setJobAdsFilteredHandler(jobAds.filter(job => job.remote))}
-        unFilterHandler={() => setJobAdsFilteredHandler(jobAds)}
-        />
+        filterHandler={() => setJobAdsFilteredHandler(jobAdsFiltered.filter(job => job.remote))}
+        unFilterHandler={() => {
+          const newJobAds = [...jobAdsFiltered, ...jobAds.filter(job => !job.remote)]
+          setJobAdsFilteredHandler(newJobAds)
+        }}
+      />
       <FilterJob
         title='امریه سربازی'
-        filterHandler={() => setJobAdsFilteredHandler(jobAds.filter(job => job.knowledgeBasedCompany))}
-        unFilterHandler={() => setJobAdsFilteredHandler(jobAds)}
+        filterHandler={() => setJobAdsFilteredHandler(jobAdsFiltered.filter(job => job.knowledgeBasedCompany))}
+        unFilterHandler={() => {
+          const newJobAds = [...jobAdsFiltered, ...jobAds.filter(job => !job.knowledgeBasedCompany)]
+          setJobAdsFilteredHandler(newJobAds)
+        }}
       />
       <MultiFilterJob
         title={'نوع همکاری'}
