@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode, useState, useEffect } from 'react'
 import { CloseRounded, FavoriteBorderRounded, HelpRounded, InfoOutlined, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined, StarRateRounded, Verified } from "@mui/icons-material";
 
 import SearchJobForm from "../components/SearchJobForm";
@@ -10,6 +10,7 @@ import CompanyTypes from "../types/Company.types";
 import JobBox from "../components/JobBox";
 import Tabs from '../components/Tabs'
 import PopularCompanies from '../components/PopularCompanies';
+import { useSearchParams } from 'react-router-dom';
 
 const testCompany: CompanyTypes = {
 	id: tokenGenerator(),
@@ -130,6 +131,7 @@ const testJobAds: JobAdsTypes[] = [
 ]
 
 const Jobs = () => {
+	const [searchParams] = useSearchParams()
 	const [showAlert, setShowAlert] = useState<boolean>(false)
 	const [jobAds, setJobAds] = useState<JobAdsTypes[]>(testJobAds)
 	const [jobAdsFiltered, setJobAdsFiltered] = useState<JobAdsTypes[]>(jobAds)
@@ -140,6 +142,23 @@ const Jobs = () => {
 	}[]>([])
 	const [selectedJobAds, setSelectedJobAds] = useState<JobAdsTypes>({} as JobAdsTypes)
 	const [showJobAd, setShowJobAd] = useState<boolean>(false)
+
+	useEffect(() => {
+		const cat = searchParams.get('cat')
+		const job = searchParams.get('job')
+		const province = searchParams.get('province')
+		const city = searchParams.get('city')
+		const cooperationType = searchParams.get('cooperationType')
+		const cooperationTypeCity = searchParams.get('cooperationType-city')
+		console.log(
+			cat,
+			job,
+			province,
+			city,
+			cooperationType,
+			cooperationTypeCity
+		)
+	}, [])
 
 	const setJobAdsFilteredHandler = (newJobAds: JobAdsTypes[]) => {
 		setJobAdsFiltered(newJobAds)

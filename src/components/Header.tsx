@@ -62,12 +62,12 @@ const megaMenus: MegaMenusTypes[] = [
 	{
 		id: tokenGenerator(),
 		title: 'نوع همکاری',
-		query: 'cooprationType',
+		query: 'cooperationType',
 		links: [
 			{
 				title: 'دورکاری',
 				link: 'remote',
-				query2: 'cooprationType-city',
+				query2: 'cooperationType-city',
 				subLinks: [
 					{
 						title: 'در تهران',
