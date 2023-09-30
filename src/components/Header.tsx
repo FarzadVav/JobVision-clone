@@ -92,9 +92,10 @@ const Header = () => {
 	const [showMegaMenu, setShowMegaMenu] = useState<boolean>(false)
 	const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
 	const [showMobileMenuJobs, setShowMobileMenuJobs] = useState<boolean>(false)
-	const [showJobInMobileMenu, setShowJobInMobileMenu] = useState<
-		{ state: boolean, id: string }
-	>({
+	const [showJobInMobileMenu, setShowJobInMobileMenu] = useState<{
+		state: boolean,
+		id: string
+	}>({
 		state: false,
 		id: ''
 	})
@@ -104,6 +105,7 @@ const Header = () => {
 	useEffect(() => {
 		setShowMegaMenu(false)
 		setShowMobileMenu(false)
+		setShowJobInMobileMenu({ state: false, id: '' })
 	}, [location.href])
 
 	const mobileMenuToggleHandler = () => {
@@ -472,7 +474,7 @@ const Header = () => {
 											>
 												<button
 													className={`w-full text-white text-xl text-right`}
-													onClick={() => megaMenuButtonLinkHandler(`#${link.link}`)}
+													onClick={() => megaMenuButtonLinkHandler(`/jobs?${menu.query}=${link.link}`)}
 												>
 													{link.title}
 												</button>
@@ -487,7 +489,7 @@ const Header = () => {
 																	>
 																		<Link
 																			className={`dana-base w-full block text-white text-base`}
-																			to={`#${subLink.link}`}
+																			to={`/jobs?${link.query2}=${subLink.link}`}
 																		>
 																			<span className={`ml-1.5`}>-</span> {subLink.title}
 																		</Link>
