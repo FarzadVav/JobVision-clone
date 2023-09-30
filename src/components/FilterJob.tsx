@@ -165,38 +165,6 @@ const JobsFiltersBar = ({ jobAds, setJobAdsFilteredHandler }: JobsFiltersBarProp
     setJobAdsFilteredHandler(newFilteredJobAds)
   }, [filters])
 
-  // const unFilterHandlerForCooperationType = () => {
-  //   return [
-  //     ...jobAdsFiltered.filter(job => !job.cooperationType),
-  //     ...jobAds.filter(job => job.cooperationType)
-  //   ]
-  // }
-
-  // const unFilterHandlerForSalary = () => {
-  //   return [
-  //     ...jobAdsFiltered.filter(job => !job.salary),
-  //     ...jobAds.filter(job => job.salary)
-  //   ]
-  // }
-
-  // const salaryFilterHandler = (salary: [number, number] | number) => {
-  //   setJobAdsFilteredHandler(
-  //     unFilterHandlerForSalary()
-  //       .filter(job => {
-  //         if (typeof job.salary === 'number'
-  //           && typeof salary === 'number'
-  //           && job.salary <= salary) {
-  //           return job
-  //         } else if (typeof job.salary === 'object'
-  //           && typeof salary === 'object'
-  //           && job.salary[0] <= salary[0]
-  //           && job.salary[1] <= salary[1]) {
-  //           return job
-  //         }
-  //       })
-  //   )
-  // }
-
   return (
     <div className={`list-scrollbar w-full mt-6 flex items-center pb-3 overflow-x-auto sm:overflow-visible`}>
       <FilterJob

@@ -563,7 +563,9 @@ const Jobs = () => {
 						<aside className={`bg-white w-full h-max flex flex-col items-center p-3 mb-6 rounded lg:ml-3 lg:w-5/12
 						xl:w-4/12`}>
 							<div className={`w-full flex justify-between items-center`}>
-								<span>2291 آگهی</span>
+								<span>
+									{jobAdsFiltered.length} آگهی
+								</span>
 								<select className={`bg-jv-bright cursor-pointer px-5 py-2 rounded`}>
 									<option value="">مرتب سازی</option>
 									<option value="">بیشترین حقوق</option>
@@ -596,7 +598,11 @@ const Jobs = () => {
 										>
 											<JobBox {...job} />
 										</div>
-									)) : 'آگهی وجود ندارد'
+									)) : (
+										<div className={`bg-red-50 text-jv-danger text-center w-full p-6 rounded`}>
+											آگهی با این مشخصات وجود ندارد
+										</div>
+									)
 								}
 							</div>
 						</aside>
@@ -690,7 +696,16 @@ const Jobs = () => {
 												tabs={jobAdsTabs}
 											/>
 										</>
-									) : 'آگهی انتخاب نشده است'
+									) : (
+										<div className={`w-full flex flex-col items-center mt-3`}>
+											<img
+												src="/images/job-detail-empty-state.svg"
+											/>
+											<span className={`text-center opacity-50 -translate-y-6`}>
+												جهت مشاهده اطلاعات آگهی شغلی یکی از موارد را از سمت <br /> راست انتخاب کنید.
+											</span>
+										</div>
+									)
 								}
 							</div>
 						</main>
