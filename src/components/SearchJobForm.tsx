@@ -19,10 +19,16 @@ type formTypes = {
   city: string;
 }
 
-const datas = [
-  { name: 'برنامه نویسی' },
+const catDatas = [
+  { name: 'programming' },
   { name: 'بازاریابی' },
   { name: 'فتوشاپ' },
+]
+
+const cityDatas = [
+  { name: 'مشهد' },
+  { name: 'تهران' },
+  { name: 'اصفهان' },
 ]
 
 const SearchJobForm = ({ customClass }: { customClass?: string }) => {
@@ -39,9 +45,11 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     await new Promise((resolve) => setTimeout(() => {
-      console.log(resolve);
-      redirect(`/jobs?search=${data.search}${data.job ? `?job=${data.job}` : ''}${data.city ? `?city=${data.city}` : ''}`)
+      redirect(
+        `/jobs?search=${data.search}${data.job ? `&cat=${data.job}` : ''}${data.city ? `&city=${data.city}` : ''}`
+      )
       reset()
+      return resolve
     }, 1500));
   }
 
@@ -64,7 +72,7 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
         register={{ ...register('job') }}
         setValue={setValue}
         placeholder={`گروه شغلی`}
-        datas={datas}
+        datas={catDatas}
       >
         <WorkOutlineRounded />
       </AutoComplete>
@@ -73,7 +81,7 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
         register={{ ...register('city') }}
         setValue={setValue}
         placeholder={`شهر`}
-        datas={datas}
+        datas={cityDatas}
       >
         <LocationOnOutlined />
       </AutoComplete>
