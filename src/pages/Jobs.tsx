@@ -28,7 +28,12 @@ const testCompany: CompanyTypes = {
 const testJobAds: JobAdsTypes[] = [
 	{
 		id: tokenGenerator(),
-		categories: [{ title: 'full-stack', id: tokenGenerator(), }],
+		categories: [{ title: 'programming', id: tokenGenerator(), }],
+		jobTags: [
+			{ title: 'full-stack', id: tokenGenerator() },
+			{ title: 'front-end', id: tokenGenerator() },
+			{ title: 'back-end', id: tokenGenerator() }
+		],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
 		company: testCompany,
 		city: 'تهران',
@@ -62,7 +67,10 @@ const testJobAds: JobAdsTypes[] = [
 	},
 	{
 		id: tokenGenerator(),
-		categories: [{ title: 'front-end', id: tokenGenerator(), }],
+		categories: [{ title: 'programming', id: tokenGenerator(), }],
+		jobTags: [
+			{ title: 'front-end', id: tokenGenerator() }
+		],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer) 2',
 		company: testCompany,
 		city: 'تهران',
@@ -96,7 +104,10 @@ const testJobAds: JobAdsTypes[] = [
 	},
 	{
 		id: tokenGenerator(),
-		categories: [{ title: 'front-end', id: tokenGenerator(), }],
+		categories: [{ title: 'programming', id: tokenGenerator(), }],
+		jobTags: [
+			{ title: 'front-end', id: tokenGenerator(), }
+		],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer) 3',
 		company: testCompany,
 		city: 'تهران',

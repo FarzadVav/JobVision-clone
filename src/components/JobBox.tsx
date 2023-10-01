@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom"
 import { Star } from "@mui/icons-material"
 
-import JobBoxTypes from "../types/Job.types"
+import JobAdsTypes from "../types/Job.types"
 
 const JobBox = (
-  { id, categories, title, company, city, location, salary, remote, knowledgeBasedCompany, isUrgent, createAt, selected }: JobBoxTypes
+  { id, categories, title, company, city, location, salary, remote, knowledgeBasedCompany, isUrgent, createAt, selected }: JobAdsTypes
 ) => {
   return (
     <article

@@ -27,18 +27,23 @@ const testCompany: CompanyTypes = {
 	ownership: 'pv'
 }
 
-const testJob: JobBoxTypes = {
+const testJobAd: JobBoxTypes = {
 	id: tokenGenerator(),
-	categories: [{ title: 'front-end', id: tokenGenerator(), }],
+	categories: [{ title: 'programming', id: tokenGenerator(), }],
+	jobTags: [
+		{ title: 'full-stack', id: tokenGenerator() },
+		{ title: 'front-end', id: tokenGenerator() },
+		{ title: 'back-end', id: tokenGenerator() }
+	],
 	title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
 	company: testCompany,
 	city: 'تهران',
 	location: 'فرشته',
 	salary: [15, 20],
 	remote: true,
-	isUrgent: true,
-	knowledgeBasedCompany: true,
-	cooperationType: 'full-time',
+	isUrgent: false,
+	knowledgeBasedCompany: false,
+	cooperationType: 'as-projects',
 	workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
 	businessTrips: [7, 'month'],
 	benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
@@ -1148,12 +1153,12 @@ const Home = () => {
 						</h2>
 					</Title>
 					<div className={`w-full grid gap-4 grid-rows-2 grid-cols-1 mt-6 md:grid-cols-2 lg:grid-cols-3`}>
-						<JobBox {...testJob} />
-						<JobBox {...testJob} />
-						<JobBox {...testJob} />
-						<JobBox {...testJob} />
-						<JobBox {...testJob} />
-						<JobBox {...testJob} />
+						<JobBox {...testJobAd} />
+						<JobBox {...testJobAd} />
+						<JobBox {...testJobAd} />
+						<JobBox {...testJobAd} />
+						<JobBox {...testJobAd} />
+						<JobBox {...testJobAd} />
 						<div className={`w-full flex justify-center mt-8 md:col-span-2 md:mt-12 lg:col-span-3`}>
 							<Link
 								className={`btn btn-out-primary`}
