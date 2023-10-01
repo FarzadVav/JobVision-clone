@@ -28,7 +28,7 @@ const testCompany: CompanyTypes = {
 const testJobAds: JobAdsTypes[] = [
 	{
 		id: tokenGenerator(),
-		category: { title: 'programming', id: tokenGenerator(), },
+		category: { title: 'programminga', id: tokenGenerator(), },
 		jobTags: [
 			{ title: 'full-stack', id: tokenGenerator() },
 			{ title: 'front-end', id: tokenGenerator() },
@@ -158,12 +158,24 @@ const Jobs = () => {
 	const [showJobAd, setShowJobAd] = useState<boolean>(false)
 
 	useEffect(() => {
+		const search = searchParams.get('search')
 		const cat = searchParams.get('cat')
 		const jobTag = searchParams.get('job')
 		const province = searchParams.get('province')
 		const city = searchParams.get('city')
 		const cooperationType = searchParams.get('cooperationType')
 		const cooperationTypeCity = searchParams.get('cooperationType-city')
+		if (search) {
+			setJobAdsFiltered(prev => prev.filter(job => {
+				if (
+					job.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+					|| job.category.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+					|| job.jobTags.filter(tag => tag.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())).length
+				) {
+					return job
+				}
+			}))
+		}
 		if (cat) {
 			setJobAdsFiltered(prev => prev.filter(job => job.category.title === cat))
 		}
