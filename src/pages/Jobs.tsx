@@ -28,7 +28,7 @@ const testCompany: CompanyTypes = {
 const testJobAds: JobAdsTypes[] = [
 	{
 		id: tokenGenerator(),
-		categories: [{ title: 'programming', id: tokenGenerator(), }],
+		category: { title: 'programming', id: tokenGenerator(), },
 		jobTags: [
 			{ title: 'full-stack', id: tokenGenerator() },
 			{ title: 'front-end', id: tokenGenerator() },
@@ -36,8 +36,9 @@ const testJobAds: JobAdsTypes[] = [
 		],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
 		company: testCompany,
-		city: 'تهران',
-		location: 'فرشته',
+		province: 'khorasan-razavi',
+		city: 'مشهد',
+		location: 'احمدآباد',
 		salary: [15, 20],
 		remote: true,
 		isUrgent: false,
@@ -67,12 +68,13 @@ const testJobAds: JobAdsTypes[] = [
 	},
 	{
 		id: tokenGenerator(),
-		categories: [{ title: 'programming', id: tokenGenerator(), }],
+		category: { title: 'programming', id: tokenGenerator(), },
 		jobTags: [
 			{ title: 'front-end', id: tokenGenerator() }
 		],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer) 2',
 		company: testCompany,
+		province: 'tehran',
 		city: 'تهران',
 		location: 'فرشته',
 		salary: 3,
@@ -104,14 +106,15 @@ const testJobAds: JobAdsTypes[] = [
 	},
 	{
 		id: tokenGenerator(),
-		categories: [{ title: 'programming', id: tokenGenerator(), }],
+		category: { title: 'programming', id: tokenGenerator(), },
 		jobTags: [
 			{ title: 'front-end', id: tokenGenerator(), }
 		],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer) 3',
 		company: testCompany,
+		province: 'tehran',
 		city: 'تهران',
-		location: 'فرشته',
+		location: 'ونک',
 		salary: 32,
 		remote: false,
 		isUrgent: true,
@@ -156,29 +159,49 @@ const Jobs = () => {
 
 	useEffect(() => {
 		const cat = searchParams.get('cat')
-		const job = searchParams.get('job')
+		const jobTag = searchParams.get('job')
 		const province = searchParams.get('province')
 		const city = searchParams.get('city')
 		const cooperationType = searchParams.get('cooperationType')
 		const cooperationTypeCity = searchParams.get('cooperationType-city')
-		console.log(
-			cat,
-			job,
-			province,
-			city,
-			cooperationType,
-			cooperationTypeCity
-		)
+		if (cat) {
+			setJobAdsFiltered(prev => prev.filter(job => job.category.title === cat))
+		}
+		if (jobTag) {
+			setJobAdsFiltered(prev => {
+				let newJobAdsFiltered: JobAdsTypes[] = []
+				prev.forEach(job => {
+					job.jobTags.forEach(tag => {
+						if (tag.title === jobTag) newJobAdsFiltered.push(job)
+					})
+				})
+				return newJobAdsFiltered
+			})
+		}
+		if (province) {
+			setJobAdsFiltered(prev => prev.filter(job => job.province === province))
+		}
+		if (city) {
+			setJobAdsFiltered(prev => prev.filter(job => job.city === city))
+		}
+		if (cooperationType) {
+			setJobAdsFiltered(prev => prev.filter(job => job.cooperationType === cooperationType))
+		}
+		if (cooperationTypeCity) {
+			const cooperationTypeCitySplited = cooperationTypeCity.split('__')
+			setJobAdsFiltered(prev => prev.filter(job => job.cooperationType === cooperationTypeCitySplited[0]
+				&& job.city === cooperationTypeCitySplited[1]))
+		}
 	}, [])
 
 	const setJobAdsFilteredHandler = (newJobAds: JobAdsTypes[]) => {
 		setJobAdsFiltered(newJobAds)
 	}
 
-	const jobAdsSelectHandler = (jobAd: JobAdsTypes) => {
+	const jobAdsSelectHandler = (singleJobAd: JobAdsTypes) => {
 		setJobAdsTabs([
 			{
-				id: jobAd.id,
+				id: singleJobAd.id,
 				title: 'درباره شغل',
 				content: (
 					<div key={1} className={`w-full flex flex-col`}>
@@ -193,7 +216,7 @@ const Jobs = () => {
 									روز و ساعت کاری
 								</span>
 								<span className={`block text-sm mt-1`}>
-									{jobAd.workTimes}
+									{singleJobAd.workTimes}
 								</span>
 							</div>
 							<div className={`w-full px-3 sm:w-1/2`}>
@@ -202,8 +225,8 @@ const Jobs = () => {
 								</span>
 								<span className={`block text-sm mt-1`}>
 									{
-										jobAd.cooperationType === 'full-time' ? 'تمام وقت'
-											: jobAd.cooperationType === 'part-time' ? 'پاره وقت'
+										singleJobAd.cooperationType === 'full-time' ? 'تمام وقت'
+											: singleJobAd.cooperationType === 'part-time' ? 'پاره وقت'
 												: 'پروژه ای'
 									}
 								</span>
@@ -214,13 +237,13 @@ const Jobs = () => {
 								</span>
 								<span className={`block text-sm mt-1`}>
 									{
-										jobAd.businessTrips === 'ever' ? 'همیشه در سفر'
-											: jobAd.businessTrips === 'some-times' ? 'در صورت نیاز'
-												: jobAd.businessTrips === 'none' ? '---'
-													: `${jobAd.businessTrips[0]}
-														${jobAd.businessTrips[1] === 'month' ? 'روز' : 'ماه'}
+										singleJobAd.businessTrips === 'ever' ? 'همیشه در سفر'
+											: singleJobAd.businessTrips === 'some-times' ? 'در صورت نیاز'
+												: singleJobAd.businessTrips === 'none' ? '---'
+													: `${singleJobAd.businessTrips[0]}
+														${singleJobAd.businessTrips[1] === 'month' ? 'روز' : 'ماه'}
 														در
-														${jobAd.businessTrips[1] === 'month' ? 'ماه' : 'سال'}`
+														${singleJobAd.businessTrips[1] === 'month' ? 'ماه' : 'سال'}`
 									}
 								</span>
 							</div>
@@ -230,8 +253,8 @@ const Jobs = () => {
 								</span>
 								<div className={`text-sm mt-1`}>
 									{
-										jobAd.benefits.length ? jobAd.benefits.map((benefit, i) => {
-											if (i < jobAd.benefits.length - 1) {
+										singleJobAd.benefits.length ? singleJobAd.benefits.map((benefit, i) => {
+											if (i < singleJobAd.benefits.length - 1) {
 												return (
 													<div
 														key={i}
@@ -270,7 +293,7 @@ const Jobs = () => {
 						</Title>
 						<ul className={`w-full flex flex-col`}>
 							{
-								jobAd.abilityForBoss.length ? jobAd.abilityForBoss.map(ability => (
+								singleJobAd.abilityForBoss.length ? singleJobAd.abilityForBoss.map(ability => (
 									<li
 										key={tokenGenerator()}
 										className={`flex items-center mt-2 pr-2 first:mt-3`}
@@ -291,7 +314,7 @@ const Jobs = () => {
 							</span>
 						</Title>
 						<p className={`w-full mt-3 pr-2`}>
-							{jobAd.description}
+							{singleJobAd.description}
 						</p>
 
 						<Title
@@ -308,7 +331,7 @@ const Jobs = () => {
 									سن
 								</span>
 								<span className={`bg-jv-bright block w-8/12 px-3 py-1.5 sm:w-10/12`}>
-									{`${jobAd.employmentConditions.age[0]} - ${jobAd.employmentConditions.age[1]}`}
+									{`${singleJobAd.employmentConditions.age[0]} - ${singleJobAd.employmentConditions.age[1]}`}
 									<span className={`mr-1.5`}>
 										سال
 									</span>
@@ -320,8 +343,8 @@ const Jobs = () => {
 								</span>
 								<span className={`bg-jv-bright block w-8/12 px-3 py-1.5 sm:w-10/12`}>
 									{
-										jobAd.employmentConditions.gender === 'male' ? 'مرد'
-											: jobAd.employmentConditions.gender === 'female' ? 'زن'
+										singleJobAd.employmentConditions.gender === 'male' ? 'مرد'
+											: singleJobAd.employmentConditions.gender === 'female' ? 'زن'
 												: 'فرقی ندارد'
 									}
 								</span>
@@ -332,7 +355,7 @@ const Jobs = () => {
 								</span>
 								<span className={`bg-jv-bright block w-8/12 px-3 py-1.5 sm:w-10/12`}>
 									{
-										jobAd.employmentConditions.endOfMilitaryService ? 'پایان خدمت یا معاف از سربازی' : 'مهم نیست'
+										singleJobAd.employmentConditions.endOfMilitaryService ? 'پایان خدمت یا معاف از سربازی' : 'مهم نیست'
 									}
 								</span>
 							</li>
@@ -342,7 +365,7 @@ const Jobs = () => {
 								</span>
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-8/12 p-1.5 overflow-x-auto sm:w-10/12`}>
 									{
-										jobAd.employmentConditions.education.length ? jobAd.employmentConditions.education.map((education, i) => (
+										singleJobAd.employmentConditions.education.length ? singleJobAd.employmentConditions.education.map((education, i) => (
 											<div
 												key={i}
 												className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}
@@ -359,7 +382,7 @@ const Jobs = () => {
 								</span>
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-8/12 p-1.5 overflow-x-auto sm:w-10/12`}>
 									{
-										jobAd.employmentConditions.languages.length ? jobAd.employmentConditions.languages.map((language, i) => (
+										singleJobAd.employmentConditions.languages.length ? singleJobAd.employmentConditions.languages.map((language, i) => (
 											<div
 												key={i}
 												className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}
@@ -376,7 +399,7 @@ const Jobs = () => {
 								</span>
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-8/12 p-1.5 overflow-x-auto sm:w-10/12`}>
 									{
-										jobAd.employmentConditions.techs.length ? jobAd.employmentConditions.techs.map((tech, i) => (
+										singleJobAd.employmentConditions.techs.length ? singleJobAd.employmentConditions.techs.map((tech, i) => (
 											<div
 												key={i}
 												className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}
@@ -410,16 +433,8 @@ const Jobs = () => {
 						<div className={`w-full grid grid-cols-1 gap-3 mt-3 sm:grid-cols-2`}>
 							{
 								jobAds.length ? jobAds.map((job, i) => {
-									if (i < 6) {
-										return job.categories.map(cat => {
-											return jobAd.categories.map(cat2 => {
-												if (cat.title === cat2.title && job.id !== jobAd.id) {
-													return <JobBox key={i} {...job} />
-												} else {
-													return null
-												}
-											})
-										})
+									if (i < 6 && job.category.title === singleJobAd.category.title && job.id !== singleJobAd.id) {
+										return <JobBox key={i} {...job} />
 									}
 								}) : 'آگهی وجود ندارد'
 							}
@@ -428,7 +443,7 @@ const Jobs = () => {
 				)
 			},
 			{
-				id: jobAd.company.id,
+				id: singleJobAd.company.id,
 				title: 'درباره شرکت',
 				content: (
 					<div className={`w-full flex flex-col`}>
@@ -439,10 +454,10 @@ const Jobs = () => {
 						</Title>
 						<div className={`w-full flex items-center mt-3`}>
 							<span className={`dana-bold h-5 ml-3`}>
-								{jobAd.company.score}
+								{singleJobAd.company.score}
 							</span>
 							{
-								Array(Math.floor(jobAd.company.score || 0)).fill('').map(() => (
+								Array(Math.floor(singleJobAd.company.score || 0)).fill('').map(() => (
 									<StarRateRounded
 										key={tokenGenerator()}
 										className={`text-jv-warning`}
@@ -450,7 +465,7 @@ const Jobs = () => {
 								))
 							}
 							{
-								Array(Math.ceil(5 - (jobAd.company.score || 0))).fill('').map(() => (
+								Array(Math.ceil(5 - (singleJobAd.company.score || 0))).fill('').map(() => (
 									<StarRateRounded
 										key={tokenGenerator()}
 										className={`text-jv-dark opacity-25`}
@@ -464,11 +479,11 @@ const Jobs = () => {
 							withOutIcon
 						>
 							<span className='!text-xl'>
-								درباره {jobAd.company.name}
+								درباره {singleJobAd.company.name}
 							</span>
 						</Title>
 						<p className={`w-full mt-3`}>
-							{jobAd.company.aboutCompany}
+							{singleJobAd.company.aboutCompany}
 						</p>
 
 						<Title
@@ -476,7 +491,7 @@ const Jobs = () => {
 							withOutIcon
 						>
 							<span className='!text-xl'>
-								{jobAd.company.name} در یک نگاه
+								{singleJobAd.company.name} در یک نگاه
 							</span>
 						</Title>
 						<div className={`w-full flex flex-wrap gap-y-3 mt-3`}>
@@ -485,7 +500,7 @@ const Jobs = () => {
 									سال تاسیس
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
-									{jobAd.company.year}
+									{singleJobAd.company.year}
 								</span>
 							</div>
 							<div className={`w-1/2 px-3`}>
@@ -493,7 +508,7 @@ const Jobs = () => {
 									اندازه سازمان
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
-									{jobAd.company.employees[0]} تا {jobAd.company.employees[1]} نفر
+									{singleJobAd.company.employees[0]} تا {singleJobAd.company.employees[1]} نفر
 								</span>
 							</div>
 							<div className={`w-1/2 px-3`}>
@@ -501,7 +516,7 @@ const Jobs = () => {
 									حوزه فعالیت
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
-									{jobAd.company.activity}
+									{singleJobAd.company.activity}
 								</span>
 							</div>
 							<div className={`w-1/2 px-3`}>
@@ -510,7 +525,7 @@ const Jobs = () => {
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
 									{
-										jobAd.company.ownership === 'pv' ? 'خصوصی' : 'دولتی'
+										singleJobAd.company.ownership === 'pv' ? 'خصوصی' : 'دولتی'
 									}
 								</span>
 							</div>

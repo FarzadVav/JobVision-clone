@@ -45,15 +45,15 @@ const megaMenus: MegaMenusTypes[] = [
 				subLinks: [
 					{
 						title: 'مشهد',
-						link: 'mashhad'
+						link: 'مشهد'
 					},
 					{
 						title: 'نیشابور',
-						link: 'neyshaboor'
+						link: 'نیشابور'
 					},
 					{
 						title: 'بیرجند',
-						link: 'birjand'
+						link: 'بیرجند'
 					}
 				]
 			}
@@ -65,21 +65,28 @@ const megaMenus: MegaMenusTypes[] = [
 		query: 'cooperationType',
 		links: [
 			{
-				title: 'دورکاری',
-				link: 'remote',
+				title: 'تمام وقت',
+				link: 'full-time',
 				query2: 'cooperationType-city',
 				subLinks: [
 					{
 						title: 'در تهران',
-						link: 'remote-in-tehran'
+						link: 'full-time__تهران'
 					},
+					{
+						title: 'در تبریز',
+						link: 'full-time__تبریز'
+					}
+				]
+			},
+			{
+				title: 'پروژه ای',
+				link: 'as-projects',
+				query2: 'cooperationType-city',
+				subLinks: [
 					{
 						title: 'در مشهد',
-						link: 'remote-in-mashhad'
-					},
-					{
-						title: 'با بالاترین حقوق',
-						link: 'remote-max-salary'
+						link: 'as-projects__مشهد'
 					}
 				]
 			}

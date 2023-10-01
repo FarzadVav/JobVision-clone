@@ -4,13 +4,13 @@ import { Star } from "@mui/icons-material"
 import JobAdsTypes from "../types/Job.types"
 
 const JobBox = (
-  { id, categories, title, company, city, location, salary, remote, knowledgeBasedCompany, isUrgent, createAt, selected }: JobAdsTypes
+  { id, category, title, company, city, location, salary, remote, knowledgeBasedCompany, isUrgent, createAt, selected }: JobAdsTypes
 ) => {
   return (
     <article
       className={`bg-white w-full group`}
       data-id={id}
-      data-category={categories}
+      data-category={category}
     >
       <Link
         className={`border border-solid w-full h-full flex flex-col justify-between rounded-md
@@ -53,7 +53,7 @@ const JobBox = (
             </div>
             <div className={`flex items-center mt-2`}>
               <span className={`text-xs`}>
-                {city} {location}
+                {city}، {location}
               </span>
               <span className={`text-jv-success border-r border-solid border-jv-light text-xs pr-2 mr-2`}>
                 {

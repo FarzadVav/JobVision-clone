@@ -29,7 +29,7 @@ const testCompany: CompanyTypes = {
 
 const testJobAd: JobBoxTypes = {
 	id: tokenGenerator(),
-	categories: [{ title: 'programming', id: tokenGenerator(), }],
+	category: { title: 'programming', id: tokenGenerator(), },
 	jobTags: [
 		{ title: 'full-stack', id: tokenGenerator() },
 		{ title: 'front-end', id: tokenGenerator() },
@@ -37,6 +37,7 @@ const testJobAd: JobBoxTypes = {
 	],
 	title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
 	company: testCompany,
+	province: 'tehran',
 	city: 'تهران',
 	location: 'فرشته',
 	salary: [15, 20],
