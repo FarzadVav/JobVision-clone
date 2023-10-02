@@ -1,4 +1,4 @@
-import { ReactNode, useState, useEffect } from 'react'
+import { ReactNode, useState, useEffect, useRef } from 'react'
 import { CloseRounded, FavoriteBorderRounded, HelpRounded, InfoOutlined, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined, StarRateRounded, Verified } from "@mui/icons-material";
 
 import SearchJobForm from "../components/SearchJobForm";
@@ -155,7 +155,7 @@ const Jobs = () => {
 		content: ReactNode
 	}[]>([])
 	const [selectedJobAds, setSelectedJobAds] = useState<JobAdsTypes>({} as JobAdsTypes)
-	const [showJobAd, setShowJobAd] = useState<boolean>(false)
+	const alertRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
 		const search = searchParams.get('search')
@@ -204,6 +204,15 @@ const Jobs = () => {
 			setJobAds(prev => prev.filter(job => job.cooperationType === cooperationTypeCitySplited[0]
 				&& job.city === cooperationTypeCitySplited[1]))
 		}
+
+		window.addEventListener('scroll', () => {
+			const footer = document.querySelector('footer')
+			if ((footer?.getBoundingClientRect().top || 0) <= window.innerHeight) {
+				alertRef.current?.classList.add('opacity-0', 'invisible')
+			} else {
+				alertRef.current?.classList.remove('opacity-0', 'invisible')
+			}
+		})
 	}, [])
 
 	useEffect(() => {
@@ -213,7 +222,9 @@ const Jobs = () => {
 	useEffect(() => {
 		if (window.innerWidth < 1024) {
 			if (Object.keys(selectedJobAds).length) {
-				document.querySelector('#root')?.classList.add('overflow-hidden')
+				setTimeout(() => {
+					document.querySelector('#root')?.classList.add('overflow-hidden')
+				}, 750);
 			} else {
 				document.querySelector('#root')?.classList.remove('overflow-hidden')
 			}
@@ -595,6 +606,7 @@ const Jobs = () => {
 						className={`bg-jv-primary w-full h-12 flex justify-center items-center fixed z-40 bottom-0 left-0
 						md:static md:z-0 md:justify-between md:pl-1 md:pr-5 md:rounded`}
 						onClick={() => !showAlert && setShowAlert(prev => !prev)}
+						ref={alertRef}
 					>
 						<div className={`h-full flex items-center absolute ${showAlert ? 'opacity-0 translate-x-full' : ''}
 						md:opacity-100 md:translate-x-0 md:static`}>
@@ -666,7 +678,6 @@ const Jobs = () => {
 												})
 												jobAdsSelectHandler(job)
 												setSelectedJobAds(job)
-												setShowJobAd(true)
 											}}
 										>
 											<JobBox {...job} />
@@ -680,9 +691,10 @@ const Jobs = () => {
 							</div>
 						</aside>
 
-						<main className={`w-full current-height fixed top-[4.5rem] right-0 duration-500 ${showJobAd ? '' :
-							'translate-y-full opacity-0 invisible'} z-40 lg:pb-6 lg:opacity-100 lg:visible lg:translate-y-0 lg:w-7/12
-						lg:sticky lg:top-[calc(4.5rem+0.75rem)] lg:z-0 xl:w-8/12`}>
+						<main className={`w-full h-screen fixed top-0 right-0 duration-700 z-50
+						${Object.keys(selectedJobAds).length ? '' : 'translate-y-full opacity-0 invisible'} lg:pb-6 lg:opacity-100
+						lg:visible lg:translate-y-0 lg:current-height lg:w-7/12 lg:sticky lg:top-[calc(4.5rem+0.75rem)] lg:z-auto
+						xl:w-8/12`}>
 							<div className={`list-scrollbar bg-white w-full h-full flex flex-col px-3 py-4 rounded overflow-y-auto`}>
 								{
 									Object.keys(selectedJobAds).length ? (
@@ -691,7 +703,17 @@ const Jobs = () => {
 												<div className={`w-full flex justify-between items-center mb-5 sm:hidden`}>
 													<button
 														className={`btn-sm btn-bright`}
-														onClick={() => setSelectedJobAds({} as JobAdsTypes)}
+														onClick={() => {
+															setSelectedJobAds({} as JobAdsTypes)
+															setJobAdsFiltered(prev => {
+																return prev.map(job => {
+																	if (job.id === selectedJobAds.id) {
+																		job.selected = false
+																	}
+																	return job
+																})
+															})
+														}}
 													>
 														بستن <CloseRounded fontSize='inherit' />
 													</button>
