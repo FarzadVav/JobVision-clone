@@ -210,6 +210,16 @@ const Jobs = () => {
 		setJobAdsFiltered(jobAds)
 	}, [jobAds])
 
+	useEffect(() => {
+		if (window.innerWidth < 1024) {
+			if (Object.keys(selectedJobAds).length) {
+				document.querySelector('#root')?.classList.add('overflow-hidden')
+			} else {
+				document.querySelector('#root')?.classList.remove('overflow-hidden')
+			}
+		}
+	}, [selectedJobAds])
+
 	const setJobAdsFilteredHandler = (newJobAds: JobAdsTypes[]) => {
 		setJobAdsFiltered(newJobAds)
 	}
@@ -555,9 +565,11 @@ const Jobs = () => {
 				content: (
 					<div className={`w-full grid grid-cols-1 gap-3 sm:grid-cols-2`}>
 						{
-							jobAds.length ? jobAds.map((job, i) => (
-								<JobBox key={i} {...job} />
-							)) : 'آگهی وجود ندارد'
+							jobAds.length ? jobAds.map((job, i) => {
+								if (job.company.id === singleJobAd.company.id && job.id !== singleJobAd.id) {
+									return <JobBox key={i} {...job} />
+								}
+							}) : 'آگهی وجود ندارد'
 						}
 					</div>
 				)
@@ -676,17 +688,36 @@ const Jobs = () => {
 									Object.keys(selectedJobAds).length ? (
 										<>
 											<div className={`w-full`}>
+												<div className={`w-full flex justify-between items-center mb-5 sm:hidden`}>
+													<button
+														className={`btn-sm btn-bright`}
+														onClick={() => setSelectedJobAds({} as JobAdsTypes)}
+													>
+														بستن <CloseRounded fontSize='inherit' />
+													</button>
+													<div className={`flex items-center`}>
+														<span className={`text-sm`}>
+															{selectedJobAds.createAt.toLocaleDateString('fa-ir').split('/').reverse().join(' / ')}
+														</span>
+														<button className={`btn-sm bg-blue-50 rounded-full mr-4`}>
+															<ShareOutlined className={`text-jv-primary cursor-pointer`} />
+														</button>
+														<button className={`btn-sm bg-red-50 rounded-full mr-1.5`}>
+															<FavoriteBorderRounded className={`text-jv-danger cursor-pointer`} />
+														</button>
+													</div>
+												</div>
 												<div className={`w-full flex justify-between`}>
 													<Title withOutIcon>
 														<h2>
 															{selectedJobAds.title}
 														</h2>
 													</Title>
-													<span className={`min-w-max text-sm`}>
+													<span className={`min-w-max hidden text-sm sm:block`}>
 														{selectedJobAds.createAt.toLocaleDateString('fa-ir').split('/').reverse().join(' / ')}
 													</span>
 												</div>
-												<div className={`flex items-center mt-6`}>
+												<div className={`flex items-center mt-3 sm:mt-6`}>
 													<span className={`text-jv-primary`}>
 														{selectedJobAds.company.name}
 													</span>
@@ -723,9 +754,11 @@ const Jobs = () => {
 														}
 													</span>
 													<div className={`flex items-center`}>
-														<ShareOutlined className={`text-jv-primary cursor-pointer`} />
-														<FavoriteBorderRounded className={`text-jv-danger mr-3 cursor-pointer`} />
-														<button className={`btn btn-success mr-6`}>
+														<div className={`hidden items-center sm:flex`}>
+															<ShareOutlined className={`text-jv-primary cursor-pointer`} />
+															<FavoriteBorderRounded className={`text-jv-danger mr-3 cursor-pointer`} />
+														</div>
+														<button className={`btn btn-success sm:mr-6`}>
 															ارسال رزومه
 														</button>
 														<img

@@ -251,7 +251,8 @@ const Header = () => {
 										{menu.title}
 									</span>
 									<ul
-										className={`bg-white columns-5 absolute top-16 bottom-0 left-0 right-0 cursor-default p-3 rounded-b-xl overflow-y-auto duration-0 opacity-0 invisible ${showMegaMenu && 'group-hover:visible group-hover:opacity-100 group-hover:z-50'}`}>
+										className={`bg-white columns-5 absolute top-16 bottom-0 left-0 right-0 cursor-default p-3 pt-0 rounded-b-xl 
+										overflow-y-auto duration-0 opacity-0 invisible ${showMegaMenu && 'group-hover:visible group-hover:opacity-100 group-hover:z-50'}`}>
 										{
 											menu.links.map(link => (
 												<li
