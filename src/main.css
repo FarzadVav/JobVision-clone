@@ -252,6 +252,7 @@
 
   .btn-bright {
     @apply border-jv-bright bg-jv-bright text-jv-dark hover:brightness-95;
+    /* height: 100 */
   }
 
   .btn-danger {

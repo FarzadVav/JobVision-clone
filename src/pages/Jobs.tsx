@@ -678,6 +678,9 @@ const Jobs = () => {
 												})
 												jobAdsSelectHandler(job)
 												setSelectedJobAds(job)
+												if (window.innerWidth < 1024) {
+													document.documentElement.requestFullscreen();
+												}
 											}}
 										>
 											<JobBox {...job} />
@@ -700,7 +703,7 @@ const Jobs = () => {
 									Object.keys(selectedJobAds).length ? (
 										<>
 											<div className={`w-full`}>
-												<div className={`w-full flex justify-between items-center mb-5 sm:hidden`}>
+												<div className={`w-full flex justify-between items-center mb-6 sm:hidden`}>
 													<button
 														className={`btn-sm btn-bright`}
 														onClick={() => {
@@ -713,6 +716,7 @@ const Jobs = () => {
 																	return job
 																})
 															})
+															document.exitFullscreen();
 														}}
 													>
 														بستن <CloseRounded fontSize='inherit' />
@@ -739,7 +743,7 @@ const Jobs = () => {
 														{selectedJobAds.createAt.toLocaleDateString('fa-ir').split('/').reverse().join(' / ')}
 													</span>
 												</div>
-												<div className={`flex items-center mt-3 sm:mt-6`}>
+												<div className={`flex items-center mt-4 sm:mt-6`}>
 													<span className={`text-jv-primary`}>
 														{selectedJobAds.company.name}
 													</span>
@@ -761,7 +765,7 @@ const Jobs = () => {
 														)
 													}
 												</div>
-												<div className={`w-full flex items-center justify-between mt-3`}>
+												<div className={`w-full flex items-center justify-between mt-4`}>
 													<span className={`text-jv-success`}>
 														{
 															typeof selectedJobAds.salary === 'number' ? `${selectedJobAds.salary} میلیون`
