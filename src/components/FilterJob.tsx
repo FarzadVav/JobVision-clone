@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { CloseRounded } from '@mui/icons-material'
 import JobAdsTypes from '../types/Job.types';
+import { createPortal } from 'react-dom';
 
 type FilterJobProps = {
   title: string;
@@ -48,33 +49,32 @@ type MultiFilterJobProps = {
 }
 
 const MultiFilterJob = ({ title, filters, unFilterHandler }: MultiFilterJobProps) => {
-  const [dynamicTitle, setDynamicTitle] = useState<string>('')
-  const [selected, setSelected] = useState<boolean>(false)
+  const [selected, setSelected] = useState<{ title: string; state: boolean; }>({ title: '', state: false })
   const [showMultiSelect, setShowMultiSelect] = useState<boolean>(false)
 
   return (
     <button
       className={`border border-solid min-w-max flex justify-center items-center px-4 py-1 ml-3 rounded-full
-      cursor-pointer !transition-colors last:ml-0 ${selected ? 'bg-jv-primary text-white border-jv-primary pl-1.5' : 'bg-white border-jv-light hover:text-jv-primary'} relative`}
+      cursor-pointer !transition-colors last:ml-0 ${selected.state ? 'bg-jv-primary text-white border-jv-primary pl-1.5'
+          : 'bg-white border-jv-light hover:text-jv-primary'} relative`}
       onClick={() => {
         setShowMultiSelect(prev => !prev)
       }}
     >
       {title}
       {
-        dynamicTitle.length ? ' : ' : ''
+        selected.title.length ? ' : ' : ''
       }
-      {dynamicTitle}
+      {selected.title}
       {
-        selected && (
+        selected.state && (
           <div
             className={`h-full flex items-center`}
             onClick={(event) => {
               event.stopPropagation()
               unFilterHandler()
-              setSelected(false)
               setShowMultiSelect(false)
-              setDynamicTitle('')
+              setSelected({ title: '', state: false })
             }}
           >
             <CloseRounded
@@ -85,9 +85,9 @@ const MultiFilterJob = ({ title, filters, unFilterHandler }: MultiFilterJobProps
         )
       }
       {
-        showMultiSelect && filters.length ? (
-          <ul className={`light-shadow bg-white border border-solid border-jv-light w-max flex flex-col items-center absolute
-          top-[calc(100%+0.75rem)] right-1/2 translate-x-1/2 z-10 rounded-md`}>
+        showMultiSelect && (
+          <ul className={`light-shadow bg-white border border-solid border-jv-light w-max hidden flex-col items-center absolute
+          top-[calc(100%+0.75rem)] right-1/2 translate-x-1/2 z-10 rounded-md sm:flex`}>
             <div className={`bg-white border-t border-l border-solid border-jv-light w-3 h-3 absolute -top-1.5 rotate-45
             rounded-tl`}></div>
             {
@@ -95,10 +95,9 @@ const MultiFilterJob = ({ title, filters, unFilterHandler }: MultiFilterJobProps
                 <li
                   key={i}
                   className={`text-jv-dark w-full px-5 py-1.5 rounded-md first-of-type:mt-1.5 last-of-type:pb-3
-                  hover:bg-jv-bright`}
+                  hover:bg-jv-bright ${selected.title === filter.title ? 'text-jv-primary' : ''}`}
                   onClick={() => {
-                    setDynamicTitle(filter.title)
-                    setSelected(true)
+                    setSelected({ title: filter.title, state: true })
                     filter.filterHandler()
                   }}
                 >
@@ -107,7 +106,42 @@ const MultiFilterJob = ({ title, filters, unFilterHandler }: MultiFilterJobProps
               ))
             }
           </ul>
-        ) : null
+        )
+      }
+      {
+        createPortal(
+          <>
+            <div
+              className={`w-full h-screen flex items-end fixed bottom-0 right-0 ${showMultiSelect ? '' : 'opacity-0 invisible'}
+              z-50 sm:hidden`}
+              onClick={(event) => {
+                event.stopPropagation()
+                setShowMultiSelect(false)
+              }}
+            >
+              <ul className={`bg-jv-primary w-full flex flex-col items-center px-6 pb-2 pt-9 rounded-t-[2rem] ${showMultiSelect ? '' : 'translate-y-full'} relative`}>
+                <div className={`bg-jv-primary brightness-125 w-12 h-1 rounded-full absolute top-3`}></div>
+                {
+                  filters.map((filter, i) => (
+                    <li
+                      key={i}
+                      className={`text-white border-b border-solid border-[#ffffff25] w-full px-5 py-2.5
+                        text-center mb-1 last-of-type:mb-0 last-of-type:border-b-0 ${selected.title === filter.title ?
+                          '!text-jv-warning' : ''}`}
+                      onClick={() => {
+                        setSelected({ title: filter.title, state: true })
+                        filter.filterHandler()
+                      }}
+                    >
+                      {filter.title}
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </>,
+          document.querySelector('#root')!
+        )
       }
     </button>
   )

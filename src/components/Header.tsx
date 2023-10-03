@@ -363,7 +363,7 @@ const Header = () => {
 							}
 						}}
 					>
-						<div className={`bg-jv-primary brightness-110 w-12 h-1 rounded-full absolute top-3`}></div>
+						<div className={`bg-jv-primary brightness-125 w-12 h-1 rounded-full absolute top-3`}></div>
 
 						<ul className={`w-full flex flex-col px-6 absolute top-9 duration-500 cubic-1
 						${(!showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : '-translate-x-full'}`}>
