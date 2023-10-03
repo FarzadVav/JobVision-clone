@@ -159,6 +159,8 @@ const Jobs = () => {
 	const alertRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
+		let jobAdsInParams = defaultJobAds
+
 		const search = searchParams.get('search')
 		const cat = searchParams.get('cat')
 		const jobTag = searchParams.get('job')
@@ -166,8 +168,9 @@ const Jobs = () => {
 		const city = searchParams.get('city')
 		const cooperationType = searchParams.get('cooperationType')
 		const cooperationTypeCity = searchParams.get('cooperationType-city')
+		
 		if (search) {
-			setJobAds(prev => prev.filter(job => {
+			jobAdsInParams = jobAds.filter(job => {
 				if (
 					job.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
 					|| job.category.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
@@ -175,36 +178,36 @@ const Jobs = () => {
 				) {
 					return job
 				}
-			}))
-		}
-		if (cat) {
-			setJobAds(prev => prev.filter(job => job.category.title === cat))
-		}
-		if (jobTag) {
-			setJobAds(prev => {
-				let newJobAdsFiltered: JobAdsTypes[] = []
-				prev.forEach(job => {
-					job.jobTags.forEach(tag => {
-						if (tag.title === jobTag) newJobAdsFiltered.push(job)
-					})
-				})
-				return newJobAdsFiltered
 			})
 		}
+		if (cat) {
+			jobAdsInParams = jobAdsInParams.filter(job => job.category.title === cat)
+		}
+		if (jobTag) {
+			let newJobAdsInParams: JobAdsTypes[] = []
+			jobAdsInParams.forEach(job => {
+				job.jobTags.forEach(tag => {
+					if (tag.title === jobTag) newJobAdsInParams.push(job)
+				})
+			})
+			jobAdsInParams = newJobAdsInParams
+		}
 		if (province) {
-			setJobAds(prev => prev.filter(job => job.province === province))
+			jobAdsInParams = jobAdsInParams.filter(job => job.province === province)
 		}
 		if (city) {
-			setJobAds(prev => prev.filter(job => job.city === city))
+			jobAdsInParams = jobAdsInParams.filter(job => job.city === city)
 		}
 		if (cooperationType) {
-			setJobAds(prev => prev.filter(job => job.cooperationType === cooperationType))
+			jobAdsInParams = jobAdsInParams.filter(job => job.cooperationType === cooperationType)
 		}
 		if (cooperationTypeCity) {
 			const cooperationTypeCitySplited = cooperationTypeCity.split('__')
-			setJobAds(prev => prev.filter(job => job.cooperationType === cooperationTypeCitySplited[0]
-				&& job.city === cooperationTypeCitySplited[1]))
+			jobAdsInParams = jobAdsInParams.filter(job => job.cooperationType === cooperationTypeCitySplited[0]
+				&& job.city === cooperationTypeCitySplited[1])
 		}
+
+		setJobAds(jobAdsInParams)
 
 		window.addEventListener('scroll', () => {
 			const footer = document.querySelector('footer')
@@ -214,7 +217,7 @@ const Jobs = () => {
 				alertRef.current?.classList.remove('opacity-0', 'invisible')
 			}
 		})
-	}, [])
+	}, [location.href])
 
 	useEffect(() => {
 		setJobAdsFiltered(jobAds)

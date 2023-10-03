@@ -5,31 +5,27 @@ import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 
 type FilterJobProps = {
+  selected: boolean;
   title: string;
   filterHandler: () => void;
   unFilterHandler: () => void
 }
-
-const FilterJob = ({ title, filterHandler, unFilterHandler }: FilterJobProps) => {
-  const [select, setSelect] = useState<boolean>(false)
-
+const FilterJob = ({ selected, title, filterHandler, unFilterHandler }: FilterJobProps) => {
   return (
     <button
       className={`border border-solid min-w-max flex justify-center items-center px-4 py-1 ml-3 rounded-full
-      cursor-pointer !transition-colors last:ml-0 ${select ? 'bg-jv-primary text-white border-jv-primary pl-1.5' : 'bg-white border-jv-light hover:text-jv-primary'}`}
+      cursor-pointer !transition-colors last:ml-0 ${selected ? 'bg-jv-primary text-white border-jv-primary pl-1.5' : 'bg-white border-jv-light hover:text-jv-primary'}`}
       onClick={() => {
-        if (select) {
-          setSelect(false)
+        if (selected) {
           unFilterHandler()
         } else {
-          setSelect(true)
           filterHandler()
         }
       }}
     >
       {title}
       {
-        select && (
+        selected && (
           <CloseRounded
             className='bg-jv-primary text-white brightness-125 mr-3 rounded-full p-0.5'
             fontSize='small'
@@ -41,6 +37,7 @@ const FilterJob = ({ title, filterHandler, unFilterHandler }: FilterJobProps) =>
 }
 
 type MultiFilterJobProps = {
+  selected: boolean;
   title: string;
   filters: {
     title: string;
@@ -48,34 +45,38 @@ type MultiFilterJobProps = {
   }[];
   unFilterHandler: () => void
 }
-
-const MultiFilterJob = ({ title, filters, unFilterHandler }: MultiFilterJobProps) => {
-  const [selected, setSelected] = useState<{ title: string; state: boolean; }>({ title: '', state: false })
+const MultiFilterJob = ({ selected, title, filters, unFilterHandler }: MultiFilterJobProps) => {
+  const [dynamicTitle, setDynamicTitle] = useState<string | null>(null)
   const [showMultiSelect, setShowMultiSelect] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (!selected) {
+      setDynamicTitle(null)
+    }
+  }, [selected])
 
   return (
     <button
       className={`border border-solid min-w-max flex justify-center items-center px-4 py-1 ml-3 rounded-full
-      cursor-pointer !transition-colors last:ml-0 ${selected.state ? 'bg-jv-primary text-white border-jv-primary pl-1.5'
-          : 'bg-white border-jv-light hover:text-jv-primary'} relative`}
+      cursor-pointer !transition-colors last:ml-0 ${selected ? 'bg-jv-primary text-white border-jv-primary pl-1.5' : 'bg-white border-jv-light hover:text-jv-primary'} relative`}
       onClick={() => {
         setShowMultiSelect(prev => !prev)
       }}
     >
       {title}
       {
-        selected.title.length ? ' : ' : ''
+        (dynamicTitle && selected) ? ' : ' : ''
       }
-      {selected.title}
+      {selected ? dynamicTitle : null}
       {
-        selected.state && (
+        selected && (
           <div
             className={`h-full flex items-center`}
             onClick={(event) => {
               event.stopPropagation()
               unFilterHandler()
               setShowMultiSelect(false)
-              setSelected({ title: '', state: false })
+              setDynamicTitle(null)
             }}
           >
             <CloseRounded
@@ -96,9 +97,9 @@ const MultiFilterJob = ({ title, filters, unFilterHandler }: MultiFilterJobProps
                 <li
                   key={i}
                   className={`text-jv-dark w-full px-5 py-1.5 rounded-md first-of-type:mt-1.5 last-of-type:pb-3
-                  hover:bg-jv-bright ${selected.title === filter.title ? 'text-jv-primary' : ''}`}
+                  hover:bg-jv-bright ${dynamicTitle === filter.title ? 'text-jv-primary' : ''}`}
                   onClick={() => {
-                    setSelected({ title: filter.title, state: true })
+                    setDynamicTitle(filter.title)
                     filter.filterHandler()
                   }}
                 >
@@ -127,10 +128,10 @@ const MultiFilterJob = ({ title, filters, unFilterHandler }: MultiFilterJobProps
                     <li
                       key={i}
                       className={`text-white border-b border-solid border-[#ffffff25] w-full px-5 py-2.5
-                        text-center mb-1 last-of-type:mb-0 last-of-type:border-b-0 ${selected.title === filter.title ?
+                        text-center mb-1 last-of-type:mb-0 last-of-type:border-b-0 ${dynamicTitle === filter.title ?
                           '!text-jv-warning' : ''}`}
                       onClick={() => {
-                        setSelected({ title: filter.title, state: true })
+                        setDynamicTitle(filter.title)
                         filter.filterHandler()
                       }}
                     >
@@ -153,20 +154,22 @@ type JobsFiltersBarProps = {
   jobAds: JobAdsTypes[];
   setJobAdsFilteredHandler: (jobAd: JobAdsTypes[]) => void
 }
-
+type filtersTypes = {
+  remote: boolean;
+  knowledgeBasedCompany: boolean;
+  cooprationType: 'full-time' | 'part-time' | 'as-projects' | 'none';
+  salaryType: [number, number] | 'none'
+}
+const initialFiltersValues: filtersTypes = {
+  remote: false,
+  knowledgeBasedCompany: false,
+  cooprationType: 'none',
+  salaryType: 'none'
+}
 const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setJobAdsFilteredHandler }: JobsFiltersBarProps) => {
   const redirect = useNavigate()
-  const [filters, setFilters] = useState<{
-    remote: boolean;
-    knowledgeBasedCompany: boolean;
-    cooprationType: 'full-time' | 'part-time' | 'as-projects' | 'none';
-    salaryType: [number, number] | 'none'
-  }>({
-    remote: false,
-    knowledgeBasedCompany: false,
-    cooprationType: 'none',
-    salaryType: 'none'
-  })
+  const [filters, setFilters] = useState<filtersTypes>(initialFiltersValues)
+  const [showClearFilters, setShowClearFilters] = useState<boolean>(false)
 
   useEffect(() => {
     let newFilteredJobAds: JobAdsTypes[] = jobAds
@@ -200,28 +203,56 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setJobAdsFilteredHandler }
       })
     }
     setJobAdsFilteredHandler(newFilteredJobAds)
+
+    chekFilters()
   }, [filters])
+
+  useEffect(() => {
+    setFilters(initialFiltersValues)
+  }, [location.href])
+
+  const chekFilters = () => {
+    let showClearFiltersState = false
+
+    if (location.href.includes('?')) {
+      showClearFiltersState = true
+    } else {
+      for (const key in filters) {
+        if (typeof filters[key as keyof filtersTypes] === 'boolean'
+          && filters[key as keyof filtersTypes] === true) {
+          showClearFiltersState = true
+          break;
+        } else if (['string', 'object'].includes(typeof filters[key as keyof filtersTypes])
+          && filters[key as keyof filtersTypes] !== 'none') {
+          showClearFiltersState = true
+          break;
+        }
+      }
+    }
+
+    setShowClearFilters(showClearFiltersState)
+  }
 
   return (
     <div className={`list-scrollbar w-full mt-6 flex items-center pb-3 overflow-x-auto sm:overflow-visible`}>
-      <button
-        className={`text-jv-danger border border-solid border-red-100 min-w-max flex justify-center items-center px-4 py-1
-        ml-3 rounded-full cursor-pointer !transition-colors last:ml-0'}`}
-        onClick={() => {
-          redirect('/jobs')
-          setJobAdsToDefault()
-          setFilters({
-            remote: false,
-            knowledgeBasedCompany: false,
-            cooprationType: 'none',
-            salaryType: 'none'
-          })
-        }}
-      >
-        پاک کردن فیلتر ها
-      </button>
+      {
+        showClearFilters && (
+          <button
+            className={`text-jv-danger border border-solid border-red-100 min-w-max flex justify-center items-center px-4 py-1
+            ml-3 rounded-full cursor-pointer !transition-colors last:ml-0'}`}
+            onClick={() => {
+              redirect('/jobs')
+              setJobAdsToDefault()
+              setFilters(initialFiltersValues)
+            }}
+          >
+            پاک کردن فیلتر ها
+          </button>
+        )
+      }
 
       <FilterJob
+        selected={filters.remote}
         title='دورکاری'
         filterHandler={() => setFilters(prev => ({
           ...prev,
@@ -234,6 +265,7 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setJobAdsFilteredHandler }
       />
 
       <FilterJob
+        selected={filters.knowledgeBasedCompany}
         title='امریه سربازی'
         filterHandler={() => setFilters(prev => ({
           ...prev,
@@ -246,6 +278,7 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setJobAdsFilteredHandler }
       />
 
       <MultiFilterJob
+        selected={filters.cooprationType !== 'none'}
         title={'نوع همکاری'}
         filters={[
           {
@@ -277,6 +310,7 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setJobAdsFilteredHandler }
       />
 
       <MultiFilterJob
+        selected={filters.salaryType !== 'none'}
         title={'حقوق'}
         filters={[
           {
