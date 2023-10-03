@@ -700,7 +700,7 @@ const Jobs = () => {
 									Object.keys(selectedJobAds).length ? (
 										<>
 											<div className={`w-full`}>
-												<div className={`w-full flex justify-between items-center mb-6 sm:hidden`}>
+												<div className={`w-full flex justify-between items-center mb-6 lg:hidden`}>
 													<button
 														className={`btn-sm btn-bright`}
 														onClick={() => {
@@ -735,11 +735,11 @@ const Jobs = () => {
 															{selectedJobAds.title}
 														</h2>
 													</Title>
-													<span className={`min-w-max hidden text-sm sm:block`}>
+													<span className={`min-w-max hidden text-sm lg:block`}>
 														{selectedJobAds.createAt.toLocaleDateString('fa-ir').split('/').reverse().join(' / ')}
 													</span>
 												</div>
-												<div className={`flex items-center mt-4 sm:mt-6`}>
+												<div className={`flex items-center mt-4 lg:mt-6`}>
 													<span className={`text-jv-primary`}>
 														{selectedJobAds.company.name}
 													</span>
@@ -776,7 +776,7 @@ const Jobs = () => {
 														}
 													</span>
 													<div className={`flex items-center`}>
-														<div className={`hidden items-center sm:flex`}>
+														<div className={`hidden items-center lg:flex`}>
 															<ShareOutlined className={`text-jv-primary cursor-pointer`} />
 															<FavoriteBorderRounded className={`text-jv-danger mr-3 cursor-pointer`} />
 														</div>
