@@ -533,7 +533,7 @@ const Jobs = () => {
 						</Title>
 						<div className={`w-full flex flex-wrap gap-y-3 mt-3`}>
 							<div className={`w-1/2 px-3`}>
-								<span className={`block`}>
+								<span className={`dana-bold block`}>
 									سال تاسیس
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
@@ -541,7 +541,7 @@ const Jobs = () => {
 								</span>
 							</div>
 							<div className={`w-1/2 px-3`}>
-								<span className={`block`}>
+								<span className={`dana-bold block`}>
 									اندازه سازمان
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
@@ -549,7 +549,7 @@ const Jobs = () => {
 								</span>
 							</div>
 							<div className={`w-1/2 px-3`}>
-								<span className={`block`}>
+								<span className={`dana-bold block`}>
 									حوزه فعالیت
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
@@ -557,7 +557,7 @@ const Jobs = () => {
 								</span>
 							</div>
 							<div className={`w-1/2 px-3`}>
-								<span className={`block`}>
+								<span className={`dana-bold block`}>
 									نوع مالکیت
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
@@ -678,9 +678,6 @@ const Jobs = () => {
 												})
 												jobAdsSelectHandler(job)
 												setSelectedJobAds(job)
-												if (window.innerWidth < 1024) {
-													document.documentElement.requestFullscreen();
-												}
 											}}
 										>
 											<JobBox {...job} />
@@ -716,7 +713,6 @@ const Jobs = () => {
 																	return job
 																})
 															})
-															document.exitFullscreen();
 														}}
 													>
 														بستن <CloseRounded fontSize='inherit' />
