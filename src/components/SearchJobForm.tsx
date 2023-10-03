@@ -45,9 +45,14 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     await new Promise((resolve) => setTimeout(() => {
-      redirect(
-        `/jobs?search=${data.search}${data.job ? `&cat=${data.job}` : ''}${data.city ? `&city=${data.city}` : ''}`
-      )
+      if (location.pathname === '/jobs') {
+        location.href =
+          `/jobs?search=${data.search}${data.job ? `&cat=${data.job}` : ''}${data.city ? `&city=${data.city}` : ''}`
+      } else {
+        redirect(
+          `/jobs?search=${data.search}${data.job ? `&cat=${data.job}` : ''}${data.city ? `&city=${data.city}` : ''}`
+        )
+      }
       reset()
       return resolve
     }, 1500));

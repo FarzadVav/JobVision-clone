@@ -147,6 +147,7 @@ const testJobAds: JobAdsTypes[] = [
 const Jobs = () => {
 	const [searchParams] = useSearchParams()
 	const [showAlert, setShowAlert] = useState<boolean>(false)
+	const [defaultJobAds] = useState<JobAdsTypes[]>(testJobAds)
 	const [jobAds, setJobAds] = useState<JobAdsTypes[]>(testJobAds)
 	const [jobAdsFiltered, setJobAdsFiltered] = useState<JobAdsTypes[]>(jobAds)
 	const [jobAdsTabs, setJobAdsTabs] = useState<{
@@ -233,6 +234,10 @@ const Jobs = () => {
 
 	const setJobAdsFilteredHandler = (newJobAds: JobAdsTypes[]) => {
 		setJobAdsFiltered(newJobAds)
+	}
+
+	const setJobAdsToDefault = () => {
+		setJobAds(defaultJobAds)
 	}
 
 	const jobAdsSelectHandler = (singleJobAd: JobAdsTypes) => {
@@ -594,6 +599,7 @@ const Jobs = () => {
 				<div className={`wrapper`}>
 					<SearchJobForm />
 					<JobsFiltersBar
+						setJobAdsToDefault={setJobAdsToDefault}
 						jobAds={jobAds}
 						setJobAdsFilteredHandler={setJobAdsFilteredHandler}
 					/>

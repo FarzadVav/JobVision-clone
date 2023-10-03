@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { CloseRounded } from '@mui/icons-material'
 import JobAdsTypes from '../types/Job.types';
 import { createPortal } from 'react-dom';
+import { useNavigate } from 'react-router-dom';
 
 type FilterJobProps = {
   title: string;
@@ -148,11 +149,13 @@ const MultiFilterJob = ({ title, filters, unFilterHandler }: MultiFilterJobProps
 }
 
 type JobsFiltersBarProps = {
+  setJobAdsToDefault: () => void;
   jobAds: JobAdsTypes[];
   setJobAdsFilteredHandler: (jobAd: JobAdsTypes[]) => void
 }
 
-const JobsFiltersBar = ({ jobAds, setJobAdsFilteredHandler }: JobsFiltersBarProps) => {
+const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setJobAdsFilteredHandler }: JobsFiltersBarProps) => {
+  const redirect = useNavigate()
   const [filters, setFilters] = useState<{
     remote: boolean;
     knowledgeBasedCompany: boolean;
@@ -201,6 +204,23 @@ const JobsFiltersBar = ({ jobAds, setJobAdsFilteredHandler }: JobsFiltersBarProp
 
   return (
     <div className={`list-scrollbar w-full mt-6 flex items-center pb-3 overflow-x-auto sm:overflow-visible`}>
+      <button
+        className={`text-jv-danger border border-solid border-red-100 min-w-max flex justify-center items-center px-4 py-1
+        ml-3 rounded-full cursor-pointer !transition-colors last:ml-0'}`}
+        onClick={() => {
+          redirect('/jobs')
+          setJobAdsToDefault()
+          setFilters({
+            remote: false,
+            knowledgeBasedCompany: false,
+            cooprationType: 'none',
+            salaryType: 'none'
+          })
+        }}
+      >
+        پاک کردن فیلتر ها
+      </button>
+
       <FilterJob
         title='دورکاری'
         filterHandler={() => setFilters(prev => ({
