@@ -14,7 +14,7 @@ const FilterJob = ({ selected, title, filterHandler, unFilterHandler }: FilterJo
   return (
     <button
       className={`border border-solid min-w-max flex justify-center items-center px-4 py-1 ml-3 rounded-full
-      cursor-pointer last:ml-0 ${selected ? 'bg-jv-primary text-white border-jv-primary pl-1.5' : 'bg-white border-jv-light hover:text-jv-primary'} active:scale-90`}
+      cursor-pointer last:ml-0 ${selected ? 'bg-jv-primary text-white border-jv-primary pl-1.5' : 'bg-white border-jv-light hover:text-jv-primary'} !transition-transform active:scale-95`}
       onClick={() => {
         if (selected) {
           unFilterHandler()
@@ -58,7 +58,7 @@ const MultiFilterJob = ({ selected, title, filters, unFilterHandler }: MultiFilt
   return (
     <button
       className={`border border-solid min-w-max flex justify-center items-center px-4 py-1 ml-3 rounded-full
-      cursor-pointer last:ml-0 ${selected ? 'bg-jv-primary text-white border-jv-primary pl-1.5' : 'bg-white border-jv-light hover:text-jv-primary'} relative active:scale-90`}
+      cursor-pointer last:ml-0 ${selected ? 'bg-jv-primary text-white border-jv-primary pl-1.5' : 'bg-white border-jv-light hover:text-jv-primary'} relative !transition-transform active:scale-95`}
       onClick={() => {
         setShowMultiSelect(prev => !prev)
       }}
@@ -236,21 +236,18 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setJobAdsFilteredHandler }
 
   return (
     <div className={`list-scrollbar w-full mt-6 flex items-center pb-3 overflow-x-auto sm:overflow-visible`}>
-      {
-        showClearFilters && (
-          <button
-            className={`text-jv-danger border border-solid border-red-100 min-w-max flex justify-center items-center px-4 py-1
-            ml-3 rounded-full cursor-pointer`}
-            onClick={() => {
-              redirect('/jobs')
-              setJobAdsToDefault()
-              setFilters(initialFiltersValues)
-            }}
-          >
-            پاک کردن فیلتر ها
-          </button>
-        )
-      }
+      <button
+        className={`bg-jv-danger text-white min-w-max flex justify-center items-center px-4 py-1
+          ml-3 rounded-full cursor-pointer ${showClearFilters ? '' : 'opacity-20 cursor-not-allowed'}`}
+        onClick={() => {
+          redirect('/jobs')
+          setJobAdsToDefault()
+          setFilters(initialFiltersValues)
+        }}
+        disabled={!showClearFilters}
+      >
+        پاک کردن فیلتر ها
+      </button>
 
       <FilterJob
         selected={filters.remote}
