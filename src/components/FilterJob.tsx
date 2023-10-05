@@ -14,7 +14,7 @@ const FilterJob = ({ selected, title, filterHandler, unFilterHandler }: FilterJo
   return (
     <button
       className={`border border-solid min-w-max flex justify-center items-center px-4 py-1 ml-3 rounded-full
-      cursor-pointer !transition-colors last:ml-0 ${selected ? 'bg-jv-primary text-white border-jv-primary pl-1.5' : 'bg-white border-jv-light hover:text-jv-primary'}`}
+      cursor-pointer last:ml-0 ${selected ? 'bg-jv-primary text-white border-jv-primary pl-1.5' : 'bg-white border-jv-light hover:text-jv-primary'} active:scale-90`}
       onClick={() => {
         if (selected) {
           unFilterHandler()
@@ -58,7 +58,7 @@ const MultiFilterJob = ({ selected, title, filters, unFilterHandler }: MultiFilt
   return (
     <button
       className={`border border-solid min-w-max flex justify-center items-center px-4 py-1 ml-3 rounded-full
-      cursor-pointer !transition-colors last:ml-0 ${selected ? 'bg-jv-primary text-white border-jv-primary pl-1.5' : 'bg-white border-jv-light hover:text-jv-primary'} relative`}
+      cursor-pointer last:ml-0 ${selected ? 'bg-jv-primary text-white border-jv-primary pl-1.5' : 'bg-white border-jv-light hover:text-jv-primary'} relative active:scale-90`}
       onClick={() => {
         setShowMultiSelect(prev => !prev)
       }}
@@ -240,7 +240,7 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setJobAdsFilteredHandler }
         showClearFilters && (
           <button
             className={`text-jv-danger border border-solid border-red-100 min-w-max flex justify-center items-center px-4 py-1
-            ml-3 rounded-full cursor-pointer !transition-colors last:ml-0'}`}
+            ml-3 rounded-full cursor-pointer`}
             onClick={() => {
               redirect('/jobs')
               setJobAdsToDefault()
