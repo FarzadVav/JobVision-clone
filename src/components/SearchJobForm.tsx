@@ -6,6 +6,7 @@ import { WorkOutlineRounded, SearchRounded, LocationOnOutlined } from "@mui/icon
 
 import TextInput from "./inputs/TextInput";
 import AutoComplete from "./inputs/AutoComplete";
+import { PulseLoader } from "react-spinners";
 
 const schema = z.object({
   search: z.string().nonempty('لطفا عنوان شغل را خالی نگذارید').min(2).max(128),
@@ -91,10 +92,18 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
         <LocationOnOutlined />
       </AutoComplete>
       <button
-        className={`btn btn-primary w-full ${isSubmitting && 'opacity-25'} sm:col-span-2 lg:col-span-1`}
+        className={`btn btn-primary w-full sm:col-span-2 lg:col-span-1`}
         type={`submit`}
+        disabled={isSubmitting}
       >
-        جستجو
+        {
+          isSubmitting ? '' : 'جستجو'
+        }
+        <PulseLoader
+          color='white'
+          loading={isSubmitting}
+          size={6}
+        />
       </button>
     </form>
   )

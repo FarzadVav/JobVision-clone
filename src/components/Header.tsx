@@ -5,6 +5,7 @@ import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded, Nav
 
 import tokenGenerator from "../utils/tokenGenerator.ts";
 import MegaMenusTypes from "../types/megaMenu.types.ts";
+import LoginPopUp from "./LoginPopUp.tsx";
 
 const megaMenus: MegaMenusTypes[] = [
 	{
@@ -99,6 +100,7 @@ const Header = () => {
 	const [showMegaMenu, setShowMegaMenu] = useState<boolean>(false)
 	const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
 	const [showMobileMenuJobs, setShowMobileMenuJobs] = useState<boolean>(false)
+	const [showLogin, setShowLogin] = useState<boolean>(false)
 	const [showJobInMobileMenu, setShowJobInMobileMenu] = useState<{
 		state: boolean,
 		id: string
@@ -180,12 +182,12 @@ const Header = () => {
 						</ul>
 					</nav>
 					<div className={`h-full flex justify-center items-center`}>
-						<Link
+						<button
 							className={`btn btn-primary`}
-							to={``}
+							onClick={() => setShowLogin(true)}
 						>
-							ورود / ثبت نام کارجو
-						</Link>
+							ورود / ثبت نام
+						</button>
 						<Link
 							className={'nav-link mr-5 xl:mr-7'}
 							to={``}
@@ -227,12 +229,12 @@ const Header = () => {
 							alt="لوگوی جاب ویژن"
 						/>
 					</Link>
-					<Link
+					<button
 						className={`h-full flex items-center`}
-						to={''}
+						onClick={() => setShowLogin(true)}
 					>
 						<PersonRounded className={`text-white`} fontSize='large' />
-					</Link>
+					</button>
 				</div>
 			</header>
 
@@ -518,6 +520,11 @@ const Header = () => {
 					</menu>
 				)
 			}
+
+			<LoginPopUp
+				showLogin={showLogin}
+				setShowLogin={setShowLogin}
+			/>
 		</>
 	);
 };
