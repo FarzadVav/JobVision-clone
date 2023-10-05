@@ -209,6 +209,7 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setJobAdsFilteredHandler }
 
   useEffect(() => {
     setFilters(initialFiltersValues)
+    chekFilters()
   }, [location.href])
 
   const chekFilters = () => {
