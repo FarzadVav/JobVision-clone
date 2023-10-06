@@ -237,8 +237,7 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setJobAdsFilteredHandler }
   return (
     <div className={`list-scrollbar w-full mt-6 flex items-center pb-3 overflow-x-auto sm:overflow-visible`}>
       <button
-        className={`bg-jv-danger text-white min-w-max flex justify-center items-center px-4 py-1
-          ml-3 rounded-full cursor-pointer ${showClearFilters ? '' : 'opacity-20 cursor-not-allowed'}`}
+        className={`bg-jv-danger text-white min-w-max flex justify-center items-center px-4 py-1 ml-3 rounded-full ${showClearFilters ? 'cursor-pointer active:scale-95' : 'opacity-20 cursor-not-allowed'}`}
         onClick={() => {
           redirect('/jobs')
           setJobAdsToDefault()

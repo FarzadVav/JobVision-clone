@@ -187,15 +187,19 @@ const Header = () => {
 						{
 							auth.isLogin ? (
 								<>
-									<button
-										className={`btn btn-danger`}
-										onClick={() => auth.logOutHandler()}
-									>
-										<LogoutRounded />
-									</button>
+									{
+										location.pathname === '/d_employer' ? (
+											<button
+												className={`btn btn-danger`}
+												onClick={() => auth.logOutHandler()}
+											>
+												<LogoutRounded />
+											</button>
+										) : null
+									}
 									<Link
 										className={`btn btn-primary mr-3`}
-										to={``}
+										to={`/d_employer`}
 									>
 										پنل کارفرمایان
 									</Link>
