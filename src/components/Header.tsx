@@ -191,7 +191,10 @@ const Header = () => {
 										location.pathname === '/d_employer' ? (
 											<button
 												className={`btn btn-danger`}
-												onClick={() => auth.logOutHandler()}
+												onClick={() => {
+													redirect('/')
+													auth.logOutHandler()
+												}}
 											>
 												<LogoutRounded />
 											</button>

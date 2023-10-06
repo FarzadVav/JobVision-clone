@@ -11,7 +11,7 @@ type authTypes = {
 const authContext = createContext({} as authTypes)
 
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isLogin, setIsLogin] = useState<boolean>(false)
+  const [isLogin, setIsLogin] = useState<boolean>(true)
 
   useEffect(() => {
     if (getToken()) loginHandler()
@@ -24,6 +24,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
     document.cookie = `jv_token=${tokenGenerator()}; expires=${expiryDate}`;
     setIsLogin(true)
   }
+
   const logOutHandler = () => {
     const expiryDate = new Date()
     document.cookie = `jv_token=none; expires=${expiryDate}`
