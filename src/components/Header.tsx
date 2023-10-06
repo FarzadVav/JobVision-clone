@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState, AnimationEvent } from "react";
+import { useContext, useEffect, useRef, useState, AnimationEvent } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
-import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded, NavigateBeforeRounded } from '@mui/icons-material';
+import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded, NavigateBeforeRounded, LogoutRounded } from '@mui/icons-material';
 
 import tokenGenerator from "../utils/tokenGenerator.ts";
 import MegaMenusTypes from "../types/megaMenu.types.ts";
 import LoginPopUp from "./LoginPopUp.tsx";
+import authContext from "../context/AuthContext.tsx";
 
 const megaMenus: MegaMenusTypes[] = [
 	{
@@ -97,6 +98,7 @@ const megaMenus: MegaMenusTypes[] = [
 
 const Header = () => {
 	const redirect = useNavigate()
+	const auth = useContext(authContext)
 	const [showMegaMenu, setShowMegaMenu] = useState<boolean>(false)
 	const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
 	const [showMobileMenuJobs, setShowMobileMenuJobs] = useState<boolean>(false)
@@ -182,18 +184,39 @@ const Header = () => {
 						</ul>
 					</nav>
 					<div className={`h-full flex justify-center items-center`}>
-						<button
-							className={`btn btn-primary`}
-							onClick={() => setShowLogin(true)}
-						>
-							ورود / ثبت نام
-						</button>
-						<Link
-							className={'nav-link mr-5 xl:mr-7'}
-							to={``}
-						>
-							بخش کارفرمایان
-						</Link>
+						{
+							auth.isLogin ? (
+								<>
+									<button
+										className={`btn btn-danger`}
+										onClick={() => auth.logOutHandler()}
+									>
+										<LogoutRounded />
+									</button>
+									<Link
+										className={`btn btn-primary mr-3`}
+										to={``}
+									>
+										پنل کارفرمایان
+									</Link>
+								</>
+							) : (
+								<>
+									<button
+										className={`btn btn-primary`}
+										onClick={() => setShowLogin(true)}
+									>
+										ورود / ثبت نام
+									</button>
+									<Link
+										className={'nav-link mr-5 xl:mr-7'}
+										to={``}
+									>
+										بخش کارفرمایان
+									</Link>
+								</>
+							)
+						}
 						<Link
 							className={`nav-link pr-4 mr-5 relative before:absolute before:w-[1px] before:h-10 before:right-0 before:content-[''] before:bg-slate-200 xl:mr-7 xl:pr-5`}
 							to={``}

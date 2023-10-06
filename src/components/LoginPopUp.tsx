@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -6,8 +6,8 @@ import { z } from 'zod';
 import TextInput from './inputs/TextInput';
 import { CloseRounded, EmailOutlined, Verified, VpnKeyOutlined } from '@mui/icons-material';
 import PulseLoader from "react-spinners/PulseLoader";
-import tokenGenerator from '../utils/tokenGenerator';
 import { Snackbar } from '@mui/material';
+import authContext from '../context/AuthContext';
 
 type LoginPopUpProps = {
   showLogin: boolean;
@@ -33,14 +33,13 @@ const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
   } = useForm<formTypes>({
     resolver: zodResolver(schema)
   })
+  const auth = useContext(authContext)
   const [showAlert, setShowAlert] = useState<boolean>(false)
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     await new Promise((resolve) => setTimeout(() => {
       console.log(data);
-      const expiryDate = new Date()
-      expiryDate.setMonth(expiryDate.getMonth() + 1)
-      document.cookie = `jv_token=${tokenGenerator()}; expires=${expiryDate}`;
+      auth.loginHandler()
       reset()
       setShowAlert(true)
       return resolve
