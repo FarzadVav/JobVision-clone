@@ -238,12 +238,24 @@
     @apply border-jv-dark bg-jv-dark text-white;
   }
 
+  .btn-white {
+    @apply border-white bg-white text-jv-primary;
+  }
+
   .btn-out-dark {
-    @apply text-jv-dark border border-solid border-jv-dark hover-dark;
+    @apply hover-dark text-jv-dark border border-solid border-jv-dark;
+  }
+
+  .btn-out-white {
+    @apply hover-white text-white border border-solid border-white;
   }
 
   .hover-dark {
     @apply hover:bg-jv-dark hover:text-white;
+  }
+
+  .hover-white {
+    @apply hover:bg-white hover:text-jv-primary;
   }
 
   .btn-light {

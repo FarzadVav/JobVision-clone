@@ -1,34 +1,32 @@
 import { ReactNode, Suspense } from "react";
 import { Skeleton } from "@mui/material";
+import { PuffLoader } from "react-spinners";
 
 const PageLoader = () => {
 	return (
 		<div className={`wrapper my-12`}>
-			<Skeleton className={`!transform-none`} height={45} animation="wave" />
-			<Skeleton className={`!transform-none opacity-60 !mt-2 !w-2/3`} height={30} animation="wave" />
-			<Skeleton className={`!transform-none !mt-2`} height={225} animation="wave" />
-			<div className={`w-full mt-4 opacity-75`}>
-				<Skeleton className={`!transform-none !w-2/3`} height={12} animation="wave" />
-				<Skeleton className={`!transform-none !mt-2`} height={12} animation="wave" />
-				<Skeleton className={`!transform-none !mt-2 !w-5/6`} height={12} animation="wave" />
+			<div className={`w-full flex`}>
+				<Skeleton className={`!transform-none !w-2/3`} height={75} animation="wave" />
+				<Skeleton className={`!transform-none !w-1/3 !mr-2`} height={75} animation="wave" />
 			</div>
-			<div className={`w-full mt-4 opacity-60`}>
-				<Skeleton className={`!transform-none !w-5/6`} height={12} animation="wave" />
-				<Skeleton className={`!transform-none !mt-2 !w-2/3`} height={12} animation="wave" />
-				<Skeleton className={`!transform-none !mt-2`} height={12} animation="wave" />
-			</div>
-			<div className={`w-full mt-4 opacity-40`}>
-				<Skeleton className={`!transform-none !w-2/3`} height={12} animation="wave" />
-				<Skeleton className={`!transform-none !mt-2 !w-5/6`} height={12} animation="wave" />
-				<Skeleton className={`!transform-none !mt-2`} height={12} animation="wave" />
-			</div>
+			<Skeleton className={`!transform-none !mt-2`} height={50} animation="wave" />
+			<Skeleton className={`!transform-none !mt-2`} height={20} animation="wave" />
 		</div>
 	)
 };
 
-const LazyPage = ({ children }: { children: ReactNode }) => {
+type LazyPageProps = {
+	children: ReactNode;
+	minimal?: boolean
+}
+
+const LazyPage = ({ children, minimal }: LazyPageProps) => {
 	return (
-		<Suspense fallback={<PageLoader />}>
+		<Suspense
+			fallback={
+				minimal ? <PuffLoader color="#5660F2" /> : <PageLoader />
+			}
+		>
 			{children}
 		</Suspense>
 	);

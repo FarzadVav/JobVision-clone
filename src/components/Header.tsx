@@ -188,7 +188,7 @@ const Header = () => {
 							auth.isLogin ? (
 								<>
 									{
-										location.pathname === '/d_employer' ? (
+										location.pathname.includes('/d_employer') ? (
 											<button
 												className={`btn btn-danger`}
 												onClick={() => {
