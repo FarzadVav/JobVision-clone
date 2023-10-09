@@ -1,12 +1,13 @@
-import React, { useContext } from "react"
-import { Navigate } from "react-router-dom"
+import React, { lazy, useContext } from "react"
 
+const NotFound = lazy(() => import('./../pages/NotFound'))
 import authContext from "../context/AuthContext"
+import LazyPage from "./LazyPage.tsx"
 
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   const auth = useContext(authContext)
 
-  return auth.isLogin ? children : <Navigate to={`/404`} />
+  return auth.isLogin ? children : <LazyPage><NotFound /></LazyPage>
 }
 
 export default PrivateRoute

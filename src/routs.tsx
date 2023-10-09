@@ -79,14 +79,6 @@ const routes: routesProps[] = [
 		]
 	},
 	{
-		path: '/404',
-		element: (
-			<LazyPage>
-				<NotFound />
-			</LazyPage>
-		)
-	},
-	{
 		path: '*',
 		element: (
 			<LazyPage>

@@ -1,5 +1,5 @@
 const getToken = () => {
-  return document.cookie.split(';').find(c => c.includes('jv_token'))
+  return document.cookie.split(';').find(c => c.trim().startsWith('jv_token='))
 }
 
 export default getToken

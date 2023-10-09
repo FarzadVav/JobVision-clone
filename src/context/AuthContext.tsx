@@ -19,9 +19,10 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
   }, [])
 
   const loginHandler = () => {
+    logOutHandler()
     const expiryDate = new Date()
     expiryDate.setMonth(expiryDate.getMonth() + 1)
-    document.cookie = `jv_token=${tokenGenerator()}; expires=${expiryDate}`;
+    document.cookie = `jv_token=${tokenGenerator()}; expires=${expiryDate}`
     setIsLogin(true)
   }
 
