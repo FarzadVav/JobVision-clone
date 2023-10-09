@@ -333,7 +333,10 @@ const Footer = () => {
         </p>
 
         <div className={`w-full flex justify-between items-center pt-6 pb-2 mt-6 sm:pb-6`}>
-          <Link to={`/`}>
+          <Link
+            className={`btn pr-0`}
+            to={`/`}
+          >
             <img
               src={`/images/logo-white.svg`}
               alt={`لوگوی جاب ویژن`}

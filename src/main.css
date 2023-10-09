@@ -203,15 +203,15 @@
   }
 
   .nav-link {
-    @apply h-full flex justify-center items-center hover:text-jv-primary;
+    @apply h-full flex justify-center items-center hover:text-jv-primary active:opacity-75;
   }
 
   .btn {
-    @apply w-max h-10 flex justify-center items-center gap-3 px-5 rounded cursor-pointer hover:brightness-110;
+    @apply w-max h-10 flex justify-center items-center gap-3 px-5 rounded cursor-pointer hover:brightness-110 active:scale-95;
   }
 
   .btn-sm {
-    @apply w-max h-8 flex justify-center items-center gap-2 px-3 rounded cursor-pointer hover:brightness-110;
+    @apply w-max h-8 flex justify-center items-center gap-2 px-3 rounded cursor-pointer hover:brightness-110 active:scale-95;
   }
 
   form .btn {
