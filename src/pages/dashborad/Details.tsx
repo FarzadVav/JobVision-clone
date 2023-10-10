@@ -10,14 +10,18 @@ const schema = z.object({
   about: z.string().nonempty().min(16).max(9999),
   year: z.string().nonempty().regex(/^[0-9]+$/).min(4).max(4),
   employees: z.string().nonempty().regex(/^[0-9]+$/),
-  activity: z.string().nonempty().regex(/^[0-9]+$/),
+  activity: z.string().nonempty(),
+  pvOwnerShip: z.string().nullable(),
+  governmentalOwnerShip: z.string().nullable()
 })
 
 type formTypes = {
   about: string;
   year: string;
   employees: string;
-  activity: string
+  activity: string;
+  pvOwnerShip: string;
+  governmentalOwnerShip: string;
 }
 
 const Details = () => {
@@ -25,6 +29,7 @@ const Details = () => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    // setValue,
     reset
   } = useForm<formTypes>({
     resolver: zodResolver(schema)
@@ -90,6 +95,37 @@ const Details = () => {
         >
           <ManageSearchRounded />
         </TextInput>
+      </div>
+      <div className={`w-full flex items-center mt-5`}>
+        <span className={`dana-bold`}>
+          نوع ماکلیت
+        </span>
+        <label
+          className={`mr-3 ${errors.pvOwnerShip ? 'text-jv-danger' : ''}`}
+          htmlFor="pv"
+        >
+          شخصی
+        </label>
+        <input
+          id="pv"
+          className={`mr-1`}
+          {...register('pvOwnerShip')}
+          name="ownership"
+          type="radio"
+        />
+        <label
+          className={`mr-3 ${errors.governmentalOwnerShip ? 'text-jv-danger' : ''}`}
+          htmlFor="governmental"
+        >
+          دولتی
+        </label>
+        <input
+          id="governmental"
+          className={`mr-1`}
+          {...register('governmentalOwnerShip')}
+          name="ownership"
+          type="radio"
+        />
       </div>
       <button
         className={`btn btn-primary mt-5`}
