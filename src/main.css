@@ -293,7 +293,7 @@
   }
 
   .input {
-    @apply bg-none w-[calc(100%-3rem)] h-full absolute left-0 top-0 py-2 pl-5 rounded placeholder:opacity-75 
+    @apply bg-transparent w-[calc(100%-3rem)] h-full absolute left-0 top-0 py-2 pl-5 rounded placeholder:opacity-75 
     focus:placeholder:opacity-100;
   }
 

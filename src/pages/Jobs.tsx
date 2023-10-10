@@ -168,7 +168,7 @@ const Jobs = () => {
 		const city = searchParams.get('city')
 		const cooperationType = searchParams.get('cooperationType')
 		const cooperationTypeCity = searchParams.get('cooperationType-city')
-		
+
 		if (search) {
 			jobAdsInParams = jobAds.filter(job => {
 				if (
@@ -674,7 +674,7 @@ const Jobs = () => {
 											key={job.id}
 											className={`w-full`}
 											onClick={() => {
-												setJobAds(prev => {
+												setJobAdsFiltered(prev => {
 													const newJobAds = prev.map(jobAd => {
 														if (jobAd.id === job.id) {
 															jobAd.selected = true

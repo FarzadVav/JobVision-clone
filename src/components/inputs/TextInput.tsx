@@ -5,10 +5,11 @@ type TextInputProps = {
   register: {};
   placeholder: string;
   error?: boolean;
+  numeric?: boolean;
   children: ReactNode
 }
 
-const TextInput = ({ customClass, register, placeholder, error, children }: TextInputProps) => {
+const TextInput = ({ customClass, register, placeholder, error, numeric, children }: TextInputProps) => {
   const [focus, setFocus] = useState<boolean>(false)
 
   return (
@@ -20,6 +21,7 @@ const TextInput = ({ customClass, register, placeholder, error, children }: Text
         placeholder={placeholder}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
+        inputMode={numeric ? 'numeric' : 'text'}
       />
       <div className={`input-icon ${error ? 'text-jv-danger group-hover:text-jv-danger' : (focus && !error) ? 'text-jv-primary' : 'group-hover:text-jv-primary'}`}>
         {children}

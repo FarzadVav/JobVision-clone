@@ -4,7 +4,7 @@ import { PuffLoader } from "react-spinners";
 
 const PageLoader = () => {
 	return (
-		<div className={`wrapper my-12`}>
+		<div className={`current-height wrapper my-12`}>
 			<div className={`w-full flex`}>
 				<Skeleton className={`!transform-none !w-2/3`} height={75} animation="wave" />
 				<Skeleton className={`!transform-none !w-1/3 !mr-2`} height={75} animation="wave" />
