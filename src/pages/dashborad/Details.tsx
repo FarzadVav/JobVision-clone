@@ -1,6 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
+
+import TextArea from "../../components/inputs/TextArea"
 import TextInput from "../../components/inputs/TextInput"
 import Title from "../../components/Title"
 import { PulseLoader } from "react-spinners"
@@ -11,25 +13,16 @@ const schema = z.object({
   year: z.string().nonempty().regex(/^[0-9]+$/).min(4).max(4),
   employees: z.string().nonempty().regex(/^[0-9]+$/),
   activity: z.string().nonempty(),
-  pvOwnerShip: z.string().nullable(),
-  governmentalOwnerShip: z.string().nullable()
+  ownership: z.string().nonempty()
 })
 
-type formTypes = {
-  about: string;
-  year: string;
-  employees: string;
-  activity: string;
-  pvOwnerShip: string;
-  governmentalOwnerShip: string;
-}
+type formTypes = z.infer<typeof schema>
 
 const Details = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    // setValue,
     reset
   } = useForm<formTypes>({
     resolver: zodResolver(schema)
@@ -53,14 +46,14 @@ const Details = () => {
           درباره شرکت
         </label>
       </Title>
-      <TextInput
+      <TextArea
         customClass={`bg-jv-bright`}
         register={{ ...register('about') }}
         placeholder={`درباره شرکت`}
         error={!!errors.about}
       >
         <HelpOutlineRounded />
-      </TextInput>
+      </TextArea>
 
       <Title withOutIcon>
         <label className={`!text-xl mb-2 mt-5`}>
@@ -101,7 +94,7 @@ const Details = () => {
           نوع ماکلیت
         </span>
         <label
-          className={`mr-3 ${errors.pvOwnerShip ? 'text-jv-danger' : ''}`}
+          className={`mr-3 ${errors.ownership ? 'text-jv-danger' : ''}`}
           htmlFor="pv"
         >
           شخصی
@@ -109,12 +102,12 @@ const Details = () => {
         <input
           id="pv"
           className={`mr-1`}
-          {...register('pvOwnerShip')}
-          name="ownership"
+          {...register('ownership')}
+          value={'pv'}
           type="radio"
         />
         <label
-          className={`mr-3 ${errors.governmentalOwnerShip ? 'text-jv-danger' : ''}`}
+          className={`mr-3 ${errors.ownership ? 'text-jv-danger' : ''}`}
           htmlFor="governmental"
         >
           دولتی
@@ -122,8 +115,8 @@ const Details = () => {
         <input
           id="governmental"
           className={`mr-1`}
-          {...register('governmentalOwnerShip')}
-          name="ownership"
+          value={'governmental'}
+          {...register('ownership')}
           type="radio"
         />
       </div>

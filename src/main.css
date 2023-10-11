@@ -292,20 +292,36 @@
     rounded relative hover:border-jv-primary;
   }
 
+  .textarea-bg {
+    @apply bg-white text-jv-dark w-full h-44 border border-solid border-jv-dark flex justify-between items-center
+    rounded relative hover:border-jv-primary;
+  }
+
   .input {
     @apply bg-transparent w-[calc(100%-3rem)] h-full absolute left-0 top-0 py-2 pl-5 rounded placeholder:opacity-75 
     focus:placeholder:opacity-100;
+  }
+
+  .textarea {
+    @apply bg-transparent w-[calc(100%-3rem)] h-full absolute left-0 top-0 py-2 pl-5 rounded placeholder:opacity-75 
+    focus:placeholder:opacity-100 resize-none;
   }
 
   .input-icon {
     @apply absolute top-0 right-0 w-12 h-12 flex justify-center items-center;
   }
 
-  .input-icon svg {
+  .textarea-icon {
+    @apply absolute top-0 right-0 w-12 h-12 flex justify-center items-center;
+  }
+
+  .input-icon svg,
+  .textarea-icon svg {
     @apply !w-6 !h-6;
   }
 
-  .input-icon * {
+  .input-icon *,
+  .textarea-icon * {
     @apply duration-0;
   }
 }
