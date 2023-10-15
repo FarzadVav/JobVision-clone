@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState, AnimationEvent } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded, NavigateBeforeRounded, LogoutRounded } from '@mui/icons-material';
 
@@ -190,7 +190,7 @@ const Header = () => {
 									{
 										location.pathname.includes('/d_employer') ? (
 											<button
-												className={`btn btn-danger`}
+												className={`btn btn-out-danger`}
 												onClick={() => {
 													redirect('/')
 													auth.logOutHandler()
@@ -200,17 +200,17 @@ const Header = () => {
 											</button>
 										) : null
 									}
-									<Link
-										className={`btn btn-primary mr-3`}
+									<NavLink
+										className={link => `btn ${link.isActive ? 'btn-primary' : 'btn-out-primary'} mr-3`}
 										to={`/d_employer`}
 									>
 										پنل کارفرمایان
-									</Link>
+									</NavLink>
 								</>
 							) : (
 								<>
 									<button
-										className={`btn btn-primary`}
+										className={`btn btn-out-primary`}
 										onClick={() => setShowLogin(true)}
 									>
 										ورود / ثبت نام

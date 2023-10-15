@@ -231,27 +231,27 @@
   }
 
   .btn-out-primary {
-    @apply text-jv-primary border border-solid border-jv-primary hover:bg-jv-primary hover:text-white;
+    @apply text-jv-primary border border-solid border-jv-primary hover:btn-primary;
   }
 
   .btn-dark {
     @apply border-jv-dark bg-jv-dark text-white;
   }
 
+  .btn-out-dark {
+    @apply hover-dark text-jv-dark border border-solid border-jv-dark;
+  }
+  
+  .hover-dark {
+    @apply hover:bg-jv-dark hover:text-white;
+  }
+
   .btn-white {
     @apply border-white bg-white text-jv-primary;
   }
 
-  .btn-out-dark {
-    @apply hover-dark text-jv-dark border border-solid border-jv-dark;
-  }
-
   .btn-out-white {
     @apply hover-white text-white border border-solid border-white;
-  }
-
-  .hover-dark {
-    @apply hover:bg-jv-dark hover:text-white;
   }
 
   .hover-white {
@@ -264,11 +264,14 @@
 
   .btn-bright {
     @apply border-jv-bright bg-jv-bright text-jv-dark hover:brightness-95;
-    /* height: 100 */
   }
 
   .btn-danger {
     @apply border-jv-danger bg-jv-danger text-white;
+  }
+
+  .btn-out-danger {
+    @apply border border-solid border-jv-danger text-jv-danger hover:btn-danger;
   }
 
   .btn-success {
