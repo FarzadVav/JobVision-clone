@@ -300,8 +300,16 @@
     focus:placeholder:opacity-100;
   }
 
+  .input-with-btn {
+    @apply bg-transparent w-[calc(100%-6rem)] h-full absolute left-1/2 top-0 -translate-x-1/2 py-2 rounded placeholder:opacity-75 focus:placeholder:opacity-100;
+  }
+
   .input-icon {
-    @apply absolute top-0 right-0 w-12 h-12 flex justify-center items-center;
+    @apply absolute top-0 right-0 w-12 h-full flex justify-center items-center;
+  }
+
+  .input-btn {
+    @apply absolute top-0 left-0 w-12 h-full flex justify-center items-center rounded-full cursor-pointer bg-inherit hover:brightness-95;
   }
 
   .textarea-bg {
@@ -319,11 +327,13 @@
   }
 
   .input-icon svg,
+  .input-btn svg,
   .textarea-icon svg {
     @apply !w-6 !h-6;
   }
 
   .input-icon *,
+  .input-btn *,
   .textarea-icon * {
     @apply duration-0;
   }

@@ -2,9 +2,10 @@ import { useState } from 'react'
 import { z } from "zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import ComboBox from '../../components/inputs/ComboBox'
+import { StarBorder } from '@mui/icons-material'
 
 const COOPERATION_TYPE = z.enum(['full-time', 'part-time', 'as-projects'])
-const BUSINESS_TRIPS = z.enum(['month', 'year', 'ever', 'some-times', 'none'])
 const GENDER = z.enum(['male', 'female', 'none'])
 
 const schema = z.object({
@@ -19,7 +20,7 @@ const schema = z.object({
   salary_2: z.string().nonempty().regex(/^[0-9]+$/),
   workTimes: z.string().nonempty(),
   cooperationType: COOPERATION_TYPE,
-  businessTrips: BUSINESS_TRIPS,
+  businessTrips: z.string().nonempty(),
   businessTripsNumbers: z.string().nonempty().regex(/^[0-9]+$/),
   description: z.string().nonempty(),
   age_1: z.string().nonempty().regex(/^[0-9]+$/),
@@ -32,10 +33,10 @@ type formTypes = z.infer<typeof schema>
 
 const AddJobAd = () => {
   const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    reset
+    // register,
+    // handleSubmit,
+    // formState: { errors, isSubmitting },
+    // reset
   } = useForm<formTypes>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -59,7 +60,18 @@ const AddJobAd = () => {
   })
 
   return (
-    <div>AddJobAd</div>
+    <div className={`w-full flex flex-col`}>
+      <form className={`w-full flex flex-col`}>
+        <ComboBox
+          customClass={`bg-jv-bright`}
+          placeholder='شاخص های کلیدی از نظر کارفرما'
+          list={form.abilityForBoss}
+          addItemHandler={(item: string) => setForm(prev => ({ ...prev, abilityForBoss: [...prev.abilityForBoss, item] }))}
+        >
+          <StarBorder />
+        </ComboBox>
+      </form>
+    </div>
   )
 }
 
