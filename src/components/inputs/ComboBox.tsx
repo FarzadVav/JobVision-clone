@@ -16,10 +16,10 @@ const ComboBox = ({ customClass, placeholder, error, list, addItemHandler, child
   console.log(list);
 
   return (
-    
+
     <div className={`input-bg group ${error ? 'border-jv-danger hover:border-jv-danger' : (focus && !error) ? 'border-jv-primary' : ''} ${customClass}`}>
       <input
-        className={`input-with-btn`}
+        className={`combo`}
         type="text"
         placeholder={placeholder}
         onFocus={() => setFocus(true)}
@@ -29,7 +29,7 @@ const ComboBox = ({ customClass, placeholder, error, list, addItemHandler, child
         {children}
       </div>
       <button
-        className={`input-btn ${error ? 'text-jv-danger group-hover:text-jv-danger' : (focus && !error) ? 'text-jv-primary' : 'group-hover:text-jv-primary'}`}
+        className={`combo-btn ${error ? 'text-jv-danger group-hover:text-jv-danger' : (focus && !error) ? 'text-jv-primary' : 'group-hover:text-jv-primary'}`}
         onClick={event => {
           addItemHandler(event.currentTarget.value)
         }}
