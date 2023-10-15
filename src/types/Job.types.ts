@@ -15,7 +15,7 @@ type JobAdsTypes = {
   salary: [number, number] | number | 'none';
   workTimes: string;
   cooperationType: 'full-time' | 'part-time' | 'as-projects';
-  businessTrips: [number, ('month' | 'year')] | 'ever' | 'some-times' | 'none';
+  businessTrips: string | null;
   benefits: string[];
   abilityForBoss: string[];
   description: string;

@@ -45,7 +45,7 @@ const testJobAds: JobAdsTypes[] = [
 		knowledgeBasedCompany: false,
 		cooperationType: 'as-projects',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
-		businessTrips: [7, 'month'],
+		businessTrips: '7 روز در مار',
 		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
 		abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
 		description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
@@ -83,7 +83,7 @@ const testJobAds: JobAdsTypes[] = [
 		knowledgeBasedCompany: true,
 		cooperationType: 'full-time',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
-		businessTrips: [7, 'month'],
+		businessTrips: null,
 		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
 		abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
 		description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
@@ -121,7 +121,7 @@ const testJobAds: JobAdsTypes[] = [
 		knowledgeBasedCompany: true,
 		cooperationType: 'full-time',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
-		businessTrips: [7, 'month'],
+		businessTrips: 'همیشه در سفر',
 		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
 		abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
 		description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
@@ -281,15 +281,7 @@ const Jobs = () => {
 									سفر های کاری
 								</span>
 								<span className={`block text-sm mt-1`}>
-									{
-										singleJobAd.businessTrips === 'ever' ? 'همیشه در سفر'
-											: singleJobAd.businessTrips === 'some-times' ? 'در صورت نیاز'
-												: singleJobAd.businessTrips === 'none' ? '---'
-													: `${singleJobAd.businessTrips[0]}
-														${singleJobAd.businessTrips[1] === 'month' ? 'روز' : 'ماه'}
-														در
-														${singleJobAd.businessTrips[1] === 'month' ? 'ماه' : 'سال'}`
-									}
+									{singleJobAd.businessTrips || '-'}
 								</span>
 							</div>
 							<div className={`w-full px-3 sm:w-1/2`}>
