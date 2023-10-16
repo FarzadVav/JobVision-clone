@@ -9,17 +9,17 @@ type AutoCompleteProps = {
   placeholder: string;
   error?: boolean;
   children: ReactNode;
-  datas: { name: string }[];
+  datas: string[];
 }
 
 const AutoComplete = ({ customClass, register, setValue, placeholder, error, children, datas }: AutoCompleteProps) => {
   const [focus, setFocus] = useState<boolean>(false)
-  const [searchedDatas, setSearchedDatas] = useState<{ name: string; }[]>(datas)
+  const [searchedDatas, setSearchedDatas] = useState<typeof datas>(datas)
 
   const searchedDatasHandler = (value: string) => {
     setSearchedDatas([])
     datas.map(data => {
-      if (data.name.includes(value)) {
+      if (data.includes(value)) {
         setSearchedDatas(prev => ([...prev, data]))
       }
     })
@@ -63,11 +63,11 @@ const AutoComplete = ({ customClass, register, setValue, placeholder, error, chi
                 className={`bg-jv-bright border-b border-solid border-jv-light w-full py-2 pr-2 cursor-pointer
                 hover:brightness-[0.97] last:border-none`}
                 onMouseDown={() => {
-                  setValue(register.name, data.name)
+                  setValue(register.name, data)
                   setFocus(false)
                 }}
               >
-                {data.name}
+                {data}
               </li>
             )) : 'موردی برای نشان دادن وجود ندارد'
           }

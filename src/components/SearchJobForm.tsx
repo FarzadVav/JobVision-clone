@@ -20,17 +20,9 @@ type formTypes = {
   city: string;
 }
 
-const catDatas = [
-  { name: 'programming' },
-  { name: 'بازاریابی' },
-  { name: 'فتوشاپ' },
-]
+const catDatas = ['programming', 'بازاریابی', 'فتوشاپ']
 
-const cityDatas = [
-  { name: 'مشهد' },
-  { name: 'تهران' },
-  { name: 'اصفهان' },
-]
+const cityDatas = ['مشهد', 'تهران', 'اصفهان']
 
 const SearchJobForm = ({ customClass }: { customClass?: string }) => {
   const {

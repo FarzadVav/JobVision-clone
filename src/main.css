@@ -421,7 +421,7 @@
   .hidden-message-box {
     animation: hidden-message-box 1s ease forwards;
   }
-
+  
   @keyframes hidden-message-box {
     0% {
       opacity: 1;
@@ -430,6 +430,19 @@
     100% {
       opacity: 0;
       transform: scale(0.5);
+    }
+  }
+  
+  .show-fade {
+    animation: show-fade 750ms ease;
+  }
+
+  @keyframes show-fade {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
     }
   }
 }

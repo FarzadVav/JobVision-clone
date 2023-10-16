@@ -41,8 +41,8 @@ const Details = () => {
       className={`w-full flex flex-col`}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Title withOutIcon>
-        <label className={`!text-xl mb-2`}>
+      <Title withOutIcon customClass={`mb-2.5`}>
+        <label className={`!text-xl`}>
           درباره شرکت
         </label>
       </Title>
@@ -55,8 +55,8 @@ const Details = () => {
         <HelpOutlineRounded />
       </TextArea>
 
-      <Title withOutIcon>
-        <label className={`!text-xl mb-2 mt-5`}>
+      <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+        <label className={`!text-xl`}>
           اطلاعات شرکت
         </label>
       </Title>
