@@ -3,7 +3,7 @@ import Title from "./../../components/Title"
 
 const Employer = () => {
   return (
-    <div className={`wrapper flex my-12`}>
+    <div className={`wrapper flex mt-12 pb-12`}>
       <aside className={`bg-jv-primary w-3/12 h-max flex flex-col justify-center items-center p-5 rounded-md sticky top-[5.25rem] overflow-hidden`}>
         <div className={`bg-white w-20 h-20 flex justify-center items-center rounded-md relative`}>
           <img
@@ -53,7 +53,7 @@ const Employer = () => {
         </ul>
       </aside>
 
-      <section className={`max-h-screen bg-jv-bright w-9/12 h-max flex justify-center items-center p-5 mr-3 rounded-md`}>
+      <section className={`max-h-screen bg-jv-bright w-9/12 h-max p-5 mr-3 rounded-md overflow-y-auto`}>
         <Outlet />
       </section>
     </div>

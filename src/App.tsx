@@ -12,7 +12,9 @@ const App = () => {
 		<AuthContextProvider>
 			<Header />
 			{router}
-			<Footer />
+			{
+				!location.pathname.includes('d_employer') ? <Footer /> : null
+			}
 		</AuthContextProvider>
 	);
 };
