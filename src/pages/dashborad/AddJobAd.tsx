@@ -2,29 +2,30 @@ import { useState } from 'react'
 import { z } from "zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import ComboBox from '../../components/inputs/ComboBox'
 import { SearchRounded, StarBorder, WorkOutlineRounded } from '@mui/icons-material'
+import { PulseLoader } from 'react-spinners'
+
+import ComboBox from '../../components/inputs/ComboBox'
 import MultiSelectBox from '../../components/inputs/MultiSelectBox'
 import Title from '../../components/Title'
 import AutoComplete from '../../components/inputs/AutoComplete'
 import TextInput from '../../components/inputs/TextInput'
-import { PulseLoader } from 'react-spinners'
 import TextArea from '../../components/inputs/TextArea'
 
-const catDatas = ['برنامه نویسی', 'بازاریابی', 'فتوشاپ']
+const categories = ['برنامه نویسی', 'بازاریابی', 'فتوشاپ']
 const datas = ['aaa', 'bbb', 'ccc']
 const cities = ['تهران', 'تبریز', 'مشهد']
 const cooperationTypes = ['پاره وقت', 'تمام وقت', 'پروژه ای']
 const genders = ['مرد', 'زن', 'فرقی ندارد']
 
-const COOPERATION_TYPE = z.enum(['full-time', 'part-time', 'as-projects'])
-const GENDER = z.enum(['', ...genders])
+const COOPERATION_TYPE = z.enum(['null', ...cooperationTypes])
+const GENDER = z.enum(['null', ...genders])
 
 const schema = z.object({
   category: z.string().nonempty(),
   title: z.string().nonempty().min(3).max(256),
+  address: z.string().nonempty().min(3).max(256),
   city: z.string().nonempty(),
-  location: z.string().nonempty().min(3).max(256),
   remote: z.boolean(),
   isUrgent: z.boolean(),
   salary_1: z.string().nonempty().regex(/^[0-9]+$/),
@@ -49,7 +50,11 @@ const AddJobAd = () => {
     formState: { errors, isSubmitting },
     reset
   } = useForm<formTypes>({
-    resolver: zodResolver(schema)
+    resolver: zodResolver(schema),
+    defaultValues: {
+      salary_2: '0',
+      age_2: '0'
+    }
   })
   const [form, setForm] = useState<{
     jobTags: string[];
@@ -83,6 +88,8 @@ const AddJobAd = () => {
       return resolve
     }, 1500));
   }
+
+  console.log(errors);
 
   return (
     <div className={`w-full flex flex-col`}>
@@ -120,14 +127,14 @@ const AddJobAd = () => {
 
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
-            آدرس مکان
+            آدرس و موقعیت
           </label>
         </Title>
         <TextInput
           customClass={`bg-jv-bright`}
-          register={{ ...register('location') }}
-          placeholder={`برای مثال هاشمیه، هاشمیه 4، پلاک 27`}
-          error={!!errors.location}
+          register={{ ...register('address') }}
+          placeholder={`برای مثال هاشمیه 24`}
+          error={!!errors.address}
         >
           <SearchRounded />
         </TextInput>
@@ -250,27 +257,11 @@ const AddJobAd = () => {
           register={{ ...register('category') }}
           setValue={setValue}
           placeholder={`برای مثال برنامه نویسی`}
-          datas={catDatas}
+          datas={categories}
           error={!!errors.category}
         >
           <WorkOutlineRounded />
         </AutoComplete>
-
-        <Title withOutIcon customClass={`mb-2.5 mt-5`}>
-          <label className={`!text-xl`}>
-            تگ های شغلی
-          </label>
-        </Title>
-        <MultiSelectBox
-          customClass={`bg-jv-bright`}
-          placeholder='برای مثال Front-End'
-          datas={datas}
-          list={form.jobTags}
-          error={(submittedForm && form.jobTags.length <= 0)}
-          addItemHandler={(item: string) => setForm(prev => ({ ...prev, jobTags: [...prev.jobTags, item] }))}
-          resetHandler={() => setForm(prev => ({ ...prev, jobTags: [] }))}
-          unSelectHandler={(item: string) => setForm(prev => ({ ...prev, jobTags: prev.jobTags.filter(tag => tag !== item) }))}
-        />
 
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
@@ -295,11 +286,11 @@ const AddJobAd = () => {
         </Title>
         <AutoComplete
           customClass={`bg-jv-bright`}
-          register={{ ...register('location') }}
+          register={{ ...register('cooperationType') }}
           setValue={setValue}
           placeholder={`برای مثال برنامه نویسی`}
           datas={cooperationTypes}
-          error={!!errors.location}
+          error={!!errors.cooperationType}
         >
           <WorkOutlineRounded />
         </AutoComplete>
@@ -319,6 +310,22 @@ const AddJobAd = () => {
         >
           <WorkOutlineRounded />
         </AutoComplete>
+
+        <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <label className={`!text-xl`}>
+            تگ های شغلی
+          </label>
+        </Title>
+        <MultiSelectBox
+          customClass={`bg-jv-bright`}
+          placeholder='برای مثال Front-End'
+          datas={datas}
+          list={form.jobTags}
+          error={(submittedForm && form.jobTags.length <= 0)}
+          addItemHandler={(item: string) => setForm(prev => ({ ...prev, jobTags: [...prev.jobTags, item] }))}
+          resetHandler={() => setForm(prev => ({ ...prev, jobTags: [] }))}
+          unSelectHandler={(item: string) => setForm(prev => ({ ...prev, jobTags: prev.jobTags.filter(tag => tag !== item) }))}
+        />
 
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>

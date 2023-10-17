@@ -1,6 +1,7 @@
 import { ReactNode, useState } from "react";
-import tokenGenerator from "../../utils/tokenGenerator";
 import { CloseRounded } from "@mui/icons-material";
+
+import tokenGenerator from "../../utils/tokenGenerator";
 
 type AutoCompleteProps = {
   customClass?: string;
