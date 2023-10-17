@@ -21,8 +21,6 @@ const MultiSelectBox = ({
   const [searchedDatas, setSearchedDatas] = useState<typeof datas>(datas)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  console.log(error);
-
   useEffect(() => {
     window.addEventListener('click', () => {
       setFocus(false)

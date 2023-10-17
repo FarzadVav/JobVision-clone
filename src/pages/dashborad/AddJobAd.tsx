@@ -9,31 +9,32 @@ import Title from '../../components/Title'
 import AutoComplete from '../../components/inputs/AutoComplete'
 import TextInput from '../../components/inputs/TextInput'
 import { PulseLoader } from 'react-spinners'
+import TextArea from '../../components/inputs/TextArea'
 
 const catDatas = ['برنامه نویسی', 'بازاریابی', 'فتوشاپ']
 const datas = ['aaa', 'bbb', 'ccc']
 const cities = ['تهران', 'تبریز', 'مشهد']
 const cooperationTypes = ['پاره وقت', 'تمام وقت', 'پروژه ای']
+const genders = ['مرد', 'زن', 'فرقی ندارد']
 
 const COOPERATION_TYPE = z.enum(['full-time', 'part-time', 'as-projects'])
-const GENDER = z.enum(['male', 'female', 'none'])
+const GENDER = z.enum(['', ...genders])
 
 const schema = z.object({
   category: z.string().nonempty(),
   title: z.string().nonempty().min(3).max(256),
   city: z.string().nonempty(),
-  location: z.string().nonempty(),
+  location: z.string().nonempty().min(3).max(256),
   remote: z.boolean(),
   isUrgent: z.boolean(),
   salary_1: z.string().nonempty().regex(/^[0-9]+$/),
   salary_2: z.string().regex(/^[0-9]+$/),
-  workTimes: z.string().nonempty(),
+  workTimes: z.string().nonempty().min(3).max(256),
   cooperationType: COOPERATION_TYPE,
   businessTrips: z.string().nonempty(),
-  businessTripsNumbers: z.string().nonempty().regex(/^[0-9]+$/),
-  description: z.string().nonempty(),
+  description: z.string().nonempty().min(3).max(256),
   age_1: z.string().nonempty().regex(/^[0-9]+$/),
-  age_2: z.string().nonempty().regex(/^[0-9]+$/),
+  age_2: z.string().regex(/^[0-9]+$/),
   gender: GENDER,
   endOfMilitaryService: z.boolean()
 })
@@ -48,10 +49,7 @@ const AddJobAd = () => {
     formState: { errors, isSubmitting },
     reset
   } = useForm<formTypes>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      salary_2: '0'
-    }
+    resolver: zodResolver(schema)
   })
   const [form, setForm] = useState<{
     jobTags: string[];
@@ -68,10 +66,17 @@ const AddJobAd = () => {
     languages: [],
     techs: []
   })
-  const [showSalary2, setShowSalary2] = useState<boolean>(false)
+  const [twoStepForms, setTwoStepsForms] = useState<{
+    salary: boolean;
+    age: boolean
+  }>({
+    salary: false,
+    age: false
+  })
   const [submittedForm, setSubmittedForm] = useState<boolean>(false)
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
+    console.log(123);
     await new Promise((resolve) => setTimeout(() => {
       console.log(data);
       reset()
@@ -98,6 +103,20 @@ const AddJobAd = () => {
         >
           <SearchRounded />
         </TextInput>
+
+        <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <label className={`!text-xl`}>
+            توضیحات
+          </label>
+        </Title>
+        <TextArea
+          customClass={`bg-jv-bright`}
+          register={{ ...register('description') }}
+          placeholder={`آگهی شغلی تان را شرح دهید...`}
+          error={!!errors.description}
+        >
+          <SearchRounded />
+        </TextArea>
 
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
@@ -129,6 +148,20 @@ const AddJobAd = () => {
 
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
+            سفر های کاری
+          </label>
+        </Title>
+        <TextInput
+          customClass={`bg-jv-bright`}
+          register={{ ...register('businessTrips') }}
+          placeholder={`برای مثال 1 هفته در سال`}
+          error={!!errors.businessTrips}
+        >
+          <SearchRounded />
+        </TextInput>
+
+        <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <label className={`!text-xl`}>
             میزان حقوق
           </label>
         </Title>
@@ -136,14 +169,14 @@ const AddJobAd = () => {
           <TextInput
             customClass={`bg-jv-bright`}
             register={{ ...register('salary_1') }}
-            placeholder={`برای مثال ${showSalary2 ? 'از ' : ''}20 میلیون تومان`}
+            placeholder={`برای مثال ${twoStepForms.salary ? 'از ' : ''}20 میلیون تومان`}
             error={!!errors.salary_1}
           >
             <SearchRounded />
           </TextInput>
           <TextInput
-            customClass={`show-fade bg-jv-bright mr-3 ${showSalary2 ? '' : 'hidden'}`}
-            register={{ ...register('salary_1') }}
+            customClass={`show-fade bg-jv-bright mr-3 ${twoStepForms.salary ? '' : 'hidden'}`}
+            register={{ ...register('salary_2') }}
             placeholder={`تا 30 میلیون تومان`}
             error={!!errors.salary_2}
           >
@@ -162,7 +195,47 @@ const AddJobAd = () => {
             className={`mr-2`}
             type="checkbox"
             onChange={event => {
-              setShowSalary2(event.currentTarget.checked)
+              setTwoStepsForms(prev => ({ ...prev, salary: event.target.checked }))
+            }}
+          />
+        </div>
+
+        <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <label className={`!text-xl`}>
+            میزان سن
+          </label>
+        </Title>
+        <div className={`w-full flex items-center`}>
+          <TextInput
+            customClass={`bg-jv-bright`}
+            register={{ ...register('age_1') }}
+            placeholder={`برای مثال ${twoStepForms.age ? 'از ' : ''}18 سال`}
+            error={!!errors.age_1}
+          >
+            <SearchRounded />
+          </TextInput>
+          <TextInput
+            customClass={`show-fade bg-jv-bright mr-3 ${twoStepForms.age ? '' : 'hidden'}`}
+            register={{ ...register('age_2') }}
+            placeholder={`تا 25 سال`}
+            error={!!errors.age_2}
+          >
+            <SearchRounded />
+          </TextInput>
+        </div>
+        <div className={`w-full flex items-center mt-5`}>
+          <label
+            className={`cursor-pointer`}
+            htmlFor="age_2"
+          >
+            ایجاد بازه سنی
+          </label>
+          <input
+            id='age_2'
+            className={`mr-2`}
+            type="checkbox"
+            onChange={event => {
+              setTwoStepsForms(prev => ({ ...prev, age: event.target.checked }))
             }}
           />
         </div>
@@ -227,6 +300,22 @@ const AddJobAd = () => {
           placeholder={`برای مثال برنامه نویسی`}
           datas={cooperationTypes}
           error={!!errors.location}
+        >
+          <WorkOutlineRounded />
+        </AutoComplete>
+
+        <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <label className={`!text-xl`}>
+            جنسیت
+          </label>
+        </Title>
+        <AutoComplete
+          customClass={`bg-jv-bright`}
+          register={{ ...register('gender') }}
+          setValue={setValue}
+          placeholder={`برای مثال فرقی ندارد`}
+          datas={genders}
+          error={!!errors.gender}
         >
           <WorkOutlineRounded />
         </AutoComplete>
