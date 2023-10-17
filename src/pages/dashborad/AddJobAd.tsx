@@ -12,6 +12,15 @@ import AutoComplete from '../../components/inputs/AutoComplete'
 import TextInput from '../../components/inputs/TextInput'
 import TextArea from '../../components/inputs/TextArea'
 
+const defaultFormValues = {
+  jobTags: [],
+  benefits: [],
+  abilityForBoss: [],
+  education: [],
+  languages: [],
+  techs: []
+}
+
 const categories = ['برنامه نویسی', 'بازاریابی', 'فتوشاپ']
 const datas = ['aaa', 'bbb', 'ccc']
 const cities = ['تهران', 'تبریز', 'مشهد']
@@ -26,8 +35,8 @@ const schema = z.object({
   title: z.string().nonempty().min(3).max(256),
   address: z.string().nonempty().min(3).max(256),
   city: z.string().nonempty(),
-  remote: z.boolean(),
-  isUrgent: z.boolean(),
+  remote: z.string(),
+  isUrgent: z.string(),
   salary_1: z.string().nonempty().regex(/^[0-9]+$/),
   salary_2: z.string().regex(/^[0-9]+$/),
   workTimes: z.string().nonempty().min(3).max(256),
@@ -37,7 +46,7 @@ const schema = z.object({
   age_1: z.string().nonempty().regex(/^[0-9]+$/),
   age_2: z.string().regex(/^[0-9]+$/),
   gender: GENDER,
-  endOfMilitaryService: z.boolean()
+  endOfMilitaryService: z.string()
 })
 
 type formTypes = z.infer<typeof schema>
@@ -53,7 +62,10 @@ const AddJobAd = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       salary_2: '0',
-      age_2: '0'
+      age_2: '0',
+      remote: '',
+      isUrgent: '',
+      endOfMilitaryService: '',
     }
   })
   const [form, setForm] = useState<{
@@ -63,14 +75,7 @@ const AddJobAd = () => {
     education: string[];
     languages: string[];
     techs: string[]
-  }>({
-    jobTags: [],
-    benefits: [],
-    abilityForBoss: [],
-    education: [],
-    languages: [],
-    techs: []
-  })
+  }>(defaultFormValues)
   const [twoStepForms, setTwoStepsForms] = useState<{
     salary: boolean;
     age: boolean
@@ -84,6 +89,8 @@ const AddJobAd = () => {
     console.log(123);
     await new Promise((resolve) => setTimeout(() => {
       console.log(data);
+      console.log(form);
+      setForm(defaultFormValues)
       reset()
       return resolve
     }, 1500));
