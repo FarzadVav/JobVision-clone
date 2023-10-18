@@ -63,7 +63,7 @@ const Employer = () => {
       {
         createPortal(
           <>
-            <nav className={`bg-jv-primary h-14 w-full flex justify-evenly items-center fixed bottom-0 left-0 z-40`}>
+            <nav className={`bg-jv-primary h-14 w-full flex justify-evenly items-center fixed bottom-0 left-0 z-40 lg:hidden`}>
               <NavLink
                 className={link => `${link.isActive && location.pathname.endsWith('d_employer') ? 'bg-gradient-to-t from-[#ffffff15] to-transparent' : ''} text-white w-24 h-full flex flex-col items-center justify-center`}
                 to={``}

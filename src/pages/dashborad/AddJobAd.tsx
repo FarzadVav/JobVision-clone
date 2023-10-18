@@ -429,48 +429,54 @@ const AddJobAd = () => {
           <StarBorder />
         </ComboBox>
 
-        <div className={`w-full flex items-center mt-5`}>
-          <label
-            className={`cursor-pointer`}
-            htmlFor="remote"
-          >
-            امکان دورکاری
-          </label>
-          <input
-            id='remote'
-            value='remote'
-            className={`mr-2`}
-            {...register('remote')}
-            type="checkbox"
-          />
+        <div className={`w-full flex flex-col mt-5 sm:flex-row sm:items-center`}>
+          <div className={`flex items-center`}>
+            <label
+              className={`cursor-pointer`}
+              htmlFor="remote"
+            >
+              امکان دورکاری
+            </label>
+            <input
+              id='remote'
+              value='remote'
+              className={`mr-2`}
+              {...register('remote')}
+              type="checkbox"
+            />
+          </div>
 
-          <label
-            className={`cursor-pointer mr-5`}
-            htmlFor="isUrgent"
-          >
-            آگهی فوری
-          </label>
-          <input
-            id='isUrgent'
-            value={`isUrgent`}
-            className={`mr-2`}
-            {...register('isUrgent')}
-            type="checkbox"
-          />
+          <div className={`flex items-center`}>
+            <label
+              className={`cursor-pointer mt-3 sm:mr-5 sm:mt-0`}
+              htmlFor="isUrgent"
+            >
+              آگهی فوری
+            </label>
+            <input
+              id='isUrgent'
+              value={`isUrgent`}
+              className={`mr-2`}
+              {...register('isUrgent')}
+              type="checkbox"
+            />
+          </div>
 
-          <label
-            className={`cursor-pointer mr-5`}
-            htmlFor="endOfMilitaryService"
-          >
-            پایان خدمت
-          </label>
-          <input
-            id='endOfMilitaryService'
-            value={`endOfMilitaryService`}
-            className={`mr-2`}
-            {...register('endOfMilitaryService')}
-            type="checkbox"
-          />
+          <div className={`flex items-center`}>
+            <label
+              className={`cursor-pointer mt-3 sm:mr-5 sm:mt-0`}
+              htmlFor="endOfMilitaryService"
+            >
+              پایان خدمت
+            </label>
+            <input
+              id='endOfMilitaryService'
+              value={`endOfMilitaryService`}
+              className={`mr-2`}
+              {...register('endOfMilitaryService')}
+              type="checkbox"
+            />
+          </div>
         </div>
 
         <button

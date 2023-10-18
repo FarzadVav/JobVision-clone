@@ -10,7 +10,7 @@ const EmployerDashboard = () => {
               className={`text-jv-primary`}
               fontSize="large"
             />
-            <span className={`dana-bold mr-3`}>
+            <span className={`dana-bold hidden mr-3 sm:inline-block`}>
               فرزاد وحدتی نژاد
             </span>
           </div>
@@ -30,7 +30,7 @@ const EmployerDashboard = () => {
               className={`text-jv-primary`}
               fontSize="large"
             />
-            <span className={`dana-bold mr-3`}>
+            <span className={`dana-bold hidden mr-3 sm:inline-block`}>
               فرزاد وحدتی نژاد
             </span>
           </div>
@@ -50,7 +50,7 @@ const EmployerDashboard = () => {
               className={`text-jv-primary`}
               fontSize="large"
             />
-            <span className={`dana-bold mr-3`}>
+            <span className={`dana-bold hidden mr-3 sm:inline-block`}>
               فرزاد وحدتی نژاد
             </span>
           </div>
