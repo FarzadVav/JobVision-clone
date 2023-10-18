@@ -98,6 +98,8 @@ const AddJobAd = () => {
     }
     if (state) {
       setValue('customFormFields', 'VALID')
+    } else {
+      setValue('customFormFields', '')
     }
   }, [form])
 
