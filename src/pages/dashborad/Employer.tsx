@@ -5,7 +5,7 @@ import { AssessmentRounded, InfoRounded, PersonRounded } from "@mui/icons-materi
 
 const Employer = () => {
   return (
-    <div className={`wrapper flex mt-3 pb-[4.25rem] lg:mt-12 lg:pb-12`}>
+    <div className={`wrapper flex mt-3 pb-[4.75rem] lg:mt-12 lg:pb-12`}>
       <aside className={`bg-jv-primary w-3/12 h-max hidden flex-col justify-center items-center p-5 rounded-md sticky top-[5.25rem] overflow-hidden lg:flex`}>
         <div className={`bg-white w-20 h-20 flex justify-center items-center rounded-md relative`}>
           <img
@@ -63,7 +63,7 @@ const Employer = () => {
       {
         createPortal(
           <>
-            <nav className={`bg-jv-primary h-14 w-full flex justify-evenly items-center fixed bottom-0 left-0 z-40 lg:hidden`}>
+            <nav className={`bg-jv-primary h-16 w-full flex justify-evenly items-center fixed bottom-0 left-0 z-40 lg:hidden`}>
               <NavLink
                 className={link => `${link.isActive && location.pathname.endsWith('d_employer') ? 'bg-gradient-to-t from-[#ffffff15] to-transparent' : ''} text-white w-24 h-full flex flex-col items-center justify-center`}
                 to={``}
