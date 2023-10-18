@@ -194,7 +194,7 @@ const AddJobAd = () => {
             میزان حقوق
           </label>
         </Title>
-        <div className={`w-full flex items-center`}>
+        <div className={`w-full flex flex-col items-center justify-center sm:flex-row`}>
           <TextInput
             customClass={`bg-jv-bright`}
             register={{ ...register('salary_1') }}
@@ -204,7 +204,7 @@ const AddJobAd = () => {
             <SearchRounded />
           </TextInput>
           <TextInput
-            customClass={`show-fade bg-jv-bright mr-3 ${twoStepForms.salary ? '' : 'hidden'}`}
+            customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3 ${twoStepForms.salary ? '' : 'hidden'}`}
             register={{ ...register('salary_2') }}
             placeholder={`تا 30 میلیون تومان`}
             error={!!errors.salary_2}
@@ -234,7 +234,7 @@ const AddJobAd = () => {
             میزان سن
           </label>
         </Title>
-        <div className={`w-full flex items-center`}>
+        <div className={`w-full flex flex-col items-center justify-center sm:flex-row`}>
           <TextInput
             customClass={`bg-jv-bright`}
             register={{ ...register('age_1') }}
@@ -244,7 +244,7 @@ const AddJobAd = () => {
             <SearchRounded />
           </TextInput>
           <TextInput
-            customClass={`show-fade bg-jv-bright mr-3 ${twoStepForms.age ? '' : 'hidden'}`}
+            customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3 ${twoStepForms.age ? '' : 'hidden'}`}
             register={{ ...register('age_2') }}
             placeholder={`تا 25 سال`}
             error={!!errors.age_2}

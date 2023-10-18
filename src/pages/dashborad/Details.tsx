@@ -60,9 +60,9 @@ const Details = () => {
           اطلاعات شرکت
         </label>
       </Title>
-      <div className={`w-full grid grid-rows-2 grid-cols-2 gap-2`}>
+      <div className={`w-full grid grid-rows-3 grid-cols-2 gap-2 sm:grid-cols-2`}>
         <TextInput
-          customClass={`bg-jv-bright`}
+          customClass={`bg-jv-bright col-span-2 sm:col-span-1`}
           register={{ ...register('year') }}
           placeholder={`سال تاسیس`}
           error={!!errors.year}
@@ -71,7 +71,7 @@ const Details = () => {
           <CalendarMonthRounded />
         </TextInput>
         <TextInput
-          customClass={`bg-jv-bright`}
+          customClass={`bg-jv-bright col-span-2 sm:col-span-1`}
           register={{ ...register('employees') }}
           placeholder={`تعداد کارکنان شرکت`}
           error={!!errors.employees}
