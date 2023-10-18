@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { z } from "zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -12,7 +12,16 @@ import AutoComplete from '../../components/inputs/AutoComplete'
 import TextInput from '../../components/inputs/TextInput'
 import TextArea from '../../components/inputs/TextArea'
 
-const defaultFormValues = {
+type customFormTypes = {
+  jobTags: string[];
+  benefits: string[];
+  abilityForBoss: string[];
+  education: string[];
+  languages: string[];
+  techs: string[]
+}
+
+const defaultFormValues: customFormTypes = {
   jobTags: [],
   benefits: [],
   abilityForBoss: [],
@@ -46,7 +55,8 @@ const schema = z.object({
   age_1: z.string().nonempty().regex(/^[0-9]+$/),
   age_2: z.string().regex(/^[0-9]+$/),
   gender: GENDER,
-  endOfMilitaryService: z.string()
+  endOfMilitaryService: z.string(),
+  customFormFields: z.string().nonempty()
 })
 
 type formTypes = z.infer<typeof schema>
@@ -68,14 +78,7 @@ const AddJobAd = () => {
       endOfMilitaryService: '',
     }
   })
-  const [form, setForm] = useState<{
-    jobTags: string[];
-    benefits: string[];
-    abilityForBoss: string[];
-    education: string[];
-    languages: string[];
-    techs: string[]
-  }>(defaultFormValues)
+  const [form, setForm] = useState<customFormTypes>(defaultFormValues)
   const [twoStepForms, setTwoStepsForms] = useState<{
     salary: boolean;
     age: boolean
@@ -85,18 +88,30 @@ const AddJobAd = () => {
   })
   const [submittedForm, setSubmittedForm] = useState<boolean>(false)
 
+  useEffect(() => {
+    let state: boolean = true
+    for (const field in form) {
+      if (!form[field as keyof customFormTypes].length) {
+        state = false
+        break
+      }
+    }
+    if (state) {
+      setValue('customFormFields', 'VALID')
+    }
+  }, [form])
+
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     console.log(123);
     await new Promise((resolve) => setTimeout(() => {
       console.log(data);
       console.log(form);
+      setSubmittedForm(false)
       setForm(defaultFormValues)
       reset()
       return resolve
     }, 1500));
   }
-
-  console.log(errors);
 
   return (
     <div className={`w-full flex flex-col`}>

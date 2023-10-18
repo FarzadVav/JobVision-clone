@@ -46,7 +46,7 @@ const AutoComplete = ({ customClass, register, setValue, placeholder, error, chi
           <svg className={`absolute transition-transform !duration-150 ${focus ? 'opacity-0 -translate-y-5 invisible' : ''}`}>
             {children}
           </svg>
-          <div onMouseDown={() => setValue(register.name, '')}>
+          <div onMouseDown={() => setValue(register.name, '', { shouldValidate: true })}>
             <CloseRounded className={`cursor-pointer absolute transition-transform !duration-150
               ${focus ? '' : 'opacity-0 translate-y-5 invisible'}`} />
           </div>
@@ -64,7 +64,7 @@ const AutoComplete = ({ customClass, register, setValue, placeholder, error, chi
                 className={`bg-jv-bright border-b border-solid border-jv-light w-full py-2 pr-2 cursor-pointer
                 hover:brightness-[0.97] last:border-none`}
                 onMouseDown={() => {
-                  setValue(register.name, data)
+                  setValue(register.name, data, { shouldValidate: true })
                   setFocus(false)
                 }}
               >
