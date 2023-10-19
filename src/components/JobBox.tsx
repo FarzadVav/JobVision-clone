@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Star } from "@mui/icons-material"
 
 import JobAdsTypes from "../types/Job.types"
@@ -6,16 +6,21 @@ import JobAdsTypes from "../types/Job.types"
 const JobBox = (
   { id, category, title, company, city, location, salary, remote, knowledgeBasedCompany, isUrgent, createAt, selected }: JobAdsTypes
 ) => {
+  const redirect = useNavigate()
+
   return (
     <article
       className={`bg-white w-full group`}
       data-id={id}
       data-category={category}
     >
-      <Link
-        className={`border border-solid w-full h-full flex flex-col justify-between rounded-md
-        p-3 ${selected ? 'border-jv-primary text-jv-primary' : 'border-jv-light text-jv-dark'}`}
-        to={`/jobs`}
+      <div
+        className={`border border-solid w-full h-full flex flex-col justify-between rounded-md cursor-pointer p-3 ${selected ? 'border-jv-primary text-jv-primary' : 'border-jv-light text-jv-dark'}`}
+        onClick={() => {
+          if (!window.location.pathname.includes('/jobs')) {
+            redirect(`/jobs?id=${id}`)
+          }
+        }}
       >
         <div className={`flex`}>
           <div className={`col-span-3 flex flex-col items-center`}>
@@ -104,7 +109,7 @@ const JobBox = (
             )
           }
         </div>
-      </Link>
+      </div>
     </article>
   )
 }

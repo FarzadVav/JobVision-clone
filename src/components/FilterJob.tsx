@@ -152,6 +152,7 @@ const MultiFilterJob = ({ selected, title, filters, unFilterHandler }: MultiFilt
 type JobsFiltersBarProps = {
   setJobAdsToDefault: () => void;
   jobAds: JobAdsTypes[];
+  filteredJobAds: JobAdsTypes[];
   setJobAdsFilteredHandler: (jobAd: JobAdsTypes[]) => void
 }
 type filtersTypes = {
@@ -160,28 +161,29 @@ type filtersTypes = {
   cooprationType: 'full-time' | 'part-time' | 'as-projects' | 'none';
   salaryType: [number, number] | 'none'
 }
-const initialFiltersValues: filtersTypes = {
+const initialFiltersValue: filtersTypes = {
   remote: false,
   knowledgeBasedCompany: false,
   cooprationType: 'none',
   salaryType: 'none'
 }
-const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setJobAdsFilteredHandler }: JobsFiltersBarProps) => {
+const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, filteredJobAds, setJobAdsFilteredHandler }: JobsFiltersBarProps) => {
   const redirect = useNavigate()
-  const [filters, setFilters] = useState<filtersTypes>(initialFiltersValues)
+  const [filters, setFilters] = useState<filtersTypes>(initialFiltersValue)
   const [showClearFilters, setShowClearFilters] = useState<boolean>(false)
 
   useEffect(() => {
-    let newFilteredJobAds: JobAdsTypes[] = jobAds
+    let newFilteredJobAds: JobAdsTypes[] = []
+    const mainJobAds: JobAdsTypes[] = (filteredJobAds.length && chekFilters()) ? filteredJobAds : jobAds
 
     if (filters.remote) {
-      newFilteredJobAds = newFilteredJobAds.filter(job => job.remote)
+      newFilteredJobAds = mainJobAds.filter(job => job.remote)
     }
     if (filters.knowledgeBasedCompany) {
-      newFilteredJobAds = newFilteredJobAds.filter(job => job.knowledgeBasedCompany)
+      newFilteredJobAds = mainJobAds.filter(job => job.knowledgeBasedCompany)
     }
     if (filters.salaryType !== 'none') {
-      newFilteredJobAds = newFilteredJobAds.filter(job => {
+      newFilteredJobAds = mainJobAds.filter(job => {
         if (typeof job.salary === 'number'
           && typeof filters.salaryType === 'object'
           && job.salary >= filters.salaryType[0]
@@ -196,7 +198,7 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setJobAdsFilteredHandler }
       })
     }
     if (filters.cooprationType !== 'none') {
-      newFilteredJobAds = newFilteredJobAds.filter(job => {
+      newFilteredJobAds = mainJobAds.filter(job => {
         if (job.cooperationType === filters.cooprationType) {
           return job
         }
@@ -204,34 +206,32 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setJobAdsFilteredHandler }
     }
     setJobAdsFilteredHandler(newFilteredJobAds)
 
-    chekFilters()
+    setShowClearFilters(chekFilters())
   }, [filters])
 
   useEffect(() => {
-    setFilters(initialFiltersValues)
-    chekFilters()
+    setFilters(initialFiltersValue)
+    setShowClearFilters(chekFilters())
   }, [location.href])
 
-  const chekFilters = () => {
-    let showClearFiltersState = false
-
+  const chekFilters = (): boolean => {
+    let state = false
     if (location.href.includes('?')) {
-      showClearFiltersState = true
+      state = true
     } else {
       for (const key in filters) {
         if (typeof filters[key as keyof filtersTypes] === 'boolean'
           && filters[key as keyof filtersTypes] === true) {
-          showClearFiltersState = true
+          state = true
           break;
         } else if (['string', 'object'].includes(typeof filters[key as keyof filtersTypes])
           && filters[key as keyof filtersTypes] !== 'none') {
-          showClearFiltersState = true
+          state = true
           break;
         }
       }
     }
-
-    setShowClearFilters(showClearFiltersState)
+    return state
   }
 
   return (
@@ -241,7 +241,7 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setJobAdsFilteredHandler }
         onClick={() => {
           redirect('/jobs')
           setJobAdsToDefault()
-          setFilters(initialFiltersValues)
+          setFilters(initialFiltersValue)
         }}
         disabled={!showClearFilters}
       >

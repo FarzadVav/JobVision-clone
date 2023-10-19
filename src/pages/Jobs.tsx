@@ -147,9 +147,8 @@ const testJobAds: JobAdsTypes[] = [
 const Jobs = () => {
 	const [searchParams] = useSearchParams()
 	const [showAlert, setShowAlert] = useState<boolean>(false)
-	const [defaultJobAds] = useState<JobAdsTypes[]>(testJobAds)
 	const [jobAds, setJobAds] = useState<JobAdsTypes[]>(testJobAds)
-	const [jobAdsFiltered, setJobAdsFiltered] = useState<JobAdsTypes[]>(jobAds)
+	const [filteredJobAds, setFilteredJobAds] = useState<JobAdsTypes[]>([])
 	const [jobAdsTabs, setJobAdsTabs] = useState<{
 		id: string;
 		title: string;
@@ -159,7 +158,7 @@ const Jobs = () => {
 	const alertRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
-		let jobAdsInParams = defaultJobAds
+		let jobAdsInParams: JobAdsTypes[] = []
 
 		const search = searchParams.get('search')
 		const cat = searchParams.get('cat')
@@ -181,11 +180,11 @@ const Jobs = () => {
 			})
 		}
 		if (cat) {
-			jobAdsInParams = jobAdsInParams.filter(job => job.category.title === cat)
+			jobAdsInParams = jobAds.filter(job => job.category.title === cat)
 		}
 		if (jobTag) {
 			let newJobAdsInParams: JobAdsTypes[] = []
-			jobAdsInParams.forEach(job => {
+			jobAds.forEach(job => {
 				job.jobTags.forEach(tag => {
 					if (tag.title === jobTag) newJobAdsInParams.push(job)
 				})
@@ -193,21 +192,21 @@ const Jobs = () => {
 			jobAdsInParams = newJobAdsInParams
 		}
 		if (province) {
-			jobAdsInParams = jobAdsInParams.filter(job => job.province === province)
+			jobAdsInParams = jobAds.filter(job => job.province === province)
 		}
 		if (city) {
-			jobAdsInParams = jobAdsInParams.filter(job => job.city === city)
+			jobAdsInParams = jobAds.filter(job => job.city === city)
 		}
 		if (cooperationType) {
-			jobAdsInParams = jobAdsInParams.filter(job => job.cooperationType === cooperationType)
+			jobAdsInParams = jobAds.filter(job => job.cooperationType === cooperationType)
 		}
 		if (cooperationTypeCity) {
 			const cooperationTypeCitySplited = cooperationTypeCity.split('__')
-			jobAdsInParams = jobAdsInParams.filter(job => job.cooperationType === cooperationTypeCitySplited[0]
+			jobAdsInParams = jobAds.filter(job => job.cooperationType === cooperationTypeCitySplited[0]
 				&& job.city === cooperationTypeCitySplited[1])
 		}
 
-		setJobAds(jobAdsInParams)
+		setFilteredJobAds(jobAdsInParams)
 
 		window.addEventListener('scroll', () => {
 			const footer = document.querySelector('footer')
@@ -219,9 +218,7 @@ const Jobs = () => {
 		})
 	}, [location.href])
 
-	useEffect(() => {
-		setJobAdsFiltered(jobAds)
-	}, [jobAds])
+	// useEffect(() => setJobAdsFiltered(jobAds), [jobAds])
 
 	useEffect(() => {
 		if (window.innerWidth < 1024) {
@@ -235,13 +232,9 @@ const Jobs = () => {
 		}
 	}, [selectedJobAds])
 
-	const setJobAdsFilteredHandler = (newJobAds: JobAdsTypes[]) => {
-		setJobAdsFiltered(newJobAds)
-	}
+	const setJobAdsFilteredHandler = (newJobAds: JobAdsTypes[]) => setFilteredJobAds(newJobAds)
 
-	const setJobAdsToDefault = () => {
-		setJobAds(defaultJobAds)
-	}
+	const setJobAdsToDefault = () => setFilteredJobAds([])
 
 	const jobAdsSelectHandler = (singleJobAd: JobAdsTypes) => {
 		setJobAdsTabs([
@@ -596,6 +589,7 @@ const Jobs = () => {
 					<JobsFiltersBar
 						setJobAdsToDefault={setJobAdsToDefault}
 						jobAds={jobAds}
+						filteredJobAds={filteredJobAds}
 						setJobAdsFilteredHandler={setJobAdsFilteredHandler}
 					/>
 				</div>
@@ -650,7 +644,8 @@ const Jobs = () => {
 						xl:w-4/12`}>
 							<div className={`w-full flex justify-between items-center`}>
 								<span>
-									{jobAdsFiltered.length} آگهی
+									{/* {filteredJobAds.length > 0 ? filteredJobAds.length : jobAds.length} آگهی */}
+									{filteredJobAds.length} آگهی
 								</span>
 								<select className={`bg-jv-bright cursor-pointer px-5 py-2 rounded`}>
 									<option value="">مرتب سازی</option>
@@ -661,12 +656,12 @@ const Jobs = () => {
 							</div>
 							<div className={`w-full flex flex-col items-center gap-3 mt-3`}>
 								{
-									jobAdsFiltered.length ? jobAdsFiltered.map(job => (
+									filteredJobAds.length ? filteredJobAds.map(job => (
 										<div
 											key={job.id}
 											className={`w-full`}
 											onClick={() => {
-												setJobAdsFiltered(prev => {
+												setFilteredJobAds(prev => {
 													const newJobAds = prev.map(jobAd => {
 														if (jobAd.id === job.id) {
 															jobAd.selected = true
@@ -681,13 +676,33 @@ const Jobs = () => {
 												setSelectedJobAds(job)
 											}}
 										>
+											123
 											<JobBox {...job} />
 										</div>
-									)) : (
-										<div className={`bg-red-50 text-jv-danger text-center w-full p-6 rounded`}>
-											آگهی با این مشخصات وجود ندارد
+									)) : jobAds.map(job => (
+										<div
+											key={job.id}
+											className={`w-full`}
+											onClick={() => {
+												setJobAds(prev => {
+													const newJobAds = prev.map(jobAd => {
+														if (jobAd.id === job.id) {
+															jobAd.selected = true
+														} else {
+															jobAd.selected = false
+														}
+														return jobAd
+													})
+													return newJobAds
+												})
+												jobAdsSelectHandler(job)
+												setSelectedJobAds(job)
+											}}
+										>
+											456
+											<JobBox {...job} />
 										</div>
-									)
+									))
 								}
 							</div>
 						</aside>
@@ -706,7 +721,7 @@ const Jobs = () => {
 														className={`btn-sm btn-bright`}
 														onClick={() => {
 															setSelectedJobAds({} as JobAdsTypes)
-															setJobAdsFiltered(prev => {
+															setFilteredJobAds(prev => {
 																return prev.map(job => {
 																	if (job.id === selectedJobAds.id) {
 																		job.selected = false
