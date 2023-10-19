@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { CloseRounded } from '@mui/icons-material'
 import JobAdsTypes from '../types/Job.types';
 import { createPortal } from 'react-dom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 type FilterJobProps = {
   selected: boolean;
@@ -153,26 +153,43 @@ type JobsFiltersBarProps = {
   setJobAdsToDefault: () => void;
   jobAds: JobAdsTypes[];
   filteredJobAds: JobAdsTypes[];
-  setJobAdsFilteredHandler: (jobAd: JobAdsTypes[]) => void
+  setFilteredJobAdsHandler: (jobAd: JobAdsTypes[]) => void
 }
 type filtersTypes = {
+  q_search: string | null;
+  q_cat: string | null;
+  q_jobTag: string | null;
+  q_province: string | null;
+  q_city: string | null;
+  q_cooperationType: string | null;
+  q_cooperationTypeCity: string | null;
   remote: boolean;
   knowledgeBasedCompany: boolean;
   cooprationType: 'full-time' | 'part-time' | 'as-projects' | 'none';
   salaryType: [number, number] | 'none'
 }
 const initialFiltersValue: filtersTypes = {
+  q_search: null,
+  q_cat: null,
+  q_jobTag: null,
+  q_province: null,
+  q_city: null,
+  q_cooperationType: null,
+  q_cooperationTypeCity: null,
   remote: false,
   knowledgeBasedCompany: false,
   cooprationType: 'none',
   salaryType: 'none'
 }
-const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, filteredJobAds, setJobAdsFilteredHandler }: JobsFiltersBarProps) => {
+const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, filteredJobAds, setFilteredJobAdsHandler }: JobsFiltersBarProps) => {
+  const [searchParams] = useSearchParams()
   const redirect = useNavigate()
   const [filters, setFilters] = useState<filtersTypes>(initialFiltersValue)
   const [showClearFilters, setShowClearFilters] = useState<boolean>(false)
 
   useEffect(() => {
+    console.log(filters);
+    
     let newFilteredJobAds: JobAdsTypes[] = []
     const mainJobAds: JobAdsTypes[] = (filteredJobAds.length && chekFilters()) ? filteredJobAds : jobAds
 
@@ -204,13 +221,70 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, filteredJobAds, setJobAdsF
         }
       })
     }
-    setJobAdsFilteredHandler(newFilteredJobAds)
+    if (filters.q_search) {
+      newFilteredJobAds = mainJobAds.filter(job => {
+        if (
+          //@ts-ignore
+          job.title.toLocaleLowerCase().includes(filters.q_search.toLocaleLowerCase())
+          //@ts-ignore
+          || job.category.title.toLocaleLowerCase().includes(filters.q_search.toLocaleLowerCase())
+          //@ts-ignore
+          || job.jobTags.filter(tag => tag.title.toLocaleLowerCase().includes(filters.q_search.toLocaleLowerCase())).length
+        ) {
+          return job
+        }
+      })
+    }
+    if (filters.q_cat) {
+      newFilteredJobAds = mainJobAds.filter(job => job.category.title === filters.q_cat)
+    }
+    if (filters.q_jobTag) {
+      let _newFilteredJobAds: JobAdsTypes[] = []
+      mainJobAds.forEach(job => {
+        job.jobTags.forEach(tag => {
+          if (tag.title === filters.q_jobTag) _newFilteredJobAds.push(job)
+        })
+      })
+      newFilteredJobAds = _newFilteredJobAds
+    }
+    if (filters.q_province) {
+      newFilteredJobAds = mainJobAds.filter(job => job.province === filters.q_province)
+    }
+    if (filters.q_city) {
+      newFilteredJobAds = mainJobAds.filter(job => job.city === filters.q_city)
+    }
+    if (filters.q_cooperationType) {
+      newFilteredJobAds = mainJobAds.filter(job => job.cooperationType === filters.q_cooperationType)
+    }
+    if (filters.q_cooperationTypeCity) {
+      const cooperationTypeCitySplited = filters.q_cooperationTypeCity.split('__')
+      newFilteredJobAds = mainJobAds.filter(job => job.cooperationType === cooperationTypeCitySplited[0]
+        && job.city === cooperationTypeCitySplited[1])
+    }
+    setFilteredJobAdsHandler(newFilteredJobAds)
 
     setShowClearFilters(chekFilters())
   }, [filters])
 
   useEffect(() => {
-    setFilters(initialFiltersValue)
+    const search = searchParams.get('search')
+    const cat = searchParams.get('cat')
+    const jobTag = searchParams.get('job')
+    const province = searchParams.get('province')
+    const city = searchParams.get('city')
+    const cooperationType = searchParams.get('cooperationType')
+    const cooperationTypeCity = searchParams.get('cooperationType-city')
+    setFilters(prev => ({
+      ...prev,
+      q_search: search,
+      q_cat: cat,
+      q_jobTag: jobTag,
+      q_province: province,
+      q_city: city,
+      q_cooperationType: cooperationType,
+      q_cooperationTypeCity: cooperationTypeCity
+    }))
+    //------------------------------------------------
     setShowClearFilters(chekFilters())
   }, [location.href])
 
@@ -220,14 +294,13 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, filteredJobAds, setJobAdsF
       state = true
     } else {
       for (const key in filters) {
-        if (typeof filters[key as keyof filtersTypes] === 'boolean'
-          && filters[key as keyof filtersTypes] === true) {
-          state = true
-          break;
-        } else if (['string', 'object'].includes(typeof filters[key as keyof filtersTypes])
+        if (filters[key as keyof filtersTypes] !== null
+          && ['string', 'object'].includes(typeof filters[key as keyof filtersTypes])
           && filters[key as keyof filtersTypes] !== 'none') {
           state = true
-          break;
+        } else if (typeof filters[key as keyof filtersTypes] === 'boolean'
+          && filters[key as keyof filtersTypes] === true) {
+          state = true
         }
       }
     }

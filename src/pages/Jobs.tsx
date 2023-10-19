@@ -10,7 +10,6 @@ import CompanyTypes from "../types/Company.types";
 import JobBox from "../components/JobBox";
 import Tabs from '../components/Tabs'
 import PopularCompanies from '../components/PopularCompanies';
-import { useSearchParams } from 'react-router-dom';
 
 const testCompany: CompanyTypes = {
 	id: tokenGenerator(),
@@ -145,7 +144,6 @@ const testJobAds: JobAdsTypes[] = [
 ]
 
 const Jobs = () => {
-	const [searchParams] = useSearchParams()
 	const [showAlert, setShowAlert] = useState<boolean>(false)
 	const [jobAds, setJobAds] = useState<JobAdsTypes[]>(testJobAds)
 	const [filteredJobAds, setFilteredJobAds] = useState<JobAdsTypes[]>([])
@@ -158,56 +156,6 @@ const Jobs = () => {
 	const alertRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
-		let jobAdsInParams: JobAdsTypes[] = []
-
-		const search = searchParams.get('search')
-		const cat = searchParams.get('cat')
-		const jobTag = searchParams.get('job')
-		const province = searchParams.get('province')
-		const city = searchParams.get('city')
-		const cooperationType = searchParams.get('cooperationType')
-		const cooperationTypeCity = searchParams.get('cooperationType-city')
-
-		if (search) {
-			jobAdsInParams = jobAds.filter(job => {
-				if (
-					job.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-					|| job.category.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-					|| job.jobTags.filter(tag => tag.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())).length
-				) {
-					return job
-				}
-			})
-		}
-		if (cat) {
-			jobAdsInParams = jobAds.filter(job => job.category.title === cat)
-		}
-		if (jobTag) {
-			let newJobAdsInParams: JobAdsTypes[] = []
-			jobAds.forEach(job => {
-				job.jobTags.forEach(tag => {
-					if (tag.title === jobTag) newJobAdsInParams.push(job)
-				})
-			})
-			jobAdsInParams = newJobAdsInParams
-		}
-		if (province) {
-			jobAdsInParams = jobAds.filter(job => job.province === province)
-		}
-		if (city) {
-			jobAdsInParams = jobAds.filter(job => job.city === city)
-		}
-		if (cooperationType) {
-			jobAdsInParams = jobAds.filter(job => job.cooperationType === cooperationType)
-		}
-		if (cooperationTypeCity) {
-			const cooperationTypeCitySplited = cooperationTypeCity.split('__')
-			jobAdsInParams = jobAds.filter(job => job.cooperationType === cooperationTypeCitySplited[0]
-				&& job.city === cooperationTypeCitySplited[1])
-		}
-
-		setFilteredJobAds(jobAdsInParams)
-
 		window.addEventListener('scroll', () => {
 			const footer = document.querySelector('footer')
 			if ((footer?.getBoundingClientRect().top || 0) <= window.innerHeight) {
@@ -216,7 +164,7 @@ const Jobs = () => {
 				alertRef.current?.classList.remove('opacity-0', 'invisible')
 			}
 		})
-	}, [location.href])
+	}, [])
 
 	// useEffect(() => setJobAdsFiltered(jobAds), [jobAds])
 
@@ -232,7 +180,7 @@ const Jobs = () => {
 		}
 	}, [selectedJobAds])
 
-	const setJobAdsFilteredHandler = (newJobAds: JobAdsTypes[]) => setFilteredJobAds(newJobAds)
+	const setFilteredJobAdsHandler = (newJobAds: JobAdsTypes[]) => setFilteredJobAds(newJobAds)
 
 	const setJobAdsToDefault = () => setFilteredJobAds([])
 
@@ -590,7 +538,7 @@ const Jobs = () => {
 						setJobAdsToDefault={setJobAdsToDefault}
 						jobAds={jobAds}
 						filteredJobAds={filteredJobAds}
-						setJobAdsFilteredHandler={setJobAdsFilteredHandler}
+						setFilteredJobAdsHandler={setFilteredJobAdsHandler}
 					/>
 				</div>
 			</div>
