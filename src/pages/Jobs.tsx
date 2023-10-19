@@ -164,11 +164,7 @@ const Jobs = () => {
 				alertRef.current?.classList.remove('opacity-0', 'invisible')
 			}
 		})
-	}, [])
 
-	// useEffect(() => setJobAdsFiltered(jobAds), [jobAds])
-
-	useEffect(() => {
 		if (window.innerWidth < 1024) {
 			if (Object.keys(selectedJobAds).length) {
 				setTimeout(() => {
