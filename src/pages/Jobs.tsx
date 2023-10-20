@@ -2,7 +2,7 @@ import { ReactNode, useState, useEffect, useRef } from 'react'
 import { CloseRounded, FavoriteBorderRounded, HelpRounded, InfoOutlined, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined, StarRateRounded, Verified } from "@mui/icons-material";
 
 import SearchJobForm from "../components/SearchJobForm";
-import JobsFiltersBar from "../components/FilterJob";
+import FilterJob from "../components/FilterJob";
 import Title from "../components/Title";
 import JobAdsTypes from "../types/Job.types";
 import tokenGenerator from "../utils/tokenGenerator";
@@ -147,12 +147,14 @@ const Jobs = () => {
 	const [showAlert, setShowAlert] = useState<boolean>(false)
 	const [jobAds, setJobAds] = useState<JobAdsTypes[]>(testJobAds)
 	const [filteredJobAds, setFilteredJobAds] = useState<JobAdsTypes[]>([])
+	const [selectedJobAds, setSelectedJobAds] = useState<JobAdsTypes>({} as JobAdsTypes)
+	const [hasFilter, setHasFilter] = useState<boolean>(false)
 	const [jobAdsTabs, setJobAdsTabs] = useState<{
 		id: string;
 		title: string;
 		content: ReactNode
 	}[]>([])
-	const [selectedJobAds, setSelectedJobAds] = useState<JobAdsTypes>({} as JobAdsTypes)
+
 	const alertRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
@@ -530,11 +532,12 @@ const Jobs = () => {
 			<div className={`light-shadow w-full pt-9 pb-3 relative z-10`}>
 				<div className={`wrapper`}>
 					<SearchJobForm />
-					<JobsFiltersBar
+					<FilterJob
 						setJobAdsToDefault={setJobAdsToDefault}
 						jobAds={jobAds}
 						filteredJobAds={filteredJobAds}
 						setFilteredJobAdsHandler={setFilteredJobAdsHandler}
+						setHasFilter={setHasFilter}
 					/>
 				</div>
 			</div>
@@ -587,10 +590,9 @@ const Jobs = () => {
 						<aside className={`bg-white w-full h-max flex flex-col items-center p-3 mb-6 rounded lg:ml-3 lg:w-5/12
 						xl:w-4/12`}>
 							<div className={`w-full flex justify-between items-center`}>
-								<span>
-									{/* {filteredJobAds.length > 0 ? filteredJobAds.length : jobAds.length} آگهی */}
-									{filteredJobAds.length} آگهی
-								</span>
+								<p>
+									{hasFilter ? filteredJobAds.length : jobAds.length} آگهی
+								</p>
 								<select className={`bg-jv-bright cursor-pointer px-5 py-2 rounded`}>
 									<option value="">مرتب سازی</option>
 									<option value="">بیشترین حقوق</option>
@@ -600,7 +602,7 @@ const Jobs = () => {
 							</div>
 							<div className={`w-full flex flex-col items-center gap-3 mt-3`}>
 								{
-									filteredJobAds.length ? filteredJobAds.map(job => (
+									(hasFilter && filteredJobAds.length) ? filteredJobAds.map(job => (
 										<div
 											key={job.id}
 											className={`w-full`}
@@ -620,15 +622,21 @@ const Jobs = () => {
 												setSelectedJobAds(job)
 											}}
 										>
-											123
 											<JobBox {...job} />
 										</div>
-									)) : jobAds.map(job => (
+									)) : hasFilter ? (
+										<div className={`bg-yellow-50 text-jv-warning w-full text-center px-5 py-2 mt-3 rounded`}>
+											آگهی با این فیلتر پیدا نشد
+										</div>
+									) : null
+								}
+								{
+									!hasFilter && jobAds.length ? jobAds.map(job => (
 										<div
 											key={job.id}
 											className={`w-full`}
 											onClick={() => {
-												setJobAds(prev => {
+												setFilteredJobAds(prev => {
 													const newJobAds = prev.map(jobAd => {
 														if (jobAd.id === job.id) {
 															jobAd.selected = true
@@ -643,10 +651,9 @@ const Jobs = () => {
 												setSelectedJobAds(job)
 											}}
 										>
-											456
 											<JobBox {...job} />
 										</div>
-									))
+									)) : null
 								}
 							</div>
 						</aside>
@@ -790,8 +797,8 @@ const Jobs = () => {
 					<div className={`my-12 md:my-16`}>
 						<PopularCompanies />
 					</div>
-				</div>
-			</div>
+				</div >
+			</div >
 		</>
 	);
 };

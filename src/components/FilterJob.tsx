@@ -153,7 +153,8 @@ type JobsFiltersBarProps = {
   setJobAdsToDefault: () => void;
   jobAds: JobAdsTypes[];
   filteredJobAds: JobAdsTypes[];
-  setFilteredJobAdsHandler: (jobAd: JobAdsTypes[]) => void
+  setFilteredJobAdsHandler: (jobAd: JobAdsTypes[]) => void;
+  setHasFilter: Function
 }
 type filtersTypes = {
   q_search: string | null;
@@ -181,15 +182,15 @@ const initialFiltersValue: filtersTypes = {
   cooprationType: 'none',
   salaryType: 'none'
 }
-const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, filteredJobAds, setFilteredJobAdsHandler }: JobsFiltersBarProps) => {
+const JobsFiltersBar = ({
+  setJobAdsToDefault, jobAds, filteredJobAds, setFilteredJobAdsHandler, setHasFilter
+}: JobsFiltersBarProps) => {
   const [searchParams] = useSearchParams()
   const redirect = useNavigate()
   const [filters, setFilters] = useState<filtersTypes>(initialFiltersValue)
   const [showClearFilters, setShowClearFilters] = useState<boolean>(false)
 
   useEffect(() => {
-    console.log(filters);
-    
     let newFilteredJobAds: JobAdsTypes[] = []
     const mainJobAds: JobAdsTypes[] = (filteredJobAds.length && chekFilters()) ? filteredJobAds : jobAds
 
@@ -264,6 +265,7 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, filteredJobAds, setFiltere
     setFilteredJobAdsHandler(newFilteredJobAds)
 
     setShowClearFilters(chekFilters())
+    setHasFilter(chekFilters())
   }, [filters])
 
   useEffect(() => {
