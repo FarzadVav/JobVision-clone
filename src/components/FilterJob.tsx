@@ -191,37 +191,11 @@ const JobsFiltersBar = ({
   const [showClearFilters, setShowClearFilters] = useState<boolean>(false)
 
   useEffect(() => {
+    console.log(filters);
+    console.log((filteredJobAds.length && chekFilters()) ? 'filteredJobAds' : 'jobAds');
     let newFilteredJobAds: JobAdsTypes[] = []
     const mainJobAds: JobAdsTypes[] = (filteredJobAds.length && chekFilters()) ? filteredJobAds : jobAds
 
-    if (filters.remote) {
-      newFilteredJobAds = mainJobAds.filter(job => job.remote)
-    }
-    if (filters.knowledgeBasedCompany) {
-      newFilteredJobAds = mainJobAds.filter(job => job.knowledgeBasedCompany)
-    }
-    if (filters.salaryType !== 'none') {
-      newFilteredJobAds = mainJobAds.filter(job => {
-        if (typeof job.salary === 'number'
-          && typeof filters.salaryType === 'object'
-          && job.salary >= filters.salaryType[0]
-          && job.salary <= filters.salaryType[1]) {
-          return job
-        } else if (typeof job.salary === 'object'
-          && typeof filters.salaryType === 'object'
-          && job.salary[0] >= filters.salaryType[0]
-          && job.salary[1] <= filters.salaryType[1]) {
-          return job
-        }
-      })
-    }
-    if (filters.cooprationType !== 'none') {
-      newFilteredJobAds = mainJobAds.filter(job => {
-        if (job.cooperationType === filters.cooprationType) {
-          return job
-        }
-      })
-    }
     if (filters.q_search) {
       newFilteredJobAds = mainJobAds.filter(job => {
         if (
@@ -262,6 +236,34 @@ const JobsFiltersBar = ({
       newFilteredJobAds = mainJobAds.filter(job => job.cooperationType === cooperationTypeCitySplited[0]
         && job.city === cooperationTypeCitySplited[1])
     }
+    if (filters.remote) {
+      newFilteredJobAds = mainJobAds.filter(job => job.remote)
+    }
+    if (filters.knowledgeBasedCompany) {
+      newFilteredJobAds = mainJobAds.filter(job => job.knowledgeBasedCompany)
+    }
+    if (filters.salaryType !== 'none') {
+      newFilteredJobAds = mainJobAds.filter(job => {
+        if (typeof job.salary === 'number'
+          && typeof filters.salaryType === 'object'
+          && job.salary >= filters.salaryType[0]
+          && job.salary <= filters.salaryType[1]) {
+          return job
+        } else if (typeof job.salary === 'object'
+          && typeof filters.salaryType === 'object'
+          && job.salary[0] >= filters.salaryType[0]
+          && job.salary[1] <= filters.salaryType[1]) {
+          return job
+        }
+      })
+    }
+    if (filters.cooprationType !== 'none') {
+      newFilteredJobAds = mainJobAds.filter(job => {
+        if (job.cooperationType === filters.cooprationType) {
+          return job
+        }
+      })
+    }
     setFilteredJobAdsHandler(newFilteredJobAds)
 
     setShowClearFilters(chekFilters())
@@ -269,6 +271,7 @@ const JobsFiltersBar = ({
   }, [filters])
 
   useEffect(() => {
+    setJobAdsToDefault()
     const search = searchParams.get('search')
     const cat = searchParams.get('cat')
     const jobTag = searchParams.get('job')
@@ -286,7 +289,6 @@ const JobsFiltersBar = ({
       q_cooperationType: cooperationType,
       q_cooperationTypeCity: cooperationTypeCity
     }))
-    //------------------------------------------------
     setShowClearFilters(chekFilters())
   }, [location.href])
 
