@@ -141,6 +141,44 @@ const testJobAds: JobAdsTypes[] = [
 		selected: false,
 		createAt: new Date()
 	},
+	{
+		id: tokenGenerator(),
+		category: { title: 'programming', id: tokenGenerator(), },
+		jobTags: [
+			{ title: 'front-end', id: tokenGenerator(), }
+		],
+		title: 'متخصص فرانت اند و بک اند (full-stack Developer) 4',
+		company: testCompany,
+		province: 'tehran',
+		city: 'تهران',
+		location: 'ونک',
+		salary: 40,
+		remote: true,
+		isUrgent: true,
+		knowledgeBasedCompany: true,
+		cooperationType: 'full-time',
+		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
+		businessTrips: 'همیشه در سفر',
+		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
+		abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
+		description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
+		employmentConditions: {
+			age: [18, 32],
+			gender: 'male',
+			endOfMilitaryService: false,
+			education: ['لیسانس مهندسی نرم افزار'],
+			languages: [
+				{ name: 'english', power: 90 }
+			],
+			techs: [
+				{ name: 'Javascript', power: 100 },
+				{ name: 'React.js', power: 90 },
+				{ name: 'Typescript', power: 75 },
+			]
+		},
+		selected: false,
+		createAt: new Date()
+	},
 ]
 
 const Jobs = () => {
@@ -535,7 +573,6 @@ const Jobs = () => {
 					<FilterJob
 						setJobAdsToDefault={setJobAdsToDefault}
 						jobAds={jobAds}
-						filteredJobAds={filteredJobAds}
 						setFilteredJobAdsHandler={setFilteredJobAdsHandler}
 						setHasFilter={setHasFilter}
 					/>
