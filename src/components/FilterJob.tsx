@@ -191,31 +191,24 @@ const JobsFiltersBar = ({
   const [showClearFilters, setShowClearFilters] = useState<boolean>(false)
 
   useEffect(() => {
-    console.log(filters);
-    console.log((filteredJobAds.length && chekFilters()) ? 'filteredJobAds' : 'jobAds');
-    let newFilteredJobAds: JobAdsTypes[] = []
-    const mainJobAds: JobAdsTypes[] = (filteredJobAds.length && chekFilters()) ? filteredJobAds : jobAds
+    let newFilteredJobAds: JobAdsTypes[] = (filteredJobAds.length && chekFilters()) ? filteredJobAds : jobAds
 
     if (filters.q_search) {
-      newFilteredJobAds = mainJobAds.filter(job => {
-        if (
-          //@ts-ignore
-          job.title.toLocaleLowerCase().includes(filters.q_search.toLocaleLowerCase())
-          //@ts-ignore
-          || job.category.title.toLocaleLowerCase().includes(filters.q_search.toLocaleLowerCase())
-          //@ts-ignore
-          || job.jobTags.filter(tag => tag.title.toLocaleLowerCase().includes(filters.q_search.toLocaleLowerCase())).length
-        ) {
+      const search: string = filters.q_search
+      newFilteredJobAds = newFilteredJobAds.filter(job => {
+        if (job.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+          || job.category.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+          || job.jobTags.filter(tag => tag.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())).length) {
           return job
         }
       })
     }
     if (filters.q_cat) {
-      newFilteredJobAds = mainJobAds.filter(job => job.category.title === filters.q_cat)
+      newFilteredJobAds = newFilteredJobAds.filter(job => job.category.title === filters.q_cat)
     }
     if (filters.q_jobTag) {
       let _newFilteredJobAds: JobAdsTypes[] = []
-      mainJobAds.forEach(job => {
+      newFilteredJobAds.forEach(job => {
         job.jobTags.forEach(tag => {
           if (tag.title === filters.q_jobTag) _newFilteredJobAds.push(job)
         })
@@ -223,27 +216,27 @@ const JobsFiltersBar = ({
       newFilteredJobAds = _newFilteredJobAds
     }
     if (filters.q_province) {
-      newFilteredJobAds = mainJobAds.filter(job => job.province === filters.q_province)
+      newFilteredJobAds = newFilteredJobAds.filter(job => job.province === filters.q_province)
     }
     if (filters.q_city) {
-      newFilteredJobAds = mainJobAds.filter(job => job.city === filters.q_city)
+      newFilteredJobAds = newFilteredJobAds.filter(job => job.city === filters.q_city)
     }
     if (filters.q_cooperationType) {
-      newFilteredJobAds = mainJobAds.filter(job => job.cooperationType === filters.q_cooperationType)
+      newFilteredJobAds = newFilteredJobAds.filter(job => job.cooperationType === filters.q_cooperationType)
     }
     if (filters.q_cooperationTypeCity) {
       const cooperationTypeCitySplited = filters.q_cooperationTypeCity.split('__')
-      newFilteredJobAds = mainJobAds.filter(job => job.cooperationType === cooperationTypeCitySplited[0]
+      newFilteredJobAds = newFilteredJobAds.filter(job => job.cooperationType === cooperationTypeCitySplited[0]
         && job.city === cooperationTypeCitySplited[1])
     }
     if (filters.remote) {
-      newFilteredJobAds = mainJobAds.filter(job => job.remote)
+      newFilteredJobAds = newFilteredJobAds.filter(job => job.remote)
     }
     if (filters.knowledgeBasedCompany) {
-      newFilteredJobAds = mainJobAds.filter(job => job.knowledgeBasedCompany)
+      newFilteredJobAds = newFilteredJobAds.filter(job => job.knowledgeBasedCompany)
     }
     if (filters.salaryType !== 'none') {
-      newFilteredJobAds = mainJobAds.filter(job => {
+      newFilteredJobAds = newFilteredJobAds.filter(job => {
         if (typeof job.salary === 'number'
           && typeof filters.salaryType === 'object'
           && job.salary >= filters.salaryType[0]
@@ -258,7 +251,7 @@ const JobsFiltersBar = ({
       })
     }
     if (filters.cooprationType !== 'none') {
-      newFilteredJobAds = mainJobAds.filter(job => {
+      newFilteredJobAds = newFilteredJobAds.filter(job => {
         if (job.cooperationType === filters.cooprationType) {
           return job
         }
