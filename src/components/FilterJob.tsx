@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { CloseRounded } from '@mui/icons-material'
-import JobAdsTypes from '../types/Job.types';
 import { createPortal } from 'react-dom';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
+import JobAdsTypes from '../types/Job.types';
+
+// simple filter button
 type FilterJobProps = {
   selected: boolean;
   title: string;
@@ -36,6 +38,7 @@ const FilterJob = ({ selected, title, filterHandler, unFilterHandler }: FilterJo
   )
 }
 
+// multi select filter
 type MultiFilterJobProps = {
   selected: boolean;
   title: string;
@@ -149,10 +152,11 @@ const MultiFilterJob = ({ selected, title, filters, unFilterHandler }: MultiFilt
   )
 }
 
+// handle query params, FilterJob and MultiFilterJob filters
 type JobsFiltersBarProps = {
-  setJobAdsToDefault: () => void;
   jobAds: JobAdsTypes[];
   setFilteredJobAdsHandler: (jobAd: JobAdsTypes[]) => void;
+  setJobAdsToDefault: () => void;
   setHasFilter: Function;
   removeSelectedJobAd: Function
 }
@@ -185,7 +189,7 @@ const initialFiltersValue: filtersTypes = {
   salaryType: 'none'
 }
 const JobsFiltersBar = ({
-  setJobAdsToDefault, jobAds, setFilteredJobAdsHandler, setHasFilter, removeSelectedJobAd
+  jobAds, setFilteredJobAdsHandler, setJobAdsToDefault, setHasFilter, removeSelectedJobAd
 }: JobsFiltersBarProps) => {
   const [searchParams] = useSearchParams()
   const redirect = useNavigate()
@@ -313,6 +317,7 @@ const JobsFiltersBar = ({
 
   return (
     <div className={`list-scrollbar w-full mt-6 flex items-center pb-3 overflow-x-auto sm:overflow-visible`}>
+      {/* call setJobAdsToDefault and clear filters */}
       <button
         className={`bg-jv-danger text-white min-w-max flex justify-center items-center px-4 py-1 ml-3 rounded-full ${showClearFilters ? 'cursor-pointer active:scale-95' : 'opacity-20 cursor-not-allowed'}`}
         onClick={() => {

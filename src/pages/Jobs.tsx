@@ -182,20 +182,21 @@ const testJobAds: JobAdsTypes[] = [
 ]
 
 const Jobs = () => {
-	const [showAlert, setShowAlert] = useState<boolean>(false)
 	const [jobAds, setJobAds] = useState<JobAdsTypes[]>(testJobAds)
 	const [filteredJobAds, setFilteredJobAds] = useState<JobAdsTypes[]>([])
-	const [selectedJobAds, setSelectedJobAds] = useState<JobAdsTypes>({} as JobAdsTypes)
 	const [hasFilter, setHasFilter] = useState<boolean>(false)
+	const [selectedJobAds, setSelectedJobAds] = useState<JobAdsTypes>({} as JobAdsTypes)
 	const [jobAdsTabs, setJobAdsTabs] = useState<{
 		id: string;
 		title: string;
 		content: ReactNode
 	}[]>([])
+	const [showAlert, setShowAlert] = useState<boolean>(false)
 
 	const alertRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
+		// hide alertBox on scroll to footer (in mobile size)
 		window.addEventListener('scroll', () => {
 			const footer = document.querySelector('footer')
 			if ((footer?.getBoundingClientRect().top || 0) <= window.innerHeight) {
@@ -205,6 +206,7 @@ const Jobs = () => {
 			}
 		})
 
+		// cancell scrolling when selected a jobAd (in mobile size)
 		if (window.innerWidth < 1024) {
 			if (Object.keys(selectedJobAds).length) {
 				setTimeout(() => {
@@ -216,6 +218,7 @@ const Jobs = () => {
 		}
 	}, [selectedJobAds])
 
+	// handle select jobAds and his tabs
 	const jobAdsSelectHandler = (singleJobAd: JobAdsTypes) => {
 		setJobAdsTabs([
 			{
@@ -561,10 +564,13 @@ const Jobs = () => {
 		])
 	}
 
+	// handle filtering
 	const setFilteredJobAdsHandler = (newJobAds: JobAdsTypes[]) => setFilteredJobAds(newJobAds)
 
+	// remove all filtered jobAds
 	const setJobAdsToDefault = () => setFilteredJobAds([])
 
+	// remove selected jobAd when change in filters
 	const removeSelectedJobAd = () => {
 		setSelectedJobAds({} as JobAdsTypes)
 		setJobAds(prev => prev.map(job => {
@@ -579,21 +585,25 @@ const Jobs = () => {
 
 	return (
 		<>
+			{/* handle all filterings on jobAds */}
 			<div className={`light-shadow w-full pt-9 pb-3 relative z-10`}>
 				<div className={`wrapper`}>
 					<SearchJobForm />
 					<FilterJob
-						setJobAdsToDefault={setJobAdsToDefault}
 						jobAds={jobAds}
 						setFilteredJobAdsHandler={setFilteredJobAdsHandler}
+						setJobAdsToDefault={setJobAdsToDefault}
 						setHasFilter={setHasFilter}
 						removeSelectedJobAd={removeSelectedJobAd}
 					/>
 				</div>
 			</div>
+			{/* handle all filterings on jobAds */}
 
+			{/* jobAds */}
 			<div className={`bg-jv-bright py-3`}>
 				<div className={`wrapper`}>
+					{/* alert */}
 					<div
 						className={`bg-jv-primary w-full h-12 flex justify-center items-center fixed z-40 bottom-0 left-0
 						md:static md:z-0 md:justify-between md:pl-1 md:pr-5 md:rounded`}
@@ -635,8 +645,10 @@ const Jobs = () => {
 							</button>
 						</div>
 					</div>
+					{/* alert */}
 
 					<div className={`flex mt-3 lg:relative`}>
+						{/* jobAds list */}
 						<aside className={`bg-white w-full h-max flex flex-col items-center p-3 mb-6 rounded lg:ml-3 lg:w-5/12
 						xl:w-4/12`}>
 							<div className={`w-full flex justify-between items-center`}>
@@ -707,7 +719,9 @@ const Jobs = () => {
 								}
 							</div>
 						</aside>
+						{/* jobAds list */}
 
+						{/* selected jobAd */}
 						<main className={`w-full h-screen fixed top-0 right-0 duration-700 z-50
 						${Object.keys(selectedJobAds).length ? '' : 'translate-y-full opacity-0 invisible'} lg:pb-6 lg:opacity-100
 						lg:visible lg:translate-y-0 lg:current-height lg:w-7/12 lg:sticky lg:top-[calc(4.5rem+0.75rem)] lg:z-auto
@@ -842,13 +856,17 @@ const Jobs = () => {
 								}
 							</div>
 						</main>
+						{/* selected jobAd */}
 					</div>
 
+					{/* other popular companies */}
 					<div className={`my-12 md:my-16`}>
 						<PopularCompanies />
 					</div>
+					{/* other popular companies */}
 				</div >
 			</div >
+			{/* jobAds */}
 		</>
 	);
 };
