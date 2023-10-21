@@ -152,7 +152,7 @@ const Header = () => {
 							<li className={'h-full'}>
 								<Link
 									className={'nav-link'}
-									to={`/jobs`}
+									to={`/`}
 								>
 									محصولات
 								</Link>
@@ -160,7 +160,7 @@ const Header = () => {
 							<li className={'h-full'}>
 								<Link
 									className={'nav-link'}
-									to={``}
+									to={`/`}
 								>
 									رده بندی شرکت ها
 								</Link>
@@ -168,7 +168,7 @@ const Header = () => {
 							<li className={'h-full'}>
 								<Link
 									className={'nav-link'}
-									to={``}
+									to={`/`}
 								>
 									رزومه ساز
 								</Link>
@@ -176,7 +176,7 @@ const Header = () => {
 							<li className={'h-full'}>
 								<Link
 									className={'nav-link text-jv-danger hover:text-jv-danger hover:brightness-90'}
-									to={``}
+									to={`/`}
 								>
 									گزارش کارنامه بازار کار
 								</Link>
@@ -226,7 +226,7 @@ const Header = () => {
 						}
 						<Link
 							className={`nav-link pr-4 mr-5 relative before:absolute before:w-[1px] before:h-10 before:right-0 before:content-[''] before:bg-slate-200 xl:mr-7 xl:pr-5`}
-							to={``}
+							to={`/`}
 						>
 							<img
 								src="/images/logo.svg"

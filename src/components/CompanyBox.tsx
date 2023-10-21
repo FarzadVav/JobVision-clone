@@ -7,7 +7,7 @@ const CompanyBox = ({ id, logo, name, score, jobs }: CompanyTypes) => {
   return (
     <Link
       className={`bg-white text-jv-dark border border-solid border-jv-light w-52 p-2 flex flex-col rounded-md`}
-      to={`/jobs`}
+      to={`/`}
       data-id={id}
     >
       <div className={`w-20 h-20 rounded-md`}>
