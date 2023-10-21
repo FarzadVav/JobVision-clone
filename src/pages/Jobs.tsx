@@ -26,7 +26,7 @@ const testCompany: CompanyTypes = {
 
 const testJobAds: JobAdsTypes[] = [
 	{
-		id: tokenGenerator(),
+		id: 'tokenGenerator()',
 		category: { title: 'programming', id: tokenGenerator(), },
 		jobTags: [
 			{ title: 'full-stack', id: tokenGenerator() },

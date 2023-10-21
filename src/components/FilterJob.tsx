@@ -156,6 +156,7 @@ type JobsFiltersBarProps = {
   setHasFilter: Function
 }
 type filtersTypes = {
+  q_id: string | null;
   q_search: string | null;
   q_cat: string | null;
   q_jobTag: string | null;
@@ -169,6 +170,7 @@ type filtersTypes = {
   salaryType: [number, number] | 'none'
 }
 const initialFiltersValue: filtersTypes = {
+  q_id: null,
   q_search: null,
   q_cat: null,
   q_jobTag: null,
@@ -190,6 +192,9 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setFilteredJobAdsHandler, 
   useEffect(() => {
     let newFilteredJobAds: JobAdsTypes[] = jobAds
 
+    if (filters.q_id) {
+      newFilteredJobAds = newFilteredJobAds.filter(job => job.id === filters.q_id)
+    }
     if (filters.q_search) {
       const search: string = filters.q_search
       newFilteredJobAds = newFilteredJobAds.filter(job => {
@@ -262,6 +267,7 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setFilteredJobAdsHandler, 
 
   useEffect(() => {
     setJobAdsToDefault()
+    const id = searchParams.get('id')
     const search = searchParams.get('search')
     const cat = searchParams.get('cat')
     const jobTag = searchParams.get('job')
@@ -271,6 +277,7 @@ const JobsFiltersBar = ({ setJobAdsToDefault, jobAds, setFilteredJobAdsHandler, 
     const cooperationTypeCity = searchParams.get('cooperationType-city')
     setFilters(prev => ({
       ...prev,
+      q_id: id,
       q_search: search,
       q_cat: cat,
       q_jobTag: jobTag,

@@ -28,7 +28,7 @@ const testCompany: CompanyTypes = {
 }
 
 const testJobAd: JobBoxTypes = {
-	id: tokenGenerator(),
+	id: 'tokenGenerator()',
 	category: { title: 'programming', id: tokenGenerator(), },
 	jobTags: [
 		{ title: 'full-stack', id: tokenGenerator() },
@@ -46,7 +46,7 @@ const testJobAd: JobBoxTypes = {
 	knowledgeBasedCompany: false,
 	cooperationType: 'as-projects',
 	workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
-	businessTrips: [7, 'month'],
+	businessTrips: 'woooooooooooooow',
 	benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
 	abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
 	description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
