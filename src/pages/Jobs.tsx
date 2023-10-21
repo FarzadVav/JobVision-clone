@@ -216,10 +216,6 @@ const Jobs = () => {
 		}
 	}, [selectedJobAds])
 
-	const setFilteredJobAdsHandler = (newJobAds: JobAdsTypes[]) => setFilteredJobAds(newJobAds)
-
-	const setJobAdsToDefault = () => setFilteredJobAds([])
-
 	const jobAdsSelectHandler = (singleJobAd: JobAdsTypes) => {
 		setJobAdsTabs([
 			{
@@ -565,6 +561,22 @@ const Jobs = () => {
 		])
 	}
 
+	const setFilteredJobAdsHandler = (newJobAds: JobAdsTypes[]) => setFilteredJobAds(newJobAds)
+
+	const setJobAdsToDefault = () => setFilteredJobAds([])
+
+	const removeSelectedJobAd = () => {
+		setSelectedJobAds({} as JobAdsTypes)
+		setJobAds(prev => prev.map(job => {
+			job.selected = false
+			return job
+		}))
+		setFilteredJobAds(prev => prev.map(job => {
+			job.selected = false
+			return job
+		}))
+	}
+
 	return (
 		<>
 			<div className={`light-shadow w-full pt-9 pb-3 relative z-10`}>
@@ -575,6 +587,7 @@ const Jobs = () => {
 						jobAds={jobAds}
 						setFilteredJobAdsHandler={setFilteredJobAdsHandler}
 						setHasFilter={setHasFilter}
+						removeSelectedJobAd={removeSelectedJobAd}
 					/>
 				</div>
 			</div>
