@@ -68,6 +68,7 @@ const testJobAd: JobBoxTypes = {
 	createAt: new Date()
 }
 
+// accordions
 const accordions: { title: string; text: string }[] = [
 	{
 		title: 'مورد اعتماد بهترین سازمان‌های ایران',
@@ -98,29 +99,34 @@ const accordions: { title: string; text: string }[] = [
 const Home = () => {
 	const [svgPath, setSvgPath] = useState<{ x: number, y: number }>({ x: 0, y: 0 })
 	const runAnimationRef = useRef<boolean>(false)
-
-	const messageBoxRef = useRef<HTMLDivElement>(null)
+	// custom hook for scroll effects
 	useOneScroll(['employee-baner', 'cta-1', { id: 'cta-2', delay: 150 }])
 
+	const messageBoxRef = useRef<HTMLDivElement>(null)
+
 	useEffect(() => {
+		// play animation on first app running
 		const oneAnimate = () => {
-			acticeRandomCircle()
+			activeRandomCircle()
 			setTimeout(() => {
 				messageBoxRef.current?.classList.remove('show-message-box')
 				messageBoxRef.current?.classList.add('hidden-message-box')
 			}, 4000);
 		}
 
+		// animation function
 		const animate = () => {
-			acticeRandomCircle()
+			activeRandomCircle()
 			setTimeout(() => {
 				messageBoxRef.current?.classList.remove('show-message-box')
 				messageBoxRef.current?.classList.add('hidden-message-box')
 			}, 4000);
 		}
 
+		// inital animation interVal
 		let interVal = 0
 
+		// handle remove animation in mobile size and play again in larger sizes
 		const windowSizeHandler = () => {
 			const width = window.innerWidth
 			if (width < 768 && runAnimationRef.current) {
@@ -133,15 +139,16 @@ const Home = () => {
 				runAnimationRef.current = true
 			}
 		}
-
 		window.addEventListener('resize', windowSizeHandler)
 
+		// check window size for handeling playing animation in first app runnig
 		windowSizeHandler()
 
 		return () => clearInterval(interVal)
 	}, [])
 
-	const acticeRandomCircle = () => {
+	// handle active a circle in iran map animation
+	const activeRandomCircle = () => {
 		const number = Math.floor(Math.random() * (916 - 476 + 1) + 476)
 		const prevCircleElem = document.querySelector('.active-circle')
 		prevCircleElem?.classList.remove('active-circle')
@@ -158,9 +165,10 @@ const Home = () => {
 	return (
 		<>
 			<div className={`wrapper mt-12 md:mt-3`}>
-				{/* Hero section */}
+				{/* hero section */}
 				<main className={`h-max grid grid-rows-[1fr_13.5rem] grid-cols-1 gap-y-9 sm:grid-rows-[1fr_10rem] md:grid-cols-2
 				lg:grid-rows-[1fr_3rem] md:gap-y-16`}>
+					{/* details */}
 					<div className={`flex flex-col justify-center items-center text-center md:text-right md:items-start`}>
 						<Title
 							customClass={`justify-center md:justify-start`}
@@ -196,6 +204,8 @@ const Home = () => {
 							</Link>
 						</div>
 					</div>
+					{/* details */}
+					{/* iran map animation */}
 					<div className={`hidden justify-center items-center md:flex`}>
 						<svg
 							id="iran-svg"
@@ -1142,11 +1152,15 @@ const Home = () => {
 							}
 						</svg>
 					</div>
+					{/* iran map animation */}
+
+					{/* filter jobAds with searchBar */}
 					<SearchJobForm />
+					{/* filter jobAds with searchBar */}
 				</main>
 				{/* Hero section */}
 
-				{/* Suggested jobs */}
+				{/* suggested jobs */}
 				<div className={`mt-12 md:mt-16`}>
 					<Title>
 						<h2>
@@ -1171,15 +1185,15 @@ const Home = () => {
 						</div>
 					</div>
 				</div>
-				{/* Suggested jobs */}
+				{/* suggested jobs */}
 
-				{/* Popular companies */}
+				{/* popular companies */}
 				<div className={`mt-12 md:mt-16`}>
 					<PopularCompanies />
 				</div>
-				{/* Popular companies */}
+				{/* popular companies */}
 
-				{/* Employment baner */}
+				{/* employment baner */}
 				<div
 					id={`employee-baner`}
 					className={`bg-jv-bright flex flex-col-reverse justify-center items-center mt-12 p-5 pb-9 rounded-md
@@ -1212,9 +1226,9 @@ const Home = () => {
 						loading={`lazy`}
 					/>
 				</div>
-				{/* Employment baner */}
+				{/* employment baner */}
 
-				{/* Honors section */}
+				{/* honors section */}
 				<div className={`mt-12 md:mt-16`}>
 					<Title customClass={'justify-center'}>
 						<h4>
@@ -1246,7 +1260,7 @@ const Home = () => {
 						/>
 					</div>
 				</div>
-				{/* Honors section */}
+				{/* honors section */}
 
 				{/* CTA section */}
 				<div className={`flex flex-col gap-4 mt-12 md:mt-16 lg:flex-row`}>
@@ -1267,7 +1281,7 @@ const Home = () => {
 				</div>
 				{/* CTA section */}
 
-				{/* Accordions */}
+				{/* accordions */}
 				<div className={`flex flex-col justify-center items-center mt-12 md:mt-16`}>
 					<Title customClass={'justify-center'}>
 						<h6>
@@ -1292,7 +1306,7 @@ const Home = () => {
 						}
 					</ul>
 				</div>
-				{/* Accordions */}
+				{/* accordions */}
 			</div>
 
 			{/* CTA section in end */}
