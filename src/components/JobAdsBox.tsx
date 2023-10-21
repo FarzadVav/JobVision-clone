@@ -63,7 +63,7 @@ const JobBox = (
               <span className={`text-jv-success border-r border-solid border-jv-light text-xs pr-2 mr-2`}>
                 {
                   typeof salary === 'number' ? `${salary} میلیون`
-                    : salary === 'none' ? 'حقوق توافقی'
+                    : salary === null ? 'حقوق توافقی'
                       : salary?.length ? salary?.map((price, index) => {
                         if (index > 0) {
                           return ` تا ${price} میلیون`

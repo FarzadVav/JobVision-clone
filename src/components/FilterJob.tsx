@@ -171,8 +171,8 @@ type filtersTypes = {
   q_cooperationTypeCity: string | null;
   remote: boolean;
   knowledgeBasedCompany: boolean;
-  cooprationType: 'full-time' | 'part-time' | 'as-projects' | 'none';
-  salaryType: [number, number] | 'none'
+  cooprationType: 'full-time' | 'part-time' | 'as-projects' | null;
+  salaryType: [number, number] | null
 }
 const initialFiltersValue: filtersTypes = {
   q_id: null,
@@ -185,8 +185,8 @@ const initialFiltersValue: filtersTypes = {
   q_cooperationTypeCity: null,
   remote: false,
   knowledgeBasedCompany: false,
-  cooprationType: 'none',
-  salaryType: 'none'
+  cooprationType: null,
+  salaryType: null
 }
 const JobsFiltersBar = ({
   jobAds, setFilteredJobAdsHandler, setJobAdsToDefault, setHasFilter, removeSelectedJobAd
@@ -247,22 +247,25 @@ const JobsFiltersBar = ({
     if (filters.knowledgeBasedCompany) {
       newFilteredJobAds = newFilteredJobAds.filter(job => job.company.knowledgeBased)
     }
-    if (filters.salaryType !== 'none') {
+    if (filters.salaryType) {
       newFilteredJobAds = newFilteredJobAds.filter(job => {
         if (typeof job.salary === 'number'
           && typeof filters.salaryType === 'object'
+          && filters.salaryType !== null
           && job.salary >= filters.salaryType[0]
           && job.salary <= filters.salaryType[1]) {
           return job
         } else if (typeof job.salary === 'object'
           && typeof filters.salaryType === 'object'
+          && filters.salaryType !== null
+          && job.salary !== null
           && job.salary[0] >= filters.salaryType[0]
           && job.salary[1] <= filters.salaryType[1]) {
           return job
         }
       })
     }
-    if (filters.cooprationType !== 'none') {
+    if (filters.cooprationType) {
       newFilteredJobAds = newFilteredJobAds.filter(job => {
         if (job.cooperationType === filters.cooprationType) {
           return job
@@ -357,7 +360,7 @@ const JobsFiltersBar = ({
       />
 
       <MultiFilterJob
-        selected={filters.cooprationType !== 'none'}
+        selected={filters.cooprationType !== null}
         title={'نوع همکاری'}
         filters={[
           {
@@ -384,12 +387,12 @@ const JobsFiltersBar = ({
         ]}
         unFilterHandler={() => setFilters(prev => ({
           ...prev,
-          cooprationType: 'none'
+          cooprationType: null
         }))}
       />
 
       <MultiFilterJob
-        selected={filters.salaryType !== 'none'}
+        selected={filters.salaryType !== null}
         title={'حقوق'}
         filters={[
           {
@@ -437,7 +440,7 @@ const JobsFiltersBar = ({
         ]}
         unFilterHandler={() => setFilters(prev => ({
           ...prev,
-          salaryType: 'none'
+          salaryType: null
         }))}
       />
     </div>

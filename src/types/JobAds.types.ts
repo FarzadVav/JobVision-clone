@@ -11,7 +11,7 @@ type JobAdsTypes = {
   location: string;
   remote: boolean;
   isUrgent: boolean;
-  salary: [number, number] | number | 'none';
+  salary: [number, number] | number | null;
   workTimes: string;
   cooperationType: 'full-time' | 'part-time' | 'as-projects';
   businessTrips: string | null;
@@ -20,7 +20,7 @@ type JobAdsTypes = {
   description: string;
   employmentConditions: {
     age: [number, number];
-    gender: 'male' | 'female' | 'none';
+    gender: 'male' | 'female' | null;
     endOfMilitaryService: boolean;
     education: string[];
     languages: { name: string; power: number }[];

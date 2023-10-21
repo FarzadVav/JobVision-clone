@@ -807,7 +807,7 @@ const Jobs = () => {
 													<span className={`text-jv-success`}>
 														{
 															typeof selectedJobAds.salary === 'number' ? `${selectedJobAds.salary} میلیون`
-																: selectedJobAds.salary === 'none' ? 'حقوق توافقی'
+																: selectedJobAds.salary === null ? 'حقوق توافقی'
 																	: selectedJobAds.salary?.length ? selectedJobAds.salary?.map((price, index) => {
 																		if (index > 0) {
 																			return ` تا ${price} میلیون`
