@@ -1,6 +1,7 @@
 import { lazy, ReactNode } from "react";
 import LazyPage from "./components/LazyPage.tsx";
 
+// import pages component as lazy for optimization app bundle size
 const Home = lazy(() => import('./pages/Home.tsx'))
 const Jobs = lazy(() => import('./pages/Jobs.tsx'))
 const Employer = lazy(() => import('./pages/dashborad/Employer.tsx'))
@@ -18,7 +19,6 @@ type routesProps = {
 		element: ReactNode;
 	}[]
 }
-
 const routes: routesProps[] = [
 	{
 		path: '/',

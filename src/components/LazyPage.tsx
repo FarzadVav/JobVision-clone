@@ -2,6 +2,7 @@ import { ReactNode, Suspense } from "react";
 import { Skeleton } from "@mui/material";
 import { PuffLoader } from "react-spinners";
 
+// preview for loading pages
 const PageLoader = () => {
 	return (
 		<div className={`current-height wrapper my-12`}>
@@ -19,7 +20,6 @@ type LazyPageProps = {
 	children: ReactNode;
 	minimal?: boolean
 }
-
 const LazyPage = ({ children, minimal }: LazyPageProps) => {
 	return (
 		<Suspense

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import tokenGenerator from "../../utils/tokenGenerator";
 import { CloseRounded, DoneRounded, KeyboardArrowDownRounded } from "@mui/icons-material";
+
+import tokenGenerator from "../../utils/tokenGenerator";
 
 type MultiSelectBoxProps = {
   customClass?: string;
