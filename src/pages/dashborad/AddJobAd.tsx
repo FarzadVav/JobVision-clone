@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { z } from "zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { SearchRounded, StarBorder, WorkOutlineRounded } from '@mui/icons-material'
+import { AccessTimeRounded, AccountCircleOutlined, ArticleOutlined, GpsNotFixedRounded, HomeWorkOutlined, ImportantDevicesOutlined, LanguageOutlined, LocalAirportRounded, LocationOnOutlined, NotesRounded, PaymentsOutlined, PeopleOutlined, SchoolOutlined, StarBorder, TextFieldsRounded, WorkOutlineRounded } from '@mui/icons-material'
 import { PulseLoader } from 'react-spinners'
 
 import ComboBox from '../../components/inputs/ComboBox'
@@ -132,7 +132,7 @@ const AddJobAd = () => {
           placeholder={`برای مثال استخدام آقای اکیس`}
           error={!!errors.title}
         >
-          <SearchRounded />
+          <TextFieldsRounded className={`-scale-x-100`} />
         </TextInput>
         {/* job title */}
 
@@ -148,7 +148,7 @@ const AddJobAd = () => {
           placeholder={`آگهی شغلی تان را شرح دهید...`}
           error={!!errors.description}
         >
-          <SearchRounded />
+          <NotesRounded className={`-scale-x-100`} />
         </TextArea>
         {/* description */}
 
@@ -164,7 +164,7 @@ const AddJobAd = () => {
           placeholder={`برای مثال هاشمیه 24`}
           error={!!errors.address}
         >
-          <SearchRounded />
+          <LocationOnOutlined />
         </TextInput>
         {/* location and address */}
 
@@ -180,7 +180,7 @@ const AddJobAd = () => {
           placeholder={`برای مثال از 7 صبح تا 4 بعد از ظهر`}
           error={!!errors.workTimes}
         >
-          <SearchRounded />
+          <AccessTimeRounded />
         </TextInput>
         {/* work times */}
 
@@ -196,7 +196,7 @@ const AddJobAd = () => {
           placeholder={`برای مثال 1 هفته در سال`}
           error={!!errors.businessTrips}
         >
-          <SearchRounded />
+          <LocalAirportRounded />
         </TextInput>
         {/* business trips */}
 
@@ -213,7 +213,7 @@ const AddJobAd = () => {
             placeholder={`برای مثال ${twoStepForms.salary ? 'از ' : ''}20 میلیون تومان`}
             error={!!errors.salary_1}
           >
-            <SearchRounded />
+            <PaymentsOutlined />
           </TextInput>
           <TextInput
             customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3 ${twoStepForms.salary ? '' : 'hidden'}`}
@@ -221,7 +221,7 @@ const AddJobAd = () => {
             placeholder={`تا 30 میلیون تومان`}
             error={!!errors.salary_2}
           >
-            <SearchRounded />
+            <PaymentsOutlined />
           </TextInput>
         </div>
         <div className={`w-full flex items-center mt-5`}>
@@ -255,7 +255,7 @@ const AddJobAd = () => {
             placeholder={`برای مثال از 18 سال`}
             error={!!errors.age_1}
           >
-            <SearchRounded />
+            <AccountCircleOutlined />
           </TextInput>
           <TextInput
             customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3`}
@@ -263,7 +263,7 @@ const AddJobAd = () => {
             placeholder={`تا 25 سال`}
             error={!!errors.age_2}
           >
-            <SearchRounded />
+            <AccountCircleOutlined />
           </TextInput>
         </div>
         {/* age */}
@@ -300,7 +300,7 @@ const AddJobAd = () => {
           datas={cities}
           error={!!errors.city}
         >
-          <WorkOutlineRounded />
+          <HomeWorkOutlined />
         </AutoComplete>
         {/* city */}
 
@@ -318,7 +318,7 @@ const AddJobAd = () => {
           datas={cooperationTypes}
           error={!!errors.cooperationType}
         >
-          <WorkOutlineRounded />
+          <ArticleOutlined />
         </AutoComplete>
         {/* cooperaton types */}
 
@@ -336,7 +336,7 @@ const AddJobAd = () => {
           datas={genders}
           error={!!errors.gender}
         >
-          <WorkOutlineRounded />
+          <PeopleOutlined />
         </AutoComplete>
         {/* gender */}
 
@@ -390,7 +390,7 @@ const AddJobAd = () => {
           addItemHandler={(item: string) => setForm(prev => ({ ...prev, abilityForBoss: [...prev.abilityForBoss, item] }))}
           resetHandler={() => setForm(prev => ({ ...prev, abilityForBoss: [] }))}
         >
-          <StarBorder />
+          <GpsNotFixedRounded className={`-scale-x-100`} />
         </ComboBox>
         {/* abilties */}
 
@@ -408,7 +408,7 @@ const AddJobAd = () => {
           addItemHandler={(item: string) => setForm(prev => ({ ...prev, education: [...prev.education, item] }))}
           resetHandler={() => setForm(prev => ({ ...prev, education: [] }))}
         >
-          <StarBorder />
+          <SchoolOutlined />
         </ComboBox>
         {/* educations */}
 
@@ -426,7 +426,7 @@ const AddJobAd = () => {
           addItemHandler={(item: string) => setForm(prev => ({ ...prev, languages: [...prev.languages, item] }))}
           resetHandler={() => setForm(prev => ({ ...prev, languages: [] }))}
         >
-          <StarBorder />
+          <LanguageOutlined />
         </ComboBox>
         {/* languages */}
 
@@ -444,7 +444,7 @@ const AddJobAd = () => {
           addItemHandler={(item: string) => setForm(prev => ({ ...prev, techs: [...prev.techs, item] }))}
           resetHandler={() => setForm(prev => ({ ...prev, techs: [] }))}
         >
-          <StarBorder />
+          <ImportantDevicesOutlined />
         </ComboBox>
         {/* technologies */}
 
