@@ -1,12 +1,12 @@
 import { z } from "zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { PulseLoader } from "react-spinners"
+import { ManageSearchRounded, CalendarMonthRounded, HelpOutlineRounded, PeopleOutlineRounded } from "@mui/icons-material"
 
 import TextArea from "../../components/inputs/TextArea"
 import TextInput from "../../components/inputs/TextInput"
 import Title from "../../components/Title"
-import { PulseLoader } from "react-spinners"
-import { ManageSearchRounded, CalendarMonthRounded, HelpOutlineRounded, PeopleOutlineRounded } from "@mui/icons-material"
 
 const schema = z.object({
   about: z.string().nonempty().min(16).max(9999),
@@ -41,6 +41,7 @@ const Details = () => {
       className={`w-full flex flex-col`}
       onSubmit={handleSubmit(onSubmit)}
     >
+      {/* about company */}
       <Title withOutIcon customClass={`mb-2.5`}>
         <label className={`!text-xl`}>
           درباره شرکت
@@ -54,13 +55,16 @@ const Details = () => {
       >
         <HelpOutlineRounded />
       </TextArea>
+      {/* about company */}
 
+      {/* details */}
       <Title withOutIcon customClass={`mb-2.5 mt-5`}>
         <label className={`!text-xl`}>
           اطلاعات شرکت
         </label>
       </Title>
-      <div className={`w-full grid grid-rows-3 grid-cols-2 gap-2 sm:grid-cols-2`}>
+      <div className={`w-full grid grid-rows-3 grid-cols-2 gap-2 sm:grid-rows-2 sm:grid-cols-2`}>
+        {/* year */}
         <TextInput
           customClass={`bg-jv-bright col-span-2 sm:col-span-1`}
           register={{ ...register('year') }}
@@ -70,6 +74,9 @@ const Details = () => {
         >
           <CalendarMonthRounded />
         </TextInput>
+        {/* year */}
+
+        {/* employees */}
         <TextInput
           customClass={`bg-jv-bright col-span-2 sm:col-span-1`}
           register={{ ...register('employees') }}
@@ -79,6 +86,9 @@ const Details = () => {
         >
           <PeopleOutlineRounded />
         </TextInput>
+        {/* employees */}
+
+        {/* activity */}
         <TextInput
           customClass={`bg-jv-bright col-span-2`}
           register={{ ...register('activity') }}
@@ -88,7 +98,11 @@ const Details = () => {
         >
           <ManageSearchRounded />
         </TextInput>
+        {/* activity */}
       </div>
+      {/* details */}
+
+      {/* ownership */}
       <div className={`w-full flex items-center mt-5`}>
         <span className={`dana-bold`}>
           نوع ماکلیت
@@ -120,6 +134,8 @@ const Details = () => {
           type="radio"
         />
       </div>
+      {/* ownership */}
+
       <button
         className={`btn btn-primary mt-5`}
         type={`submit`}

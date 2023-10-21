@@ -46,16 +46,17 @@ const schema = z.object({
   city: z.string().nonempty(),
   remote: z.string(),
   isUrgent: z.string(),
-  salary_1: z.string().nonempty().regex(/^[0-9]+$/),
+  salary_1: z.string().regex(/^[0-9]+$/),
   salary_2: z.string().regex(/^[0-9]+$/),
   workTimes: z.string().nonempty().min(3).max(256),
   cooperationType: COOPERATION_TYPE,
   businessTrips: z.string().nonempty(),
   description: z.string().nonempty().min(3).max(256),
   age_1: z.string().nonempty().regex(/^[0-9]+$/),
-  age_2: z.string().regex(/^[0-9]+$/),
+  age_2: z.string().nonempty().regex(/^[0-9]+$/),
   gender: GENDER,
   endOfMilitaryService: z.string(),
+  // for sinc react-hook-form whith custom form
   customFormFields: z.string().nonempty()
 })
 
@@ -72,7 +73,6 @@ const AddJobAd = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       salary_2: '0',
-      age_2: '0',
       remote: '',
       isUrgent: '',
       endOfMilitaryService: '',
@@ -80,14 +80,13 @@ const AddJobAd = () => {
   })
   const [form, setForm] = useState<customFormTypes>(defaultFormValues)
   const [twoStepForms, setTwoStepsForms] = useState<{
-    salary: boolean;
-    age: boolean
+    salary: boolean
   }>({
-    salary: false,
-    age: false
+    salary: false
   })
   const [submittedForm, setSubmittedForm] = useState<boolean>(false)
 
+  // for sinc react-hook-form whith custom form
   useEffect(() => {
     let state: boolean = true
     for (const field in form) {
@@ -121,6 +120,7 @@ const AddJobAd = () => {
         className={`w-full flex flex-col`}
         onSubmit={handleSubmit(onSubmit)}
       >
+        {/* job title */}
         <Title withOutIcon customClass={`mb-2.5`}>
           <label className={`!text-xl`}>
             عنوان آگهی
@@ -134,7 +134,9 @@ const AddJobAd = () => {
         >
           <SearchRounded />
         </TextInput>
+        {/* job title */}
 
+        {/* description */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
             توضیحات
@@ -148,7 +150,9 @@ const AddJobAd = () => {
         >
           <SearchRounded />
         </TextArea>
+        {/* description */}
 
+        {/* location and address */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
             آدرس و موقعیت
@@ -162,7 +166,9 @@ const AddJobAd = () => {
         >
           <SearchRounded />
         </TextInput>
+        {/* location and address */}
 
+        {/* work times */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
             شرح ساعت کاری
@@ -176,7 +182,9 @@ const AddJobAd = () => {
         >
           <SearchRounded />
         </TextInput>
+        {/* work times */}
 
+        {/* business trips */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
             سفر های کاری
@@ -190,7 +198,9 @@ const AddJobAd = () => {
         >
           <SearchRounded />
         </TextInput>
+        {/* business trips */}
 
+        {/* salary */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
             میزان حقوق
@@ -230,7 +240,9 @@ const AddJobAd = () => {
             }}
           />
         </div>
+        {/* salary */}
 
+        {/* age */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
             میزان سن
@@ -240,13 +252,13 @@ const AddJobAd = () => {
           <TextInput
             customClass={`bg-jv-bright`}
             register={{ ...register('age_1') }}
-            placeholder={`برای مثال ${twoStepForms.age ? 'از ' : ''}18 سال`}
+            placeholder={`برای مثال از 18 سال`}
             error={!!errors.age_1}
           >
             <SearchRounded />
           </TextInput>
           <TextInput
-            customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3 ${twoStepForms.age ? '' : 'hidden'}`}
+            customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3`}
             register={{ ...register('age_2') }}
             placeholder={`تا 25 سال`}
             error={!!errors.age_2}
@@ -254,23 +266,9 @@ const AddJobAd = () => {
             <SearchRounded />
           </TextInput>
         </div>
-        <div className={`w-full flex items-center mt-5`}>
-          <label
-            className={`cursor-pointer`}
-            htmlFor="age_2"
-          >
-            ایجاد بازه سنی
-          </label>
-          <input
-            id='age_2'
-            className={`mr-2`}
-            type="checkbox"
-            onChange={event => {
-              setTwoStepsForms(prev => ({ ...prev, age: event.target.checked }))
-            }}
-          />
-        </div>
+        {/* age */}
 
+        {/* category */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
             دسته بندی شغلی
@@ -286,7 +284,9 @@ const AddJobAd = () => {
         >
           <WorkOutlineRounded />
         </AutoComplete>
+        {/* category */}
 
+        {/* city */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
             شهر
@@ -302,7 +302,9 @@ const AddJobAd = () => {
         >
           <WorkOutlineRounded />
         </AutoComplete>
+        {/* city */}
 
+        {/* cooperaton types */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
             نوع قرارداد
@@ -318,7 +320,9 @@ const AddJobAd = () => {
         >
           <WorkOutlineRounded />
         </AutoComplete>
+        {/* cooperaton types */}
 
+        {/* gender */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
             جنسیت
@@ -334,7 +338,9 @@ const AddJobAd = () => {
         >
           <WorkOutlineRounded />
         </AutoComplete>
+        {/* gender */}
 
+        {/* tags */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
             تگ های شغلی
@@ -350,7 +356,9 @@ const AddJobAd = () => {
           resetHandler={() => setForm(prev => ({ ...prev, jobTags: [] }))}
           unSelectHandler={(item: string) => setForm(prev => ({ ...prev, jobTags: prev.jobTags.filter(tag => tag !== item) }))}
         />
+        {/* tags */}
 
+        {/* benefits */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
             مزیت های شغلی
@@ -366,7 +374,9 @@ const AddJobAd = () => {
         >
           <StarBorder />
         </ComboBox>
+        {/* benefits */}
 
+        {/* abilties */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
             شاخص های کلیدی
@@ -382,7 +392,9 @@ const AddJobAd = () => {
         >
           <StarBorder />
         </ComboBox>
+        {/* abilties */}
 
+        {/* educations */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
             مدارک تحصیلی
@@ -398,7 +410,9 @@ const AddJobAd = () => {
         >
           <StarBorder />
         </ComboBox>
+        {/* educations */}
 
+        {/* languages */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
             زبان های بین المللی
@@ -414,7 +428,9 @@ const AddJobAd = () => {
         >
           <StarBorder />
         </ComboBox>
+        {/* languages */}
 
+        {/* technologies */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
             تکنولوژی ها
@@ -430,8 +446,11 @@ const AddJobAd = () => {
         >
           <StarBorder />
         </ComboBox>
+        {/* technologies */}
 
+        {/* check boxes */}
         <div className={`w-full flex flex-col mt-5 sm:flex-row sm:items-center`}>
+          {/* remote */}
           <div className={`flex items-center`}>
             <label
               className={`cursor-pointer`}
@@ -447,7 +466,9 @@ const AddJobAd = () => {
               type="checkbox"
             />
           </div>
+          {/* remote */}
 
+          {/* isUrgent */}
           <div className={`flex items-center`}>
             <label
               className={`cursor-pointer mt-3 sm:mr-5 sm:mt-0`}
@@ -463,7 +484,9 @@ const AddJobAd = () => {
               type="checkbox"
             />
           </div>
+          {/* isUrgent */}
 
+          {/* end of military service */}
           <div className={`flex items-center`}>
             <label
               className={`cursor-pointer mt-3 sm:mr-5 sm:mt-0`}
@@ -479,7 +502,9 @@ const AddJobAd = () => {
               type="checkbox"
             />
           </div>
+          {/* end of military service */}
         </div>
+        {/* check boxes */}
 
         <button
           className={`btn btn-primary mt-5`}

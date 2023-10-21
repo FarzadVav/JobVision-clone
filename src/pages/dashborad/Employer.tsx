@@ -6,8 +6,10 @@ import { AssessmentRounded, InfoRounded, PersonRounded } from "@mui/icons-materi
 const Employer = () => {
   return (
     <div className={`wrapper flex mt-3 pb-[4.75rem] lg:mt-12 lg:pb-12`}>
+      {/* dashboard sidebar */}
       <aside className={`bg-jv-primary w-3/12 h-max hidden flex-col justify-center items-center p-5 rounded-md sticky top-[5.25rem] overflow-hidden lg:flex`}>
         <div className={`bg-white w-20 h-20 flex justify-center items-center rounded-md relative`}>
+          {/* this image is for light shadow in back orginal image */}
           <img
             className={`w-32 h-32 object-cover object-center rounded-md absolute blur-2xl opacity-50`}
             src="https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=151196&width=70&height=70"
@@ -54,10 +56,13 @@ const Employer = () => {
           </li>
         </ul>
       </aside>
+      {/* dashboard sidebar */}
 
+      {/* dashboard contents */}
       <section className={`bg-jv-bright w-full h-max max-h-screen p-5 rounded-md overflow-y-auto lg:w-9/12 lg:mr-3`}>
         <Outlet />
       </section>
+      {/* dashboard contents */}
 
       {/* mobile navigation */}
       {
