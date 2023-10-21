@@ -4,10 +4,10 @@ import { CloseRounded, FavoriteBorderRounded, HelpRounded, InfoOutlined, Notific
 import SearchJobForm from "../components/SearchJobForm";
 import FilterJob from "../components/FilterJob";
 import Title from "../components/Title";
-import JobAdsTypes from "../types/Job.types";
+import JobAdsTypes from "../types/JobAds.types";
 import tokenGenerator from "../utils/tokenGenerator";
 import CompanyTypes from "../types/Company.types";
-import JobBox from "../components/JobBox";
+import JobAdsBox from "../components/JobAdsBox";
 import Tabs from '../components/Tabs'
 import PopularCompanies from '../components/PopularCompanies';
 
@@ -458,7 +458,7 @@ const Jobs = () => {
 							{
 								jobAds.length ? jobAds.map((job, i) => {
 									if (i < 6 && job.category.title === singleJobAd.category.title && job.id !== singleJobAd.id) {
-										return <JobBox key={i} {...job} />
+										return <JobAdsBox key={i} {...job} />
 									}
 								}) : 'آگهی وجود ندارد'
 							}
@@ -565,7 +565,7 @@ const Jobs = () => {
 						{
 							jobAds.length ? jobAds.map((job, i) => {
 								if (job.company.id === singleJobAd.company.id && job.id !== singleJobAd.id) {
-									return <JobBox key={i} {...job} />
+									return <JobAdsBox key={i} {...job} />
 								}
 							}) : 'آگهی وجود ندارد'
 						}
@@ -695,7 +695,7 @@ const Jobs = () => {
 												setSelectedJobAds(job)
 											}}
 										>
-											<JobBox {...job} />
+											<JobAdsBox {...job} />
 										</div>
 									)) : hasFilter ? (
 										<div className={`bg-yellow-50 text-jv-warning w-full text-center px-5 py-2 mt-3 rounded`}>
@@ -724,7 +724,7 @@ const Jobs = () => {
 												setSelectedJobAds(job)
 											}}
 										>
-											<JobBox {...job} />
+											<JobAdsBox {...job} />
 										</div>
 									)) : null
 								}

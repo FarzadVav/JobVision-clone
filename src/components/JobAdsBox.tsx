@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { Star } from "@mui/icons-material"
 
-import JobAdsTypes from "../types/Job.types"
+import JobAdsTypes from "../types/JobAds.types"
 
 const JobBox = (
   { id, category, title, company, city, location, salary, remote, isUrgent, createAt, selected }: JobAdsTypes

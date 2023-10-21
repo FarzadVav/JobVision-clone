@@ -1,4 +1,4 @@
-import JobsTypes from "./Job.types"
+import JobsTypes from "./JobAds.types"
 
 type CompanyTypes = {
   id: string;

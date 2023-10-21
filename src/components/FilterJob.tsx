@@ -3,7 +3,7 @@ import { CloseRounded } from '@mui/icons-material'
 import { createPortal } from 'react-dom';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import JobAdsTypes from '../types/Job.types';
+import JobAdsTypes from '../types/JobAds.types';
 
 // simple filter button
 type FilterJobProps = {

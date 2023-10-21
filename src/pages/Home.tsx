@@ -5,8 +5,8 @@ import { ApartmentOutlined, AssignmentTurnedIn, BusinessCenter, Diversity3Rounde
 import tokenGenerator from "../utils/tokenGenerator";
 import SearchJobForm from "../components/SearchJobForm";
 import Title from "../components/Title";
-import JobBox from "../components/JobBox";
-import JobBoxTypes from "../types/Job.types";
+import JobAdsBox from "../components/JobAdsBox";
+import JobAdsTypes from "../types/JobAds.types";
 import CompanyTypes from "../types/Company.types";
 import HonorBox from "../components/HonorBox";
 import CtaBox from "../components/CtaBox";
@@ -28,7 +28,7 @@ const testCompany: CompanyTypes = {
 	knowledgeBased: true
 }
 
-const testJobAd: JobBoxTypes = {
+const testJobAd: JobAdsTypes = {
 	id: 'tokenGenerator()',
 	category: { title: 'programming', id: tokenGenerator(), },
 	jobTags: [
@@ -1168,12 +1168,12 @@ const Home = () => {
 						</h2>
 					</Title>
 					<div className={`w-full grid gap-4 grid-rows-2 grid-cols-1 mt-6 md:grid-cols-2 lg:grid-cols-3`}>
-						<JobBox {...testJobAd} />
-						<JobBox {...testJobAd} />
-						<JobBox {...testJobAd} />
-						<JobBox {...testJobAd} />
-						<JobBox {...testJobAd} />
-						<JobBox {...testJobAd} />
+						<JobAdsBox {...testJobAd} />
+						<JobAdsBox {...testJobAd} />
+						<JobAdsBox {...testJobAd} />
+						<JobAdsBox {...testJobAd} />
+						<JobAdsBox {...testJobAd} />
+						<JobAdsBox {...testJobAd} />
 						<div className={`w-full flex justify-center mt-8 md:col-span-2 md:mt-12 lg:col-span-3`}>
 							<Link
 								className={`btn btn-out-primary`}
