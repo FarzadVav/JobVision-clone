@@ -11,7 +11,6 @@ type JobAdsTypes = {
   location: string;
   remote: boolean;
   isUrgent: boolean;
-  knowledgeBasedCompany: boolean;
   salary: [number, number] | number | 'none';
   workTimes: string;
   cooperationType: 'full-time' | 'part-time' | 'as-projects';

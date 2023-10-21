@@ -24,7 +24,8 @@ const testCompany: CompanyTypes = {
 	employees: [10, 30],
 	year: 1397,
 	activity: 'تاکسی رانی اینترنتی',
-	ownership: 'pv'
+	ownership: 'pv',
+	knowledgeBased: true
 }
 
 const testJobAd: JobBoxTypes = {
@@ -43,7 +44,6 @@ const testJobAd: JobBoxTypes = {
 	salary: [15, 20],
 	remote: true,
 	isUrgent: false,
-	knowledgeBasedCompany: false,
 	cooperationType: 'as-projects',
 	workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
 	businessTrips: 'woooooooooooooow',

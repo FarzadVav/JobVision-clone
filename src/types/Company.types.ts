@@ -11,6 +11,7 @@ type CompanyTypes = {
   year: number;
   activity: string;
   ownership: 'pv' | 'governmental'
+  knowledgeBased: boolean;
 }
 
 export default CompanyTypes

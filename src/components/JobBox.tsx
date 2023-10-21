@@ -4,7 +4,7 @@ import { Star } from "@mui/icons-material"
 import JobAdsTypes from "../types/Job.types"
 
 const JobBox = (
-  { id, category, title, company, city, location, salary, remote, knowledgeBasedCompany, isUrgent, createAt, selected }: JobAdsTypes
+  { id, category, title, company, city, location, salary, remote, isUrgent, createAt, selected }: JobAdsTypes
 ) => {
   const redirect = useNavigate()
 
@@ -49,7 +49,7 @@ const JobBox = (
                 ) : null
               }
               {
-                knowledgeBasedCompany ? (
+                company.knowledgeBased ? (
                   <span className={`italic border-r border-solid border-jv-light text-xs pr-2 mr-2`}>
                     امریه سربازی
                   </span>

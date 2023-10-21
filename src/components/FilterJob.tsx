@@ -245,7 +245,7 @@ const JobsFiltersBar = ({
       newFilteredJobAds = newFilteredJobAds.filter(job => job.remote)
     }
     if (filters.knowledgeBasedCompany) {
-      newFilteredJobAds = newFilteredJobAds.filter(job => job.knowledgeBasedCompany)
+      newFilteredJobAds = newFilteredJobAds.filter(job => job.company.knowledgeBased)
     }
     if (filters.salaryType !== 'none') {
       newFilteredJobAds = newFilteredJobAds.filter(job => {

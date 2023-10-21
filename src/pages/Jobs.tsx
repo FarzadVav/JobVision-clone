@@ -21,7 +21,22 @@ const testCompany: CompanyTypes = {
 	employees: [10, 30],
 	year: 1397,
 	activity: 'تاکسی رانی اینترنتی',
-	ownership: 'pv'
+	ownership: 'pv',
+	knowledgeBased: true
+}
+
+const testCompany2: CompanyTypes = {
+	id: tokenGenerator(),
+	logo: 'https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=3518088&width=70&height=70',
+	name: 'تاکسی اسنپ',
+	score: 4.1,
+	jobs: [],
+	aboutCompany: 'ما به عنوان سازمانی یادگیرنده، همه تلاش خود را برای ارتقاء کیفیت و عدالت آموزشی بکار می گیریم. دانش و تخصصمان به ما کمک می کند در کنار حامیان خیرخواه و نیکوکار، راه حلهای کارآمدی برای یادگیری دانش آموزان، معلمان و والدین خلق کنیم. ما با بکارگیری فناوری های روز و دستاوردهای علمی نهاد آموزش را به عنوان یکی از الزامات توسعه پایدار تقویت می نماییم تا در مسیر شکل گیری جامعه یادگیرنده قدم برداریم.',
+	employees: [100, 125],
+	year: 1395,
+	activity: 'تاکسی رانی اینترنتی',
+	ownership: 'pv',
+	knowledgeBased: false
 }
 
 const testJobAds: JobAdsTypes[] = [
@@ -34,14 +49,13 @@ const testJobAds: JobAdsTypes[] = [
 			{ title: 'back-end', id: tokenGenerator() }
 		],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
-		company: testCompany,
+		company: testCompany2,
 		province: 'khorasan-razavi',
 		city: 'مشهد',
 		location: 'احمدآباد',
 		salary: [15, 20],
 		remote: true,
 		isUrgent: false,
-		knowledgeBasedCompany: false,
 		cooperationType: 'as-projects',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
 		businessTrips: '7 روز در مار',
@@ -79,7 +93,6 @@ const testJobAds: JobAdsTypes[] = [
 		salary: 3,
 		remote: false,
 		isUrgent: true,
-		knowledgeBasedCompany: true,
 		cooperationType: 'full-time',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
 		businessTrips: null,
@@ -117,7 +130,6 @@ const testJobAds: JobAdsTypes[] = [
 		salary: 32,
 		remote: false,
 		isUrgent: true,
-		knowledgeBasedCompany: true,
 		cooperationType: 'full-time',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
 		businessTrips: 'همیشه در سفر',
@@ -155,7 +167,6 @@ const testJobAds: JobAdsTypes[] = [
 		salary: 40,
 		remote: true,
 		isUrgent: true,
-		knowledgeBasedCompany: true,
 		cooperationType: 'full-time',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
 		businessTrips: 'همیشه در سفر',
