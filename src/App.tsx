@@ -13,7 +13,7 @@ const App = () => {
 			<Header />
 			{router}
 			{
-				!location.pathname.includes('d_employer') ? <Footer /> : null
+				!location.pathname.includes('employer') ? <Footer /> : null
 			}
 		</AuthContextProvider>
 	);

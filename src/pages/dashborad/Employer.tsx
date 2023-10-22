@@ -32,7 +32,7 @@ const Employer = () => {
         <ul className={`w-full flex flex-col justify-center items-center mt-4`}>
           <li className={`w-full`}>
             <NavLink
-              className={link => (link.isActive && location.pathname.endsWith('d_employer')) ? `btn btn-white w-full` : `btn btn-out-white w-full`}
+              className={link => (link.isActive && location.pathname.endsWith('employer')) ? `btn btn-white w-full` : `btn btn-out-white w-full`}
               to={``}
             >
               داشبورد
@@ -70,7 +70,7 @@ const Employer = () => {
           <>
             <nav className={`bg-jv-primary h-16 w-full flex justify-evenly items-center fixed bottom-0 left-0 z-40 lg:hidden`}>
               <NavLink
-                className={link => `${link.isActive && location.pathname.endsWith('d_employer') ? 'bg-gradient-to-t from-[#ffffff15] to-transparent' : ''} text-white w-24 h-full flex flex-col items-center justify-center`}
+                className={link => `${link.isActive && location.pathname.endsWith('employer') ? 'bg-gradient-to-t from-[#ffffff15] to-transparent' : ''} text-white w-24 h-full flex flex-col items-center justify-center`}
                 to={``}
               >
                 <PersonRounded />
