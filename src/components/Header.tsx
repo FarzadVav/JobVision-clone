@@ -188,7 +188,7 @@ const Header = () => {
 							auth.isLogin ? (
 								<>
 									{
-										location.pathname.includes('/d_employer') ? (
+										location.pathname.includes('/employer') ? (
 											<button
 												className={`btn btn-out-danger`}
 												onClick={() => {
@@ -202,7 +202,7 @@ const Header = () => {
 									}
 									<NavLink
 										className={link => `btn ${link.isActive ? 'btn-primary' : 'btn-out-primary'} mr-3`}
-										to={`/d_employer`}
+										to={`/employer`}
 									>
 										پنل کارفرمایان
 									</NavLink>

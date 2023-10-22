@@ -37,7 +37,7 @@ const routes: routesProps[] = [
 		)
 	},
 	{
-		path: '/d_employer',
+		path: '/employer',
 		element: (
 			<PrivateRoute>
 				<LazyPage>
