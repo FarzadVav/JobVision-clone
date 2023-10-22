@@ -16,19 +16,22 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
   useEffect(() => {
     if (getToken()) loginHandler()
     else logOutHandler()
-    console.log(document.cookie.split(';').map(c => c.trim()));
   }, [])
 
   const loginHandler = () => {
+    console.log(document.cookie);
+    logOutHandler()
+    console.log(document.cookie);
     const expiryDate = new Date()
     expiryDate.setMonth(expiryDate.getMonth() + 1)
-    document.cookie = `jv_token=${tokenGenerator()}; path=/; expires=${expiryDate}`
+    document.cookie = `jv_token=${tokenGenerator()};path=/;expires=${expiryDate}`
+    console.log(document.cookie);
     setIsLogin(true)
   }
 
   const logOutHandler = () => {
     const expiryDate = new Date()
-    document.cookie = `jv_token=none; path=/; expires=${expiryDate}`
+    document.cookie = `jv_token=none;path=/;expires=${expiryDate}`
     setIsLogin(false)
   }
 
