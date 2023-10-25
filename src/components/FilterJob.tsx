@@ -158,7 +158,9 @@ type JobsFiltersBarProps = {
   setFilteredJobAdsHandler: (jobAd: JobAdsTypes[]) => void;
   setJobAdsToDefault: () => void;
   setHasFilter: Function;
-  removeSelectedJobAd: Function
+  removeSelectedJobAd: Function;
+  setSelectedJobAds: Function;
+  jobAdsSelectHandler: (singleJobAd: JobAdsTypes) => void
 }
 type filtersTypes = {
   q_id: string | null;
@@ -189,7 +191,7 @@ const initialFiltersValue: filtersTypes = {
   salaryType: null
 }
 const JobsFiltersBar = ({
-  jobAds, setFilteredJobAdsHandler, setJobAdsToDefault, setHasFilter, removeSelectedJobAd
+  jobAds, setFilteredJobAdsHandler, setJobAdsToDefault, setHasFilter, removeSelectedJobAd, setSelectedJobAds, jobAdsSelectHandler
 }: JobsFiltersBarProps) => {
   const [searchParams] = useSearchParams()
   const redirect = useNavigate()
@@ -198,79 +200,94 @@ const JobsFiltersBar = ({
 
   useEffect(() => {
     removeSelectedJobAd()
-    setShowClearFilters(chekFilters())
-    setHasFilter(chekFilters())
+
+    if (chekFilters()) {
+      setShowClearFilters(true)
+      setHasFilter(true)
+    } else {
+      setShowClearFilters(false)
+      setHasFilter(false)
+    }
+
 
     let newFilteredJobAds: JobAdsTypes[] = jobAds
     if (filters.q_id) {
-      newFilteredJobAds = newFilteredJobAds.filter(job => job.id === filters.q_id)
-    }
-    if (filters.q_search) {
-      const search: string = filters.q_search
-      newFilteredJobAds = newFilteredJobAds.filter(job => {
-        if (job.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-          || job.category.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-          || job.jobTags.filter(tag => tag.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())).length) {
-          return job
-        }
-      })
-    }
-    if (filters.q_cat) {
-      newFilteredJobAds = newFilteredJobAds.filter(job => job.category.title === filters.q_cat)
-    }
-    if (filters.q_jobTag) {
-      let _newFilteredJobAds: JobAdsTypes[] = []
-      newFilteredJobAds.forEach(job => {
-        job.jobTags.forEach(tag => {
-          if (tag.title === filters.q_jobTag) _newFilteredJobAds.push(job)
+      const newFilteredJobAds_id = newFilteredJobAds.find(job => job.id === filters.q_id)
+      if (newFilteredJobAds_id) {
+        newFilteredJobAds = [newFilteredJobAds_id]
+        setSelectedJobAds(newFilteredJobAds_id)
+        jobAdsSelectHandler(newFilteredJobAds_id)
+      } else {
+        newFilteredJobAds = []
+      }
+    } else {
+      if (filters.q_search) {
+        const search: string = filters.q_search
+        newFilteredJobAds = newFilteredJobAds.filter(job => {
+          if (job.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+            || job.category.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+            || job.jobTags.filter(tag => tag.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())).length) {
+            return job
+          }
         })
-      })
-      newFilteredJobAds = _newFilteredJobAds
-    }
-    if (filters.q_province) {
-      newFilteredJobAds = newFilteredJobAds.filter(job => job.province === filters.q_province)
-    }
-    if (filters.q_city) {
-      newFilteredJobAds = newFilteredJobAds.filter(job => job.city === filters.q_city)
-    }
-    if (filters.q_cooperationType) {
-      newFilteredJobAds = newFilteredJobAds.filter(job => job.cooperationType === filters.q_cooperationType)
-    }
-    if (filters.q_cooperationTypeCity) {
-      const cooperationTypeCitySplited = filters.q_cooperationTypeCity.split('__')
-      newFilteredJobAds = newFilteredJobAds.filter(job => job.cooperationType === cooperationTypeCitySplited[0]
-        && job.city === cooperationTypeCitySplited[1])
-    }
-    if (filters.remote) {
-      newFilteredJobAds = newFilteredJobAds.filter(job => job.remote)
-    }
-    if (filters.knowledgeBasedCompany) {
-      newFilteredJobAds = newFilteredJobAds.filter(job => job.company.knowledgeBased)
-    }
-    if (filters.salaryType) {
-      newFilteredJobAds = newFilteredJobAds.filter(job => {
-        if (typeof job.salary === 'number'
-          && typeof filters.salaryType === 'object'
-          && filters.salaryType !== null
-          && job.salary >= filters.salaryType[0]
-          && job.salary <= filters.salaryType[1]) {
-          return job
-        } else if (typeof job.salary === 'object'
-          && typeof filters.salaryType === 'object'
-          && filters.salaryType !== null
-          && job.salary !== null
-          && job.salary[0] >= filters.salaryType[0]
-          && job.salary[1] <= filters.salaryType[1]) {
-          return job
-        }
-      })
-    }
-    if (filters.cooprationType) {
-      newFilteredJobAds = newFilteredJobAds.filter(job => {
-        if (job.cooperationType === filters.cooprationType) {
-          return job
-        }
-      })
+      }
+      if (filters.q_cat) {
+        newFilteredJobAds = newFilteredJobAds.filter(job => job.category.title === filters.q_cat)
+      }
+      if (filters.q_jobTag) {
+        let _newFilteredJobAds: JobAdsTypes[] = []
+        newFilteredJobAds.forEach(job => {
+          job.jobTags.forEach(tag => {
+            if (tag.title === filters.q_jobTag) _newFilteredJobAds.push(job)
+          })
+        })
+        newFilteredJobAds = _newFilteredJobAds
+      }
+      if (filters.q_province) {
+        newFilteredJobAds = newFilteredJobAds.filter(job => job.province === filters.q_province)
+      }
+      if (filters.q_city) {
+        newFilteredJobAds = newFilteredJobAds.filter(job => job.city === filters.q_city)
+      }
+      if (filters.q_cooperationType) {
+        newFilteredJobAds = newFilteredJobAds.filter(job => job.cooperationType === filters.q_cooperationType)
+      }
+      if (filters.q_cooperationTypeCity) {
+        const cooperationTypeCitySplited = filters.q_cooperationTypeCity.split('__')
+        newFilteredJobAds = newFilteredJobAds.filter(job => job.cooperationType === cooperationTypeCitySplited[0]
+          && job.city === cooperationTypeCitySplited[1])
+      }
+      if (filters.remote) {
+        newFilteredJobAds = newFilteredJobAds.filter(job => job.remote)
+      }
+      if (filters.knowledgeBasedCompany) {
+        newFilteredJobAds = newFilteredJobAds.filter(job => job.company.knowledgeBased)
+      }
+      if (filters.salaryType) {
+        newFilteredJobAds = newFilteredJobAds.filter(job => {
+          if (typeof job.salary === 'number'
+            && typeof filters.salaryType === 'object'
+            && filters.salaryType !== null
+            && job.salary >= filters.salaryType[0]
+            && job.salary <= filters.salaryType[1]) {
+            return job
+          } else if (typeof job.salary === 'object'
+            && typeof filters.salaryType === 'object'
+            && filters.salaryType !== null
+            && job.salary !== null
+            && job.salary[0] >= filters.salaryType[0]
+            && job.salary[1] <= filters.salaryType[1]) {
+            return job
+          }
+        })
+      }
+      if (filters.cooprationType) {
+        newFilteredJobAds = newFilteredJobAds.filter(job => {
+          if (job.cooperationType === filters.cooprationType) {
+            return job
+          }
+        })
+      }
     }
     setFilteredJobAdsHandler(newFilteredJobAds)
   }, [filters])

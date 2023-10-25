@@ -606,6 +606,8 @@ const Jobs = () => {
 						setJobAdsToDefault={setJobAdsToDefault}
 						setHasFilter={setHasFilter}
 						removeSelectedJobAd={removeSelectedJobAd}
+						setSelectedJobAds={setSelectedJobAds}
+						jobAdsSelectHandler={jobAdsSelectHandler}
 					/>
 				</div>
 			</div>
