@@ -10,6 +10,7 @@ import CompanyTypes from "../types/Company.types";
 import JobAdsBox from "../components/JobAdsBox";
 import Tabs from '../components/Tabs'
 import PopularCompanies from '../components/PopularCompanies';
+import { Alert } from '@mui/material';
 
 const testCompany: CompanyTypes = {
 	id: tokenGenerator(),
@@ -454,15 +455,45 @@ const Jobs = () => {
 								فرصت‌های شغلی مشابه
 							</span>
 						</Title>
-						<div className={`w-full grid grid-cols-1 gap-3 mt-3 sm:grid-cols-2`}>
+						<>
 							{
-								jobAds.length ? jobAds.map((job, i) => {
-									if (i < 6 && job.category.title === singleJobAd.category.title && job.id !== singleJobAd.id) {
-										return <JobAdsBox key={i} {...job} />
-									}
-								}) : 'آگهی وجود ندارد'
+								(
+									jobAds.length
+									&& jobAds.filter(job => (job.category.title === singleJobAd.category.title && job.id !== singleJobAd.id)).length
+								)
+									? (
+										<div className={`w-full grid grid-cols-1 gap-3 mt-3 sm:grid-cols-2`}>
+											{
+												jobAds.map((job, i) => {
+													if (i < 6 && job.category.title === singleJobAd.category.title && job.id !== singleJobAd.id) {
+														return (
+															<div
+																key={job.id}
+																className={`w-full`}
+																onClick={() => {
+																	jobAdsSelectHandler(job)
+																	setSelectedJobAds(job)
+																}}
+															>
+																<JobAdsBox {...job} />
+															</div>
+														)
+													}
+												})
+											}
+										</div>
+									) : (
+										<div className={`w-full mt-3`} dir='ltr'>
+											<Alert
+												className={`!justify-between`}
+												severity="warning"
+											>
+												آگهی وجود ندارد
+											</Alert>
+										</div>
+									)
 							}
-						</div>
+						</>
 					</div>
 				)
 			},
@@ -561,15 +592,45 @@ const Jobs = () => {
 				id: 'other-jobAds',
 				title: 'سایر آگهی های این شرکت',
 				content: (
-					<div className={`w-full grid grid-cols-1 gap-3 sm:grid-cols-2`}>
+					<>
 						{
-							jobAds.length ? jobAds.map((job, i) => {
-								if (job.company.id === singleJobAd.company.id && job.id !== singleJobAd.id) {
-									return <JobAdsBox key={i} {...job} />
-								}
-							}) : 'آگهی وجود ندارد'
+							(
+								jobAds.length
+								&& jobAds.filter(job => (job.company.id === singleJobAd.company.id && job.id !== singleJobAd.id)).length
+							)
+								? (
+									<div className={`w-full grid grid-cols-1 gap-3 sm:grid-cols-2`}>
+										{
+											jobAds.map((job) => {
+												if (job.company.id === singleJobAd.company.id && job.id !== singleJobAd.id) {
+													return (
+														<div
+															key={job.id}
+															className={`w-full`}
+															onClick={() => {
+																jobAdsSelectHandler(job)
+																setSelectedJobAds(job)
+															}}
+														>
+															<JobAdsBox {...job} />
+														</div>
+													)
+												}
+											})
+										}
+									</div>
+								) : (
+									<div className={`w-full`} dir='ltr'>
+										<Alert
+											className={`!justify-between`}
+											severity="warning"
+										>
+											آگهی وجود ندارد
+										</Alert>
+									</div>
+								)
 						}
-					</div>
+					</>
 				)
 			}
 		])
@@ -700,8 +761,13 @@ const Jobs = () => {
 											<JobAdsBox {...job} />
 										</div>
 									)) : hasFilter ? (
-										<div className={`bg-yellow-50 text-jv-warning w-full text-center px-5 py-2 mt-3 rounded`}>
-											آگهی با این فیلتر پیدا نشد
+										<div className={`w-full mt-3`} dir='ltr'>
+											<Alert
+												className={`!justify-between`}
+												severity="warning"
+											>
+												آگهی با این فیلتر وجود ندارد
+											</Alert>
 										</div>
 									) : null
 								}
