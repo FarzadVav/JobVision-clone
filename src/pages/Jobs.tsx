@@ -466,11 +466,13 @@ const Jobs = () => {
 											{
 												jobAds.map((job, i) => {
 													if (i < 6 && job.category.title === singleJobAd.category.title && job.id !== singleJobAd.id) {
+														job.selected = false
 														return (
 															<div
 																key={job.id}
 																className={`w-full`}
 																onClick={() => {
+																	removeSelectedJobAd()
 																	jobAdsSelectHandler(job)
 																	setSelectedJobAds(job)
 																}}
@@ -603,11 +605,13 @@ const Jobs = () => {
 										{
 											jobAds.map((job) => {
 												if (job.company.id === singleJobAd.company.id && job.id !== singleJobAd.id) {
+													job.selected = false
 													return (
 														<div
 															key={job.id}
 															className={`w-full`}
 															onClick={() => {
+																removeSelectedJobAd()
 																jobAdsSelectHandler(job)
 																setSelectedJobAds(job)
 															}}
