@@ -1,14 +1,14 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { createPortal } from 'react-dom'
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod';
 import TextInput from './inputs/TextInput';
-import { CloseRounded, EmailOutlined, ShapeLine, Verified, VpnKeyOutlined } from '@mui/icons-material';
+import { CloseRounded, EmailOutlined, VpnKeyOutlined } from '@mui/icons-material';
 import PulseLoader from "react-spinners/PulseLoader";
-import { Snackbar } from '@mui/material';
 import authContext from '../context/AuthContext';
 import supabase from '../utils/supabase';
+import { Toaster, toast } from 'react-hot-toast';
 
 type LoginPopUpProps = {
   showLogin: boolean;
@@ -35,15 +35,6 @@ const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
     resolver: zodResolver(schema)
   })
   const auth = useContext(authContext)
-  const [showAlert, setShowAlert] = useState<{
-    state: boolean;
-    message: string;
-    type: 'success' | 'danger' | '';
-  }>({
-    state: false,
-    message: '',
-    type: ''
-  })
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     const { data: companies } = await supabase
@@ -55,18 +46,10 @@ const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
       if (company.email === data.email) {
         if (company.password === data.password) {
           auth.loginHandler(company.token)
-          setShowAlert({
-            state: true,
-            message: 'با موفقیت وارد حسابتان شدید',
-            type: 'success'
-          })
+          toast.success('با موفقیت وارد حسابتان شدید')
           reset()
         } else {
-          setShowAlert({
-            state: true,
-            message: 'رمز عبور اشتباه است',
-            type: 'danger'
-          })
+          toast.error('رمز عبور اشتباه است')
         }
         return hasUser = true
       }
@@ -84,11 +67,7 @@ const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
         .select()
       // @ts-ignore
       auth.loginHandler(company[0].token)
-      setShowAlert({
-        state: true,
-        message: 'با موفقیت ثبت نام شدید',
-        type: 'success'
-      })
+      toast.success('با موفقیت ثبت نام شدید')
       reset()
     }
   }
@@ -154,18 +133,8 @@ const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
           </div>
         </form>
       </div>
-      <Snackbar
-        open={showAlert.state}
-        autoHideDuration={6000}
-        onClose={() => setShowAlert({ state: false, message: '', type: '' })}
-      >
-        <div className={`${showAlert.type === 'success' ? 'bg-green-50' : 'bg-red-50'} h-12 w-full flex justify-between items-center px-5 rounded`}>
-          <span className={showAlert.type === 'success' ? 'text-jv-success' : 'text-jv-danger'}>
-            {showAlert.message}
-          </span>
-          <Verified className={`${showAlert.type === 'success' ? 'text-jv-success' : 'text-jv-danger'} mr-4`} />
-        </div>
-      </Snackbar>
+
+      <Toaster />
     </>,
     document.body
   )
