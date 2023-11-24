@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod';
 import TextInput from './inputs/TextInput';
-import { CloseRounded, EmailOutlined, Verified, VpnKeyOutlined } from '@mui/icons-material';
+import { CloseRounded, EmailOutlined, ShapeLine, Verified, VpnKeyOutlined } from '@mui/icons-material';
 import PulseLoader from "react-spinners/PulseLoader";
 import { Snackbar } from '@mui/material';
 import authContext from '../context/AuthContext';
@@ -35,22 +35,62 @@ const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
     resolver: zodResolver(schema)
   })
   const auth = useContext(authContext)
-  const [showAlert, setShowAlert] = useState<boolean>(false)
+  const [showAlert, setShowAlert] = useState<{
+    state: boolean;
+    message: string;
+    type: 'success' | 'danger' | '';
+  }>({
+    state: false,
+    message: '',
+    type: ''
+  })
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     const { data: companies } = await supabase
       .from('companies')
-      .insert([
-        {
-          email: data.email,
-          password: data.password
-        }
-      ])
-      .select()
+      .select('*')
 
-    reset()
-    setShowAlert(true)
-    auth.loginHandler(companies[0].token)
+    let hasUser = false
+    companies?.forEach(company => {
+      if (company.email === data.email) {
+        if (company.password === data.password) {
+          auth.loginHandler(company.token)
+          setShowAlert({
+            state: true,
+            message: 'با موفقیت وارد حسابتان شدید',
+            type: 'success'
+          })
+          reset()
+        } else {
+          setShowAlert({
+            state: true,
+            message: 'رمز عبور اشتباه است',
+            type: 'danger'
+          })
+        }
+        return hasUser = true
+      }
+    })
+
+    if (!hasUser) {
+      const { data: company } = await supabase
+        .from('companies')
+        .insert([
+          {
+            email: data.email,
+            password: data.password
+          }
+        ])
+        .select()
+      // @ts-ignore
+      auth.loginHandler(company[0].token)
+      setShowAlert({
+        state: true,
+        message: 'با موفقیت ثبت نام شدید',
+        type: 'success'
+      })
+      reset()
+    }
   }
 
   return createPortal(
@@ -115,15 +155,15 @@ const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
         </form>
       </div>
       <Snackbar
-        open={showAlert}
+        open={showAlert.state}
         autoHideDuration={6000}
-        onClose={() => setShowAlert(false)}
+        onClose={() => setShowAlert({ state: false, message: '', type: '' })}
       >
-        <div className={`bg-green-50 h-12 w-full flex justify-between items-center px-5 rounded`}>
-          <span className={`text-jv-success`}>
-            با موفقیت ثبت نام شدید
+        <div className={`${showAlert.type === 'success' ? 'bg-green-50' : 'bg-red-50'} h-12 w-full flex justify-between items-center px-5 rounded`}>
+          <span className={showAlert.type === 'success' ? 'text-jv-success' : 'text-jv-danger'}>
+            {showAlert.message}
           </span>
-          <Verified className={`text-jv-success mr-4`} />
+          <Verified className={`${showAlert.type === 'success' ? 'text-jv-success' : 'text-jv-danger'} mr-4`} />
         </div>
       </Snackbar>
     </>,
