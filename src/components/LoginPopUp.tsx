@@ -8,6 +8,7 @@ import { CloseRounded, EmailOutlined, Verified, VpnKeyOutlined } from '@mui/icon
 import PulseLoader from "react-spinners/PulseLoader";
 import { Snackbar } from '@mui/material';
 import authContext from '../context/AuthContext';
+import supabase from '../utils/supabase';
 
 type LoginPopUpProps = {
   showLogin: boolean;
@@ -37,13 +38,19 @@ const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
   const [showAlert, setShowAlert] = useState<boolean>(false)
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
-    await new Promise((resolve) => setTimeout(() => {
-      console.log(data);
-      auth.loginHandler()
-      reset()
-      setShowAlert(true)
-      return resolve
-    }, 1500));
+    const { data: companies } = await supabase
+      .from('companies')
+      .insert([
+        {
+          email: data.email,
+          password: data.password
+        }
+      ])
+      .select()
+
+    reset()
+    setShowAlert(true)
+    auth.loginHandler(companies[0].token)
   }
 
   return createPortal(
