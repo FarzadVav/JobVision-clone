@@ -21,7 +21,7 @@ export const AuthContextProvider = ({ children }: { children: React.ReactNode })
       let validation = false
       const myToken = getToken()
       companies?.forEach(company => {
-        if (company.token === myToken) {
+        if (company._id === myToken) {
           validation = true
         }
       })
