@@ -65,7 +65,7 @@
   }
 
   body {
-    @apply bg-white w-full max-w-full h-screen min-h-screen relative;
+    @apply bg-white w-full max-w-full min-h-screen relative;
   }
 
   ::-webkit-scrollbar {
