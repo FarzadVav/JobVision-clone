@@ -30,19 +30,18 @@ const testCompany: CompanyTypes = {
 
 const testJobAd: JobAdsTypes = {
 	id: 'tokenGenerator()',
-	category: { title: 'programming', id: tokenGenerator(), },
+	category: { name: 'programming', id: tokenGenerator(), },
 	jobTags: [
-		{ title: 'full-stack', id: tokenGenerator() },
-		{ title: 'front-end', id: tokenGenerator() },
-		{ title: 'back-end', id: tokenGenerator() }
+		{ name: 'full-stack', id: tokenGenerator() },
+		{ name: 'front-end', id: tokenGenerator() },
+		{ name: 'back-end', id: tokenGenerator() }
 	],
 	title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
 	company: testCompany,
 	province: 'tehran',
 	city: 'تهران',
-	location: 'فرشته',
 	salary: [15, 20],
-	remote: true,
+	isRemote: true,
 	isUrgent: false,
 	cooperationType: 'as-projects',
 	workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
@@ -50,22 +49,14 @@ const testJobAd: JobAdsTypes = {
 	benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
 	abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
 	description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
-	employmentConditions: {
-		age: [18, 32],
-		gender: 'male',
-		endOfMilitaryService: false,
-		education: ['لیسانس مهندسی نرم افزار'],
-		languages: [
-			{ name: 'english', power: 90 }
-		],
-		techs: [
-			{ name: 'Javascript', power: 100 },
-			{ name: 'React.js', power: 90 },
-			{ name: 'Typescript', power: 75 },
-		]
-	},
+	age: [18, 32],
+	gender: true,
+	endOfMilitaryService: false,
+	education: ['لیسانس مهندسی نرم افزار'],
+	languages: ['english'],
+	techs: ['Javascript', 'React.js', 'Typescript'],
 	selected: false,
-	createAt: new Date()
+	created_at: new Date()
 }
 
 // accordions
@@ -124,7 +115,7 @@ const Home = () => {
 		}
 
 		// inital animation interVal
-		let interVal = 0
+		let interVal: ReturnType<typeof setInterval> | number = 0
 
 		// handle remove animation in mobile size and play again in larger sizes
 		const windowSizeHandler = () => {

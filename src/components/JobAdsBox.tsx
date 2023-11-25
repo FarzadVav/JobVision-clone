@@ -4,7 +4,7 @@ import { Star } from "@mui/icons-material"
 import JobAdsTypes from "../types/JobAds.types"
 
 const JobBox = (
-  { id, category, title, company, city, location, salary, remote, isUrgent, createAt, selected }: JobAdsTypes
+  { id, category, title, company, city, salary, isRemote, isUrgent, created_at, selected }: JobAdsTypes
 ) => {
   const redirect = useNavigate()
 
@@ -42,7 +42,7 @@ const JobBox = (
                 {company.name}
               </span>
               {
-                remote ? (
+                isRemote ? (
                   <span className={`italic border-r border-solid border-jv-light text-xs pr-2 mr-2`}>
                     دورکاری
                   </span>
@@ -58,19 +58,19 @@ const JobBox = (
             </div>
             <div className={`flex items-center mt-2`}>
               <span className={`text-xs`}>
-                {city}، {location}
+                {city}، آدرس
               </span>
               <span className={`text-jv-success border-r border-solid border-jv-light text-xs pr-2 mr-2`}>
                 {
-                  typeof salary === 'number' ? `${salary} میلیون`
-                    : salary === null ? 'حقوق توافقی'
-                      : salary?.length ? salary?.map((price, index) => {
-                        if (index > 0) {
-                          return ` تا ${price} میلیون`
+                  salary === null ? 'حقوق توافقی'
+                    : salary.length === 1 ? `${salary} میلیون`
+                      : salary.map((price, index) => {
+                        if (index + 1 === salary.length) {
+                          return `${price} میلیون`
                         } else {
-                          return `${price}`
+                          return `${price} تا `
                         }
-                      }) : null
+                      })
                 }
               </span>
             </div>
@@ -85,7 +85,7 @@ const JobBox = (
               </span>
             ) : (
               <span className={`text-xs h-3`}>
-                {createAt.toLocaleDateString('fa-ir').split('/').reverse().join(' / ')}
+                {created_at.toLocaleDateString('fa-ir').split('/').reverse().join(' / ')}
               </span>
             )
           }

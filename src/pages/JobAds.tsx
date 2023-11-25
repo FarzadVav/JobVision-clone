@@ -43,19 +43,18 @@ const testCompany2: CompanyTypes = {
 const testJobAds: JobAdsTypes[] = [
 	{
 		id: 'tokenGenerator()',
-		category: { title: 'programming', id: tokenGenerator(), },
+		category: { name: 'programming', id: tokenGenerator(), },
 		jobTags: [
-			{ title: 'full-stack', id: tokenGenerator() },
-			{ title: 'front-end', id: tokenGenerator() },
-			{ title: 'back-end', id: tokenGenerator() }
+			{ name: 'full-stack', id: tokenGenerator() },
+			{ name: 'front-end', id: tokenGenerator() },
+			{ name: 'back-end', id: tokenGenerator() }
 		],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
 		company: testCompany2,
 		province: 'khorasan-razavi',
 		city: 'مشهد',
-		location: 'احمدآباد',
-		salary: [15, 20],
-		remote: true,
+		salary: [15, 20, 30],
+		isRemote: true,
 		isUrgent: false,
 		cooperationType: 'as-projects',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
@@ -63,36 +62,27 @@ const testJobAds: JobAdsTypes[] = [
 		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
 		abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
 		description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
-		employmentConditions: {
-			age: [18, 32],
-			gender: 'male',
-			endOfMilitaryService: false,
-			education: ['لیسانس مهندسی نرم افزار'],
-			languages: [
-				{ name: 'english', power: 90 }
-			],
-			techs: [
-				{ name: 'Javascript', power: 100 },
-				{ name: 'React.js', power: 90 },
-				{ name: 'Typescript', power: 75 },
-			]
-		},
+		age: [18, 32],
+		gender: true,
+		endOfMilitaryService: false,
+		education: ['لیسانس مهندسی نرم افزار'],
+		languages: ['english'],
+		techs: ['Javascript', 'React.js', 'Typescript'],
 		selected: false,
-		createAt: new Date()
+		created_at: new Date()
 	},
 	{
 		id: tokenGenerator(),
-		category: { title: 'programming', id: tokenGenerator(), },
+		category: { name: 'programming', id: tokenGenerator(), },
 		jobTags: [
-			{ title: 'front-end', id: tokenGenerator() }
+			{ name: 'front-end', id: tokenGenerator() }
 		],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer) 2',
 		company: testCompany,
 		province: 'tehran',
 		city: 'تهران',
-		location: 'فرشته',
-		salary: 3,
-		remote: false,
+		salary: [3],
+		isRemote: false,
 		isUrgent: true,
 		cooperationType: 'full-time',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
@@ -100,36 +90,27 @@ const testJobAds: JobAdsTypes[] = [
 		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
 		abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
 		description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
-		employmentConditions: {
-			age: [18, 32],
-			gender: 'male',
-			endOfMilitaryService: false,
-			education: ['لیسانس مهندسی نرم افزار'],
-			languages: [
-				{ name: 'english', power: 90 }
-			],
-			techs: [
-				{ name: 'Javascript', power: 100 },
-				{ name: 'React.js', power: 90 },
-				{ name: 'Typescript', power: 75 },
-			]
-		},
+		age: [18, 32],
+		gender: true,
+		endOfMilitaryService: false,
+		education: ['لیسانس مهندسی نرم افزار'],
+		languages: ['english'],
+		techs: ['Javascript', 'React.js', 'Typescript'],
 		selected: false,
-		createAt: new Date()
+		created_at: new Date()
 	},
 	{
 		id: tokenGenerator(),
-		category: { title: 'programming', id: tokenGenerator(), },
+		category: { name: 'programming', id: tokenGenerator(), },
 		jobTags: [
-			{ title: 'front-end', id: tokenGenerator(), }
+			{ name: 'front-end', id: tokenGenerator(), }
 		],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer) 3',
 		company: testCompany,
 		province: 'tehran',
 		city: 'تهران',
-		location: 'ونک',
-		salary: 32,
-		remote: false,
+		salary: [32],
+		isRemote: false,
 		isUrgent: true,
 		cooperationType: 'full-time',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
@@ -137,36 +118,27 @@ const testJobAds: JobAdsTypes[] = [
 		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
 		abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
 		description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
-		employmentConditions: {
-			age: [18, 32],
-			gender: 'male',
-			endOfMilitaryService: false,
-			education: ['لیسانس مهندسی نرم افزار'],
-			languages: [
-				{ name: 'english', power: 90 }
-			],
-			techs: [
-				{ name: 'Javascript', power: 100 },
-				{ name: 'React.js', power: 90 },
-				{ name: 'Typescript', power: 75 },
-			]
-		},
+		age: [18, 32],
+		gender: true,
+		endOfMilitaryService: false,
+		education: ['لیسانس مهندسی نرم افزار'],
+		languages: ['english'],
+		techs: ['Javascript', 'React.js', 'Typescript'],
 		selected: false,
-		createAt: new Date()
+		created_at: new Date()
 	},
 	{
 		id: tokenGenerator(),
-		category: { title: 'programming', id: tokenGenerator(), },
+		category: { name: 'programming', id: tokenGenerator(), },
 		jobTags: [
-			{ title: 'front-end', id: tokenGenerator(), }
+			{ name: 'front-end', id: tokenGenerator(), }
 		],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer) 4',
 		company: testCompany,
 		province: 'tehran',
 		city: 'تهران',
-		location: 'ونک',
-		salary: 40,
-		remote: true,
+		salary: [40],
+		isRemote: true,
 		isUrgent: true,
 		cooperationType: 'full-time',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
@@ -174,22 +146,14 @@ const testJobAds: JobAdsTypes[] = [
 		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
 		abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
 		description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
-		employmentConditions: {
-			age: [18, 32],
-			gender: 'male',
-			endOfMilitaryService: false,
-			education: ['لیسانس مهندسی نرم افزار'],
-			languages: [
-				{ name: 'english', power: 90 }
-			],
-			techs: [
-				{ name: 'Javascript', power: 100 },
-				{ name: 'React.js', power: 90 },
-				{ name: 'Typescript', power: 75 },
-			]
-		},
+		age: [18, 32],
+		gender: false,
+		endOfMilitaryService: false,
+		education: ['لیسانس مهندسی نرم افزار'],
+		languages: ['english'],
+		techs: ['Javascript', 'React.js', 'Typescript'],
 		selected: false,
-		createAt: new Date()
+		created_at: new Date()
 	},
 ]
 
@@ -356,7 +320,7 @@ const Jobs = () => {
 									سن
 								</span>
 								<span className={`bg-jv-bright block w-8/12 px-3 py-1.5 sm:w-10/12`}>
-									{`${singleJobAd.employmentConditions.age[0]} - ${singleJobAd.employmentConditions.age[1]}`}
+									{`${singleJobAd.age[0]} - ${singleJobAd.age[1]}`}
 									<span className={`mr-1.5`}>
 										سال
 									</span>
@@ -368,9 +332,7 @@ const Jobs = () => {
 								</span>
 								<span className={`bg-jv-bright block w-8/12 px-3 py-1.5 sm:w-10/12`}>
 									{
-										singleJobAd.employmentConditions.gender === 'male' ? 'مرد'
-											: singleJobAd.employmentConditions.gender === 'female' ? 'زن'
-												: 'فرقی ندارد'
+										typeof singleJobAd.gender === 'object' ? 'فرقی ندارد' : singleJobAd.gender ? 'مرد' : 'زن'
 									}
 								</span>
 							</li>
@@ -380,7 +342,7 @@ const Jobs = () => {
 								</span>
 								<span className={`bg-jv-bright block w-8/12 px-3 py-1.5 sm:w-10/12`}>
 									{
-										singleJobAd.employmentConditions.endOfMilitaryService ? 'پایان خدمت یا معاف از سربازی' : 'مهم نیست'
+										singleJobAd.endOfMilitaryService ? 'پایان خدمت یا معاف از سربازی' : 'مهم نیست'
 									}
 								</span>
 							</li>
@@ -390,7 +352,7 @@ const Jobs = () => {
 								</span>
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-8/12 p-1.5 overflow-x-auto sm:w-10/12`}>
 									{
-										singleJobAd.employmentConditions.education.length ? singleJobAd.employmentConditions.education.map((education, i) => (
+										singleJobAd.education.length ? singleJobAd.education.map((education, i) => (
 											<div
 												key={i}
 												className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}
@@ -407,12 +369,12 @@ const Jobs = () => {
 								</span>
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-8/12 p-1.5 overflow-x-auto sm:w-10/12`}>
 									{
-										singleJobAd.employmentConditions.languages.length ? singleJobAd.employmentConditions.languages.map((language, i) => (
+										singleJobAd.languages.length ? singleJobAd.languages.map((language, i) => (
 											<div
 												key={i}
 												className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}
 											>
-												{`${language.name} - ${language.power}%`}
+												{language}
 											</div>
 										)) : 'فرقی ندارد'
 									}
@@ -424,12 +386,12 @@ const Jobs = () => {
 								</span>
 								<span className={`list-scrollbar bg-jv-bright flex items-center w-8/12 p-1.5 overflow-x-auto sm:w-10/12`}>
 									{
-										singleJobAd.employmentConditions.techs.length ? singleJobAd.employmentConditions.techs.map((tech, i) => (
+										singleJobAd.techs.length ? singleJobAd.techs.map((tech, i) => (
 											<div
 												key={i}
 												className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}
 											>
-												{`${tech.name} - ${tech.power}%`}
+												{tech}
 											</div>
 										)) : 'فرقی ندارد'
 									}
@@ -459,13 +421,13 @@ const Jobs = () => {
 							{
 								(
 									jobAds.length
-									&& jobAds.filter(job => (job.category.title === singleJobAd.category.title && job.id !== singleJobAd.id)).length
+									&& jobAds.filter(job => (job.category.name === singleJobAd.category.name && job.id !== singleJobAd.id)).length
 								)
 									? (
 										<div className={`w-full grid grid-cols-1 gap-3 mt-3 sm:grid-cols-2`}>
 											{
 												jobAds.map((job, i) => {
-													if (i < 6 && job.category.title === singleJobAd.category.title && job.id !== singleJobAd.id) {
+													if (i < 6 && job.category.name === singleJobAd.category.name && job.id !== singleJobAd.id) {
 														job.selected = false
 														return (
 															<div
@@ -833,7 +795,7 @@ const Jobs = () => {
 													</button>
 													<div className={`flex items-center`}>
 														<span className={`text-sm`}>
-															{selectedJobAds.createAt.toLocaleDateString('fa-ir').split('/').reverse().join(' / ')}
+															{selectedJobAds.created_at.toLocaleDateString('fa-ir').split('/').reverse().join(' / ')}
 														</span>
 														<button className={`btn-sm bg-blue-50 rounded-full mr-4`}>
 															<ShareOutlined className={`text-jv-primary cursor-pointer`} />
@@ -850,7 +812,7 @@ const Jobs = () => {
 														</h2>
 													</Title>
 													<span className={`min-w-max hidden text-sm lg:block`}>
-														{selectedJobAds.createAt.toLocaleDateString('fa-ir').split('/').reverse().join(' / ')}
+														{selectedJobAds.created_at.toLocaleDateString('fa-ir').split('/').reverse().join(' / ')}
 													</span>
 												</div>
 												<div className={`flex items-center mt-4 lg:mt-6`}>
@@ -858,10 +820,10 @@ const Jobs = () => {
 														{selectedJobAds.company.name}
 													</span>
 													<span className={`border-r border-solid border-jv-light italic pr-3 mr-3`}>
-														{selectedJobAds.city} ، {selectedJobAds.location}
+														{selectedJobAds.city} ، آدرس
 													</span>
 													{
-														selectedJobAds.remote && (
+														selectedJobAds.isRemote && (
 															<span className={`border-r border-solid border-jv-light italic pr-3 mr-3`}>
 																امکان دورکاری
 															</span>
@@ -878,15 +840,15 @@ const Jobs = () => {
 												<div className={`w-full flex items-center justify-between mt-4`}>
 													<span className={`text-jv-success`}>
 														{
-															typeof selectedJobAds.salary === 'number' ? `${selectedJobAds.salary} میلیون`
-																: selectedJobAds.salary === null ? 'حقوق توافقی'
-																	: selectedJobAds.salary?.length ? selectedJobAds.salary?.map((price, index) => {
-																		if (index > 0) {
-																			return ` تا ${price} میلیون`
+															selectedJobAds.salary === null ? 'حقوق توافقی'
+																: selectedJobAds.salary.length === 1 ? `${selectedJobAds.salary} میلیون`
+																	: selectedJobAds.salary.map((price, index) => {
+																		if (index + 1 === selectedJobAds.salary?.length) {
+																			return `${price} میلیون`
 																		} else {
-																			return `${price}`
+																			return `${price} تا `
 																		}
-																	}) : null
+																	})
 														}
 													</span>
 													<div className={`flex items-center`}>

@@ -2,32 +2,29 @@ import CompanyTypes from "./Company.types"
 
 type JobAdsTypes = {
   id: string;
-  category: { title: string; id: string };
-  jobTags: { title: string; id: string; }[];
+  category: { name: string; id: string };
+  jobTags: { name: string; id: string; }[];
   title: string;
   company: CompanyTypes;
   province: string;
   city: string;
-  location: string;
-  remote: boolean;
+  isRemote: boolean;
   isUrgent: boolean;
-  salary: [number, number] | number | null;
+  salary: number[] | null;
   workTimes: string;
   cooperationType: 'full-time' | 'part-time' | 'as-projects';
   businessTrips: string | null;
   benefits: string[];
   abilityForBoss: string[];
   description: string;
-  employmentConditions: {
-    age: [number, number];
-    gender: 'male' | 'female' | null;
-    endOfMilitaryService: boolean;
-    education: string[];
-    languages: { name: string; power: number }[];
-    techs: { name: string; power: number }[]
-  };
+  age: [number, number];
+  gender: boolean | null;
+  endOfMilitaryService: boolean;
+  education: string[];
+  languages: string[];
+  techs: string[];
   selected: boolean;
-  createAt: Date;
+  created_at: Date;
 }
 
 export default JobAdsTypes

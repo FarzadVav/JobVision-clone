@@ -225,20 +225,20 @@ const JobsFiltersBar = ({
         const search: string = filters.q_search
         newFilteredJobAds = newFilteredJobAds.filter(job => {
           if (job.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-            || job.category.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-            || job.jobTags.filter(tag => tag.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())).length) {
+            || job.category.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+            || job.jobTags.filter(tag => tag.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())).length) {
             return job
           }
         })
       }
       if (filters.q_cat) {
-        newFilteredJobAds = newFilteredJobAds.filter(job => job.category.title === filters.q_cat)
+        newFilteredJobAds = newFilteredJobAds.filter(job => job.category.name === filters.q_cat)
       }
       if (filters.q_jobTag) {
         let _newFilteredJobAds: JobAdsTypes[] = []
         newFilteredJobAds.forEach(job => {
           job.jobTags.forEach(tag => {
-            if (tag.title === filters.q_jobTag) _newFilteredJobAds.push(job)
+            if (tag.name === filters.q_jobTag) _newFilteredJobAds.push(job)
           })
         })
         newFilteredJobAds = _newFilteredJobAds
@@ -258,26 +258,34 @@ const JobsFiltersBar = ({
           && job.city === cooperationTypeCitySplited[1])
       }
       if (filters.remote) {
-        newFilteredJobAds = newFilteredJobAds.filter(job => job.remote)
+        newFilteredJobAds = newFilteredJobAds.filter(job => job.isRemote)
       }
       if (filters.knowledgeBasedCompany) {
         newFilteredJobAds = newFilteredJobAds.filter(job => job.company.knowledgeBased)
       }
       if (filters.salaryType) {
+        // newFilteredJobAds = newFilteredJobAds.filter(job => {
+        //   if (typeof job.salary === 'number'
+        //     && typeof filters.salaryType === 'object'
+        //     && filters.salaryType !== null
+        //     && job.salary >= filters.salaryType[0]
+        //     && job.salary <= filters.salaryType[1]) {
+        //     return job
+        //   } else if (typeof job.salary === 'object'
+        //     && typeof filters.salaryType === 'object'
+        //     && filters.salaryType !== null
+        //     && job.salary !== null
+        //     && job.salary[0] >= filters.salaryType[0]
+        //     && job.salary[1] <= filters.salaryType[1]) {
+        //     return job
+        //   }
+        // })
         newFilteredJobAds = newFilteredJobAds.filter(job => {
-          if (typeof job.salary === 'number'
-            && typeof filters.salaryType === 'object'
+          if ( job.salary !== null
             && filters.salaryType !== null
-            && job.salary >= filters.salaryType[0]
-            && job.salary <= filters.salaryType[1]) {
-            return job
-          } else if (typeof job.salary === 'object'
-            && typeof filters.salaryType === 'object'
-            && filters.salaryType !== null
-            && job.salary !== null
             && job.salary[0] >= filters.salaryType[0]
             && job.salary[1] <= filters.salaryType[1]) {
-            return job
+              return job
           }
         })
       }
