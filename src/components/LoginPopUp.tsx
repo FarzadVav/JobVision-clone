@@ -45,7 +45,7 @@ const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
     companies?.forEach(company => {
       if (company.email === data.email) {
         if (company.password === data.password) {
-          auth.loginHandler(company.token)
+          auth.loginHandler(company._id)
           toast.success('با موفقیت وارد حسابتان شدید')
           reset()
         } else {
@@ -66,7 +66,7 @@ const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
         ])
         .select()
       // @ts-ignore
-      auth.loginHandler(company[0].token)
+      auth.loginHandler(company[0]._id)
       toast.success('با موفقیت ثبت نام شدید')
       reset()
     }
