@@ -226,7 +226,7 @@ const JobsFiltersBar = ({
         newFilteredJobAds = newFilteredJobAds.filter(job => {
           if (job.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
             || job.category.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-            || job.jobTags.filter(tag => tag.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())).length) {
+            || job.tags.filter(tag => tag.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())).length) {
             return job
           }
         })
@@ -237,17 +237,17 @@ const JobsFiltersBar = ({
       if (filters.q_jobTag) {
         let _newFilteredJobAds: JobAdsTypes[] = []
         newFilteredJobAds.forEach(job => {
-          job.jobTags.forEach(tag => {
+          job.tags.forEach(tag => {
             if (tag.name === filters.q_jobTag) _newFilteredJobAds.push(job)
           })
         })
         newFilteredJobAds = _newFilteredJobAds
       }
       if (filters.q_province) {
-        newFilteredJobAds = newFilteredJobAds.filter(job => job.province === filters.q_province)
+        newFilteredJobAds = newFilteredJobAds.filter(job => job.company.province.name === filters.q_province)
       }
       if (filters.q_city) {
-        newFilteredJobAds = newFilteredJobAds.filter(job => job.city === filters.q_city)
+        newFilteredJobAds = newFilteredJobAds.filter(job => job.company.city.name === filters.q_city)
       }
       if (filters.q_cooperationType) {
         newFilteredJobAds = newFilteredJobAds.filter(job => job.cooperationType === filters.q_cooperationType)
@@ -255,7 +255,7 @@ const JobsFiltersBar = ({
       if (filters.q_cooperationTypeCity) {
         const cooperationTypeCitySplited = filters.q_cooperationTypeCity.split('__')
         newFilteredJobAds = newFilteredJobAds.filter(job => job.cooperationType === cooperationTypeCitySplited[0]
-          && job.city === cooperationTypeCitySplited[1])
+          && job.company.city.name === cooperationTypeCitySplited[1])
       }
       if (filters.remote) {
         newFilteredJobAds = newFilteredJobAds.filter(job => job.isRemote)

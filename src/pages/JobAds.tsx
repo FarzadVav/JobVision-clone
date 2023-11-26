@@ -17,13 +17,13 @@ const testCompany: CompanyTypes = {
 	logo: 'https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=3518088&width=70&height=70',
 	name: 'تاکسی ماکسیم',
 	score: 4.1,
-	jobs: [],
 	aboutCompany: 'ما به عنوان سازمانی یادگیرنده، همه تلاش خود را برای ارتقاء کیفیت و عدالت آموزشی بکار می گیریم. دانش و تخصصمان به ما کمک می کند در کنار حامیان خیرخواه و نیکوکار، راه حلهای کارآمدی برای یادگیری دانش آموزان، معلمان و والدین خلق کنیم. ما با بکارگیری فناوری های روز و دستاوردهای علمی نهاد آموزش را به عنوان یکی از الزامات توسعه پایدار تقویت می نماییم تا در مسیر شکل گیری جامعه یادگیرنده قدم برداریم.',
 	employees: [10, 30],
 	year: 1397,
 	activity: 'تاکسی رانی اینترنتی',
-	ownership: 'pv',
-	knowledgeBased: true
+	knowledgeBased: true,
+	province: { id: tokenGenerator(), name: 'خراسان رضوی' },
+	city: { id: tokenGenerator(), name: 'مشهد' }
 }
 
 const testCompany2: CompanyTypes = {
@@ -31,28 +31,26 @@ const testCompany2: CompanyTypes = {
 	logo: 'https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=3518088&width=70&height=70',
 	name: 'تاکسی اسنپ',
 	score: 4.1,
-	jobs: [],
 	aboutCompany: 'ما به عنوان سازمانی یادگیرنده، همه تلاش خود را برای ارتقاء کیفیت و عدالت آموزشی بکار می گیریم. دانش و تخصصمان به ما کمک می کند در کنار حامیان خیرخواه و نیکوکار، راه حلهای کارآمدی برای یادگیری دانش آموزان، معلمان و والدین خلق کنیم. ما با بکارگیری فناوری های روز و دستاوردهای علمی نهاد آموزش را به عنوان یکی از الزامات توسعه پایدار تقویت می نماییم تا در مسیر شکل گیری جامعه یادگیرنده قدم برداریم.',
 	employees: [100, 125],
 	year: 1395,
 	activity: 'تاکسی رانی اینترنتی',
-	ownership: 'pv',
-	knowledgeBased: false
+	knowledgeBased: false,
+	province: { id: tokenGenerator(), name: 'تهران' },
+	city: { id: tokenGenerator(), name: 'تهران' }
 }
 
 const testJobAds: JobAdsTypes[] = [
 	{
 		id: 'tokenGenerator()',
 		category: { name: 'programming', id: tokenGenerator(), },
-		jobTags: [
+		tags: [
 			{ name: 'full-stack', id: tokenGenerator() },
 			{ name: 'front-end', id: tokenGenerator() },
 			{ name: 'back-end', id: tokenGenerator() }
 		],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
 		company: testCompany2,
-		province: 'khorasan-razavi',
-		city: 'مشهد',
 		salary: [15, 20, 30],
 		isRemote: true,
 		isUrgent: false,
@@ -74,19 +72,17 @@ const testJobAds: JobAdsTypes[] = [
 	{
 		id: tokenGenerator(),
 		category: { name: 'programming', id: tokenGenerator(), },
-		jobTags: [
+		tags: [
 			{ name: 'front-end', id: tokenGenerator() }
 		],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer) 2',
 		company: testCompany,
-		province: 'tehran',
-		city: 'تهران',
 		salary: [3],
 		isRemote: false,
 		isUrgent: true,
 		cooperationType: 'full-time',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
-		businessTrips: null,
+		businessTrips: '',
 		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
 		abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
 		description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
@@ -102,13 +98,11 @@ const testJobAds: JobAdsTypes[] = [
 	{
 		id: tokenGenerator(),
 		category: { name: 'programming', id: tokenGenerator(), },
-		jobTags: [
+		tags: [
 			{ name: 'front-end', id: tokenGenerator(), }
 		],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer) 3',
 		company: testCompany,
-		province: 'tehran',
-		city: 'تهران',
 		salary: [32],
 		isRemote: false,
 		isUrgent: true,
@@ -130,13 +124,11 @@ const testJobAds: JobAdsTypes[] = [
 	{
 		id: tokenGenerator(),
 		category: { name: 'programming', id: tokenGenerator(), },
-		jobTags: [
+		tags: [
 			{ name: 'front-end', id: tokenGenerator(), }
 		],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer) 4',
 		company: testCompany,
-		province: 'tehran',
-		city: 'تهران',
 		salary: [40],
 		isRemote: true,
 		isUrgent: true,
@@ -233,7 +225,7 @@ const Jobs = () => {
 									سفر های کاری
 								</span>
 								<span className={`block text-sm mt-1`}>
-									{singleJobAd.businessTrips || '-'}
+									{singleJobAd.businessTrips.length ? singleJobAd.businessTrips : 'ندارد'}
 								</span>
 							</div>
 							<div className={`w-full px-3 sm:w-1/2`}>
@@ -266,7 +258,7 @@ const Jobs = () => {
 												)
 
 											}
-										}) : '---'
+										}) : 'ندارد'
 									}
 								</div>
 							</div>
@@ -290,7 +282,7 @@ const Jobs = () => {
 										<Verified className='text-jv-primary ml-3' fontSize='small' />
 										{ability}
 									</li>
-								)) : '---'
+								)) : 'مهم نیست'
 							}
 						</ul>
 
@@ -320,10 +312,16 @@ const Jobs = () => {
 									سن
 								</span>
 								<span className={`bg-jv-bright block w-8/12 px-3 py-1.5 sm:w-10/12`}>
-									{`${singleJobAd.age[0]} - ${singleJobAd.age[1]}`}
-									<span className={`mr-1.5`}>
-										سال
-									</span>
+									{
+										singleJobAd.age.length === 1 ? `${singleJobAd.age[0]} سال`
+											: singleJobAd.age.map((price, index) => {
+												if (index + 1 === singleJobAd.age.length) {
+													return `${price} سال`
+												} else {
+													return `${price} تا `
+												}
+											})
+									}
 								</span>
 							</li>
 							<li className={`w-full flex items-center mt-2`}>
@@ -527,7 +525,16 @@ const Jobs = () => {
 									اندازه سازمان
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
-									{singleJobAd.company.employees[0]} تا {singleJobAd.company.employees[1]} نفر
+									{
+										singleJobAd.company.employees.length === 1 ? `${singleJobAd.company.employees[0]} نفر`
+											: singleJobAd.company.employees.map((price, index) => {
+												if (index + 1 === singleJobAd.company.employees.length) {
+													return `${price} نفر`
+												} else {
+													return `${price} تا `
+												}
+											})
+									}
 								</span>
 							</div>
 							<div className={`w-1/2 px-3`}>
@@ -536,16 +543,6 @@ const Jobs = () => {
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
 									{singleJobAd.company.activity}
-								</span>
-							</div>
-							<div className={`w-1/2 px-3`}>
-								<span className={`dana-bold block`}>
-									نوع مالکیت
-								</span>
-								<span className={`opacity-75 block text-sm mt-1`}>
-									{
-										singleJobAd.company.ownership === 'pv' ? 'خصوصی' : 'دولتی'
-									}
 								</span>
 							</div>
 						</div>
@@ -820,7 +817,7 @@ const Jobs = () => {
 														{selectedJobAds.company.name}
 													</span>
 													<span className={`border-r border-solid border-jv-light italic pr-3 mr-3`}>
-														{selectedJobAds.city} ، آدرس
+														{selectedJobAds.company.province.name}، {selectedJobAds.company.city.name}
 													</span>
 													{
 														selectedJobAds.isRemote && (
@@ -872,7 +869,16 @@ const Jobs = () => {
 												<div className={`flex items-center`}>
 													<PeopleAltRounded className={`text-jv-light brightness-75`} />
 													<span className={`mr-3`}>
-														{selectedJobAds.company.employees[0]} تا {selectedJobAds.company.employees[1]} نفر
+														{
+															selectedJobAds.company.employees.length === 1 ? `${selectedJobAds.company.employees[0]} نفر`
+																: selectedJobAds.company.employees.map((price, index) => {
+																	if (index + 1 === selectedJobAds.company.employees.length) {
+																		return `${price} نفر`
+																	} else {
+																		return `${price} تا `
+																	}
+																})
+														}
 													</span>
 												</div>
 												<div className={`flex items-center mt-1.5 md:mr-6 md:mt-0`}>

@@ -8,6 +8,8 @@ type CompanyTypes = {
   score: number;
   knowledgeBased: boolean;
   employees: number[];
+  province: { id: string; name: string };
+  city: { id: string; name: string }
 }
 
 export default CompanyTypes

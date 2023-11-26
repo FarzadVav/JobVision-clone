@@ -5,14 +5,14 @@ type JobAdsTypes = {
   id: string;
   title: string;
   workTimes: string;
-  businessTrips: string | null;
+  businessTrips: string;
   cooperationType: 'full-time' | 'part-time' | 'as-projects';
   isRemote: boolean;
   isUrgent: boolean;
   endOfMilitaryService: boolean;
   selected: boolean;
   gender: boolean | null;
-  category: { name: string; id: string };
+  category: { id: string; name: string };
   benefits: string[];
   abilityForBoss: string[];
   description: string;
@@ -21,7 +21,7 @@ type JobAdsTypes = {
   techs: string[];
   age: number[];
   salary: number[] | null;
-  jobTags: { name: string; id: string; }[];
+  tags: { id: string; name: string }[];
   company: CompanyTypes;
 }
 

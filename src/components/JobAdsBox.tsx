@@ -4,7 +4,7 @@ import { Star } from "@mui/icons-material"
 import JobAdsTypes from "../types/JobAds.types"
 
 const JobBox = (
-  { id, category, title, company, city, salary, isRemote, isUrgent, created_at, selected }: JobAdsTypes
+  { id, category, title, company, salary, isRemote, isUrgent, created_at, selected }: JobAdsTypes
 ) => {
   const redirect = useNavigate()
 
@@ -58,7 +58,7 @@ const JobBox = (
             </div>
             <div className={`flex items-center mt-2`}>
               <span className={`text-xs`}>
-                {city}، آدرس
+                {company.province.name}، {company.city.name}
               </span>
               <span className={`text-jv-success border-r border-solid border-jv-light text-xs pr-2 mr-2`}>
                 {
