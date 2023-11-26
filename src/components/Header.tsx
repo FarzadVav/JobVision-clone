@@ -12,24 +12,24 @@ const megaMenus: MegaMenusTypes[] = [
 	{
 		id: tokenGenerator(),
 		title: 'پربازدیدترین شغل ها',
-		query: 'cat',
+		query: 'category',
 		links: [
 			{
 				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'programming',
-				query2: 'job',
+				link: 'برنامه نویسی و توسعه نرم افزار',
+				query2: 'tag',
 				subLinks: [
 					{
 						title: 'فرانت اند',
-						link: 'front-end'
+						link: 'فرانت اند'
 					},
 					{
 						title: 'بک اند',
-						link: 'back-end'
+						link: 'بک اند'
 					},
 					{
 						title: 'برنامه نویسسی موبایل',
-						link: 'mobile-programming'
+						link: 'برنامه نویسسی موبایل'
 					}
 				]
 			}
@@ -42,7 +42,7 @@ const megaMenus: MegaMenusTypes[] = [
 		links: [
 			{
 				title: 'خراسان رضوی',
-				link: 'khorasan-razavi',
+				link: 'خراسان رضوی',
 				query2: 'city',
 				subLinks: [
 					{
@@ -68,27 +68,31 @@ const megaMenus: MegaMenusTypes[] = [
 		links: [
 			{
 				title: 'تمام وقت',
-				link: 'full-time',
+				link: 'تمام وقت',
 				query2: 'cooperationType-city',
 				subLinks: [
 					{
 						title: 'در تهران',
-						link: 'full-time__تهران'
+						link: 'تمام وقت__تهران'
 					},
 					{
 						title: 'در تبریز',
-						link: 'full-time__تبریز'
+						link: 'تمام وقت__تبریز'
 					}
 				]
 			},
 			{
 				title: 'پروژه ای',
-				link: 'as-projects',
+				link: 'پروژه ای',
 				query2: 'cooperationType-city',
 				subLinks: [
 					{
 						title: 'در مشهد',
-						link: 'as-projects__مشهد'
+						link: 'پروژه ای__مشهد'
+					},
+					{
+						title: 'در تهران',
+						link: 'پروژه ای__تهران'
 					}
 				]
 			}

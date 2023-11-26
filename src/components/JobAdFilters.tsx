@@ -165,8 +165,8 @@ type JobsFiltersBarProps = {
 type filtersTypes = {
   q_id: string | null;
   q_search: string | null;
-  q_cat: string | null;
-  q_jobTag: string | null;
+  q_category: string | null;
+  q_tag: string | null;
   q_province: string | null;
   q_city: string | null;
   q_cooperationType: string | null;
@@ -179,8 +179,8 @@ type filtersTypes = {
 const initialFiltersValue: filtersTypes = {
   q_id: null,
   q_search: null,
-  q_cat: null,
-  q_jobTag: null,
+  q_category: null,
+  q_tag: null,
   q_province: null,
   q_city: null,
   q_cooperationType: null,
@@ -231,14 +231,14 @@ const JobsFiltersBar = ({
           }
         })
       }
-      if (filters.q_cat) {
-        newFilteredJobAds = newFilteredJobAds.filter(job => job.category.name === filters.q_cat)
+      if (filters.q_category) {
+        newFilteredJobAds = newFilteredJobAds.filter(job => job.category.name === filters.q_category)
       }
-      if (filters.q_jobTag) {
+      if (filters.q_tag) {
         let _newFilteredJobAds: JobAdsTypes[] = []
         newFilteredJobAds.forEach(job => {
           job.tags.forEach(tag => {
-            if (tag.name === filters.q_jobTag) _newFilteredJobAds.push(job)
+            if (tag.name === filters.q_tag) _newFilteredJobAds.push(job)
           })
         })
         newFilteredJobAds = _newFilteredJobAds
@@ -306,7 +306,7 @@ const JobsFiltersBar = ({
     const id = searchParams.get('id')
     const search = searchParams.get('search')
     const cat = searchParams.get('cat')
-    const jobTag = searchParams.get('job')
+    const jobTag = searchParams.get('tag')
     const province = searchParams.get('province')
     const city = searchParams.get('city')
     const cooperationType = searchParams.get('cooperationType')
@@ -315,8 +315,8 @@ const JobsFiltersBar = ({
       ...prev,
       q_id: id,
       q_search: search,
-      q_cat: cat,
-      q_jobTag: jobTag,
+      q_category: cat,
+      q_tag: jobTag,
       q_province: province,
       q_city: city,
       q_cooperationType: cooperationType,
