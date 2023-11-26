@@ -6,7 +6,7 @@ type JobAdsTypes = {
   title: string;
   workTimes: string;
   businessTrips: string;
-  cooperationType: 'full-time' | 'part-time' | 'as-projects';
+  cooperationType: 'تمام وقت' | 'پاره وقت' | 'پروژه ای';
   isRemote: boolean;
   isUrgent: boolean;
   endOfMilitaryService: boolean;

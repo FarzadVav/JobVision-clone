@@ -173,7 +173,7 @@ type filtersTypes = {
   q_cooperationTypeCity: string | null;
   remote: boolean;
   knowledgeBasedCompany: boolean;
-  cooprationType: 'full-time' | 'part-time' | 'as-projects' | null;
+  cooprationType: JobAdsTypes['cooperationType'] | null;
   salaryType: [number, number] | null
 }
 const initialFiltersValue: filtersTypes = {
@@ -392,21 +392,21 @@ const JobsFiltersBar = ({
             title: 'تمام وقت',
             filterHandler: () => setFilters(prev => ({
               ...prev,
-              cooprationType: 'full-time'
+              cooprationType: 'تمام وقت'
             }))
           },
           {
             title: 'پاره وقت',
             filterHandler: () => setFilters(prev => ({
               ...prev,
-              cooprationType: 'part-time'
+              cooprationType: 'پاره وقت'
             }))
           },
           {
             title: 'پروژه ای',
             filterHandler: () => setFilters(prev => ({
               ...prev,
-              cooprationType: 'as-projects'
+              cooprationType: 'پروژه ای'
             }))
           }
         ]}

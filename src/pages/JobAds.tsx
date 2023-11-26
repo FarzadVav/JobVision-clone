@@ -54,7 +54,7 @@ const testJobAds: JobAdsTypes[] = [
 		salary: [15, 20, 30],
 		isRemote: true,
 		isUrgent: false,
-		cooperationType: 'as-projects',
+		cooperationType: 'پروژه ای',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
 		businessTrips: '7 روز در مار',
 		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
@@ -80,7 +80,7 @@ const testJobAds: JobAdsTypes[] = [
 		salary: [3],
 		isRemote: false,
 		isUrgent: true,
-		cooperationType: 'full-time',
+		cooperationType: 'تمام وقت',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
 		businessTrips: '',
 		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
@@ -106,7 +106,7 @@ const testJobAds: JobAdsTypes[] = [
 		salary: [32],
 		isRemote: false,
 		isUrgent: true,
-		cooperationType: 'full-time',
+		cooperationType: 'تمام وقت',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
 		businessTrips: 'همیشه در سفر',
 		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
@@ -132,7 +132,7 @@ const testJobAds: JobAdsTypes[] = [
 		salary: [40],
 		isRemote: true,
 		isUrgent: true,
-		cooperationType: 'full-time',
+		cooperationType: 'پاره وقت',
 		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
 		businessTrips: 'همیشه در سفر',
 		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
@@ -213,11 +213,7 @@ const Jobs = () => {
 									نوع همکاری
 								</span>
 								<span className={`block text-sm mt-1`}>
-									{
-										singleJobAd.cooperationType === 'full-time' ? 'تمام وقت'
-											: singleJobAd.cooperationType === 'part-time' ? 'پاره وقت'
-												: 'پروژه ای'
-									}
+									{singleJobAd.cooperationType}
 								</span>
 							</div>
 							<div className={`w-full px-3 sm:w-1/2`}>
