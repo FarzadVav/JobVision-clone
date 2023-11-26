@@ -51,7 +51,7 @@ const testJobAds: JobAdsTypes[] = [
 		],
 		title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
 		company: testCompany2,
-		salary: [15, 20, 30],
+		salary: [15, 20, 25],
 		isRemote: true,
 		isUrgent: false,
 		cooperationType: 'پروژه ای',

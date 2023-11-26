@@ -281,16 +281,17 @@ const JobsFiltersBar = ({
         //   }
         // })
         newFilteredJobAds = newFilteredJobAds.filter(job => {
-          if ( job.salary !== null
+          if (job.salary !== null
             && filters.salaryType !== null
             && job.salary[0] >= filters.salaryType[0]
-            && job.salary[1] <= filters.salaryType[1]) {
-              return job
+            && job.salary[job.salary.length - 1] <= filters.salaryType[1]) {
+            return job
           }
         })
       }
       if (filters.cooprationType) {
         newFilteredJobAds = newFilteredJobAds.filter(job => {
+          console.log(job.cooperationType, filters.cooprationType);
           if (job.cooperationType === filters.cooprationType) {
             return job
           }
