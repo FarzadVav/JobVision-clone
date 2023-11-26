@@ -1,17 +1,13 @@
-import JobsTypes from "./JobAds.types"
-
 type CompanyTypes = {
   id: string;
   logo: string;
   name: string;
-  score: number | null;
-  jobs: JobsTypes[]
   aboutCompany: string;
-  employees: [number, number];
-  year: number;
   activity: string;
-  ownership: 'pv' | 'governmental'
+  year: number;
+  score: number;
   knowledgeBased: boolean;
+  employees: number[];
 }
 
 export default CompanyTypes
