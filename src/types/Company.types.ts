@@ -1,3 +1,5 @@
+import ProvinceAndCityTypes from "./ProvinceAndCity.types";
+
 type CompanyTypes = {
   id: string;
   logo: string;
@@ -8,8 +10,8 @@ type CompanyTypes = {
   score: number;
   knowledgeBased: boolean;
   employees: number[];
-  province: { id: string; name: string };
-  city: { id: string; name: string }
+  province: ProvinceAndCityTypes;
+  city: ProvinceAndCityTypes
 }
 
 export default CompanyTypes
