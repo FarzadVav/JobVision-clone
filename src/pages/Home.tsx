@@ -19,27 +19,25 @@ const testCompany: CompanyTypes = {
 	logo: 'https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=3518088&width=70&height=70',
 	name: 'تاکسی ماکسیم',
 	score: 4.9,
-	jobs: [],
 	aboutCompany: 'lorem',
 	employees: [10, 30],
 	year: 1397,
 	activity: 'تاکسی رانی اینترنتی',
-	ownership: 'pv',
-	knowledgeBased: true
+	knowledgeBased: true,
+	province: { id: tokenGenerator(), name: 'خراسان رضوی' },
+	city: { id: tokenGenerator(), name: 'مشهد' }
 }
 
 const testJobAd: JobAdsTypes = {
 	id: 'tokenGenerator()',
 	category: { name: 'programming', id: tokenGenerator(), },
-	jobTags: [
+	tags: [
 		{ name: 'full-stack', id: tokenGenerator() },
 		{ name: 'front-end', id: tokenGenerator() },
 		{ name: 'back-end', id: tokenGenerator() }
 	],
 	title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
 	company: testCompany,
-	province: 'tehran',
-	city: 'تهران',
 	salary: [15, 20],
 	isRemote: true,
 	isUrgent: false,
