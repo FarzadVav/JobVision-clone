@@ -3,8 +3,9 @@ import { CloseRounded } from '@mui/icons-material'
 import { createPortal } from 'react-dom';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import JobAdsTypes from '../types/JobAds.types';
+import JobAdsTypes from '../types/jobAds.types';
 import useJobAdsStore from '../store/useJobAdsStore';
+import CooperationTypes from '../types/cooperationTypes.type';
 
 // simple filter button
 type FilterJobProps = {
@@ -168,7 +169,7 @@ type filtersTypes = {
   q_cooperationTypeCity: string | null;
   remote: boolean;
   knowledgeBasedCompany: boolean;
-  cooprationType: JobAdsTypes['cooperationType'] | null;
+  cooprationType: CooperationTypes | null;
   salaryType: [number, number] | null
 }
 const initialFiltersValue: filtersTypes = {
@@ -244,11 +245,11 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
         newFilteredJobAds = newFilteredJobAds.filter(job => job.company.city.name === filters.q_city)
       }
       if (filters.q_cooperationType) {
-        newFilteredJobAds = newFilteredJobAds.filter(job => job.cooperationType === filters.q_cooperationType)
+        newFilteredJobAds = newFilteredJobAds.filter(job => job.cooperationType.name === filters.q_cooperationType)
       }
       if (filters.q_cooperationTypeCity) {
         const cooperationTypeCitySplited = filters.q_cooperationTypeCity.split('__')
-        newFilteredJobAds = newFilteredJobAds.filter(job => job.cooperationType === cooperationTypeCitySplited[0]
+        newFilteredJobAds = newFilteredJobAds.filter(job => job.cooperationType.name === cooperationTypeCitySplited[0]
           && job.company.city.name === cooperationTypeCitySplited[1])
       }
       if (filters.remote) {
@@ -286,7 +287,7 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
       if (filters.cooprationType) {
         newFilteredJobAds = newFilteredJobAds.filter(job => {
           console.log(job.cooperationType, filters.cooprationType);
-          if (job.cooperationType === filters.cooprationType) {
+          if (job.cooperationType.name === filters.cooprationType) {
             return job
           }
         })

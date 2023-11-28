@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { Star } from "@mui/icons-material"
 
-import CompanyTypes from "../types/Company.types"
+import CompanyTypes from "../types/company.types"
 
 const CompanyBox = ({ id, logo, name, score, jobs }: CompanyTypes) => {
   return (

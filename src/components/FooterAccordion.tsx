@@ -1,6 +1,6 @@
 import { KeyboardArrowLeftRounded } from "@mui/icons-material"
 import AccordionWithToggle from "../hoc/AccordionWithToggle"
-import AccordionTypes from "../types/Accordion.types"
+import AccordionTypes from "../types/accordion.types"
 import Title from "./Title"
 
 const FooterAccordion = ({ toggle, accordionRef, toggleHandler, length, title, text }: AccordionTypes) => {

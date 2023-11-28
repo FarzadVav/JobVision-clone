@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { Star } from "@mui/icons-material"
 
-import JobAdsTypes from "../types/JobAds.types"
+import JobAdsTypes from "../types/jobAds.types"
 
 type selectedJobAdsTypes = {
   selected?: boolean

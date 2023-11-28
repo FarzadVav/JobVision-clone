@@ -3,7 +3,7 @@ import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import CompanyTypes from "../types/Company.types";
+import CompanyTypes from "../types/company.types";
 import tokenGenerator from "../utils/tokenGenerator";
 import CompanyBox from './CompanyBox';
 

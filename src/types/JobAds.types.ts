@@ -1,4 +1,5 @@
-import CompanyTypes from "./Company.types"
+import CompanyTypes from "./company.types"
+import CooperationTypes from "./cooperationTypes.type";
 
 type JobAdsTypes = {
   created_at: Date;
@@ -6,7 +7,7 @@ type JobAdsTypes = {
   title: string;
   workTimes: string;
   businessTrips: string;
-  cooperationType: 'تمام وقت' | 'پاره وقت' | 'پروژه ای';
+  cooperationType: { id: string; name: CooperationTypes };
   isRemote: boolean;
   isUrgent: boolean;
   endOfMilitaryService: boolean;

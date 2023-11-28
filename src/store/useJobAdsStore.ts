@@ -1,6 +1,7 @@
 import { create } from "zustand";
-import JobAdsTypes from "../types/JobAds.types";
 import supabase from "../utils/supabase";
+
+import JobAdsTypes from "../types/jobAds.types";
 
 type useJobAdsStoreTypes = {
   jobAds: JobAdsTypes[];
@@ -36,6 +37,10 @@ const useJobAdsStore = create<useJobAdsStoreTypes>(set => ({
       .from('cities')
       .select('*')
 
+    const { data: cooperationTypes } = await supabase
+      .from('cooperationTypes')
+      .select('*')
+
     jobAds?.forEach(jobAd => {
       companies?.forEach(company => {
         if (jobAd.company === company._id) {
@@ -52,8 +57,13 @@ const useJobAdsStore = create<useJobAdsStoreTypes>(set => ({
           jobAd.company = company
         }
       })
+      cooperationTypes?.forEach(type => {
+        if (jobAd.cooperationType === type._id) {
+          jobAd.cooperationType = type
+        }
+      })
     })
-
+    
     set(() => ({ jobAds: jobAds || [] }))
   },
   setFilteredJobAds: newJobAds => set(() => ({ filteredJobAds: newJobAds })),

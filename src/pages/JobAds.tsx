@@ -4,7 +4,7 @@ import { CloseRounded, FavoriteBorderRounded, HelpRounded, InfoOutlined, Notific
 import SearchJobForm from "../components/SearchJobForm";
 import FilterJob from "../components/JobAdFilters";
 import Title from "../components/Title";
-import JobAdsTypes from "../types/JobAds.types";
+import JobAdsTypes from "../types/jobAds.types";
 import tokenGenerator from "../utils/tokenGenerator";
 import JobAdsBox from "../components/JobAdsBox";
 import Tabs from '../components/Tabs'
@@ -82,7 +82,7 @@ const Jobs = () => {
 									نوع همکاری
 								</span>
 								<span className={`block text-sm mt-1`}>
-									{singleJobAd.cooperationType}
+									{singleJobAd.cooperationType.name}
 								</span>
 							</div>
 							<div className={`w-full px-3 sm:w-1/2`}>

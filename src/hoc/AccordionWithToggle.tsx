@@ -1,5 +1,5 @@
 import { FC, useEffect, useRef, useState } from "react"
-import AccordionTypes from "../types/Accordion.types";
+import AccordionTypes from "../types/accordion.types";
 
 const AccordionWithToggle = (Component: FC<any>, moreSpace?: number) => {
   const NewComponent = (props: Omit<AccordionTypes, 'toggle' | 'setToggle' | 'accordionRef' | 'toggleHandler'>) => {
