@@ -85,7 +85,7 @@ const JobBox = (
               </span>
             ) : (
               <span className={`text-xs h-3`}>
-                {created_at.toLocaleDateString('fa-ir').split('/').reverse().join(' / ')}
+                {new Date(created_at).toLocaleDateString('fa-ir')}
               </span>
             )
           }

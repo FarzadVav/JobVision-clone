@@ -13,6 +13,7 @@ import CtaBox from "../components/CtaBox";
 import Accordion from "../components/Accordion";
 import useOneScroll from "../hooks/useOnScrool";
 import PopularCompanies from "../components/PopularCompanies";
+import useJobAdsStore from "../store/useJobAdsStore";
 
 const testCompany: CompanyTypes = {
 	id: tokenGenerator(),
@@ -41,7 +42,7 @@ const testJobAd: JobAdsTypes = {
 	salary: [15, 20],
 	isRemote: true,
 	isUrgent: false,
-	cooperationType: 'as-projects',
+	cooperationType: 'پروژه ای',
 	workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
 	businessTrips: 'woooooooooooooow',
 	benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
@@ -88,12 +89,17 @@ const accordions: { title: string; text: string }[] = [
 const Home = () => {
 	const [svgPath, setSvgPath] = useState<{ x: number, y: number }>({ x: 0, y: 0 })
 	const runAnimationRef = useRef<boolean>(false)
+	const { jobAds, getJobAds } = useJobAdsStore(s => s)
+
 	// custom hook for scroll effects
 	useOneScroll(['employee-baner', 'cta-1', { id: 'cta-2', delay: 150 }])
 
 	const messageBoxRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
+		// get all jobAds
+		getJobAds()
+
 		// play animation on first app running
 		const oneAnimate = () => {
 			activeRandomCircle()
@@ -1149,7 +1155,7 @@ const Home = () => {
 				</main>
 				{/* Hero section */}
 
-				{/* suggested jobs */}
+				{/* suggested jobAds */}
 				<div className={`mt-12 md:mt-16`}>
 					<Title>
 						<h2>
@@ -1157,12 +1163,19 @@ const Home = () => {
 						</h2>
 					</Title>
 					<div className={`w-full grid gap-4 grid-rows-2 grid-cols-1 mt-6 md:grid-cols-2 lg:grid-cols-3`}>
+						{
+							jobAds.length ? jobAds.map(jobAd => (
+								<JobAdsBox
+									key={tokenGenerator()}
+									{...jobAd}
+								/>
+							)) : null
+						}
+						{/* <JobAdsBox {...testJobAd} />
 						<JobAdsBox {...testJobAd} />
 						<JobAdsBox {...testJobAd} />
 						<JobAdsBox {...testJobAd} />
-						<JobAdsBox {...testJobAd} />
-						<JobAdsBox {...testJobAd} />
-						<JobAdsBox {...testJobAd} />
+						<JobAdsBox {...testJobAd} /> */}
 						<div className={`w-full flex justify-center mt-8 md:col-span-2 md:mt-12 lg:col-span-3`}>
 							<Link
 								className={`btn btn-out-primary`}
@@ -1174,7 +1187,7 @@ const Home = () => {
 						</div>
 					</div>
 				</div>
-				{/* suggested jobs */}
+				{/* suggested jobAds */}
 
 				{/* popular companies */}
 				<div className={`mt-12 md:mt-16`}>
