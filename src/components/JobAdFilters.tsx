@@ -359,116 +359,118 @@ const JobsFiltersBar = ({
         پاک کردن فیلتر ها
       </button>
 
-      <FilterJob
-        selected={filters.remote}
-        title='دورکاری'
-        filterHandler={() => setFilters(prev => ({
-          ...prev,
-          remote: true
-        }))}
-        unFilterHandler={() => setFilters(prev => ({
-          ...prev,
-          remote: false
-        }))}
-      />
+      <div className={filters.q_id?.length ? 'hidden' : 'flex items-center'}>
+        <FilterJob
+          selected={filters.remote}
+          title='دورکاری'
+          filterHandler={() => setFilters(prev => ({
+            ...prev,
+            remote: true
+          }))}
+          unFilterHandler={() => setFilters(prev => ({
+            ...prev,
+            remote: false
+          }))}
+        />
 
-      <FilterJob
-        selected={filters.knowledgeBasedCompany}
-        title='امریه سربازی'
-        filterHandler={() => setFilters(prev => ({
-          ...prev,
-          knowledgeBasedCompany: true
-        }))}
-        unFilterHandler={() => setFilters(prev => ({
-          ...prev,
-          knowledgeBasedCompany: false
-        }))}
-      />
+        <FilterJob
+          selected={filters.knowledgeBasedCompany}
+          title='امریه سربازی'
+          filterHandler={() => setFilters(prev => ({
+            ...prev,
+            knowledgeBasedCompany: true
+          }))}
+          unFilterHandler={() => setFilters(prev => ({
+            ...prev,
+            knowledgeBasedCompany: false
+          }))}
+        />
 
-      <MultiFilterJob
-        selected={filters.cooprationType !== null}
-        title={'نوع همکاری'}
-        filters={[
-          {
-            title: 'تمام وقت',
-            filterHandler: () => setFilters(prev => ({
-              ...prev,
-              cooprationType: 'تمام وقت'
-            }))
-          },
-          {
-            title: 'پاره وقت',
-            filterHandler: () => setFilters(prev => ({
-              ...prev,
-              cooprationType: 'پاره وقت'
-            }))
-          },
-          {
-            title: 'پروژه ای',
-            filterHandler: () => setFilters(prev => ({
-              ...prev,
-              cooprationType: 'پروژه ای'
-            }))
-          }
-        ]}
-        unFilterHandler={() => setFilters(prev => ({
-          ...prev,
-          cooprationType: null
-        }))}
-      />
+        <MultiFilterJob
+          selected={filters.cooprationType !== null}
+          title={'نوع همکاری'}
+          filters={[
+            {
+              title: 'تمام وقت',
+              filterHandler: () => setFilters(prev => ({
+                ...prev,
+                cooprationType: 'تمام وقت'
+              }))
+            },
+            {
+              title: 'پاره وقت',
+              filterHandler: () => setFilters(prev => ({
+                ...prev,
+                cooprationType: 'پاره وقت'
+              }))
+            },
+            {
+              title: 'پروژه ای',
+              filterHandler: () => setFilters(prev => ({
+                ...prev,
+                cooprationType: 'پروژه ای'
+              }))
+            }
+          ]}
+          unFilterHandler={() => setFilters(prev => ({
+            ...prev,
+            cooprationType: null
+          }))}
+        />
 
-      <MultiFilterJob
-        selected={filters.salaryType !== null}
-        title={'حقوق'}
-        filters={[
-          {
-            title: 'تا 4 میلیون',
-            filterHandler: () => setFilters(prev => ({
-              ...prev,
-              salaryType: [0, 4]
-            }))
-          },
-          {
-            title: '4 تا 8 میلیون',
-            filterHandler: () => setFilters(prev => ({
-              ...prev,
-              salaryType: [4, 8]
-            }))
-          },
-          {
-            title: 'از 8 تا 15 میلیون',
-            filterHandler: () => setFilters(prev => ({
-              ...prev,
-              salaryType: [8, 15]
-            }))
-          },
-          {
-            title: 'از 15 تا 25 میلیون',
-            filterHandler: () => setFilters(prev => ({
-              ...prev,
-              salaryType: [15, 25]
-            }))
-          },
-          {
-            title: 'از 25 تا 40 میلیون',
-            filterHandler: () => setFilters(prev => ({
-              ...prev,
-              salaryType: [25, 40]
-            }))
-          },
-          {
-            title: 'از 40 تا 75 میلیون',
-            filterHandler: () => setFilters(prev => ({
-              ...prev,
-              salaryType: [40, 75]
-            }))
-          },
-        ]}
-        unFilterHandler={() => setFilters(prev => ({
-          ...prev,
-          salaryType: null
-        }))}
-      />
+        <MultiFilterJob
+          selected={filters.salaryType !== null}
+          title={'حقوق'}
+          filters={[
+            {
+              title: 'تا 4 میلیون',
+              filterHandler: () => setFilters(prev => ({
+                ...prev,
+                salaryType: [0, 4]
+              }))
+            },
+            {
+              title: '4 تا 8 میلیون',
+              filterHandler: () => setFilters(prev => ({
+                ...prev,
+                salaryType: [4, 8]
+              }))
+            },
+            {
+              title: 'از 8 تا 15 میلیون',
+              filterHandler: () => setFilters(prev => ({
+                ...prev,
+                salaryType: [8, 15]
+              }))
+            },
+            {
+              title: 'از 15 تا 25 میلیون',
+              filterHandler: () => setFilters(prev => ({
+                ...prev,
+                salaryType: [15, 25]
+              }))
+            },
+            {
+              title: 'از 25 تا 40 میلیون',
+              filterHandler: () => setFilters(prev => ({
+                ...prev,
+                salaryType: [25, 40]
+              }))
+            },
+            {
+              title: 'از 40 تا 75 میلیون',
+              filterHandler: () => setFilters(prev => ({
+                ...prev,
+                salaryType: [40, 75]
+              }))
+            },
+          ]}
+          unFilterHandler={() => setFilters(prev => ({
+            ...prev,
+            salaryType: null
+          }))}
+        />
+      </div>
     </div>
   )
 }
