@@ -1,7 +1,7 @@
 import ProvinceAndCityTypes from "./ProvinceAndCity.types";
 
 type CompanyTypes = {
-  id: string;
+  _id: string;
   logo: string;
   name: string;
   aboutCompany: string;

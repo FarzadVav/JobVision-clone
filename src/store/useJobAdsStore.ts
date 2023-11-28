@@ -4,11 +4,21 @@ import supabase from "../utils/supabase";
 
 type useJobAdsStoreTypes = {
   jobAds: JobAdsTypes[];
+  filteredJobAds: JobAdsTypes[];
+  selectedJobAds: JobAdsTypes;
+  hasFilter: boolean;
   getJobAds: () => void;
+  setFilteredJobAds: (newJobAds: JobAdsTypes[]) => void;
+  setJobAdsToDefault: () => void,
+  setSelectedJobAds: (jobAd: JobAdsTypes) => void
+  setHasFilter: (state: boolean) => void
 }
 
 const useJobAdsStore = create<useJobAdsStoreTypes>(set => ({
   jobAds: [],
+  filteredJobAds: [],
+  selectedJobAds: {} as JobAdsTypes,
+  hasFilter: false,
   getJobAds: async () => {
     const { data: jobAds } = await supabase
       .from('jobAds')
@@ -44,9 +54,12 @@ const useJobAdsStore = create<useJobAdsStoreTypes>(set => ({
       })
     })
 
-    //@ts-ignore
-    set(state => state.jobAds = jobAds)
-  }
+    set(() => ({ jobAds: jobAds || [] }))
+  },
+  setFilteredJobAds: newJobAds => set(() => ({ filteredJobAds: newJobAds })),
+  setJobAdsToDefault: () => set(() => ({ filteredJobAds: [] })),
+  setSelectedJobAds: jobAd => set(() => ({ selectedJobAds: jobAd })),
+  setHasFilter: state => set(() => ({ hasFilter: state }))
 }))
 
 export default useJobAdsStore

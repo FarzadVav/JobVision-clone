@@ -6,57 +6,12 @@ import tokenGenerator from "../utils/tokenGenerator";
 import SearchJobForm from "../components/SearchJobForm";
 import Title from "../components/Title";
 import JobAdsBox from "../components/JobAdsBox";
-import JobAdsTypes from "../types/JobAds.types";
-import CompanyTypes from "../types/Company.types";
 import HonorBox from "../components/HonorBox";
 import CtaBox from "../components/CtaBox";
 import Accordion from "../components/Accordion";
 import useOneScroll from "../hooks/useOnScrool";
 import PopularCompanies from "../components/PopularCompanies";
 import useJobAdsStore from "../store/useJobAdsStore";
-
-const testCompany: CompanyTypes = {
-	id: tokenGenerator(),
-	logo: 'https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=3518088&width=70&height=70',
-	name: 'تاکسی ماکسیم',
-	score: 4.9,
-	aboutCompany: 'lorem',
-	employees: [10, 30],
-	year: 1397,
-	activity: 'تاکسی رانی اینترنتی',
-	knowledgeBased: true,
-	province: { id: tokenGenerator(), name: 'خراسان رضوی' },
-	city: { id: tokenGenerator(), name: 'مشهد' }
-}
-
-const testJobAd: JobAdsTypes = {
-	id: 'tokenGenerator()',
-	category: { name: 'programming', id: tokenGenerator(), },
-	tags: [
-		{ name: 'full-stack', id: tokenGenerator() },
-		{ name: 'front-end', id: tokenGenerator() },
-		{ name: 'back-end', id: tokenGenerator() }
-	],
-	title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
-	company: testCompany,
-	salary: [15, 20],
-	isRemote: true,
-	isUrgent: false,
-	cooperationType: 'پروژه ای',
-	workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
-	businessTrips: 'woooooooooooooow',
-	benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
-	abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
-	description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
-	age: [18, 32],
-	gender: true,
-	endOfMilitaryService: false,
-	education: ['لیسانس مهندسی نرم افزار'],
-	languages: ['english'],
-	techs: ['Javascript', 'React.js', 'Typescript'],
-	selected: false,
-	created_at: new Date()
-}
 
 // accordions
 const accordions: { title: string; text: string }[] = [
@@ -1162,7 +1117,7 @@ const Home = () => {
 							تازه‌ترین آگهی‌های شغلی برای شما
 						</h2>
 					</Title>
-					<div className={`w-full grid gap-4 grid-rows-2 grid-cols-1 mt-6 md:grid-cols-2 lg:grid-cols-3`}>
+					<div className={`w-full grid gap-4 grid-rows-(1fr_auto) grid-cols-1 mt-6 md:grid-cols-2 lg:grid-cols-3`}>
 						{
 							jobAds.length ? jobAds.map(jobAd => (
 								<JobAdsBox
@@ -1171,11 +1126,6 @@ const Home = () => {
 								/>
 							)) : null
 						}
-						{/* <JobAdsBox {...testJobAd} />
-						<JobAdsBox {...testJobAd} />
-						<JobAdsBox {...testJobAd} />
-						<JobAdsBox {...testJobAd} />
-						<JobAdsBox {...testJobAd} /> */}
 						<div className={`w-full flex justify-center mt-8 md:col-span-2 md:mt-12 lg:col-span-3`}>
 							<Link
 								className={`btn btn-out-primary`}

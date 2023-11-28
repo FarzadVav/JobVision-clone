@@ -6,164 +6,31 @@ import FilterJob from "../components/JobAdFilters";
 import Title from "../components/Title";
 import JobAdsTypes from "../types/JobAds.types";
 import tokenGenerator from "../utils/tokenGenerator";
-import CompanyTypes from "../types/Company.types";
 import JobAdsBox from "../components/JobAdsBox";
 import Tabs from '../components/Tabs'
 import PopularCompanies from '../components/PopularCompanies';
 import { Alert } from '@mui/material';
-
-const testCompany: CompanyTypes = {
-	id: tokenGenerator(),
-	logo: 'https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=3518088&width=70&height=70',
-	name: 'تاکسی ماکسیم',
-	score: 4.1,
-	aboutCompany: 'ما به عنوان سازمانی یادگیرنده، همه تلاش خود را برای ارتقاء کیفیت و عدالت آموزشی بکار می گیریم. دانش و تخصصمان به ما کمک می کند در کنار حامیان خیرخواه و نیکوکار، راه حلهای کارآمدی برای یادگیری دانش آموزان، معلمان و والدین خلق کنیم. ما با بکارگیری فناوری های روز و دستاوردهای علمی نهاد آموزش را به عنوان یکی از الزامات توسعه پایدار تقویت می نماییم تا در مسیر شکل گیری جامعه یادگیرنده قدم برداریم.',
-	employees: [10, 30, 45],
-	year: 1397,
-	activity: 'تاکسی رانی اینترنتی',
-	knowledgeBased: true,
-	province: { id: tokenGenerator(), name: 'خراسان رضوی' },
-	city: { id: tokenGenerator(), name: 'مشهد' }
-}
-
-const testCompany2: CompanyTypes = {
-	id: tokenGenerator(),
-	logo: 'https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=3518088&width=70&height=70',
-	name: 'تاکسی اسنپ',
-	score: 4.1,
-	aboutCompany: 'ما به عنوان سازمانی یادگیرنده، همه تلاش خود را برای ارتقاء کیفیت و عدالت آموزشی بکار می گیریم. دانش و تخصصمان به ما کمک می کند در کنار حامیان خیرخواه و نیکوکار، راه حلهای کارآمدی برای یادگیری دانش آموزان، معلمان و والدین خلق کنیم. ما با بکارگیری فناوری های روز و دستاوردهای علمی نهاد آموزش را به عنوان یکی از الزامات توسعه پایدار تقویت می نماییم تا در مسیر شکل گیری جامعه یادگیرنده قدم برداریم.',
-	employees: [100, 125],
-	year: 1395,
-	activity: 'تاکسی رانی اینترنتی',
-	knowledgeBased: false,
-	province: { id: tokenGenerator(), name: 'تهران' },
-	city: { id: tokenGenerator(), name: 'تهران' }
-}
-
-const testJobAds: JobAdsTypes[] = [
-	{
-		id: 'tokenGenerator()',
-		category: { name: 'programming', id: tokenGenerator(), },
-		tags: [
-			{ name: 'full-stack', id: tokenGenerator() },
-			{ name: 'front-end', id: tokenGenerator() },
-			{ name: 'back-end', id: tokenGenerator() }
-		],
-		title: 'متخصص فرانت اند و بک اند (full-stack Developer)',
-		company: testCompany2,
-		salary: [15, 20, 25],
-		isRemote: true,
-		isUrgent: false,
-		cooperationType: 'پروژه ای',
-		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
-		businessTrips: '7 روز در مار',
-		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
-		abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
-		description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
-		age: [18, 32],
-		gender: true,
-		endOfMilitaryService: false,
-		education: ['لیسانس مهندسی نرم افزار'],
-		languages: ['english'],
-		techs: ['Javascript', 'React.js', 'Typescript'],
-		selected: false,
-		created_at: new Date()
-	},
-	{
-		id: tokenGenerator(),
-		category: { name: 'programming', id: tokenGenerator(), },
-		tags: [
-			{ name: 'front-end', id: tokenGenerator() }
-		],
-		title: 'متخصص فرانت اند و بک اند (full-stack Developer) 2',
-		company: testCompany,
-		salary: [3],
-		isRemote: false,
-		isUrgent: true,
-		cooperationType: 'تمام وقت',
-		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
-		businessTrips: '',
-		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
-		abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
-		description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
-		age: [18, 32, 65, 90],
-		gender: true,
-		endOfMilitaryService: false,
-		education: ['لیسانس مهندسی نرم افزار'],
-		languages: ['english'],
-		techs: ['Javascript', 'React.js', 'Typescript'],
-		selected: false,
-		created_at: new Date()
-	},
-	{
-		id: tokenGenerator(),
-		category: { name: 'programming', id: tokenGenerator(), },
-		tags: [
-			{ name: 'front-end', id: tokenGenerator(), }
-		],
-		title: 'متخصص فرانت اند و بک اند (full-stack Developer) 3',
-		company: testCompany,
-		salary: [32],
-		isRemote: false,
-		isUrgent: true,
-		cooperationType: 'تمام وقت',
-		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
-		businessTrips: 'همیشه در سفر',
-		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
-		abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
-		description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
-		age: [18, 32],
-		gender: true,
-		endOfMilitaryService: false,
-		education: ['لیسانس مهندسی نرم افزار'],
-		languages: ['english'],
-		techs: ['Javascript', 'React.js', 'Typescript'],
-		selected: false,
-		created_at: new Date()
-	},
-	{
-		id: tokenGenerator(),
-		category: { name: 'programming', id: tokenGenerator(), },
-		tags: [
-			{ name: 'front-end', id: tokenGenerator(), }
-		],
-		title: 'متخصص فرانت اند و بک اند (full-stack Developer) 4',
-		company: testCompany,
-		salary: [40],
-		isRemote: true,
-		isUrgent: true,
-		cooperationType: 'پاره وقت',
-		workTimes: 'شنبه تا چهارشنبه از ساعت 08:00 الی 16:30 و پنجشنبه ها تا ساعت 12:00',
-		businessTrips: 'همیشه در سفر',
-		benefits: ['بیمه', 'ناهار', 'پاداش', 'بیمه درمان تکمیلی', 'بسته ها و هدایای مناسبتی'],
-		abilityForBoss: ['5 سال سابقه کار', 'ترجیحا ساکن ونکوور'],
-		description: 'توسعه و بهبود وبسایتها و محصولات کارفرمایان خارجی و افزودن قابلیت‌های جدید به آنها (قابلیت‌های جدید باید ایمن، تست‌شده و بهینه باشند)',
-		age: [18, 32],
-		gender: false,
-		endOfMilitaryService: false,
-		education: ['لیسانس مهندسی نرم افزار'],
-		languages: ['english'],
-		techs: ['Javascript', 'React.js', 'Typescript'],
-		selected: false,
-		created_at: new Date()
-	},
-]
+import useJobAdsStore from '../store/useJobAdsStore';
 
 const Jobs = () => {
-	const [jobAds, setJobAds] = useState<JobAdsTypes[]>(testJobAds)
-	const [filteredJobAds, setFilteredJobAds] = useState<JobAdsTypes[]>([])
-	const [hasFilter, setHasFilter] = useState<boolean>(false)
-	const [selectedJobAds, setSelectedJobAds] = useState<JobAdsTypes>({} as JobAdsTypes)
+	const {
+		jobAds, filteredJobAds, selectedJobAds, hasFilter, getJobAds, setSelectedJobAds
+	} = useJobAdsStore(s => s)
+	const [showAlert, setShowAlert] = useState<boolean>(false)
 	const [jobAdsTabs, setJobAdsTabs] = useState<{
 		id: string;
 		title: string;
 		content: ReactNode
 	}[]>([])
-	const [showAlert, setShowAlert] = useState<boolean>(false)
 
+	const mountCountRef = useRef<number>(0)
 	const alertRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
+		if (mountCountRef.current === 0) {
+			getJobAds()
+		}
+
 		// hide alertBox on scroll to footer (in mobile size)
 		window.addEventListener('scroll', () => {
 			const footer = document.querySelector('footer')
@@ -184,13 +51,15 @@ const Jobs = () => {
 				document.querySelector('#root')?.classList.remove('overflow-hidden')
 			}
 		}
+
+		mountCountRef.current++
 	}, [selectedJobAds])
 
 	// handle select jobAds and his tabs
 	const jobAdsSelectHandler = (singleJobAd: JobAdsTypes) => {
 		setJobAdsTabs([
 			{
-				id: singleJobAd.id,
+				id: singleJobAd._id,
 				title: 'درباره شغل',
 				content: (
 					<div key={1} className={`w-full flex flex-col`}>
@@ -415,20 +284,19 @@ const Jobs = () => {
 							{
 								(
 									jobAds.length
-									&& jobAds.filter(job => (job.category.name === singleJobAd.category.name && job.id !== singleJobAd.id)).length
+									&& jobAds.filter(job => (job.category.name === singleJobAd.category.name && job._id !== singleJobAd._id)).length
 								)
 									? (
 										<div className={`w-full grid grid-cols-1 gap-3 mt-3 sm:grid-cols-2`}>
 											{
 												jobAds.map((job, i) => {
-													if (i < 6 && job.category.name === singleJobAd.category.name && job.id !== singleJobAd.id) {
-														job.selected = false
+													if (i < 6 && job.category.name === singleJobAd.category.name && job._id !== singleJobAd._id) {
 														return (
 															<div
-																key={job.id}
+																key={job._id}
 																className={`w-full`}
 																onClick={() => {
-																	removeSelectedJobAd()
+																	// removeSelectedJobAd()
 																	jobAdsSelectHandler(job)
 																	setSelectedJobAds(job)
 																}}
@@ -456,7 +324,7 @@ const Jobs = () => {
 				)
 			},
 			{
-				id: singleJobAd.company.id,
+				id: singleJobAd.company._id,
 				title: 'درباره شرکت',
 				content: (
 					<div className={`w-full flex flex-col`}>
@@ -553,20 +421,19 @@ const Jobs = () => {
 						{
 							(
 								jobAds.length
-								&& jobAds.filter(job => (job.company.id === singleJobAd.company.id && job.id !== singleJobAd.id)).length
+								&& jobAds.filter(job => (job.company._id === singleJobAd.company._id && job._id !== singleJobAd._id)).length
 							)
 								? (
 									<div className={`w-full grid grid-cols-1 gap-3 sm:grid-cols-2`}>
 										{
 											jobAds.map((job) => {
-												if (job.company.id === singleJobAd.company.id && job.id !== singleJobAd.id) {
-													job.selected = false
+												if (job.company._id === singleJobAd.company._id && job._id !== singleJobAd._id) {
 													return (
 														<div
-															key={job.id}
+															key={job._id}
 															className={`w-full`}
 															onClick={() => {
-																removeSelectedJobAd()
+																// removeSelectedJobAd()
 																jobAdsSelectHandler(job)
 																setSelectedJobAds(job)
 															}}
@@ -595,40 +462,13 @@ const Jobs = () => {
 		])
 	}
 
-	// handle filtering
-	const setFilteredJobAdsHandler = (newJobAds: JobAdsTypes[]) => setFilteredJobAds(newJobAds)
-
-	// remove all filtered jobAds
-	const setJobAdsToDefault = () => setFilteredJobAds([])
-
-	// remove selected jobAd when change in filters
-	const removeSelectedJobAd = () => {
-		setSelectedJobAds({} as JobAdsTypes)
-		setJobAds(prev => prev.map(job => {
-			job.selected = false
-			return job
-		}))
-		setFilteredJobAds(prev => prev.map(job => {
-			job.selected = false
-			return job
-		}))
-	}
-
 	return (
 		<>
 			{/* handle all filterings on jobAds */}
 			<div className={`light-shadow w-full pt-9 pb-3 relative z-10`}>
 				<div className={`wrapper`}>
 					<SearchJobForm />
-					<FilterJob
-						jobAds={jobAds}
-						setFilteredJobAdsHandler={setFilteredJobAdsHandler}
-						setJobAdsToDefault={setJobAdsToDefault}
-						setHasFilter={setHasFilter}
-						removeSelectedJobAd={removeSelectedJobAd}
-						setSelectedJobAds={setSelectedJobAds}
-						jobAdsSelectHandler={jobAdsSelectHandler}
-					/>
+					<FilterJob jobAdsSelectHandler={jobAdsSelectHandler} />
 				</div>
 			</div>
 			{/* handle all filterings on jobAds */}
@@ -699,25 +539,17 @@ const Jobs = () => {
 								{
 									(hasFilter && filteredJobAds.length) ? filteredJobAds.map(job => (
 										<div
-											key={job.id}
+											key={job._id}
 											className={`w-full`}
 											onClick={() => {
-												setFilteredJobAds(prev => {
-													const newJobAds = prev.map(jobAd => {
-														if (jobAd.id === job.id) {
-															jobAd.selected = true
-														} else {
-															jobAd.selected = false
-														}
-														return jobAd
-													})
-													return newJobAds
-												})
 												jobAdsSelectHandler(job)
 												setSelectedJobAds(job)
 											}}
 										>
-											<JobAdsBox {...job} />
+											<JobAdsBox
+												{...job}
+												selected={selectedJobAds._id === job._id}
+											/>
 										</div>
 									)) : hasFilter ? (
 										<div className={`w-full mt-3`} dir='ltr'>
@@ -733,25 +565,17 @@ const Jobs = () => {
 								{
 									!hasFilter && jobAds.length ? jobAds.map(job => (
 										<div
-											key={job.id}
+											key={job._id}
 											className={`w-full`}
 											onClick={() => {
-												setFilteredJobAds(prev => {
-													const newJobAds = prev.map(jobAd => {
-														if (jobAd.id === job.id) {
-															jobAd.selected = true
-														} else {
-															jobAd.selected = false
-														}
-														return jobAd
-													})
-													return newJobAds
-												})
 												jobAdsSelectHandler(job)
 												setSelectedJobAds(job)
 											}}
 										>
-											<JobAdsBox {...job} />
+											<JobAdsBox
+												{...job}
+												selected={selectedJobAds._id === job._id}
+											/>
 										</div>
 									)) : null
 								}
@@ -772,23 +596,13 @@ const Jobs = () => {
 												<div className={`w-full flex justify-between items-center mb-6 lg:hidden`}>
 													<button
 														className={`btn-sm btn-bright`}
-														onClick={() => {
-															setSelectedJobAds({} as JobAdsTypes)
-															setFilteredJobAds(prev => {
-																return prev.map(job => {
-																	if (job.id === selectedJobAds.id) {
-																		job.selected = false
-																	}
-																	return job
-																})
-															})
-														}}
+														onClick={() => setSelectedJobAds({} as JobAdsTypes)}
 													>
 														بستن <CloseRounded fontSize='inherit' />
 													</button>
 													<div className={`flex items-center`}>
 														<span className={`text-sm`}>
-															{selectedJobAds.created_at.toLocaleDateString('fa-ir').split('/').reverse().join(' / ')}
+															{new Date(selectedJobAds.created_at).toLocaleDateString('fa-ir')}
 														</span>
 														<button className={`btn-sm bg-blue-50 rounded-full mr-4`}>
 															<ShareOutlined className={`text-jv-primary cursor-pointer`} />
@@ -805,7 +619,7 @@ const Jobs = () => {
 														</h2>
 													</Title>
 													<span className={`min-w-max hidden text-sm lg:block`}>
-														{selectedJobAds.created_at.toLocaleDateString('fa-ir').split('/').reverse().join(' / ')}
+														{new Date(selectedJobAds.created_at).toLocaleDateString('fa-ir')}
 													</span>
 												</div>
 												<div className={`flex items-center mt-4 lg:mt-6`}>

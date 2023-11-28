@@ -2,7 +2,7 @@ import CompanyTypes from "./Company.types"
 
 type JobAdsTypes = {
   created_at: Date;
-  id: string;
+  _id: string;
   title: string;
   workTimes: string;
   businessTrips: string;
@@ -10,7 +10,6 @@ type JobAdsTypes = {
   isRemote: boolean;
   isUrgent: boolean;
   endOfMilitaryService: boolean;
-  selected: boolean;
   gender: boolean | null;
   category: { id: string; name: string };
   benefits: string[];

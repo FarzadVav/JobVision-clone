@@ -3,22 +3,27 @@ import { Star } from "@mui/icons-material"
 
 import JobAdsTypes from "../types/JobAds.types"
 
+type selectedJobAdsTypes = {
+  selected?: boolean
+}
+
 const JobBox = (
-  { id, category, title, company, salary, isRemote, isUrgent, created_at, selected }: JobAdsTypes
+  { _id, category, title, company, salary, isRemote, isUrgent, created_at, selected = false }: JobAdsTypes
+    & selectedJobAdsTypes
 ) => {
   const redirect = useNavigate()
 
   return (
     <article
       className={`bg-white w-full group`}
-      data-id={id}
+      data-id={_id}
       data-category={category}
     >
       <div
         className={`border border-solid w-full h-full flex flex-col justify-between rounded-md cursor-pointer p-3 ${selected ? 'border-jv-primary text-jv-primary' : 'border-jv-light text-jv-dark'}`}
         onClick={() => {
           if (!window.location.pathname.includes('/jobs')) {
-            redirect(`/jobs?id=${id}`)
+            redirect(`/jobs?id=${_id}`)
           }
         }}
       >

@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import JobAdsTypes from '../types/JobAds.types';
+import useJobAdsStore from '../store/useJobAdsStore';
 
 // simple filter button
 type FilterJobProps = {
@@ -154,12 +155,6 @@ const MultiFilterJob = ({ selected, title, filters, unFilterHandler }: MultiFilt
 
 // handle query params, FilterJob and MultiFilterJob filters
 type JobsFiltersBarProps = {
-  jobAds: JobAdsTypes[];
-  setFilteredJobAdsHandler: (jobAd: JobAdsTypes[]) => void;
-  setJobAdsToDefault: () => void;
-  setHasFilter: Function;
-  removeSelectedJobAd: Function;
-  setSelectedJobAds: Function;
   jobAdsSelectHandler: (singleJobAd: JobAdsTypes) => void
 }
 type filtersTypes = {
@@ -190,17 +185,16 @@ const initialFiltersValue: filtersTypes = {
   cooprationType: null,
   salaryType: null
 }
-const JobsFiltersBar = ({
-  jobAds, setFilteredJobAdsHandler, setJobAdsToDefault, setHasFilter, removeSelectedJobAd, setSelectedJobAds, jobAdsSelectHandler
-}: JobsFiltersBarProps) => {
+const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
+  const {
+    jobAds, setFilteredJobAds, setSelectedJobAds, setJobAdsToDefault, setHasFilter
+  } = useJobAdsStore(s => s)
   const [searchParams] = useSearchParams()
   const redirect = useNavigate()
   const [filters, setFilters] = useState<filtersTypes>(initialFiltersValue)
   const [showClearFilters, setShowClearFilters] = useState<boolean>(false)
 
   useEffect(() => {
-    removeSelectedJobAd()
-
     if (chekFilters()) {
       setShowClearFilters(true)
       setHasFilter(true)
@@ -212,11 +206,11 @@ const JobsFiltersBar = ({
 
     let newFilteredJobAds: JobAdsTypes[] = jobAds
     if (filters.q_id) {
-      const newFilteredJobAds_id = newFilteredJobAds.find(job => job.id === filters.q_id)
-      if (newFilteredJobAds_id) {
-        newFilteredJobAds = [newFilteredJobAds_id]
-        setSelectedJobAds(newFilteredJobAds_id)
-        jobAdsSelectHandler(newFilteredJobAds_id)
+      const newFilteredJobAdsFromId = newFilteredJobAds.find(job => job._id === filters.q_id)
+      if (newFilteredJobAdsFromId) {
+        newFilteredJobAds = [newFilteredJobAdsFromId]
+        setSelectedJobAds(newFilteredJobAdsFromId)
+        jobAdsSelectHandler(newFilteredJobAdsFromId)
       } else {
         newFilteredJobAds = []
       }
@@ -298,7 +292,7 @@ const JobsFiltersBar = ({
         })
       }
     }
-    setFilteredJobAdsHandler(newFilteredJobAds)
+    setFilteredJobAds(newFilteredJobAds)
   }, [filters])
 
   useEffect(() => {
