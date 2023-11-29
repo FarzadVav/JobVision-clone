@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState, AnimationEvent } from "react";
+import { useContext, useEffect, useRef, AnimationEvent } from "react";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded, NavigateBeforeRounded, LogoutRounded } from '@mui/icons-material';
@@ -7,22 +7,24 @@ import tokenGenerator from "../utils/tokenGenerator.ts";
 import LoginPopUp from "./LoginPopUp.tsx";
 import authContext from "../context/AuthContext.tsx";
 import useDetailsJobAds from "../store/useDetailsJobAds.ts";
+import useHeader from "../store/useHeader.ts";
 
 const Header = () => {
 	const redirect = useNavigate()
 	const auth = useContext(authContext)
 	const { jobAdsMneu, getDetails } = useDetailsJobAds(s => s)
-	const [showMegaMenu, setShowMegaMenu] = useState<boolean>(false)
-	const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
-	const [showMobileMenuJobs, setShowMobileMenuJobs] = useState<boolean>(false)
-	const [showLogin, setShowLogin] = useState<boolean>(false)
-	const [showJobInMobileMenu, setShowJobInMobileMenu] = useState<{
-		state: boolean,
-		id: string
-	}>({
-		state: false,
-		id: ''
-	})
+	const {
+		showMegaMenu,
+		showMobileMenu,
+		showMobileMenuJobs,
+		showLogin,
+		showJobInMobileMenu,
+		setShowMegaMenu,
+		setShowMobileMenu,
+		setShowMobileMenuJobs,
+		setShowLogin,
+		setShowJobInMobileMenu
+	} = useHeader(s => s)
 
 	const mountCountRef = useRef<number>(0)
 	const mobileMenuRef = useRef<HTMLMenuElement>(null)
@@ -34,7 +36,7 @@ const Header = () => {
 
 		setShowMegaMenu(false)
 		setShowMobileMenu(false)
-		setShowJobInMobileMenu({ state: false, id: '' })
+		setShowJobInMobileMenu('', false)
 
 		mountCountRef.current++
 	}, [location.href])
@@ -62,13 +64,13 @@ const Header = () => {
 
 	return (
 		<>
-			<header className={`bg-jv-primary light-shadow w-full h-[4.5rem] sticky top-0 z-50 lg:bg-white`}>
+			<header className={`bg-jv-primary w-full h-[4.5rem] sticky top-0 z-50 lg:bg-white lg:light-shadow`}>
 				<div className={`wrapper w-full h-full justify-between items-center hidden lg:flex`}>
 					<nav className={'h-full flex'}>
 						<ul className={'h-full flex'}>
 							<li
 								className={'h-full'}
-								onClick={() => setShowMegaMenu(prev => !prev)}
+								onClick={() => setShowMegaMenu(!showMegaMenu)}
 							>
 								<button className={`nav-link cursor-pointer group ${showMegaMenu && 'text-jv-primary'}`}>
 									فرصت های شغلی
@@ -406,7 +408,7 @@ const Header = () => {
 										className={`w-full flex justify-between items-center py-2 mt-4 cursor-pointer`}
 										onClick={() => {
 											setShowMobileMenuJobs(false)
-											setShowJobInMobileMenu({ state: true, id: menu.id })
+											setShowJobInMobileMenu(menu.id, true)
 										}}
 									>
 										<span className={`text-white text-xl`}>
@@ -424,7 +426,7 @@ const Header = () => {
 								className={`bg-jv-primary border-b border-solid border-[#ffffff25] w-full flex justify-between items-center sticky top-0 pt-2 pb-5 mb-4 cursor-pointer`}
 								onClick={() => {
 									setShowMobileMenuJobs(true)
-									setShowJobInMobileMenu({ state: false, id: '' })
+									setShowJobInMobileMenu('', false)
 								}}
 							>
 								<button className={`text-white text-xl`}>
