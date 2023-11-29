@@ -45,10 +45,10 @@ const Jobs = () => {
 		if (window.innerWidth < 1024) {
 			if (Object.keys(selectedJobAds).length) {
 				setTimeout(() => {
-					document.querySelector('#root')?.classList.add('overflow-hidden')
+					document.body?.classList.add('overflow-hidden')
 				}, 750);
 			} else {
-				document.querySelector('#root')?.classList.remove('overflow-hidden')
+				document.body?.classList.remove('overflow-hidden')
 			}
 		}
 

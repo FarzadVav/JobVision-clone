@@ -39,6 +39,14 @@ const Header = () => {
 		mountCountRef.current++
 	}, [location.href])
 
+	useEffect(() => {
+		if (showMobileMenu) {
+			document.body?.classList.add('overflow-y-hidden')
+		} else {
+			document.body?.classList.remove('overflow-y-hidden')
+		}
+	}, [showMobileMenu])
+
 	const mobileMenuToggleHandler = () => {
 		if (showMobileMenu) {
 			mobileMenuRef?.current?.classList.remove('show-mobile-menu')
@@ -308,7 +316,7 @@ const Header = () => {
 				showMobileMenu && (
 					<menu
 						ref={mobileMenuRef}
-						className={`show-mobile-menu bg-jv-primary flex flex-col items-center rounded-t-[2rem] fixed bottom-0 top-32 right-0 left-0 origin-bottom overflow-hidden z-50 lg:hidden`}
+						className={`show-mobile-menu bg-jv-primary flex flex-col items-center rounded-t-[2rem] fixed bottom-0 top-56 right-0 left-0 origin-bottom overflow-hidden z-50 lg:hidden`}
 						onAnimationEnd={(event: AnimationEvent<HTMLElement>) => {
 							if (event.animationName === 'hide-mobile-menu') {
 								setShowMobileMenu(false)
@@ -317,7 +325,7 @@ const Header = () => {
 					>
 						<div className={`bg-jv-primary brightness-125 w-12 h-1 rounded-full absolute top-3`}></div>
 
-						<ul className={`w-full h-full flex flex-col px-6 absolute top-9 duration-500 cubic-1
+						<ul className={`w-full h-full flex flex-col px-6 pb-14 absolute top-9 duration-500 cubic-1
 						${(!showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : '-translate-x-full'}`}>
 							<li
 								className={`w-full flex justify-between items-center py-2 cursor-pointer`}
@@ -361,7 +369,7 @@ const Header = () => {
 									کارفرمایان
 								</Link>
 							</li>
-							<li className={`w-full flex justify-between items-center mt-auto mb-3`}>
+							<li className={`w-full flex justify-between items-center mt-auto`}>
 								<Link
 									className={`btn btn-danger text-xl w-full`}
 									to={`/`}
@@ -371,7 +379,7 @@ const Header = () => {
 							</li>
 						</ul>
 
-						<ul className={`w-full flex flex-col px-6 absolute top-9 duration-500 cubic-1
+						<ul className={`w-full flex flex-col px-6 pb-9 absolute top-9 duration-500 cubic-1
 						${(showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : (!showMobileMenuJobs && showJobInMobileMenu.state) ? '-translate-x-full' : 'translate-x-full'}`}>
 							<li
 								className={`border-b border-solid border-[#ffffff25] brightness-125 w-full flex justify-between items-center 
@@ -410,7 +418,7 @@ const Header = () => {
 							}
 						</ul>
 
-						<ul className={`w-full h-full flex flex-col px-6 absolute top-9 overflow-y-auto duration-500 cubic-1
+						<ul className={`w-full h-full flex flex-col px-6 pb-9 absolute top-9 overflow-y-auto duration-500 cubic-1
 						${(!showMobileMenuJobs && showJobInMobileMenu.state) ? 'translate-x-0' : 'translate-x-full'}`}>
 							<li
 								className={`bg-jv-primary border-b border-solid border-[#ffffff25] w-full flex justify-between items-center sticky top-0 pt-2 pb-5 mb-4 cursor-pointer`}
