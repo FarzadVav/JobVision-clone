@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import JobAdsTypes from '../types/jobAds.types';
-import useJobAdsStore from '../store/useJobAdsStore';
+import useJobAdsStore from '../store/useJobAds';
 import CooperationTypes from '../types/cooperationTypes.type';
 
 // simple filter button

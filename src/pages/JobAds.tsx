@@ -10,7 +10,7 @@ import JobAdsBox from "../components/JobAdsBox";
 import Tabs from '../components/Tabs'
 import PopularCompanies from '../components/PopularCompanies';
 import { Alert } from '@mui/material';
-import useJobAdsStore from '../store/useJobAdsStore';
+import useJobAdsStore from '../store/useJobAds';
 
 const Jobs = () => {
 	const {
