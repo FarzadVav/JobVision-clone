@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import supabase from "../utils/supabase";
-import CooperationTypes from "../types/cooperationTypes.type";
+import CooperationTypes from "../types/CooperationTypes.type";
 
 type useDetailsJobAdsTypes = {
   cooperationType: { _id: string; name: CooperationTypes }[];

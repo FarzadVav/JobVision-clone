@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import JobAdsTypes from '../types/jobAds.types';
 import useJobAdsStore from '../store/useJobAds';
-import CooperationTypes from '../types/cooperationTypes.type';
+import CooperationTypes from '../types/CooperationTypes.type';
 
 // simple filter button
 type FilterJobProps = {

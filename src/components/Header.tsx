@@ -4,7 +4,7 @@ import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownR
 import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded, NavigateBeforeRounded, LogoutRounded } from '@mui/icons-material';
 
 import tokenGenerator from "../utils/tokenGenerator.ts";
-import MegaMenusTypes from "../types/megaMenu.types.ts";
+import MegaMenusTypes from "../types/MegaMenu.types.ts";
 import LoginPopUp from "./LoginPopUp.tsx";
 import authContext from "../context/AuthContext.tsx";
 
