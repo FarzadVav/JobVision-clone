@@ -4,102 +4,9 @@ import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownR
 import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded, NavigateBeforeRounded, LogoutRounded } from '@mui/icons-material';
 
 import tokenGenerator from "../utils/tokenGenerator.ts";
-import MegaMenusTypes from "../types/MegaMenu.types.ts";
 import LoginPopUp from "./LoginPopUp.tsx";
 import authContext from "../context/AuthContext.tsx";
 import useDetailsJobAds from "../store/useDetailsJobAds.ts";
-
-const megaMenus: MegaMenusTypes[] = [
-	{
-		id: tokenGenerator(),
-		title: 'پربازدیدترین شغل ها',
-		query: 'category',
-		links: [
-			{
-				title: 'برنامه نویسی و توسعه نرم افزار',
-				link: 'برنامه نویسی و توسعه نرم افزار',
-				query2: 'tag',
-				subLinks: [
-					{
-						title: 'فرانت اند',
-						link: 'فرانت اند'
-					},
-					{
-						title: 'بک اند',
-						link: 'بک اند'
-					},
-					{
-						title: 'برنامه نویسسی موبایل',
-						link: 'برنامه نویسسی موبایل'
-					}
-				]
-			}
-		]
-	},
-	{
-		id: tokenGenerator(),
-		title: 'استان و شهر',
-		query: 'province',
-		links: [
-			{
-				title: 'خراسان رضوی',
-				link: 'خراسان رضوی',
-				query2: 'city',
-				subLinks: [
-					{
-						title: 'مشهد',
-						link: 'مشهد'
-					},
-					{
-						title: 'نیشابور',
-						link: 'نیشابور'
-					},
-					{
-						title: 'بیرجند',
-						link: 'بیرجند'
-					}
-				]
-			}
-		]
-	},
-	{
-		id: tokenGenerator(),
-		title: 'نوع همکاری',
-		query: 'cooperationType',
-		links: [
-			{
-				title: 'تمام وقت',
-				link: 'تمام وقت',
-				query2: 'cooperationType-city',
-				subLinks: [
-					{
-						title: 'در تهران',
-						link: 'تمام وقت__تهران'
-					},
-					{
-						title: 'در تبریز',
-						link: 'تمام وقت__تبریز'
-					}
-				]
-			},
-			{
-				title: 'پروژه ای',
-				link: 'پروژه ای',
-				query2: 'cooperationType-city',
-				subLinks: [
-					{
-						title: 'در مشهد',
-						link: 'پروژه ای__مشهد'
-					},
-					{
-						title: 'در تهران',
-						link: 'پروژه ای__تهران'
-					}
-				]
-			}
-		]
-	}
-]
 
 const Header = () => {
 	const redirect = useNavigate()
@@ -410,7 +317,7 @@ const Header = () => {
 					>
 						<div className={`bg-jv-primary brightness-125 w-12 h-1 rounded-full absolute top-3`}></div>
 
-						<ul className={`w-full flex flex-col px-6 absolute top-9 duration-500 cubic-1
+						<ul className={`w-full h-full flex flex-col px-6 absolute top-9 duration-500 cubic-1
 						${(!showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : '-translate-x-full'}`}>
 							<li
 								className={`w-full flex justify-between items-center py-2 cursor-pointer`}
@@ -454,7 +361,7 @@ const Header = () => {
 									کارفرمایان
 								</Link>
 							</li>
-							<li className={`w-full flex justify-between items-center mt-3`}>
+							<li className={`w-full flex justify-between items-center mt-auto mb-3`}>
 								<Link
 									className={`btn btn-danger text-xl w-full`}
 									to={`/`}
@@ -485,7 +392,7 @@ const Header = () => {
 								</Link>
 							</li>
 							{
-								megaMenus.map(menu => (
+								jobAdsMneu.map(menu => (
 									<li
 										key={menu.id}
 										className={`w-full flex justify-between items-center py-2 mt-4 cursor-pointer`}
@@ -518,7 +425,7 @@ const Header = () => {
 								<NavigateBeforeRounded className={`text-white rotate-180`} />
 							</li>
 							{
-								megaMenus.map(menu => {
+								jobAdsMneu.map(menu => {
 									if (menu.id === showJobInMobileMenu.id) {
 										return menu.links.map(link => (
 											<li
@@ -529,7 +436,7 @@ const Header = () => {
 													className={`w-full text-white text-xl text-right`}
 													onClick={() => megaMenuButtonLinkHandler(`/jobs?${menu.query}=${link.link}`)}
 												>
-													{link.title}
+													{link.link}
 												</button>
 												{
 													link.subLinks.length ? (
@@ -542,9 +449,9 @@ const Header = () => {
 																	>
 																		<Link
 																			className={`dana-base w-full block text-white text-base`}
-																			to={`/jobs?${link.query2}=${subLink.link}`}
+																			to={`/jobs?${link.query2}=${subLink}`}
 																		>
-																			<span className={`ml-1.5`}>-</span> {subLink.title}
+																			<span className={`ml-1.5`}>-</span> {link.query2 === 'cooperationType-city' ? `در ${subLink.split('_')[1]}` : subLink}
 																		</Link>
 																	</li>
 																))
