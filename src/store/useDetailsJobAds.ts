@@ -56,7 +56,7 @@ const useDetailsJobAds = create<useDetailsJobAdsTypes>(set => ({
           links: categories?.map(cat => ({
             link: cat.name,
             query2: 'tag',
-            subLinks: tags?.map(tag => tag.name) || []
+            subLinks: tags?.filter(tag => tag.parentCategory === cat._id).map(tag => tag.name) || []
           })) || []
         },
         {
@@ -66,7 +66,7 @@ const useDetailsJobAds = create<useDetailsJobAdsTypes>(set => ({
           links: provinces?.map(province => ({
             link: province.name,
             query2: 'city',
-            subLinks: cities?.map(city => city.name) || []
+            subLinks: cities?.filter(city => city.parentProvince === province._id).map(city => city.name) || []
           })) || []
         },
         {
@@ -76,14 +76,12 @@ const useDetailsJobAds = create<useDetailsJobAdsTypes>(set => ({
           links: cooperationTypes?.map(type => ({
             link: type.name,
             query2: 'cooperationType-city',
-            subLinks: cooperationTypes?.map(type => `${type.name}_شهر`) || []
+            subLinks: cities?.map(city => `${type.name}_${city.name}`) || []
           })) || []
         }
       ]
     })
   }
 }))
-
-// cities?.map(city => `${type.name}_${city.name}`)
 
 export default useDetailsJobAds
