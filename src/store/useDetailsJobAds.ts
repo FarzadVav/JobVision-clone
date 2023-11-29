@@ -11,7 +11,7 @@ type useDetailsJobAdsTypes = {
   provinces: { _id: string; name: CooperationTypes }[];
   cities: { _id: string; name: CooperationTypes }[];
   jobAdsMneu: JobAdsMenuTypes[];
-  getDetails: () => void
+  getDetails: (callBack?: () => void) => void
 }
 
 const useDetailsJobAds = create<useDetailsJobAdsTypes>(set => ({
@@ -21,7 +21,7 @@ const useDetailsJobAds = create<useDetailsJobAdsTypes>(set => ({
   provinces: [],
   cities: [],
   jobAdsMneu: [],
-  getDetails: async () => {
+  getDetails: async (callBack = () => { }) => {
     const { data: categories } = await supabase
       .from('categories')
       .select('*')
@@ -41,6 +41,8 @@ const useDetailsJobAds = create<useDetailsJobAdsTypes>(set => ({
     const { data: cities } = await supabase
       .from('cities')
       .select('*')
+
+    callBack()
 
     set({
       categories: categories || [],

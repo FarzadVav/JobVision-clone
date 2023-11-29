@@ -11,8 +11,10 @@ import Tabs from '../components/Tabs'
 import PopularCompanies from '../components/PopularCompanies';
 import { Alert } from '@mui/material';
 import useJobAdsStore from '../store/useJobAds';
+import useLoading from '../store/useLoading';
 
 const Jobs = () => {
+	const { startPageLoadingHandler, endPageLoadingHandler } = useLoading(s => s)
 	const {
 		jobAds, filteredJobAds, selectedJobAds, hasFilter, getJobAds, setSelectedJobAds
 	} = useJobAdsStore(s => s)
@@ -28,7 +30,9 @@ const Jobs = () => {
 
 	useEffect(() => {
 		if (mountCountRef.current === 0) {
-			getJobAds()
+			// get all jobAds and handel loading for it
+			startPageLoadingHandler()
+			getJobAds(endPageLoadingHandler)
 		}
 
 		// hide alertBox on scroll to footer (in mobile size)

@@ -12,6 +12,7 @@ import Accordion from "../components/Accordion";
 import useOneScroll from "../hooks/useOnScrool";
 import PopularCompanies from "../components/PopularCompanies";
 import useJobAdsStore from "../store/useJobAds";
+import useLoading from "../store/useLoading";
 
 // accordions
 const accordions: { title: string; text: string }[] = [
@@ -42,18 +43,20 @@ const accordions: { title: string; text: string }[] = [
 ]
 
 const Home = () => {
-	const [svgPath, setSvgPath] = useState<{ x: number, y: number }>({ x: 0, y: 0 })
-	const runAnimationRef = useRef<boolean>(false)
+	const { startPageLoadingHandler, endPageLoadingHandler } = useLoading(s => s)
 	const { jobAds, getJobAds } = useJobAdsStore(s => s)
+	const [svgPath, setSvgPath] = useState<{ x: number, y: number }>({ x: 0, y: 0 })
 
 	// custom hook for scroll effects
 	useOneScroll(['employee-baner', 'cta-1', { id: 'cta-2', delay: 150 }])
 
+	const runAnimationRef = useRef<boolean>(false)
 	const messageBoxRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
-		// get all jobAds
-		getJobAds()
+		// get all jobAds and handel loading for it
+		startPageLoadingHandler()
+		getJobAds(endPageLoadingHandler)
 
 		// play animation on first app running
 		const oneAnimate = () => {

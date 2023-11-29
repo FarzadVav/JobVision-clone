@@ -50,7 +50,7 @@ const routes: routesProps[] = [
 				path: '',
 				element: (
 					<PrivateRoute>
-						<LazyPage minimal>
+						<LazyPage>
 							<EmployerDashboard />
 						</LazyPage>
 					</PrivateRoute>
@@ -60,7 +60,7 @@ const routes: routesProps[] = [
 				path: 'details',
 				element: (
 					<PrivateRoute>
-						<LazyPage minimal>
+						<LazyPage>
 							<Details />
 						</LazyPage>
 					</PrivateRoute>
@@ -70,7 +70,7 @@ const routes: routesProps[] = [
 				path: 'add-jobAd',
 				element: (
 					<PrivateRoute>
-						<LazyPage minimal>
+						<LazyPage>
 							<AddJobAd />
 						</LazyPage>
 					</PrivateRoute>

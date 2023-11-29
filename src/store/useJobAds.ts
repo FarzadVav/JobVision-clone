@@ -8,7 +8,7 @@ type useJobAdsStoreTypes = {
   filteredJobAds: JobAdsTypes[];
   selectedJobAds: JobAdsTypes;
   hasFilter: boolean;
-  getJobAds: () => void;
+  getJobAds: (callBack?: () => void) => void;
   setFilteredJobAds: (newJobAds: JobAdsTypes[]) => void;
   setJobAdsToDefault: () => void,
   setSelectedJobAds: (jobAd: JobAdsTypes) => void
@@ -20,7 +20,7 @@ const useJobAdsStore = create<useJobAdsStoreTypes>(set => ({
   filteredJobAds: [],
   selectedJobAds: {} as JobAdsTypes,
   hasFilter: false,
-  getJobAds: async () => {
+  getJobAds: async (callBack = () => { }) => {
     const { data: jobAds } = await supabase
       .from('jobAds')
       .select('*')
@@ -40,6 +40,8 @@ const useJobAdsStore = create<useJobAdsStoreTypes>(set => ({
     const { data: cooperationTypes } = await supabase
       .from('cooperationTypes')
       .select('*')
+
+    callBack()
 
     jobAds?.forEach(jobAd => {
       companies?.forEach(company => {
@@ -63,7 +65,7 @@ const useJobAdsStore = create<useJobAdsStoreTypes>(set => ({
         }
       })
     })
-    
+
     set(() => ({ jobAds: jobAds || [] }))
   },
   setFilteredJobAds: newJobAds => set(() => ({ filteredJobAds: newJobAds })),
