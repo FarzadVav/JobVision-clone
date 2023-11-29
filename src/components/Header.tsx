@@ -7,6 +7,7 @@ import tokenGenerator from "../utils/tokenGenerator.ts";
 import MegaMenusTypes from "../types/MegaMenu.types.ts";
 import LoginPopUp from "./LoginPopUp.tsx";
 import authContext from "../context/AuthContext.tsx";
+import useDetailsJobAds from "../store/useDetailsJobAds.ts";
 
 const megaMenus: MegaMenusTypes[] = [
 	{
@@ -103,6 +104,7 @@ const megaMenus: MegaMenusTypes[] = [
 const Header = () => {
 	const redirect = useNavigate()
 	const auth = useContext(authContext)
+	const { jobAdsMneu, getDetails } = useDetailsJobAds(s => s)
 	const [showMegaMenu, setShowMegaMenu] = useState<boolean>(false)
 	const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
 	const [showMobileMenuJobs, setShowMobileMenuJobs] = useState<boolean>(false)
@@ -115,12 +117,19 @@ const Header = () => {
 		id: ''
 	})
 
+	const mountCountRef = useRef<number>(0)
 	const mobileMenuRef = useRef<HTMLMenuElement>(null)
 
 	useEffect(() => {
+		if (mountCountRef.current === 0) {
+			getDetails()
+		}
+
 		setShowMegaMenu(false)
 		setShowMobileMenu(false)
 		setShowJobInMobileMenu({ state: false, id: '' })
+
+		mountCountRef.current++
 	}, [location.href])
 
 	const mobileMenuToggleHandler = () => {
@@ -278,9 +287,9 @@ const Header = () => {
 					className={`bg-white w-11/12 h-full mx-auto rounded-b-xl flex flex-col relative duration-300 ${showMegaMenu ? 'translate-0' : '-translate-y-9 scale-x-[0.975]'}`}>
 					<ul className={`mega-menu light-shadow w-full h-16 flex px-6`}>
 						{
-							megaMenus.map(menu => (
+							jobAdsMneu.map(menu => (
 								<li
-									key={tokenGenerator()}
+									key={menu.id}
 									className={`h-full flex items-center cursor-pointer group hover:text-jv-primary`}>
 									<span
 										className={`border-l border-solid border-jv-light h-1/2 flex items-center px-6 dana-bold`}>
@@ -288,7 +297,7 @@ const Header = () => {
 									</span>
 									<ul
 										className={`bg-white columns-5 absolute top-16 bottom-0 left-0 right-0 cursor-default p-3 pt-0 rounded-b-xl 
-										overflow-y-auto duration-0 opacity-0 invisible ${showMegaMenu && 'group-hover:visible group-hover:opacity-100 group-hover:z-50'}`}>
+									overflow-y-auto duration-0 opacity-0 invisible ${showMegaMenu && 'group-hover:visible group-hover:opacity-100 group-hover:z-50'}`}>
 										{
 											menu.links.map(link => (
 												<li
@@ -299,7 +308,7 @@ const Header = () => {
 														className={`text-jv-dark dana-bold w-full h-full flex flex-col px-3 py-1 cursor-pointer hover:text-jv-primary`}
 														onClick={() => megaMenuButtonLinkHandler(`/jobs?${menu.query}=${link.link}`)}
 													>
-														{link.title}
+														{link.link}
 														{
 															link.subLinks.length ? (
 																<ul className={`w-full py-2 px-1 cursor-default`}>
@@ -311,18 +320,18 @@ const Header = () => {
 																			>
 																				<KeyboardArrowLeftRounded
 																					className={`no-trans text-jv-dark ml-1 opacity-60 group-hover/sub:text-jv-primary
-																					group-hover/sub:opacity-100`}
+																				group-hover/sub:opacity-100`}
 																					fontSize='small'
 																				/>
 																				<Link
 																					className={`text-jv-dark w-full inline-block text-sm text-right
-																					hover:text-jv-primary`}
-																					to={`/jobs?${link.query2}=${subLink.link}`}
+																				hover:text-jv-primary`}
+																					to={`/jobs?${link.query2}=${subLink}`}
 																					onClick={event => {
 																						event.stopPropagation()
 																					}}
 																				>
-																					{subLink.title}
+																					{link.query2 === 'cooperationType-city' ? `در ${subLink.split('_')[1]}` : subLink}
 																				</Link>
 																			</li>
 																		))
