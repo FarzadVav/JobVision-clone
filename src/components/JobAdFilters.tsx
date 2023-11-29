@@ -248,7 +248,7 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
         newFilteredJobAds = newFilteredJobAds.filter(job => job.cooperationType.name === filters.q_cooperationType)
       }
       if (filters.q_cooperationTypeCity) {
-        const cooperationTypeCitySplited = filters.q_cooperationTypeCity.split('__')
+        const cooperationTypeCitySplited = filters.q_cooperationTypeCity.split('_')
         newFilteredJobAds = newFilteredJobAds.filter(job => job.cooperationType.name === cooperationTypeCitySplited[0]
           && job.company.city.name === cooperationTypeCitySplited[1])
       }
@@ -259,22 +259,6 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
         newFilteredJobAds = newFilteredJobAds.filter(job => job.company.knowledgeBased)
       }
       if (filters.salaryType) {
-        // newFilteredJobAds = newFilteredJobAds.filter(job => {
-        //   if (typeof job.salary === 'number'
-        //     && typeof filters.salaryType === 'object'
-        //     && filters.salaryType !== null
-        //     && job.salary >= filters.salaryType[0]
-        //     && job.salary <= filters.salaryType[1]) {
-        //     return job
-        //   } else if (typeof job.salary === 'object'
-        //     && typeof filters.salaryType === 'object'
-        //     && filters.salaryType !== null
-        //     && job.salary !== null
-        //     && job.salary[0] >= filters.salaryType[0]
-        //     && job.salary[1] <= filters.salaryType[1]) {
-        //     return job
-        //   }
-        // })
         newFilteredJobAds = newFilteredJobAds.filter(job => {
           if (job.salary !== null
             && filters.salaryType !== null
