@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import JobAdsTypes from '../types/jobAds.types';
 import useJobAdsStore from '../store/useJobAds';
-import CooperationTypes from '../types/CooperationTypes.type';
+import useJobAdsFilters, { useJobAdsFiltersTypes } from '../store/useJobAdsFilters';
 
 // simple filter button
 type FilterJobProps = {
@@ -158,41 +158,17 @@ const MultiFilterJob = ({ selected, title, filters, unFilterHandler }: MultiFilt
 type JobsFiltersBarProps = {
   jobAdsSelectHandler: (singleJobAd: JobAdsTypes) => void
 }
-type filtersTypes = {
-  q_id: string | null;
-  q_search: string | null;
-  q_category: string | null;
-  q_tag: string | null;
-  q_province: string | null;
-  q_city: string | null;
-  q_cooperationType: string | null;
-  q_cooperationTypeCity: string | null;
-  remote: boolean;
-  knowledgeBasedCompany: boolean;
-  cooprationType: CooperationTypes | null;
-  salaryType: [number, number] | null
-}
-const initialFiltersValue: filtersTypes = {
-  q_id: null,
-  q_search: null,
-  q_category: null,
-  q_tag: null,
-  q_province: null,
-  q_city: null,
-  q_cooperationType: null,
-  q_cooperationTypeCity: null,
-  remote: false,
-  knowledgeBasedCompany: false,
-  cooprationType: null,
-  salaryType: null
-}
 const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
   const {
-    jobAds, setFilteredJobAds, setSelectedJobAds, setJobAdsToDefault, setHasFilter
+    jobAds,
+    setFilteredJobAds,
+    setSelectedJobAds,
+    setJobAdsToDefault,
+    setHasFilter
   } = useJobAdsStore(s => s)
+  const filters = useJobAdsFilters(s => s)
   const [searchParams] = useSearchParams()
   const redirect = useNavigate()
-  const [filters, setFilters] = useState<filtersTypes>(initialFiltersValue)
   const [showClearFilters, setShowClearFilters] = useState<boolean>(false)
 
   useEffect(() => {
@@ -203,7 +179,6 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
       setShowClearFilters(false)
       setHasFilter(false)
     }
-
 
     let newFilteredJobAds: JobAdsTypes[] = jobAds
     if (filters.q_id) {
@@ -227,6 +202,7 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
         })
       }
       if (filters.q_category) {
+        newFilteredJobAds.forEach(job => console.log(job.category.name))
         newFilteredJobAds = newFilteredJobAds.filter(job => job.category.name === filters.q_category)
       }
       if (filters.q_tag) {
@@ -270,7 +246,6 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
       }
       if (filters.cooprationType) {
         newFilteredJobAds = newFilteredJobAds.filter(job => {
-          console.log(job.cooperationType, filters.cooprationType);
           if (job.cooperationType.name === filters.cooprationType) {
             return job
           }
@@ -282,25 +257,24 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
 
   useEffect(() => {
     setJobAdsToDefault()
-    const id = searchParams.get('id')
-    const search = searchParams.get('search')
-    const cat = searchParams.get('cat')
-    const jobTag = searchParams.get('tag')
-    const province = searchParams.get('province')
-    const city = searchParams.get('city')
-    const cooperationType = searchParams.get('cooperationType')
-    const cooperationTypeCity = searchParams.get('cooperationType-city')
-    setFilters(prev => ({
-      ...prev,
-      q_id: id,
-      q_search: search,
-      q_category: cat,
-      q_tag: jobTag,
-      q_province: province,
-      q_city: city,
-      q_cooperationType: cooperationType,
-      q_cooperationTypeCity: cooperationTypeCity
-    }))
+    const q_id = searchParams.get('id')
+    const q_search = searchParams.get('search')
+    const q_category = searchParams.get('cat')
+    const q_tag = searchParams.get('tag')
+    const q_province = searchParams.get('province')
+    const q_city = searchParams.get('city')
+    const q_cooperationType = searchParams.get('cooperationType')
+    const q_cooperationTypeCity = searchParams.get('cooperationType-city')
+    useJobAdsFilters.setState({
+      q_id,
+      q_search,
+      q_category,
+      q_tag,
+      q_province,
+      q_city,
+      q_cooperationType,
+      q_cooperationTypeCity
+    })
     setShowClearFilters(chekFilters())
   }, [location.href])
 
@@ -310,12 +284,12 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
       state = true
     } else {
       for (const key in filters) {
-        if (filters[key as keyof filtersTypes] !== null
-          && ['string', 'object'].includes(typeof filters[key as keyof filtersTypes])
-          && filters[key as keyof filtersTypes] !== 'none') {
+        if (filters[key as keyof useJobAdsFiltersTypes] !== null
+          && ['string', 'object'].includes(typeof filters[key as keyof useJobAdsFiltersTypes])
+          && filters[key as keyof useJobAdsFiltersTypes] !== 'none') {
           state = true
-        } else if (typeof filters[key as keyof filtersTypes] === 'boolean'
-          && filters[key as keyof filtersTypes] === true) {
+        } else if (typeof filters[key as keyof useJobAdsFiltersTypes] === 'boolean'
+          && filters[key as keyof useJobAdsFiltersTypes] === true) {
           state = true
         }
       }
@@ -331,7 +305,7 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
         onClick={() => {
           redirect('/jobs')
           setJobAdsToDefault()
-          setFilters(initialFiltersValue)
+          filters.setFiltersToDefault()
         }}
         disabled={!showClearFilters}
       >
@@ -342,27 +316,15 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
         <FilterJob
           selected={filters.remote}
           title='دورکاری'
-          filterHandler={() => setFilters(prev => ({
-            ...prev,
-            remote: true
-          }))}
-          unFilterHandler={() => setFilters(prev => ({
-            ...prev,
-            remote: false
-          }))}
+          filterHandler={() => useJobAdsFilters.setState({ remote: true })}
+          unFilterHandler={() => useJobAdsFilters.setState({ remote: false })}
         />
 
         <FilterJob
           selected={filters.knowledgeBasedCompany}
           title='امریه سربازی'
-          filterHandler={() => setFilters(prev => ({
-            ...prev,
-            knowledgeBasedCompany: true
-          }))}
-          unFilterHandler={() => setFilters(prev => ({
-            ...prev,
-            knowledgeBasedCompany: false
-          }))}
+          filterHandler={() => useJobAdsFilters.setState({ knowledgeBasedCompany: true })}
+          unFilterHandler={() => useJobAdsFilters.setState({ knowledgeBasedCompany: false })}
         />
 
         <MultiFilterJob
@@ -371,30 +333,18 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
           filters={[
             {
               title: 'تمام وقت',
-              filterHandler: () => setFilters(prev => ({
-                ...prev,
-                cooprationType: 'تمام وقت'
-              }))
+              filterHandler: () => useJobAdsFilters.setState({ cooprationType: 'تمام وقت' })
             },
             {
               title: 'پاره وقت',
-              filterHandler: () => setFilters(prev => ({
-                ...prev,
-                cooprationType: 'پاره وقت'
-              }))
+              filterHandler: () => useJobAdsFilters.setState({ cooprationType: 'پاره وقت' })
             },
             {
               title: 'پروژه ای',
-              filterHandler: () => setFilters(prev => ({
-                ...prev,
-                cooprationType: 'پروژه ای'
-              }))
+              filterHandler: () => useJobAdsFilters.setState({ cooprationType: 'پروژه ای' })
             }
           ]}
-          unFilterHandler={() => setFilters(prev => ({
-            ...prev,
-            cooprationType: null
-          }))}
+          unFilterHandler={() => useJobAdsFilters.setState({ cooprationType: null })}
         />
 
         <MultiFilterJob
@@ -403,51 +353,30 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
           filters={[
             {
               title: 'تا 4 میلیون',
-              filterHandler: () => setFilters(prev => ({
-                ...prev,
-                salaryType: [0, 4]
-              }))
+              filterHandler: () => useJobAdsFilters.setState({ salaryType: [0, 4] })
             },
             {
               title: '4 تا 8 میلیون',
-              filterHandler: () => setFilters(prev => ({
-                ...prev,
-                salaryType: [4, 8]
-              }))
+              filterHandler: () => useJobAdsFilters.setState({ salaryType: [4, 8] })
             },
             {
               title: 'از 8 تا 15 میلیون',
-              filterHandler: () => setFilters(prev => ({
-                ...prev,
-                salaryType: [8, 15]
-              }))
+              filterHandler: () => useJobAdsFilters.setState({ salaryType: [8, 15] })
             },
             {
               title: 'از 15 تا 25 میلیون',
-              filterHandler: () => setFilters(prev => ({
-                ...prev,
-                salaryType: [15, 25]
-              }))
+              filterHandler: () => useJobAdsFilters.setState({ salaryType: [15, 25] })
             },
             {
               title: 'از 25 تا 40 میلیون',
-              filterHandler: () => setFilters(prev => ({
-                ...prev,
-                salaryType: [25, 40]
-              }))
+              filterHandler: () => useJobAdsFilters.setState({ salaryType: [25, 40] })
             },
             {
               title: 'از 40 تا 75 میلیون',
-              filterHandler: () => setFilters(prev => ({
-                ...prev,
-                salaryType: [40, 75]
-              }))
+              filterHandler: () => useJobAdsFilters.setState({ salaryType: [40, 75] })
             },
           ]}
-          unFilterHandler={() => setFilters(prev => ({
-            ...prev,
-            salaryType: null
-          }))}
+          unFilterHandler={() => useJobAdsFilters.setState({ salaryType: null })}
         />
       </div>
     </div>
