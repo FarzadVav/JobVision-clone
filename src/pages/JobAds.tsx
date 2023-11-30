@@ -10,14 +10,14 @@ import JobAdsBox from "../components/JobAdsBox";
 import Tabs from '../components/Tabs'
 import PopularCompanies from '../components/PopularCompanies';
 import { Alert } from '@mui/material';
-import useJobAdsStore from '../store/useJobAds';
+import useJobAds from '../store/useJobAds';
 import useLoading from '../store/useLoading';
 
 const Jobs = () => {
 	const { startPageLoadingHandler, endPageLoadingHandler } = useLoading(s => s)
 	const {
 		jobAds, filteredJobAds, selectedJobAds, hasFilter, getJobAds, setSelectedJobAds
-	} = useJobAdsStore(s => s)
+	} = useJobAds(s => s)
 	const [showAlert, setShowAlert] = useState<boolean>(false)
 	const [jobAdsTabs, setJobAdsTabs] = useState<{
 		id: string;

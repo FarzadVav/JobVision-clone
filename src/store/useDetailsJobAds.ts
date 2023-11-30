@@ -42,8 +42,6 @@ const useDetailsJobAds = create<useDetailsJobAdsTypes>(set => ({
       .from('cities')
       .select('*')
 
-    callBack()
-
     set({
       categories: categories || [],
       tags: tags || [],
@@ -83,6 +81,8 @@ const useDetailsJobAds = create<useDetailsJobAdsTypes>(set => ({
         }
       ]
     })
+
+    callBack()
   }
 }))
 

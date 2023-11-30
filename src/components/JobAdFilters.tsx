@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import JobAdsTypes from '../types/jobAds.types';
-import useJobAdsStore from '../store/useJobAds';
+import useJobAds from '../store/useJobAds';
 import useJobAdsFilters, { useJobAdsFiltersTypes } from '../store/useJobAdsFilters';
 
 // simple filter button
@@ -165,7 +165,7 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
     setSelectedJobAds,
     setJobAdsToDefault,
     setHasFilter
-  } = useJobAdsStore(s => s)
+  } = useJobAds(s => s)
   const filters = useJobAdsFilters(s => s)
   const [searchParams] = useSearchParams()
   const redirect = useNavigate()
@@ -202,7 +202,6 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
         })
       }
       if (filters.q_category) {
-        newFilteredJobAds.forEach(job => console.log(job.category.name))
         newFilteredJobAds = newFilteredJobAds.filter(job => job.category.name === filters.q_category)
       }
       if (filters.q_tag) {
@@ -253,13 +252,13 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
       }
     }
     setFilteredJobAds(newFilteredJobAds)
-  }, [filters])
+  }, [filters, jobAds])
 
   useEffect(() => {
     setJobAdsToDefault()
     const q_id = searchParams.get('id')
     const q_search = searchParams.get('search')
-    const q_category = searchParams.get('cat')
+    const q_category = searchParams.get('category')
     const q_tag = searchParams.get('tag')
     const q_province = searchParams.get('province')
     const q_city = searchParams.get('city')
