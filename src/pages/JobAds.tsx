@@ -1,7 +1,7 @@
 import { ReactNode, useState, useEffect, useRef } from 'react'
 import { CloseRounded, FavoriteBorderRounded, HelpRounded, InfoOutlined, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined, StarRateRounded, Verified } from "@mui/icons-material";
 
-import SearchJobForm from "../components/SearchJobForm";
+import SearchJobForm from "../components/SearchJobAdsForm";
 import FilterJob from "../components/JobAdFilters";
 import Title from "../components/Title";
 import JobAdsTypes from "../types/jobAds.types";

@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ApartmentOutlined, AssignmentTurnedIn, BusinessCenter, Diversity3Rounded, KeyboardArrowLeftRounded, KeyboardBackspaceRounded } from "@mui/icons-material";
 
 import tokenGenerator from "../utils/tokenGenerator";
-import SearchJobForm from "../components/SearchJobForm";
+import SearchJobForm from "../components/SearchJobAdsForm";
 import Title from "../components/Title";
 import JobAdsBox from "../components/JobAdsBox";
 import HonorBox from "../components/HonorBox";

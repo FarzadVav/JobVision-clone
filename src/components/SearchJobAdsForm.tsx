@@ -7,6 +7,7 @@ import { WorkOutlineRounded, SearchRounded, LocationOnOutlined } from "@mui/icon
 import TextInput from "./inputs/TextInput";
 import AutoComplete from "./inputs/AutoComplete";
 import { PulseLoader } from "react-spinners";
+import useDetailsJobAds from "../store/useDetailsJobAds";
 
 const schema = z.object({
   search: z.string().nonempty('لطفا عنوان شغل را خالی نگذارید').min(2).max(128),
@@ -20,10 +21,6 @@ type formTypes = {
   city: string;
 }
 
-const catDatas = ['programming', 'بازاریابی', 'فتوشاپ']
-
-const cityDatas = ['مشهد', 'تهران', 'اصفهان']
-
 const SearchJobForm = ({ customClass }: { customClass?: string }) => {
   const {
     register,
@@ -34,6 +31,7 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
   } = useForm<formTypes>({
     resolver: zodResolver(schema)
   })
+  const { categories, cities } = useDetailsJobAds(s => s)
   const redirect = useNavigate()
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
@@ -70,7 +68,7 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
         register={{ ...register('job') }}
         setValue={setValue}
         placeholder={`گروه شغلی`}
-        datas={catDatas}
+        datas={categories.map(cat => cat.name)}
       >
         <WorkOutlineRounded />
       </AutoComplete>
@@ -79,7 +77,7 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
         register={{ ...register('city') }}
         setValue={setValue}
         placeholder={`شهر`}
-        datas={cityDatas}
+        datas={cities.map(city => city.name)}
       >
         <LocationOnOutlined />
       </AutoComplete>
