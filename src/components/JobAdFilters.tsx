@@ -6,6 +6,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import JobAdsTypes from '../types/jobAds.types';
 import useJobAds from '../store/useJobAds';
 import useJobAdsFilters, { useJobAdsFiltersTypes } from '../store/useJobAdsFilters';
+import useJobAdsQuery from '../hooks/useJobAdsQuery';
 
 // simple filter button
 type FilterJobProps = {
@@ -159,8 +160,8 @@ type JobsFiltersBarProps = {
   jobAdsSelectHandler: (singleJobAd: JobAdsTypes) => void
 }
 const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
+  const { data: jobAds } = useJobAdsQuery()
   const {
-    jobAds,
     setFilteredJobAds,
     setSelectedJobAds,
     setJobAdsToDefault,
@@ -180,7 +181,7 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
       setHasFilter(false)
     }
 
-    let newFilteredJobAds: JobAdsTypes[] = jobAds
+    let newFilteredJobAds: JobAdsTypes[] = jobAds || []
     if (filters.q_id) {
       const newFilteredJobAdsFromId = newFilteredJobAds.find(job => job._id === filters.q_id)
       if (newFilteredJobAdsFromId) {

@@ -1,5 +1,6 @@
 import { ReactNode, useState, useEffect, useRef } from 'react'
 import { CloseRounded, FavoriteBorderRounded, HelpRounded, InfoOutlined, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined, StarRateRounded, Verified } from "@mui/icons-material";
+import { Alert } from '@mui/material';
 
 import SearchJobForm from "../components/SearchJobAdsForm";
 import FilterJob from "../components/JobAdFilters";
@@ -9,14 +10,13 @@ import tokenGenerator from "../utils/tokenGenerator";
 import JobAdsBox from "../components/JobAdsBox";
 import Tabs from '../components/Tabs'
 import PopularCompanies from '../components/PopularCompanies';
-import { Alert } from '@mui/material';
 import useJobAds from '../store/useJobAds';
-import useLoading from '../store/useLoading';
+import useJobAdsQuery from '../hooks/useJobAdsQuery';
 
 const Jobs = () => {
-	const { startPageLoadingHandler, endPageLoadingHandler } = useLoading(s => s)
+	const { data: jobAds } = useJobAdsQuery()
 	const {
-		jobAds, filteredJobAds, selectedJobAds, hasFilter, getJobAds, setSelectedJobAds
+		filteredJobAds, selectedJobAds, hasFilter, setSelectedJobAds
 	} = useJobAds(s => s)
 	const [showAlert, setShowAlert] = useState<boolean>(false)
 	const [jobAdsTabs, setJobAdsTabs] = useState<{
@@ -25,16 +25,9 @@ const Jobs = () => {
 		content: ReactNode
 	}[]>([])
 
-	const mountCountRef = useRef<number>(0)
 	const alertRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
-		if (mountCountRef.current === 0) {
-			// get all jobAds and handel loading for it
-			startPageLoadingHandler()
-			getJobAds(endPageLoadingHandler)
-		}
-
 		// hide alertBox on scroll to footer (in mobile size)
 		window.addEventListener('scroll', () => {
 			const footer = document.querySelector('footer')
@@ -55,8 +48,6 @@ const Jobs = () => {
 				document.body?.classList.remove('overflow-hidden')
 			}
 		}
-
-		mountCountRef.current++
 	}, [selectedJobAds])
 
 	// handle select jobAds and his tabs
@@ -287,7 +278,7 @@ const Jobs = () => {
 						<>
 							{
 								(
-									jobAds.length
+									jobAds?.length
 									&& jobAds.filter(job => (job.category.name === singleJobAd.category.name && job._id !== singleJobAd._id)).length
 								)
 									? (
@@ -424,7 +415,7 @@ const Jobs = () => {
 					<>
 						{
 							(
-								jobAds.length
+								jobAds?.length
 								&& jobAds.filter(job => (job.company._id === singleJobAd.company._id && job._id !== singleJobAd._id)).length
 							)
 								? (
@@ -530,7 +521,7 @@ const Jobs = () => {
 						xl:w-4/12`}>
 							<div className={`w-full flex justify-between items-center`}>
 								<p>
-									{hasFilter ? filteredJobAds.length : jobAds.length} آگهی
+									{hasFilter ? filteredJobAds.length : jobAds?.length} آگهی
 								</p>
 								<select className={`bg-jv-bright cursor-pointer px-5 py-2 rounded`}>
 									<option value="">مرتب سازی</option>
@@ -567,7 +558,7 @@ const Jobs = () => {
 									) : null
 								}
 								{
-									!hasFilter && jobAds.length ? jobAds.map(job => (
+									!hasFilter && jobAds?.length ? jobAds.map(job => (
 										<div
 											key={job._id}
 											className={`w-full`}
@@ -672,7 +663,7 @@ const Jobs = () => {
 														</button>
 														<img
 															className={`w-10 h-10 mr-3 rounded-full`}
-															src={jobAds[0].company.logo}
+															src={selectedJobAds.company.logo}
 														/>
 													</div>
 												</div>

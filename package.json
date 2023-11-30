@@ -16,6 +16,8 @@
     "@mui/icons-material": "^5.14.9",
     "@mui/material": "^5.14.10",
     "@supabase/supabase-js": "^2.38.5",
+    "@tanstack/react-query": "^5.10.0",
+    "@tanstack/react-query-devtools": "^5.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.46.1",
