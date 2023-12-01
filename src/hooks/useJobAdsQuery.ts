@@ -9,7 +9,6 @@ function useJobAdsQuery() {
   return useQuery({
     queryKey: ['jobAds'],
     queryFn: async () => {
-      console.log(1);
       startPageLoadingHandler()
 
       const { data: jobAds } = await supabase

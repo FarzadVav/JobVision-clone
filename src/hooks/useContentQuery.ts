@@ -21,7 +21,6 @@ function useContent() {
   return useQuery({
     queryKey: ['content'],
     queryFn: async () => {
-      console.log(2);
       startPageLoadingHandler()
 
       let content: ContentTypes = {} as ContentTypes

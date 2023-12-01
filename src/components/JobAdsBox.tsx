@@ -7,15 +7,39 @@ type selectedJobAdsTypes = {
   selected?: boolean
 }
 
-const JobBox = (
-  { _id, category, title, company, salary, isRemote, isUrgent, created_at, selected = false }: JobAdsTypes
-    & selectedJobAdsTypes
-) => {
+const JobBox = ({ _id,
+  category,
+  title,
+  company,
+  salary,
+  isRemote,
+  isUrgent,
+  created_at,
+  selected = false
+}: JobAdsTypes & selectedJobAdsTypes) => {
   const redirect = useNavigate()
+
+  const clickHandler = () => {
+    const prevJobAds: string[] = JSON.parse(localStorage.getItem('prevJobAds') || '[]')
+
+    if (prevJobAds.length >= 100) return
+
+    let hasIdInPrevJobAds: boolean = false
+    prevJobAds.forEach((prev: string) => {
+      if (prev === _id) {
+        hasIdInPrevJobAds = true
+      }
+    });
+    if (!hasIdInPrevJobAds) {
+      prevJobAds.push(_id)
+      localStorage.setItem('prevJobAds', JSON.stringify(prevJobAds))
+    }
+  }
 
   return (
     <article
       className={`bg-white w-full group`}
+      onClick={clickHandler}
       data-id={_id}
       data-category={category}
     >
