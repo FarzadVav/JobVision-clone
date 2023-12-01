@@ -5,7 +5,7 @@ import { Alert } from '@mui/material';
 import SearchJobForm from "../components/SearchJobAdsForm";
 import FilterJob from "../components/JobAdFilters";
 import Title from "../components/Title";
-import JobAdsTypes from "../types/jobAds.types";
+import JobAdsTypes from "../types/JobAds.types";
 import tokenGenerator from "../utils/tokenGenerator";
 import JobAdsBox from "../components/JobAdsBox";
 import Tabs from '../components/Tabs'

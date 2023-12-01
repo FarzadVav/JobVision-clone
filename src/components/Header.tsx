@@ -6,13 +6,13 @@ import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded, Nav
 import tokenGenerator from "../utils/tokenGenerator.ts";
 import LoginPopUp from "./LoginPopUp.tsx";
 import authContext from "../context/AuthContext.tsx";
-import useDetailsJobAds from "../store/useDetailsJobAds.ts";
 import useHeader from "../store/useHeader.ts";
+import useContent from "../hooks/useContent.ts";
 
 const Header = () => {
 	const redirect = useNavigate()
 	const auth = useContext(authContext)
-	const { jobAdsMneu, getDetails } = useDetailsJobAds(s => s)
+	const { data: content } = useContent()
 	const {
 		showMegaMenu,
 		showMobileMenu,
@@ -26,19 +26,12 @@ const Header = () => {
 		setShowJobInMobileMenu
 	} = useHeader(s => s)
 
-	const mountCountRef = useRef<number>(0)
 	const mobileMenuRef = useRef<HTMLMenuElement>(null)
 
 	useEffect(() => {
-		if (mountCountRef.current === 0) {
-			getDetails()
-		}
-
 		setShowMegaMenu(false)
 		setShowMobileMenu(false)
 		setShowJobInMobileMenu('', false)
-
-		mountCountRef.current++
 	}, [location.href])
 
 	useEffect(() => {
@@ -204,7 +197,7 @@ const Header = () => {
 					className={`bg-white w-11/12 h-full mx-auto rounded-b-xl flex flex-col relative duration-300 ${showMegaMenu ? 'translate-0' : '-translate-y-9 scale-x-[0.975]'}`}>
 					<ul className={`mega-menu light-shadow w-full h-16 flex px-6`}>
 						{
-							jobAdsMneu.map(menu => (
+							content?.jobAdsMneu.map(menu => (
 								<li
 									key={menu.id}
 									className={`h-full flex items-center cursor-pointer group hover:text-jv-primary`}>
@@ -402,7 +395,7 @@ const Header = () => {
 								</Link>
 							</li>
 							{
-								jobAdsMneu.map(menu => (
+								content?.jobAdsMneu.map(menu => (
 									<li
 										key={menu.id}
 										className={`w-full flex justify-between items-center py-2 mt-4 cursor-pointer`}
@@ -435,7 +428,7 @@ const Header = () => {
 								<NavigateBeforeRounded className={`text-white rotate-180`} />
 							</li>
 							{
-								jobAdsMneu.map(menu => {
+								content?.jobAdsMneu.map(menu => {
 									if (menu.id === showJobInMobileMenu.id) {
 										return menu.links.map(link => (
 											<li

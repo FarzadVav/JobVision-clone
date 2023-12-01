@@ -1,13 +1,14 @@
-import useLoading from "../store/useLoading"
-import supabase from "../utils/supabase"
 import { useQuery } from "@tanstack/react-query"
+import supabase from "../utils/supabase"
+
+import useLoading from "../store/useLoading"
 
 function useJobAdsQuery() {
   const { startPageLoadingHandler, endPageLoadingHandler } = useLoading(s => s)
+
   return useQuery({
     queryKey: ['jobAds'],
     queryFn: async () => {
-      console.log(123);
       startPageLoadingHandler()
 
       const { data: jobAds } = await supabase

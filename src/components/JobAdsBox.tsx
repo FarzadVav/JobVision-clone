@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { Star } from "@mui/icons-material"
 
-import JobAdsTypes from "../types/jobAds.types"
+import JobAdsTypes from "../types/JobAds.types"
 
 type selectedJobAdsTypes = {
   selected?: boolean
@@ -32,7 +32,7 @@ const JobBox = (
             <div className={`w-20 h-20 flex justify-center items-center rounded-md`}>
               <img
                 className={`w-full h-full object-fill object-center rounded-md`}
-                src={company.logo}
+                // src={company.logo}
                 alt={`لوگوی شرکت ${company.name}`}
                 loading={`lazy`}
               />
