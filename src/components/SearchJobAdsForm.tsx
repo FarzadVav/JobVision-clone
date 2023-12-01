@@ -7,7 +7,7 @@ import { WorkOutlineRounded, SearchRounded, LocationOnOutlined } from "@mui/icon
 import TextInput from "./inputs/TextInput";
 import AutoComplete from "./inputs/AutoComplete";
 import { PulseLoader } from "react-spinners";
-import useDetailsJobAds from "../store/useDetailsJobAds";
+import useContent from "../hooks/useContent";
 
 const schema = z.object({
   search: z.string().nonempty('لطفا عنوان شغل را خالی نگذارید').min(2).max(128),
@@ -31,7 +31,7 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
   } = useForm<formTypes>({
     resolver: zodResolver(schema)
   })
-  const { categories, cities } = useDetailsJobAds(s => s)
+  const { data: content } = useContent()
   const redirect = useNavigate()
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
@@ -68,7 +68,7 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
         register={{ ...register('job') }}
         setValue={setValue}
         placeholder={`گروه شغلی`}
-        datas={categories.map(cat => cat.name)}
+        datas={content?.categories.map(cat => cat.name) || []}
       >
         <WorkOutlineRounded />
       </AutoComplete>
@@ -77,7 +77,7 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
         register={{ ...register('city') }}
         setValue={setValue}
         placeholder={`شهر`}
-        datas={cities.map(city => city.name)}
+        datas={content?.cities.map(city => city.name) || []}
       >
         <LocationOnOutlined />
       </AutoComplete>
