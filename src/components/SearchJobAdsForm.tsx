@@ -7,7 +7,7 @@ import { WorkOutlineRounded, SearchRounded, LocationOnOutlined } from "@mui/icon
 import TextInput from "./inputs/TextInput";
 import AutoComplete from "./inputs/AutoComplete";
 import { PulseLoader } from "react-spinners";
-import useContent from "../hooks/useContent";
+import useContent from "../hooks/useContentQuery";
 
 const schema = z.object({
   search: z.string().nonempty('لطفا عنوان شغل را خالی نگذارید').min(2).max(128),

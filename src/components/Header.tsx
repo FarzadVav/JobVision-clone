@@ -7,7 +7,7 @@ import tokenGenerator from "../utils/tokenGenerator.ts";
 import LoginPopUp from "./LoginPopUp.tsx";
 import authContext from "../context/AuthContext.tsx";
 import useHeader from "../store/useHeader.ts";
-import useContent from "../hooks/useContent.ts";
+import useContent from "../hooks/useContentQuery.ts";
 
 const Header = () => {
 	const redirect = useNavigate()

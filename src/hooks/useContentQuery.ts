@@ -21,6 +21,7 @@ function useContent() {
   return useQuery({
     queryKey: ['jobAds'],
     queryFn: async () => {
+      console.log(2);
       startPageLoadingHandler()
 
       let content: ContentTypes = {} as ContentTypes
