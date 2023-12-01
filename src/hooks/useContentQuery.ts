@@ -19,7 +19,7 @@ function useContent() {
   const { startPageLoadingHandler, endPageLoadingHandler } = useLoading(s => s)
 
   return useQuery({
-    queryKey: ['jobAds'],
+    queryKey: ['content'],
     queryFn: async () => {
       console.log(2);
       startPageLoadingHandler()

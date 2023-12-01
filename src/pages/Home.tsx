@@ -42,10 +42,11 @@ const accordions: { title: string; text: string }[] = [
 ]
 
 const Home = () => {
+	const { data: jobAds } = useJobAdsQuery()
+	console.log(jobAds);
 	// custom hook for scroll effects
 	useOneScroll(['employee-baner', 'cta-1', { id: 'cta-2', delay: 150 }])
 	const [svgPath, setSvgPath] = useState<{ x: number, y: number }>({ x: 0, y: 0 })
-	const { data: jobAds } = useJobAdsQuery()
 
 	const runAnimationRef = useRef<boolean>(false)
 	const messageBoxRef = useRef<HTMLDivElement>(null)
