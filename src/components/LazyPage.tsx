@@ -1,12 +1,14 @@
 import { ReactNode, Suspense } from "react";
 
+const skeleton = () => <div className={`skeleton`}></div>
+
 type LazyPageProps = {
 	children: ReactNode;
 }
 const LazyPage = ({ children }: LazyPageProps) => {
 	return (
 		<Suspense
-			fallback={'loading...'}
+			fallback={skeleton()}
 		>
 			{children}
 		</Suspense>
