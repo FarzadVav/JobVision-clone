@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { z } from "zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { AccessTimeRounded, AccountCircleOutlined, ArticleOutlined, GpsNotFixedRounded, HomeWorkOutlined, ImportantDevicesOutlined, LanguageOutlined, LocalAirportRounded, LocationOnOutlined, NotesRounded, PaymentsOutlined, PeopleOutlined, SchoolOutlined, StarBorder, TextFieldsRounded, WorkOutlineRounded } from '@mui/icons-material'
+import { AccessTimeRounded, AccountCircleOutlined, ArticleOutlined, HomeWorkOutlined, ImportantDevicesOutlined, LanguageOutlined, LocalAirportRounded, NotesRounded, PaymentsOutlined, PeopleOutlined, PsychologyAltOutlined, SchoolOutlined, StarBorder, TextFieldsRounded, WorkOutlineRounded } from '@mui/icons-material'
 import { PulseLoader } from 'react-spinners'
 
 import ComboBox from '../../components/inputs/ComboBox'
@@ -11,6 +11,7 @@ import Title from '../../components/Title'
 import AutoComplete from '../../components/inputs/AutoComplete'
 import TextInput from '../../components/inputs/TextInput'
 import TextArea from '../../components/inputs/TextArea'
+import useContent from '../../hooks/useContentQuery'
 
 type customFormTypes = {
   jobTags: string[];
@@ -30,31 +31,23 @@ const defaultFormValues: customFormTypes = {
   techs: []
 }
 
-const categories = ['برنامه نویسی', 'بازاریابی', 'فتوشاپ']
-const datas = ['aaa', 'bbb', 'ccc']
-const cities = ['تهران', 'تبریز', 'مشهد']
-const cooperationTypes = ['پاره وقت', 'تمام وقت', 'پروژه ای']
 const genders = ['مرد', 'زن', 'فرقی ندارد']
-
-const COOPERATION_TYPE = z.enum(['null', ...cooperationTypes])
-const GENDER = z.enum(['null', ...genders])
 
 const schema = z.object({
   category: z.string().nonempty(),
   title: z.string().nonempty().min(3).max(256),
-  address: z.string().nonempty().min(3).max(256),
   city: z.string().nonempty(),
   remote: z.string(),
   isUrgent: z.string(),
   salary_1: z.string().regex(/^[0-9]+$/),
   salary_2: z.string().regex(/^[0-9]+$/),
   workTimes: z.string().nonempty().min(3).max(256),
-  cooperationType: COOPERATION_TYPE,
+  cooperationType: z.string().nonempty(),
   businessTrips: z.string().nonempty(),
   description: z.string().nonempty().min(3).max(256),
   age_1: z.string().nonempty().regex(/^[0-9]+$/),
   age_2: z.string().nonempty().regex(/^[0-9]+$/),
-  gender: GENDER,
+  gender: z.string().nonempty(),
   endOfMilitaryService: z.string(),
   // for sinc react-hook-form whith custom form
   customFormFields: z.string().nonempty()
@@ -78,6 +71,7 @@ const AddJobAd = () => {
       endOfMilitaryService: '',
     }
   })
+  const { data: content } = useContent()
   const [form, setForm] = useState<customFormTypes>(defaultFormValues)
   const [twoStepForms, setTwoStepsForms] = useState<{
     salary: boolean
@@ -152,22 +146,6 @@ const AddJobAd = () => {
         </TextArea>
         {/* description */}
 
-        {/* location and address */}
-        <Title withOutIcon customClass={`mb-2.5 mt-5`}>
-          <label className={`!text-xl`}>
-            آدرس و موقعیت
-          </label>
-        </Title>
-        <TextInput
-          customClass={`bg-jv-bright`}
-          register={{ ...register('address') }}
-          placeholder={`برای مثال هاشمیه 24`}
-          error={!!errors.address}
-        >
-          <LocationOnOutlined />
-        </TextInput>
-        {/* location and address */}
-
         {/* work times */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
@@ -187,7 +165,7 @@ const AddJobAd = () => {
         {/* business trips */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
-            سفر های کاری
+            شرح سفر های کاری
           </label>
         </Title>
         <TextInput
@@ -279,7 +257,7 @@ const AddJobAd = () => {
           register={{ ...register('category') }}
           setValue={setValue}
           placeholder={`برای مثال برنامه نویسی`}
-          datas={categories}
+          datas={content?.categories.map(cat => cat.name) || []}
           error={!!errors.category}
         >
           <WorkOutlineRounded />
@@ -297,7 +275,7 @@ const AddJobAd = () => {
           register={{ ...register('city') }}
           setValue={setValue}
           placeholder={`برای مثال برنامه نویسی`}
-          datas={cities}
+          datas={content?.cities.map(city => city.name) || []}
           error={!!errors.city}
         >
           <HomeWorkOutlined />
@@ -315,7 +293,7 @@ const AddJobAd = () => {
           register={{ ...register('cooperationType') }}
           setValue={setValue}
           placeholder={`برای مثال برنامه نویسی`}
-          datas={cooperationTypes}
+          datas={content?.cooperationType.map(type => type.name) || []}
           error={!!errors.cooperationType}
         >
           <ArticleOutlined />
@@ -349,7 +327,7 @@ const AddJobAd = () => {
         <MultiSelectBox
           customClass={`bg-jv-bright`}
           placeholder='برای مثال Front-End'
-          datas={datas}
+          datas={content?.tags.map(tag => tag.name) || []}
           list={form.jobTags}
           error={(submittedForm && form.jobTags.length <= 0)}
           addItemHandler={(item: string) => setForm(prev => ({ ...prev, jobTags: [...prev.jobTags, item] }))}
@@ -379,7 +357,7 @@ const AddJobAd = () => {
         {/* abilties */}
         <Title withOutIcon customClass={`mb-2.5 mt-5`}>
           <label className={`!text-xl`}>
-            شاخص های کلیدی
+            شاخص های کلیدی فرد
           </label>
         </Title>
         <ComboBox
@@ -390,7 +368,7 @@ const AddJobAd = () => {
           addItemHandler={(item: string) => setForm(prev => ({ ...prev, abilityForBoss: [...prev.abilityForBoss, item] }))}
           resetHandler={() => setForm(prev => ({ ...prev, abilityForBoss: [] }))}
         >
-          <GpsNotFixedRounded className={`-scale-x-100`} />
+          <PsychologyAltOutlined />
         </ComboBox>
         {/* abilties */}
 

@@ -124,7 +124,7 @@ const MultiSelectBox = ({
       {
         list.length ? (
           <span className={`text-sm mt-3`}>
-            {list.length} آیتم اضافه نشده
+            {list.length} مورد اضافه شده
           </span>
         ) : null
       }
