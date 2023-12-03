@@ -2,18 +2,23 @@ import { z } from "zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { PulseLoader } from "react-spinners"
-import { ManageSearchRounded, CalendarMonthRounded, HelpOutlineRounded, PeopleOutlineRounded } from "@mui/icons-material"
+import { ManageSearchRounded, CalendarMonthRounded, HelpOutlineRounded, PeopleOutlineRounded, LocationOnOutlined } from "@mui/icons-material"
 
+import useContent from "../../hooks/useContentQuery"
+import Title from "../../components/Title"
 import TextArea from "../../components/inputs/TextArea"
 import TextInput from "../../components/inputs/TextInput"
-import Title from "../../components/Title"
+import AutoComplete from "../../components/inputs/AutoComplete"
 
 const schema = z.object({
   about: z.string().nonempty().min(16).max(9999),
   year: z.string().nonempty().regex(/^[0-9]+$/).min(4).max(4),
-  employees: z.string().nonempty().regex(/^[0-9]+$/),
+  employees1: z.string().nonempty().regex(/^[0-9]+$/),
+  employees2: z.string().nonempty().regex(/^[0-9]+$/),
   activity: z.string().nonempty(),
-  ownership: z.string().nonempty()
+  province: z.string().nonempty(),
+  city: z.string().nonempty(),
+  knowledgeBased: z.string()
 })
 
 type formTypes = z.infer<typeof schema>
@@ -23,10 +28,12 @@ const Details = () => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setValue,
     reset
   } = useForm<formTypes>({
     resolver: zodResolver(schema)
   })
+  const { data: content } = useContent()
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     await new Promise((resolve) => setTimeout(() => {
@@ -57,84 +64,112 @@ const Details = () => {
       </TextArea>
       {/* about company */}
 
-      {/* details */}
+      {/* year */}
       <Title withOutIcon customClass={`mb-2.5 mt-5`}>
         <label className={`!text-xl`}>
-          اطلاعات شرکت
+          سال تاسیس
         </label>
       </Title>
-      <div className={`w-full grid grid-rows-3 grid-cols-2 gap-2 sm:grid-rows-2 sm:grid-cols-2`}>
-        {/* year */}
-        <TextInput
-          customClass={`bg-jv-bright col-span-2 sm:col-span-1`}
-          register={{ ...register('year') }}
-          placeholder={`سال تاسیس`}
-          error={!!errors.year}
-          numeric
-        >
-          <CalendarMonthRounded />
-        </TextInput>
-        {/* year */}
+      <TextInput
+        customClass={`bg-jv-bright`}
+        register={{ ...register('year') }}
+        placeholder={`برای مثال 1390`}
+        error={!!errors.year}
+        numeric
+      >
+        <CalendarMonthRounded />
+      </TextInput>
+      {/* year */}
 
-        {/* employees */}
+      {/* employees */}
+      <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+        <label className={`!text-xl`}>
+          تعداد کارکنان
+        </label>
+      </Title>
+      <div className={`w-full flex flex-col items-center justify-center sm:flex-row`}>
         <TextInput
-          customClass={`bg-jv-bright col-span-2 sm:col-span-1`}
-          register={{ ...register('employees') }}
-          placeholder={`تعداد کارکنان شرکت`}
-          error={!!errors.employees}
+          customClass={`bg-jv-bright`}
+          register={{ ...register('employees1') }}
+          placeholder={`از این تعداد`}
+          error={!!errors.employees1}
           numeric
         >
           <PeopleOutlineRounded />
         </TextInput>
-        {/* employees */}
-
-        {/* activity */}
         <TextInput
-          customClass={`bg-jv-bright col-span-2`}
-          register={{ ...register('activity') }}
-          placeholder={`حوزه فعالیت`}
-          error={!!errors.activity}
+          customClass={`bg-jv-bright mt-3 sm:mr-3 sm:mt-0`}
+          register={{ ...register('employees2') }}
+          placeholder={`تا این تعداد`}
+          error={!!errors.employees2}
           numeric
         >
-          <ManageSearchRounded />
+          <PeopleOutlineRounded />
         </TextInput>
-        {/* activity */}
       </div>
-      {/* details */}
+      {/* employees */}
 
-      {/* ownership */}
-      <div className={`w-full flex items-center mt-5`}>
-        <span className={`dana-bold`}>
-          نوع ماکلیت
-        </span>
-        <label
-          className={`mr-3 ${errors.ownership ? 'text-jv-danger' : ''}`}
-          htmlFor="pv"
+      {/* activity */}
+      <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+        <label className={`!text-xl`}>
+          حوزه فعالیت
+        </label>
+      </Title>
+      <TextArea
+        customClass={`bg-jv-bright`}
+        register={{ ...register('activity') }}
+        placeholder={`برای مثال برنامه نویسی`}
+        error={!!errors.activity}
+      >
+        <ManageSearchRounded />
+      </TextArea>
+      {/* activity */}
+
+      {/* city */}
+      <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+        <label className={`!text-xl`}>
+          مکان شرکت
+        </label>
+      </Title>
+      <div className={`w-full flex flex-col items-center justify-center sm:flex-row`}>
+        <AutoComplete
+          customClass={`bg-jv-bright`}
+          register={{ ...register('province') }}
+          setValue={setValue}
+          placeholder={`استان`}
+          datas={content?.provinces.map(province => province.name) || []}
         >
-          شخصی
+          <LocationOnOutlined />
+        </AutoComplete>
+        <AutoComplete
+          customClass={`bg-jv-bright mt-3 sm:mr-3 sm:mt-0`}
+          register={{ ...register('city') }}
+          setValue={setValue}
+          placeholder={`شهر`}
+          datas={content?.cities.map(city => city.name) || []}
+        >
+          <LocationOnOutlined />
+        </AutoComplete>
+      </div>
+      {/* city */}
+
+      {/* knowledgeBased */}
+      <div className={`flex items-center mt-5`}>
+        <label
+          className={`cursor-pointer`}
+          htmlFor="endOfMilitaryService"
+        >
+          شرکت دانش بنیان
         </label>
         <input
-          id="pv"
-          className={`mr-1`}
-          {...register('ownership')}
-          value={'pv'}
-          type="radio"
-        />
-        <label
-          className={`mr-3 ${errors.ownership ? 'text-jv-danger' : ''}`}
-          htmlFor="governmental"
-        >
-          دولتی
-        </label>
-        <input
-          id="governmental"
-          className={`mr-1`}
-          value={'governmental'}
-          {...register('ownership')}
-          type="radio"
+          id='endOfMilitaryService'
+          value={`endOfMilitaryService`}
+          className={`mr-2`}
+          {...register('knowledgeBased')}
+          type="checkbox"
         />
       </div>
-      {/* ownership */}
+      {/* knowledgeBased */}
 
       <button
         className={`btn btn-primary mt-5`}

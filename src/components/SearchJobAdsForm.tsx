@@ -15,11 +15,7 @@ const schema = z.object({
   city: z.string()
 })
 
-type formTypes = {
-  search: string;
-  job: string;
-  city: string;
-}
+type formTypes = z.infer<typeof schema>
 
 const SearchJobForm = ({ customClass }: { customClass?: string }) => {
   const {
