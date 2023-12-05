@@ -6,6 +6,7 @@ import { AccessTimeRounded, AccountCircleOutlined, ArticleOutlined, HomeWorkOutl
 import { PulseLoader } from 'react-spinners'
 import { useMutation } from '@tanstack/react-query'
 
+import CompanyTypes from '../../types/Company.types'
 import ComboBox from '../../components/inputs/ComboBox'
 import MultiSelectBox from '../../components/inputs/MultiSelectBox'
 import Title from '../../components/Title'
@@ -13,9 +14,8 @@ import AutoComplete from '../../components/inputs/AutoComplete'
 import TextInput from '../../components/inputs/TextInput'
 import TextArea from '../../components/inputs/TextArea'
 import useContent from '../../hooks/useContentQuery'
-import JobAdsTypes from '../../types/JobAds.types'
-import CompanyTypes from '../../types/Company.types'
 import supabase from '../../utils/supabase'
+import { newJobAdTypes } from '../../types/JobAds.types'
 
 type customFormTypes = {
   tags: string[];
@@ -33,12 +33,6 @@ const defaultFormValues: customFormTypes = {
   education: [],
   languages: [],
   techs: []
-}
-
-interface newJobAdTypes extends Omit<JobAdsTypes, 'cooperationType' | 'category' | 'tags'> {
-  cooperationType: string;
-  category: string;
-  tags: string[]
 }
 
 const genders = ['مرد', 'زن', 'فرقی ندارد']
