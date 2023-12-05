@@ -9,7 +9,8 @@ import './main.css'
 const client = new QueryClient({
 	defaultOptions: {
 		queries: {
-			staleTime: 30_000
+			staleTime: 30_000,
+			gcTime: 30_000
 		}
 	}
 })

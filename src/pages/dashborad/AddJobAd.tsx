@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { AccessTimeRounded, AccountCircleOutlined, ArticleOutlined, HomeWorkOutlined, ImportantDevicesOutlined, LanguageOutlined, LocalAirportRounded, NotesRounded, PaymentsOutlined, PeopleOutlined, PsychologyAltOutlined, SchoolOutlined, StarBorder, TextFieldsRounded, WorkOutlineRounded } from '@mui/icons-material'
 import { PulseLoader } from 'react-spinners'
+import { useMutation } from '@tanstack/react-query'
 
 import ComboBox from '../../components/inputs/ComboBox'
 import MultiSelectBox from '../../components/inputs/MultiSelectBox'
@@ -12,9 +13,12 @@ import AutoComplete from '../../components/inputs/AutoComplete'
 import TextInput from '../../components/inputs/TextInput'
 import TextArea from '../../components/inputs/TextArea'
 import useContent from '../../hooks/useContentQuery'
+import JobAdsTypes from '../../types/JobAds.types'
+import CompanyTypes from '../../types/Company.types'
+import supabase from '../../utils/supabase'
 
 type customFormTypes = {
-  jobTags: string[];
+  tags: string[];
   benefits: string[];
   abilityForBoss: string[];
   education: string[];
@@ -23,7 +27,7 @@ type customFormTypes = {
 }
 
 const defaultFormValues: customFormTypes = {
-  jobTags: [],
+  tags: [],
   benefits: [],
   abilityForBoss: [],
   education: [],
@@ -31,13 +35,20 @@ const defaultFormValues: customFormTypes = {
   techs: []
 }
 
+interface newJobAdTypes extends Omit<JobAdsTypes, 'cooperationType' | 'category' | 'tags'> {
+  cooperationType: string;
+  category: string;
+  tags: string[]
+}
+
 const genders = ['مرد', 'زن', 'فرقی ندارد']
+const gendersTypes = z.enum(['مرد', 'زن', 'فرقی ندارد'])
 
 const schema = z.object({
   category: z.string().nonempty(),
   title: z.string().nonempty().min(3).max(256),
   city: z.string().nonempty(),
-  remote: z.string(),
+  isRemote: z.string(),
   isUrgent: z.string(),
   salary_1: z.string().regex(/^[0-9]+$/),
   salary_2: z.string().regex(/^[0-9]+$/),
@@ -47,7 +58,7 @@ const schema = z.object({
   description: z.string().nonempty().min(3).max(256),
   age_1: z.string().nonempty().regex(/^[0-9]+$/),
   age_2: z.string().nonempty().regex(/^[0-9]+$/),
-  gender: z.string().nonempty(),
+  gender: gendersTypes,
   endOfMilitaryService: z.string(),
   // for sinc react-hook-form whith custom form
   customFormFields: z.string().nonempty()
@@ -66,12 +77,29 @@ const AddJobAd = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       salary_2: '0',
-      remote: '',
+      isRemote: '',
       isUrgent: '',
       endOfMilitaryService: '',
     }
   })
   const { data: content } = useContent()
+  const { mutate, isPending } = useMutation({
+    mutationKey: ['jobAds'],
+    mutationFn: async (newJobAd: newJobAdTypes) => {
+      // @ts-ignore
+      const { data, error } = await supabase
+        .from('jobAds')
+        .insert([newJobAd])
+        .select()
+
+      console.log(data);
+      console.log(error);
+
+      return data
+    },
+  })
+
+  // TODO: insert to useAddJobAdForm.ts
   const [form, setForm] = useState<customFormTypes>(defaultFormValues)
   const [twoStepForms, setTwoStepsForms] = useState<{
     salary: boolean
@@ -97,15 +125,38 @@ const AddJobAd = () => {
   }, [form])
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
-    console.log(123);
-    await new Promise((resolve) => setTimeout(() => {
-      console.log(data);
-      console.log(form);
-      setSubmittedForm(false)
-      setForm(defaultFormValues)
-      reset()
-      return resolve
-    }, 1500));
+    const newJobAd: newJobAdTypes = {
+      // created_at: new Date(),
+      title: data.title,
+      description: data.description,
+      workTimes: data.workTimes,
+      businessTrips: data.businessTrips,
+      isRemote: !!data.isRemote.length,
+      isUrgent: !!data.isUrgent.length,
+      endOfMilitaryService: !!data.endOfMilitaryService.length,
+      gender: data.gender === 'مرد' ? true : data.gender === 'زن' ? false : null,
+      cooperationType: content?.cooperationType.find(type => type.name === data.cooperationType)?._id || '',
+      category: content?.categories.find(cat => cat.name === data.category)?._id || '',
+      tags: content?.tags.filter(tag => form.tags.includes(tag.name)).map(t => t._id) || [''],
+      benefits: form.benefits,
+      abilityForBoss: form.abilityForBoss,
+      education: form.education,
+      languages: form.languages,
+      techs: form.techs,
+      age: +data.age_2 > +data.age_1 ? [+data.age_1, +data.age_2] : [+data.age_1],
+      salary: +data.salary_2 > +data.salary_1 ? [+data.salary_1, +data.salary_2] : [+data.salary_1],
+      company: {} as CompanyTypes
+    }
+
+    console.log('newJobAd', newJobAd);
+    
+    mutate(newJobAd)
+
+    // setSubmittedForm(false)
+    // setForm(defaultFormValues)
+    // reset()
+
+    // return isPending
   }
 
   return (
@@ -328,11 +379,11 @@ const AddJobAd = () => {
           customClass={`bg-jv-bright`}
           placeholder='برای مثال Front-End'
           datas={content?.tags.map(tag => tag.name) || []}
-          list={form.jobTags}
-          error={(submittedForm && form.jobTags.length <= 0)}
-          addItemHandler={(item: string) => setForm(prev => ({ ...prev, jobTags: [...prev.jobTags, item] }))}
-          resetHandler={() => setForm(prev => ({ ...prev, jobTags: [] }))}
-          unSelectHandler={(item: string) => setForm(prev => ({ ...prev, jobTags: prev.jobTags.filter(tag => tag !== item) }))}
+          list={form.tags}
+          error={(submittedForm && form.tags.length <= 0)}
+          addItemHandler={(item: string) => setForm(prev => ({ ...prev, tags: [...prev.tags, item] }))}
+          resetHandler={() => setForm(prev => ({ ...prev, tags: [] }))}
+          unSelectHandler={(item: string) => setForm(prev => ({ ...prev, tags: prev.tags.filter(tag => tag !== item) }))}
         />
         {/* tags */}
 
@@ -440,7 +491,7 @@ const AddJobAd = () => {
               id='remote'
               value='remote'
               className={`mr-2`}
-              {...register('remote')}
+              {...register('isRemote')}
               type="checkbox"
             />
           </div>

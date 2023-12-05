@@ -70,7 +70,7 @@ function useJobAdsQuery() {
 
       endPageLoadingHandler()
       return jobAds
-    },
+    }
   })
 }
 

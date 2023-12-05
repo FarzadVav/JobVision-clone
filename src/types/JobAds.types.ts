@@ -2,9 +2,10 @@ import CompanyTypes from "./Company.types"
 import CooperationTypes from "./CooperationTypes.type";
 
 type JobAdsTypes = {
-  created_at: Date;
-  _id: string;
+  created_at?: Date;
+  _id?: string;
   title: string;
+  description: string;
   workTimes: string;
   businessTrips: string;
   isRemote: boolean;
@@ -16,7 +17,6 @@ type JobAdsTypes = {
   tags: { _id: string; name: string }[];
   benefits: string[];
   abilityForBoss: string[];
-  description: string;
   education: string[];
   languages: string[];
   techs: string[];
