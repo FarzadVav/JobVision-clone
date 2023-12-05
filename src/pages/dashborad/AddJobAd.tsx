@@ -146,11 +146,11 @@ const AddJobAd = () => {
     
     mutate(newJobAd)
 
-    // setSubmittedForm(false)
-    // setForm(defaultFormValues)
-    // reset()
+    setSubmittedForm(false)
+    setForm(defaultFormValues)
+    reset()
 
-    // return isPending
+    return isPending
   }
 
   return (
