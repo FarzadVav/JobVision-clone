@@ -31,7 +31,7 @@ const JobBox = ({ _id,
       }
     });
     if (!hasIdInPrevJobAds) {
-      prevJobAds.push(_id)
+      prevJobAds.push(_id || '')
       localStorage.setItem('prevJobAds', JSON.stringify(prevJobAds))
     }
   }
@@ -114,7 +114,7 @@ const JobBox = ({ _id,
               </span>
             ) : (
               <span className={`text-xs h-3`}>
-                {new Date(created_at).toLocaleDateString('fa-ir')}
+                {new Date(created_at || '').toLocaleDateString('fa-ir')}
               </span>
             )
           }

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import JobAdsTypes from "../types/jobAds.types";
+import JobAdsTypes from "../types/JobAds.types";
 
 type useJobAdsStoreTypes = {
   filteredJobAds: JobAdsTypes[];

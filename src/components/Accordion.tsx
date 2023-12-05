@@ -1,6 +1,6 @@
 import { useRef } from "react"
 import AccordionWithToggle from "../hoc/AccordionWithToggle"
-import AccordionTypes from "../types/accordion.types"
+import AccordionTypes from "../types/Accordion.types"
 import Title from "./Title"
 import { KeyboardCapslockRounded } from "@mui/icons-material"
 

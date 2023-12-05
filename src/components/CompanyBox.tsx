@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom"
 import { Star } from "@mui/icons-material"
 
-import CompanyTypes from "../types/company.types"
+import CompanyTypes from "../types/Company.types"
 
-const CompanyBox = ({ id, logo, name, score, jobs }: CompanyTypes) => {
+const CompanyBox = ({ _id, logo, name, score }: CompanyTypes) => {
+  const jobs = [1, 2, 3]
+  
   return (
     <Link
       className={`bg-white text-jv-dark border border-solid border-jv-light w-52 p-2 flex flex-col rounded-md`}
       to={`/`}
-      data-id={id}
+      data-id={_id}
     >
       <div className={`w-20 h-20 rounded-md`}>
         <img

@@ -54,7 +54,7 @@ const Jobs = () => {
 	const jobAdsSelectHandler = (singleJobAd: JobAdsTypes) => {
 		setJobAdsTabs([
 			{
-				id: singleJobAd._id,
+				id: singleJobAd._id || '',
 				title: 'درباره شغل',
 				content: (
 					<div key={1} className={`w-full flex flex-col`}>
@@ -597,7 +597,7 @@ const Jobs = () => {
 													</button>
 													<div className={`flex items-center`}>
 														<span className={`text-sm`}>
-															{new Date(selectedJobAds.created_at).toLocaleDateString('fa-ir')}
+															{new Date(selectedJobAds.created_at || '').toLocaleDateString('fa-ir')}
 														</span>
 														<button className={`btn-sm bg-blue-50 rounded-full mr-4`}>
 															<ShareOutlined className={`text-jv-primary cursor-pointer`} />
@@ -614,7 +614,7 @@ const Jobs = () => {
 														</h2>
 													</Title>
 													<span className={`min-w-max hidden text-sm lg:block`}>
-														{new Date(selectedJobAds.created_at).toLocaleDateString('fa-ir')}
+														{new Date(selectedJobAds.created_at || '').toLocaleDateString('fa-ir')}
 													</span>
 												</div>
 												<div className={`flex items-center mt-4 lg:mt-6`}>
