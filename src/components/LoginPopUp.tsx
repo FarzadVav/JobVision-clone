@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import { createPortal } from 'react-dom'
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -6,9 +5,9 @@ import { z } from 'zod';
 import TextInput from './inputs/TextInput';
 import { CloseRounded, EmailOutlined, VpnKeyOutlined } from '@mui/icons-material';
 import PulseLoader from "react-spinners/PulseLoader";
-import authContext from '../context/AuthContext';
 import supabase from '../utils/supabase';
 import { Toaster, toast } from 'react-hot-toast';
+import useAuth from '../store/useAuth';
 
 type LoginPopUpProps = {
   showLogin: boolean;
@@ -34,7 +33,7 @@ const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
   } = useForm<formTypes>({
     resolver: zodResolver(schema)
   })
-  const auth = useContext(authContext)
+  const { loginHandler } = useAuth(s => s)
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     const { data: companies } = await supabase
@@ -45,7 +44,7 @@ const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
     companies?.forEach(company => {
       if (company.email === data.email) {
         if (company.password === data.password) {
-          auth.loginHandler(company._id)
+          loginHandler(company._id)
           toast.success('با موفقیت وارد حسابتان شدید')
           reset()
         } else {
@@ -66,7 +65,7 @@ const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
         ])
         .select()
       // @ts-ignore
-      auth.loginHandler(company[0]._id)
+      loginHandler(company[0]._id)
       toast.success('با موفقیت ثبت نام شدید')
       reset()
     }

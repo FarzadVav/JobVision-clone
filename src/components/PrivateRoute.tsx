@@ -1,14 +1,14 @@
-import React, { lazy, useContext } from "react"
+import React, { lazy } from "react"
 
 const NotFound = lazy(() => import('./../pages/NotFound'))
-import authContext from "../context/AuthContext"
 import LazyPage from "./LazyPage.tsx"
+import useAuth from "../store/useAuth.ts"
 
 // check existing roules for keep user in route or redirect he
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
-  const auth = useContext(authContext)
+  const { isLogin } = useAuth(s => s)
 
-  return auth.isLogin ? children : <LazyPage><NotFound /></LazyPage>
+  return isLogin ? children : <LazyPage><NotFound /></LazyPage>
 }
 
 export default PrivateRoute

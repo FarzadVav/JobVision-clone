@@ -1,17 +1,17 @@
-import { useContext, useEffect, useRef, AnimationEvent } from "react";
+import { useEffect, useRef, AnimationEvent } from "react";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded, NavigateBeforeRounded, LogoutRounded } from '@mui/icons-material';
 
 import tokenGenerator from "../utils/tokenGenerator.ts";
 import LoginPopUp from "./LoginPopUp.tsx";
-import authContext from "../context/AuthContext.tsx";
 import useHeader from "../store/useHeader.ts";
 import useContent from "../hooks/useContentQuery.ts";
+import useAuth from "../store/useAuth.ts";
 
 const Header = () => {
 	const redirect = useNavigate()
-	const auth = useContext(authContext)
+	const { isLogin, logOutHandler } = useAuth(s => s)
 	const { data: content } = useContent()
 	const {
 		showMegaMenu,
@@ -108,7 +108,7 @@ const Header = () => {
 					</nav>
 					<div className={`h-full flex justify-center items-center`}>
 						{
-							auth.isLogin ? (
+							isLogin ? (
 								<>
 									{
 										location.pathname.includes('/employer') ? (
@@ -116,7 +116,7 @@ const Header = () => {
 												className={`btn btn-out-danger`}
 												onClick={() => {
 													redirect('/')
-													auth.logOutHandler()
+													logOutHandler()
 												}}
 											>
 												<LogoutRounded />
