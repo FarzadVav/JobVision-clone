@@ -127,11 +127,13 @@ const AddJobAd = () => {
       company: getToken()
     }
 
-    mutate(newJobAd)
-
-    setSubmittedForm(false)
-    setForm(defaultFormValues)
-    reset()
+    mutate(newJobAd, {
+      onSuccess: () => {
+        setSubmittedForm(false)
+        setForm(defaultFormValues)
+        reset()
+      }
+    })
   }
 
   return (
@@ -458,13 +460,13 @@ const AddJobAd = () => {
           <div className={`flex items-center`}>
             <label
               className={`cursor-pointer`}
-              htmlFor="remote"
+              htmlFor="isRemote"
             >
               امکان دورکاری
             </label>
             <input
-              id='remote'
-              value='remote'
+              id='isRemote'
+              value='isRemote'
               className={`mr-2`}
               {...register('isRemote')}
               type="checkbox"

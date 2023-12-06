@@ -7,7 +7,7 @@ import { newJobAdTypes } from "../types/JobAds.types"
 function useJobAdsQuery() {
   const { startPageLoadingHandler, endPageLoadingHandler } = useLoading(s => s)
 
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ['jobAds'],
     queryFn: async () => {
       startPageLoadingHandler()
@@ -83,9 +83,7 @@ function useJobAdsQuery() {
         .insert([newJobAd])
         .select()
 
-      console.log(data);
-      console.log(error);
-
+      refetch()
       return data
     },
   })
