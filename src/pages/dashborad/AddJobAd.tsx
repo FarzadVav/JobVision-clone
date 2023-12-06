@@ -4,9 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { AccessTimeRounded, AccountCircleOutlined, ArticleOutlined, HomeWorkOutlined, ImportantDevicesOutlined, LanguageOutlined, LocalAirportRounded, NotesRounded, PaymentsOutlined, PeopleOutlined, PsychologyAltOutlined, SchoolOutlined, StarBorder, TextFieldsRounded, WorkOutlineRounded } from '@mui/icons-material'
 import { PulseLoader } from 'react-spinners'
-import { useMutation } from '@tanstack/react-query'
 
-import CompanyTypes from '../../types/Company.types'
 import ComboBox from '../../components/inputs/ComboBox'
 import MultiSelectBox from '../../components/inputs/MultiSelectBox'
 import Title from '../../components/Title'
@@ -14,7 +12,8 @@ import AutoComplete from '../../components/inputs/AutoComplete'
 import TextInput from '../../components/inputs/TextInput'
 import TextArea from '../../components/inputs/TextArea'
 import useContent from '../../hooks/useContentQuery'
-import supabase from '../../utils/supabase'
+import useJobAdsQuery from '../../hooks/useJobAdsQuery'
+import useAuth from '../../store/useAuth'
 import { newJobAdTypes } from '../../types/JobAds.types'
 
 type customFormTypes = {
@@ -65,7 +64,7 @@ const AddJobAd = () => {
     register,
     handleSubmit,
     setValue,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     reset
   } = useForm<formTypes>({
     resolver: zodResolver(schema),
@@ -77,21 +76,8 @@ const AddJobAd = () => {
     }
   })
   const { data: content } = useContent()
-  const { mutate, isPending } = useMutation({
-    mutationKey: ['jobAds'],
-    mutationFn: async (newJobAd: newJobAdTypes) => {
-      // @ts-ignore
-      const { data, error } = await supabase
-        .from('jobAds')
-        .insert([newJobAd])
-        .select()
-
-      console.log(data);
-      console.log(error);
-
-      return data
-    },
-  })
+  const { mutate, mutatePending } = useJobAdsQuery()
+  const { getToken } = useAuth(s => s)
 
   // TODO: insert to useAddJobAdForm.ts
   const [form, setForm] = useState<customFormTypes>(defaultFormValues)
@@ -120,7 +106,6 @@ const AddJobAd = () => {
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     const newJobAd: newJobAdTypes = {
-      // created_at: new Date(),
       title: data.title,
       description: data.description,
       workTimes: data.workTimes,
@@ -139,18 +124,14 @@ const AddJobAd = () => {
       techs: form.techs,
       age: +data.age_2 > +data.age_1 ? [+data.age_1, +data.age_2] : [+data.age_1],
       salary: +data.salary_2 > +data.salary_1 ? [+data.salary_1, +data.salary_2] : [+data.salary_1],
-      company: {} as CompanyTypes
+      company: getToken()
     }
 
-    console.log('newJobAd', newJobAd);
-    
     mutate(newJobAd)
 
     setSubmittedForm(false)
     setForm(defaultFormValues)
     reset()
-
-    return isPending
   }
 
   return (
@@ -532,17 +513,17 @@ const AddJobAd = () => {
         <button
           className={`btn btn-primary mt-5`}
           type={`submit`}
-          disabled={isSubmitting}
+          disabled={mutatePending}
           onClick={() => {
             setSubmittedForm(true)
           }}
         >
           {
-            isSubmitting ? '' : 'ثبت آگهی جدید'
+            mutatePending ? '' : 'ثبت آگهی جدید'
           }
           <PulseLoader
             color='white'
-            loading={isSubmitting}
+            loading={mutatePending}
             size={6}
           />
         </button>

@@ -1,12 +1,13 @@
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import supabase from "../utils/supabase"
 
 import useLoading from "../store/useLoading"
+import { newJobAdTypes } from "../types/JobAds.types"
 
 function useJobAdsQuery() {
   const { startPageLoadingHandler, endPageLoadingHandler } = useLoading(s => s)
 
-  return useQuery({
+  const { data } = useQuery({
     queryKey: ['jobAds'],
     queryFn: async () => {
       startPageLoadingHandler()
@@ -72,6 +73,24 @@ function useJobAdsQuery() {
       return jobAds
     }
   })
+
+  const { mutate, isPending: mutatePending } = useMutation({
+    mutationKey: ['jobAds'],
+    mutationFn: async (newJobAd: newJobAdTypes) => {
+      // @ts-ignore
+      const { data, error } = await supabase
+        .from('jobAds')
+        .insert([newJobAd])
+        .select()
+
+      console.log(data);
+      console.log(error);
+
+      return data
+    },
+  })
+
+  return { data, mutate, mutatePending }
 }
 
 export default useJobAdsQuery

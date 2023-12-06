@@ -25,10 +25,11 @@ type JobAdsTypes = {
   company: CompanyTypes;
 }
 
-export interface newJobAdTypes extends Omit<JobAdsTypes, 'cooperationType' | 'category' | 'tags'> {
+export interface newJobAdTypes extends Omit<JobAdsTypes, 'cooperationType' | 'category' | 'tags' | 'company'> {
   cooperationType: string;
   category: string;
-  tags: string[]
+  tags: string[];
+  company: string
 }
 
 export default JobAdsTypes

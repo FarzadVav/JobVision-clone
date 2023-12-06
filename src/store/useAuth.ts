@@ -11,7 +11,7 @@ type useAuthTypes = {
   isLogin: boolean;
   loginHandler: (token: string) => void;
   logOutHandler: () => void;
-  getToken: () => void;
+  getToken: () => string;
 }
 
 const useAuth = create<useAuthTypes>(set => ({
@@ -28,7 +28,7 @@ const useAuth = create<useAuthTypes>(set => ({
     set({ isLogin: false })
   },
   getToken: () => {
-    return document.cookie.split(';').find(c => c.trim().startsWith(`${cookieName}=`))?.split('=')[1]
+    return document.cookie.split(';').find(c => c.trim().startsWith(`${cookieName}=`))?.split('=')[1] || ''
   }
 }))
 
