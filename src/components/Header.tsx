@@ -5,9 +5,9 @@ import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded, Nav
 
 import tokenGenerator from "../utils/tokenGenerator.ts";
 import LoginPopUp from "./LoginPopUp.tsx";
-import useHeader from "../store/useHeader.ts";
+import useHeader from "../hooks/store/useHeader.ts";
 import useContent from "../hooks/query/useContent.ts";
-import useAuth from "../store/useAuth.ts";
+import useAuth from "../hooks/store/useAuth.ts";
 
 const Header = () => {
 	const redirect = useNavigate()

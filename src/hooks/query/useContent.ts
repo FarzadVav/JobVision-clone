@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { useQuery } from "@tanstack/react-query"
 import supabase from "../../utils/supabase"
 
-import useLoading from "../../store/useLoading"
+import useLoading from "../store/useLoading"
 import tokenGenerator from "../../utils/tokenGenerator"
 import CooperationTypes from "../../types/CooperationTypes.type"
 import JobAdsMenuTypes from "../../types/JobAdsMenu.types"

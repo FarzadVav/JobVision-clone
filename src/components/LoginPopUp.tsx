@@ -6,8 +6,8 @@ import TextInput from './inputs/TextInput';
 import { CloseRounded, EmailOutlined, VpnKeyOutlined } from '@mui/icons-material';
 import PulseLoader from "react-spinners/PulseLoader";
 import { Toaster, toast } from 'react-hot-toast';
-import useAuth from '../store/useAuth';
-import useHeader from '../store/useHeader';
+import useAuth from '../hooks/store/useAuth';
+import useHeader from '../hooks/store/useHeader';
 import { useNavigate } from 'react-router-dom';
 import useCompany from '../hooks/query/useCompany';
 

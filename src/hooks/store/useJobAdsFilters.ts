@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import CooperationTypes from '../types/CooperationTypes.type';
+import CooperationTypes from '../../types/CooperationTypes.type';
 
 export type useJobAdsFiltersTypes = {
   q_id: string | null;

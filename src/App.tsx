@@ -4,8 +4,8 @@ import { useRoutes } from "react-router-dom";
 import routes from "./routes.tsx";
 import Header from "./components/Header.tsx";
 import Footer from "./components/Footer.tsx";
-import useLoading from "./store/useLoading.ts";
-import useAuth from "./store/useAuth.ts";
+import useLoading from "./hooks/store/useLoading.ts";
+import useAuth from "./hooks/store/useAuth.ts";
 import useCompany from "./hooks/query/useCompany.ts";
 
 const App = () => {

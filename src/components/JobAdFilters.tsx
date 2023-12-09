@@ -4,8 +4,8 @@ import { createPortal } from 'react-dom';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import JobAdsTypes from '../types/JobAds.types';
-import useJobAds from '../store/useJobAds';
-import useJobAdsFilters, { useJobAdsFiltersTypes } from '../store/useJobAdsFilters';
+import useJobAds from '../hooks/store/useJobAds';
+import useJobAdsFilters, { useJobAdsFiltersTypes } from '../hooks/store/useJobAdsFilters';
 import useJobAdsQuery from '../hooks/query/useJobAds';
 
 // simple filter button

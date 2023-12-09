@@ -10,7 +10,7 @@ import tokenGenerator from "../utils/tokenGenerator";
 import JobAdsBox from "../components/JobAdsBox";
 import Tabs from '../components/Tabs'
 import PopularCompanies from '../components/PopularCompanies';
-import useJobAds from '../store/useJobAds';
+import useJobAds from '../hooks/store/useJobAds';
 import useJobAdsQuery from '../hooks/query/useJobAds';
 
 const Jobs = () => {

@@ -2,7 +2,7 @@ import React, { lazy } from "react"
 
 const NotFound = lazy(() => import('./../pages/NotFound'))
 import LazyPage from "./LazyPage.tsx"
-import useAuth from "../store/useAuth.ts"
+import useAuth from "../hooks/store/useAuth.ts"
 
 // check existing roules for keep user in route or redirect he
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {

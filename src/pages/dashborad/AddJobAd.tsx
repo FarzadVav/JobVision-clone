@@ -13,7 +13,7 @@ import TextInput from '../../components/inputs/TextInput'
 import TextArea from '../../components/inputs/TextArea'
 import useContent from '../../hooks/query/useContent'
 import useJobAdsQuery from '../../hooks/query/useJobAds'
-import useAuth from '../../store/useAuth'
+import useAuth from '../../hooks/store/useAuth'
 import { newJobAdTypes } from '../../types/JobAds.types'
 
 type customFormTypes = {
