@@ -42,9 +42,9 @@ const schema = z.object({
   category: z.string().nonempty(),
   title: z.string().nonempty().min(3).max(256),
   city: z.string().nonempty(),
-  isRemote: z.string(),
-  isUrgent: z.string(),
-  salary_1: z.string().regex(/^[0-9]+$/),
+  isRemote: z.any(),
+  isUrgent: z.any(),
+  salary_1: z.string().nonempty().regex(/^[0-9]+$/),
   salary_2: z.string().regex(/^[0-9]+$/),
   workTimes: z.string().nonempty().min(3).max(256),
   cooperationType: z.string().nonempty(),
@@ -53,7 +53,7 @@ const schema = z.object({
   age_1: z.string().nonempty().regex(/^[0-9]+$/),
   age_2: z.string().nonempty().regex(/^[0-9]+$/),
   gender: gendersTypes,
-  endOfMilitaryService: z.string(),
+  endOfMilitaryService: z.any(),
   // for sinc react-hook-form whith custom form
   customFormFields: z.string().nonempty()
 })
@@ -70,7 +70,7 @@ const AddJobAd = () => {
   } = useForm<formTypes>({
     resolver: zodResolver(schema),
     defaultValues: {
-      salary_2: '0',
+      salary_2: '',
       isRemote: '',
       isUrgent: '',
       endOfMilitaryService: '',
@@ -79,8 +79,6 @@ const AddJobAd = () => {
   const { data: content } = useContent()
   const { mutate, mutatePending } = useJobAdsQuery()
   const { getToken, company } = useAuth(s => s)
-
-  console.log(company);
 
   // TODO: insert to useAddJobAdForm.ts
   const [form, setForm] = useState<customFormTypes>(defaultFormValues)
@@ -135,7 +133,7 @@ const AddJobAd = () => {
         education: form.education,
         languages: form.languages,
         techs: form.techs,
-        age: +data.age_2 > +data.age_1 ? [+data.age_1, +data.age_2] : [+data.age_1],
+        age: +data.age_2 > +data.age_1 ? [+data.age_1, +data.age_2] : [+data.age_1, +data.age_1 + 1],
         salary: +data.salary_2 > +data.salary_1 ? [+data.salary_1, +data.salary_2] : [+data.salary_1],
         company: getToken()
       }

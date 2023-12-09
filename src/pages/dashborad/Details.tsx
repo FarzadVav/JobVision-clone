@@ -9,16 +9,20 @@ import Title from "../../components/Title"
 import TextArea from "../../components/inputs/TextArea"
 import TextInput from "../../components/inputs/TextInput"
 import AutoComplete from "../../components/inputs/AutoComplete"
+import { companyDetailsTypes } from "../../types/Company.types"
+import useCompany from "../../hooks/query/useCompany"
+import toast from "react-hot-toast"
 
 const schema = z.object({
-  about: z.string().nonempty().min(16).max(9999),
+  name: z.string().nonempty(),
+  aboutCompany: z.string().nonempty().min(16),
   year: z.string().nonempty().regex(/^[0-9]+$/).min(4).max(4),
-  employees1: z.string().nonempty().regex(/^[0-9]+$/),
-  employees2: z.string().nonempty().regex(/^[0-9]+$/),
+  employees_1: z.string().nonempty().regex(/^[0-9]+$/),
+  employees_2: z.string().nonempty().regex(/^[0-9]+$/),
   activity: z.string().nonempty(),
   province: z.string().nonempty(),
   city: z.string().nonempty(),
-  knowledgeBased: z.string()
+  knowledgeBased: z.any()
 })
 
 type formTypes = z.infer<typeof schema>
@@ -27,20 +31,38 @@ const Details = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     setValue,
     reset
   } = useForm<formTypes>({
-    resolver: zodResolver(schema)
+    resolver: zodResolver(schema),
+    defaultValues: {
+      knowledgeBased: ''
+    }
   })
+  const { updateMutate, updateMutateLoading } = useCompany()
   const { data: content } = useContent()
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
-    await new Promise((resolve) => setTimeout(() => {
-      console.log(data);
-      reset()
-      return resolve
-    }, 1500));
+    const companyDetials: companyDetailsTypes = {
+      logo: 'logo.png',
+      name: data.name,
+      aboutCompany: data.aboutCompany,
+      activity: data.activity,
+      year: +data.year,
+      score: 5,
+      knowledgeBased: !!data.knowledgeBased.length,
+      employees: +data.employees_2 > +data.employees_1 ? [+data.employees_1, +data.employees_2] : [+data.employees_1, +data.employees_1 + 1],
+      province: data.province,
+      city: data.city
+    }
+
+    updateMutate(companyDetials, {
+      onSuccess: () => {
+        toast.success('اطلاعات شرکت با موفقیت ویرایش شد')
+        reset()
+      }
+    })
   }
 
   return (
@@ -48,17 +70,34 @@ const Details = () => {
       className={`w-full flex flex-col`}
       onSubmit={handleSubmit(onSubmit)}
     >
-      {/* about company */}
+      {/* name */}
       <Title withOutIcon customClass={`mb-2.5`}>
+        <label className={`!text-xl`}>
+          نام شرکت
+        </label>
+      </Title>
+      <TextInput
+        customClass={`bg-jv-bright`}
+        register={{ ...register('name') }}
+        placeholder={`برای مثال 1390`}
+        error={!!errors.name}
+        numeric
+      >
+        <CalendarMonthRounded />
+      </TextInput>
+      {/* name */}
+
+      {/* about company */}
+      <Title withOutIcon customClass={`mb-2.5 mt-5`}>
         <label className={`!text-xl`}>
           درباره شرکت
         </label>
       </Title>
       <TextArea
         customClass={`bg-jv-bright`}
-        register={{ ...register('about') }}
+        register={{ ...register('aboutCompany') }}
         placeholder={`درباره شرکت`}
-        error={!!errors.about}
+        error={!!errors.aboutCompany}
       >
         <HelpOutlineRounded />
       </TextArea>
@@ -81,33 +120,35 @@ const Details = () => {
       </TextInput>
       {/* year */}
 
-      {/* employees */}
+      {/* city */}
       <Title withOutIcon customClass={`mb-2.5 mt-5`}>
         <label className={`!text-xl`}>
-          تعداد کارکنان
+          مکان شرکت
         </label>
       </Title>
       <div className={`w-full flex flex-col items-center justify-center sm:flex-row`}>
-        <TextInput
+        <AutoComplete
           customClass={`bg-jv-bright`}
-          register={{ ...register('employees1') }}
-          placeholder={`از این تعداد`}
-          error={!!errors.employees1}
-          numeric
+          register={{ ...register('province') }}
+          setValue={setValue}
+          placeholder={`استان`}
+          datas={content?.provinces.map(province => province.name) || []}
+          error={!!errors.province}
         >
-          <PeopleOutlineRounded />
-        </TextInput>
-        <TextInput
+          <LocationOnOutlined />
+        </AutoComplete>
+        <AutoComplete
           customClass={`bg-jv-bright mt-3 sm:mr-3 sm:mt-0`}
-          register={{ ...register('employees2') }}
-          placeholder={`تا این تعداد`}
-          error={!!errors.employees2}
-          numeric
+          register={{ ...register('city') }}
+          setValue={setValue}
+          placeholder={`شهر`}
+          datas={content?.cities.map(city => city.name) || []}
+          error={!!errors.city}
         >
-          <PeopleOutlineRounded />
-        </TextInput>
+          <LocationOnOutlined />
+        </AutoComplete>
       </div>
-      {/* employees */}
+      {/* city */}
 
       {/* activity */}
       <Title withOutIcon customClass={`mb-2.5 mt-5`}>
@@ -125,33 +166,33 @@ const Details = () => {
       </TextArea>
       {/* activity */}
 
-      {/* city */}
+      {/* employees */}
       <Title withOutIcon customClass={`mb-2.5 mt-5`}>
         <label className={`!text-xl`}>
-          مکان شرکت
+          تعداد کارکنان
         </label>
       </Title>
       <div className={`w-full flex flex-col items-center justify-center sm:flex-row`}>
-        <AutoComplete
+        <TextInput
           customClass={`bg-jv-bright`}
-          register={{ ...register('province') }}
-          setValue={setValue}
-          placeholder={`استان`}
-          datas={content?.provinces.map(province => province.name) || []}
+          register={{ ...register('employees_1') }}
+          placeholder={`از این تعداد`}
+          error={!!errors.employees_1}
+          numeric
         >
-          <LocationOnOutlined />
-        </AutoComplete>
-        <AutoComplete
+          <PeopleOutlineRounded />
+        </TextInput>
+        <TextInput
           customClass={`bg-jv-bright mt-3 sm:mr-3 sm:mt-0`}
-          register={{ ...register('city') }}
-          setValue={setValue}
-          placeholder={`شهر`}
-          datas={content?.cities.map(city => city.name) || []}
+          register={{ ...register('employees_2') }}
+          placeholder={`تا این تعداد`}
+          error={!!errors.employees_2}
+          numeric
         >
-          <LocationOnOutlined />
-        </AutoComplete>
+          <PeopleOutlineRounded />
+        </TextInput>
       </div>
-      {/* city */}
+      {/* employees */}
 
       {/* knowledgeBased */}
       <div className={`flex items-center mt-5`}>
@@ -174,14 +215,14 @@ const Details = () => {
       <button
         className={`btn btn-primary mt-5`}
         type={`submit`}
-        disabled={isSubmitting}
+        disabled={updateMutateLoading}
       >
         {
-          isSubmitting ? '' : 'ثبت اطلاعات'
+          updateMutateLoading ? '' : 'ثبت اطلاعات'
         }
         <PulseLoader
           color='white'
-          loading={isSubmitting}
+          loading={updateMutateLoading}
           size={6}
         />
       </button>
