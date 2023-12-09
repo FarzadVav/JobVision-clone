@@ -1,14 +1,15 @@
 import { createPortal } from 'react-dom'
+import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod';
-import TextInput from './inputs/TextInput';
 import { CloseRounded, EmailOutlined, VpnKeyOutlined } from '@mui/icons-material';
 import PulseLoader from "react-spinners/PulseLoader";
 import { Toaster, toast } from 'react-hot-toast';
+import { z } from 'zod';
+
+import TextInput from './inputs/TextInput';
 import useAuth from '../hooks/store/useAuth';
 import useHeader from '../hooks/store/useHeader';
-import { useNavigate } from 'react-router-dom';
 import useCompany from '../hooks/query/useCompany';
 
 const schema = z.object({
@@ -22,14 +23,14 @@ const LoginPopUp = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     reset
   } = useForm<formTypes>({
     resolver: zodResolver(schema)
   })
   const redirect = useNavigate()
   const { loginHandler } = useAuth(s => s)
-  const { data: companies, mutate } = useCompany()
+  const { data: companies, mutate, mutateLoading } = useCompany()
   const { setShowLogin } = useHeader(s => s)
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
@@ -40,8 +41,10 @@ const LoginPopUp = () => {
           loginHandler(company._id)
           toast.success('با موفقیت وارد حسابتان شدید')
           reset()
-          setShowLogin(false)
-          redirect('/employer')
+          setTimeout(() => {
+            setShowLogin(false)
+            redirect('/employer')
+          }, 1750);
         } else {
           toast.error('رمز عبور اشتباه است')
         }
@@ -52,12 +55,12 @@ const LoginPopUp = () => {
     if (!hasUser) {
       mutate(data, {
         onSuccess: () => {
-          // @ts-ignore
-          loginHandler(company[0]._id)
           toast.success('با موفقیت ثبت نام شدید')
           reset()
-          setShowLogin(false)
-          redirect('/employer')
+          setTimeout(() => {
+            setShowLogin(false)
+            redirect('/employer')
+          }, 1750);
         }
       })
     }
@@ -105,14 +108,14 @@ const LoginPopUp = () => {
           <button
             className={`btn btn-primary w-full mt-3`}
             type={`submit`}
-            disabled={isSubmitting}
+            disabled={mutateLoading}
           >
             {
-              isSubmitting ? '' : 'ورود'
+              mutateLoading ? '' : 'ورود'
             }
             <PulseLoader
               color='white'
-              loading={isSubmitting}
+              loading={mutateLoading}
               size={6}
             />
           </button>
