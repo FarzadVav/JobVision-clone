@@ -4,20 +4,20 @@ import supabase from '../../utils/supabase'
 
 const useCompany = () => {
   const { data } = useQuery({
-    queryKey: ['company'],
+    queryKey: ['companies'],
     queryFn: async () => {
-      const { data: companies } = await supabase
+      const { data } = await supabase
         .from('companies')
         .select('*')
 
-      return companies
+      return data
     }
   })
 
   const { mutate } = useMutation({
     mutationKey: ['company'],
     mutationFn: async (detail: { email: string; password: string }) => {
-      const { data: company } = await supabase
+      const { data } = await supabase
         .from('companies')
         .insert([
           {
@@ -27,7 +27,7 @@ const useCompany = () => {
         ])
         .select()
 
-      return company
+      return data
     }
   })
 
