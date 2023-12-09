@@ -39,6 +39,7 @@ const LoginPopUp = () => {
       if (company.email === data.email) {
         if (company.password === data.password) {
           loginHandler(company._id)
+          useAuth.setState({ company })
           toast.success('با موفقیت وارد حسابتان شدید')
           reset()
           setTimeout(() => {
