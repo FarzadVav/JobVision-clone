@@ -30,7 +30,7 @@ const LoginPopUp = () => {
   const redirect = useNavigate()
   const { loginHandler } = useAuth(s => s)
   const { data: companies, mutate } = useCompany()
-  const { showLogin, setShowLogin } = useHeader(s => s)
+  const { setShowLogin } = useHeader(s => s)
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     let hasUser = false
@@ -66,7 +66,7 @@ const LoginPopUp = () => {
   return createPortal(
     <>
       <div
-        className={`backdrop-blur-2xl w-full h-screen fixed top-0 right-0 z-50 ${showLogin ? '' : 'opacity-0 invisible'} flex justify-center items-center`}
+        className={`backdrop-blur-2xl w-full h-screen fixed top-0 right-0 z-50 flex justify-center items-center`}
         onClick={() => setShowLogin(false)}
       >
         <form

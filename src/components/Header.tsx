@@ -18,6 +18,7 @@ const Header = () => {
 		showMobileMenu,
 		showMobileMenuJobs,
 		showJobInMobileMenu,
+		showLogin,
 		setShowMegaMenu,
 		setShowMobileMenu,
 		setShowMobileMenuJobs,
@@ -473,7 +474,7 @@ const Header = () => {
 				)
 			}
 
-			<LoginPopUp />
+			{showLogin && <LoginPopUp />}
 		</>
 	);
 };

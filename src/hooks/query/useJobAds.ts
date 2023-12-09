@@ -1,16 +1,20 @@
+import { useRef } from "react"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import supabase from "../../utils/supabase"
 
 import useLoading from "../../store/useLoading"
+import tokenGenerator from "../../utils/tokenGenerator"
 import { newJobAdTypes } from "../../types/JobAds.types"
 
-function useJobAdsQuery() {
-  const { startPageLoadingHandler, endPageLoadingHandler } = useLoading(s => s)
+function useJobAds() {
+  const { addLoadingKey, removeLoadingKey } = useLoading(s => s)
+  const key = useRef<string>(tokenGenerator())
+
 
   const { data, refetch } = useQuery({
     queryKey: ['jobAds'],
     queryFn: async () => {
-      startPageLoadingHandler()
+      addLoadingKey(key.current)
 
       const { data: jobAds } = await supabase
         .from('jobAds')
@@ -69,7 +73,7 @@ function useJobAdsQuery() {
         jobAd.tags = jobAd.tags.map((tag: string) => tags?.find(tag2 => tag === tag2._id))
       })
 
-      endPageLoadingHandler()
+      removeLoadingKey(key.current)
       return jobAds
     }
   })
@@ -91,4 +95,4 @@ function useJobAdsQuery() {
   return { data, mutate, mutatePending }
 }
 
-export default useJobAdsQuery
+export default useJobAds

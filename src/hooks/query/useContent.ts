@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { useQuery } from "@tanstack/react-query"
 import supabase from "../../utils/supabase"
 
@@ -16,15 +17,16 @@ type ContentTypes = {
 }
 
 function useContent() {
-  const { startPageLoadingHandler, endPageLoadingHandler } = useLoading(s => s)
+  const { addLoadingKey, removeLoadingKey } = useLoading(s => s)
+  const key = useRef<string>(tokenGenerator())
 
   return useQuery({
     queryKey: ['content'],
     queryFn: async () => {
-      startPageLoadingHandler()
+      addLoadingKey(key.current)
 
       let content: ContentTypes = {} as ContentTypes
-      
+
       const { data: categories } = await supabase
         .from('categories')
         .select('*')
@@ -85,7 +87,7 @@ function useContent() {
         ]
       }
 
-      endPageLoadingHandler()
+      removeLoadingKey(key.current)
       return content
     },
   })
