@@ -8,11 +8,8 @@ import PulseLoader from "react-spinners/PulseLoader";
 import supabase from '../utils/supabase';
 import { Toaster, toast } from 'react-hot-toast';
 import useAuth from '../store/useAuth';
-
-type LoginPopUpProps = {
-  showLogin: boolean;
-  setShowLogin: Function
-}
+import useHeader from '../store/useHeader';
+import { useNavigate } from 'react-router-dom';
 
 const schema = z.object({
   email: z.string().nonempty().email(),
@@ -24,7 +21,7 @@ type formTypes = {
   password: string;
 }
 
-const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
+const LoginPopUp = () => {
   const {
     register,
     handleSubmit,
@@ -33,7 +30,9 @@ const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
   } = useForm<formTypes>({
     resolver: zodResolver(schema)
   })
+	const redirect = useNavigate()
   const { loginHandler } = useAuth(s => s)
+  const { showLogin, setShowLogin } = useHeader(s => s)
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     const { data: companies } = await supabase
@@ -47,6 +46,8 @@ const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
           loginHandler(company._id)
           toast.success('با موفقیت وارد حسابتان شدید')
           reset()
+          setShowLogin(false)
+          redirect('/employer')
         } else {
           toast.error('رمز عبور اشتباه است')
         }
@@ -68,6 +69,8 @@ const LoginPopUp = ({ showLogin, setShowLogin }: LoginPopUpProps) => {
       loginHandler(company[0]._id)
       toast.success('با موفقیت ثبت نام شدید')
       reset()
+      setShowLogin(false)
+      redirect('/employer')
     }
   }
 
