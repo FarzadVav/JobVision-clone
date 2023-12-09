@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { PulseLoader } from "react-spinners"
 import { ManageSearchRounded, CalendarMonthRounded, HelpOutlineRounded, PeopleOutlineRounded, LocationOnOutlined } from "@mui/icons-material"
 
-import useContent from "../../hooks/useContentQuery"
+import useContent from "../../hooks/query/useContent"
 import Title from "../../components/Title"
 import TextArea from "../../components/inputs/TextArea"
 import TextInput from "../../components/inputs/TextInput"

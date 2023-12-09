@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
-import supabase from "../utils/supabase"
+import supabase from "../../utils/supabase"
 
-import useLoading from "../store/useLoading"
-import tokenGenerator from "../utils/tokenGenerator"
-import CooperationTypes from "../types/CooperationTypes.type"
-import JobAdsMenuTypes from "../types/JobAdsMenu.types"
+import useLoading from "../../store/useLoading"
+import tokenGenerator from "../../utils/tokenGenerator"
+import CooperationTypes from "../../types/CooperationTypes.type"
+import JobAdsMenuTypes from "../../types/JobAdsMenu.types"
 
 type ContentTypes = {
   categories: { _id: string; name: string }[];

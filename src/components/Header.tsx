@@ -6,7 +6,7 @@ import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded, Nav
 import tokenGenerator from "../utils/tokenGenerator.ts";
 import LoginPopUp from "./LoginPopUp.tsx";
 import useHeader from "../store/useHeader.ts";
-import useContent from "../hooks/useContentQuery.ts";
+import useContent from "../hooks/query/useContent.ts";
 import useAuth from "../store/useAuth.ts";
 
 const Header = () => {

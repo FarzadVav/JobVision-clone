@@ -11,7 +11,7 @@ import JobAdsBox from "../components/JobAdsBox";
 import Tabs from '../components/Tabs'
 import PopularCompanies from '../components/PopularCompanies';
 import useJobAds from '../store/useJobAds';
-import useJobAdsQuery from '../hooks/useJobAdsQuery';
+import useJobAdsQuery from '../hooks/query/useJobAds';
 
 const Jobs = () => {
 	const { data: jobAds } = useJobAdsQuery()

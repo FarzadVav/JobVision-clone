@@ -1,5 +1,5 @@
 import { KeyboardArrowLeftRounded } from "@mui/icons-material"
-import AccordionWithToggle from "../hoc/AccordionWithToggle"
+import AccordionWithToggle from "../hocs/AccordionWithToggle"
 import AccordionTypes from "../types/Accordion.types"
 import Title from "./Title"
 

@@ -11,7 +11,7 @@ import CtaBox from "../components/CtaBox";
 import Accordion from "../components/Accordion";
 import useOneScroll from "../hooks/useOnScrool";
 import PopularCompanies from "../components/PopularCompanies";
-import useJobAdsQuery from "../hooks/useJobAdsQuery";
+import useJobAdsQuery from "../hooks/query/useJobAds";
 
 // accordions
 const accordions: { title: string; text: string }[] = [

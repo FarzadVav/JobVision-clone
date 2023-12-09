@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
-import supabase from "../utils/supabase"
+import supabase from "../../utils/supabase"
 
-import useLoading from "../store/useLoading"
-import { newJobAdTypes } from "../types/JobAds.types"
+import useLoading from "../../store/useLoading"
+import { newJobAdTypes } from "../../types/JobAds.types"
 
 function useJobAdsQuery() {
   const { startPageLoadingHandler, endPageLoadingHandler } = useLoading(s => s)
