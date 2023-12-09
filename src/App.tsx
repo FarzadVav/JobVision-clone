@@ -7,6 +7,7 @@ import Footer from "./components/Footer.tsx";
 import useLoading from "./hooks/store/useLoading.ts";
 import useAuth from "./hooks/store/useAuth.ts";
 import useCompany from "./hooks/query/useCompany.ts";
+import CompanyTypes from "./types/Company.types.ts";
 
 const App = () => {
 	const router = useRoutes(routes)
@@ -17,14 +18,17 @@ const App = () => {
 	useEffect(() => {
 		if (data?.length) {
 			let validation = false
-
+			let currentCompany = {} as CompanyTypes
 			const myToken = getToken()
+
 			data.forEach(company => {
 				if (company._id === myToken) {
 					validation = true
+					currentCompany = company
 				}
 			})
 
+			useAuth.setState({ company: currentCompany })
 			!validation && logOutHandler()
 		}
 	}, [data])

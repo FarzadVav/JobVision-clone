@@ -35,6 +35,9 @@ const useCompany = () => {
         .insert([newCompany])
         .select()
 
+
+      // @ts-ignore
+      useAuth.setState({ company: data[0] })
       // @ts-ignore
       loginHandler(data[0]._id)
       refetch()
