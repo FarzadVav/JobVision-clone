@@ -5,21 +5,18 @@ import { z } from 'zod';
 import TextInput from './inputs/TextInput';
 import { CloseRounded, EmailOutlined, VpnKeyOutlined } from '@mui/icons-material';
 import PulseLoader from "react-spinners/PulseLoader";
-import supabase from '../utils/supabase';
 import { Toaster, toast } from 'react-hot-toast';
 import useAuth from '../store/useAuth';
 import useHeader from '../store/useHeader';
 import { useNavigate } from 'react-router-dom';
+import useCompany from '../hooks/query/useCompany';
 
 const schema = z.object({
   email: z.string().nonempty().email(),
   password: z.string().nonempty().min(4).max(128)
 })
 
-type formTypes = {
-  email: string;
-  password: string;
-}
+type formTypes = z.infer<typeof schema>
 
 const LoginPopUp = () => {
   const {
@@ -30,15 +27,12 @@ const LoginPopUp = () => {
   } = useForm<formTypes>({
     resolver: zodResolver(schema)
   })
-	const redirect = useNavigate()
+  const redirect = useNavigate()
   const { loginHandler } = useAuth(s => s)
+  const { data: companies, mutate } = useCompany()
   const { showLogin, setShowLogin } = useHeader(s => s)
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
-    const { data: companies } = await supabase
-      .from('companies')
-      .select('*')
-
     let hasUser = false
     companies?.forEach(company => {
       if (company.email === data.email) {
@@ -56,21 +50,16 @@ const LoginPopUp = () => {
     })
 
     if (!hasUser) {
-      const { data: company } = await supabase
-        .from('companies')
-        .insert([
-          {
-            email: data.email,
-            password: data.password
-          }
-        ])
-        .select()
-      // @ts-ignore
-      loginHandler(company[0]._id)
-      toast.success('با موفقیت ثبت نام شدید')
-      reset()
-      setShowLogin(false)
-      redirect('/employer')
+      mutate(data, {
+        onSuccess: () => {
+          // @ts-ignore
+          loginHandler(company[0]._id)
+          toast.success('با موفقیت ثبت نام شدید')
+          reset()
+          setShowLogin(false)
+          redirect('/employer')
+        }
+      })
     }
   }
 

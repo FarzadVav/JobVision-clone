@@ -5,23 +5,21 @@ import routes from "./routes.tsx";
 import Header from "./components/Header.tsx";
 import Footer from "./components/Footer.tsx";
 import useLoading from "./store/useLoading.ts";
-import supabase from "./utils/supabase.ts";
 import useAuth from "./store/useAuth.ts";
+import useCompany from "./hooks/query/useCompany.ts";
 
 const App = () => {
 	const router = useRoutes(routes)
+	const { data } = useCompany()
 	const { appLoading, pageLoading } = useLoading(s => s)
 	const { getToken, logOutHandler } = useAuth(s => s)
 
 	useEffect(() => {
-		const func = async () => {
-			const { data: companies } = await supabase
-				.from('companies')
-				.select('*')
-
+		if (data?.length) {
 			let validation = false
+
 			const myToken = getToken()
-			companies?.forEach(company => {
+			data.forEach(company => {
 				if (company._id === myToken) {
 					validation = true
 				}
@@ -29,8 +27,7 @@ const App = () => {
 
 			!validation && logOutHandler()
 		}
-		func()
-	}, [])
+	}, [data])
 
 	return (
 		<>
