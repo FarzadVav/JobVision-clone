@@ -16,12 +16,12 @@ const App = () => {
 	const { getToken, logOutHandler } = useAuth(s => s)
 
 	useEffect(() => {
-		if (data?.length) {
+		if (data?.companies?.length) {
 			let validation = false
 			let currentCompany = {} as CompanyTypes
 			const myToken = getToken()
 
-			data.forEach(company => {
+			data.companies.forEach(company => {
 				if (company._id === myToken) {
 					validation = true
 					currentCompany = company

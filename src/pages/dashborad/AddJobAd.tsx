@@ -14,8 +14,8 @@ import TextInput from '../../components/inputs/TextInput'
 import TextArea from '../../components/inputs/TextArea'
 import useContent from '../../hooks/query/useContent'
 import useJobAdsQuery from '../../hooks/query/useJobAds'
-import useAuth from '../../hooks/store/useAuth'
 import { newJobAdTypes } from '../../types/JobAds.types'
+import useCompany from '../../hooks/query/useCompany'
 
 type customFormTypes = {
   tags: string[];
@@ -76,8 +76,8 @@ const AddJobAd = () => {
     }
   })
   const { data: content } = useContent()
+  const { data: company } = useCompany()
   const { mutate, mutatePending } = useJobAdsQuery()
-  const { getToken, company } = useAuth(s => s)
 
   // TODO: insert to useAddJobAdForm.ts
   const [form, setForm] = useState<customFormTypes>(defaultFormValues)
@@ -105,14 +105,14 @@ const AddJobAd = () => {
   }, [form])
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
-    if (!company.name
-      || !company.activity
-      || !company.city
-      || company.employees.length < 2
-      || !company.logo
-      || !company.name
-      || !company.province
-      || !company.year) {
+    if (!company?.company.name
+      || !company?.company.activity
+      || !company?.company.city
+      || company?.company.employees.length < 2
+      || !company?.company.logo
+      || !company?.company.name
+      || !company?.company.province
+      || !company?.company.year) {
       toast.error('لطفا ابتدا اطلاعات شرکت را کامل کنید')
     } else {
       const newJobAd: newJobAdTypes = {
@@ -134,7 +134,7 @@ const AddJobAd = () => {
         techs: form.techs,
         age: +data.age_2 > +data.age_1 ? [+data.age_1, +data.age_2] : [+data.age_1, +data.age_1 + 1],
         salary: +data.salary_2 > +data.salary_1 ? [+data.salary_1, +data.salary_2] : [+data.salary_1],
-        company: getToken()
+        company: company.company._id || ''
       }
 
       mutate(newJobAd, {

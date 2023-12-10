@@ -30,15 +30,15 @@ const LoginPopUp = () => {
   })
   const redirect = useNavigate()
   const { loginHandler } = useAuth(s => s)
-  const { data: companies, mutate, mutateLoading } = useCompany()
+  const { data: company, mutate, mutateLoading } = useCompany()
   const { setShowLogin } = useHeader(s => s)
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     let hasUser = false
-    companies?.forEach(company => {
+    company?.companies?.forEach(company => {
       if (company.email === data.email) {
         if (company.password === data.password) {
-          loginHandler(company._id)
+          loginHandler(company._id || '')
           useAuth.setState({ company })
           toast.success('با موفقیت وارد حسابتان شدید')
           reset()

@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import CompanyTypes from '../../types/Company.types'
 
 const cookieName = 'jv_token'
 
@@ -10,7 +9,6 @@ const removeCookieHandler = () => {
 
 type useAuthTypes = {
   isLogin: boolean;
-  company: CompanyTypes;
   loginHandler: (token: string) => void;
   logOutHandler: () => void;
   getToken: () => string;
@@ -18,7 +16,6 @@ type useAuthTypes = {
 
 const useAuth = create<useAuthTypes>(set => ({
   isLogin: true,
-  company: {} as CompanyTypes,
   loginHandler: (token: string) => {
     removeCookieHandler()
     const expiryDate = new Date()

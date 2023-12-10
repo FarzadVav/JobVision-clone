@@ -18,6 +18,7 @@ type ContentTypes = {
 
 function useContent() {
   const { addLoadingKey, removeLoadingKey } = useLoading(s => s)
+
   const key = useRef<string>(tokenGenerator())
 
   return useQuery({
