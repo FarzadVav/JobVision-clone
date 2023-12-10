@@ -14,7 +14,7 @@ import useJobAds from '../hooks/store/useJobAds';
 import useJobAdsQuery from '../hooks/query/useJobAds';
 
 const Jobs = () => {
-	const { data: jobAds } = useJobAdsQuery()
+	const { jobAds } = useJobAdsQuery()
 	const {
 		filteredJobAds, selectedJobAds, hasFilter, setSelectedJobAds
 	} = useJobAds(s => s)
@@ -319,7 +319,7 @@ const Jobs = () => {
 				)
 			},
 			{
-				id: singleJobAd.company._id,
+				id: singleJobAd.company._id || '',
 				title: 'درباره شرکت',
 				content: (
 					<div className={`w-full flex flex-col`}>

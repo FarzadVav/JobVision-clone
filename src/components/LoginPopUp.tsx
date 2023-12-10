@@ -30,7 +30,7 @@ const LoginPopUp = () => {
   })
   const redirect = useNavigate()
   const { loginHandler } = useAuth(s => s)
-  const { data: company, mutate, mutateLoading } = useCompany()
+  const { company, refetchCompany, addCompany, addCompanyLoading } = useCompany()
   const { setShowLogin } = useHeader(s => s)
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
@@ -39,7 +39,7 @@ const LoginPopUp = () => {
       if (company.email === data.email) {
         if (company.password === data.password) {
           loginHandler(company._id || '')
-          useAuth.setState({ company })
+          refetchCompany()
           toast.success('با موفقیت وارد حسابتان شدید')
           reset()
           setTimeout(() => {
@@ -54,7 +54,7 @@ const LoginPopUp = () => {
     })
 
     if (!hasUser) {
-      mutate(data, {
+      addCompany(data, {
         onSuccess: () => {
           toast.success('با موفقیت ثبت نام شدید')
           reset()
@@ -109,14 +109,14 @@ const LoginPopUp = () => {
           <button
             className={`btn btn-primary w-full mt-3`}
             type={`submit`}
-            disabled={mutateLoading}
+            disabled={addCompanyLoading}
           >
             {
-              mutateLoading ? '' : 'ورود'
+              addCompanyLoading ? '' : 'ورود'
             }
             <PulseLoader
               color='white'
-              loading={mutateLoading}
+              loading={addCompanyLoading}
               size={6}
             />
           </button>

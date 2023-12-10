@@ -11,7 +11,7 @@ function useJobAds() {
   const key = useRef<string>(tokenGenerator())
 
 
-  const { data, refetch } = useQuery({
+  const { data: jobAds, refetch: refetchJobAds } = useQuery({
     queryKey: ['jobAds'],
     queryFn: async () => {
       addLoadingKey(key.current)
@@ -78,7 +78,7 @@ function useJobAds() {
     }
   })
 
-  const { mutate, isPending: mutatePending } = useMutation({
+  const { mutate: addJobAd, isPending: addJobAdPending } = useMutation({
     mutationKey: ['jobAds'],
     mutationFn: async (newJobAd: newJobAdTypes) => {
       // @ts-ignore
@@ -87,12 +87,12 @@ function useJobAds() {
         .insert([newJobAd])
         .select()
 
-      refetch()
+      refetchJobAds()
       return data
     },
   })
 
-  return { data, mutate, mutatePending }
+  return { jobAds, addJobAd, addJobAdPending }
 }
 
 export default useJobAds

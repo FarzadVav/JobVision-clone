@@ -40,8 +40,8 @@ const Details = () => {
       knowledgeBased: ''
     }
   })
-  const { updateMutate, updateMutateLoading } = useCompany()
-  const { data: content } = useContent()
+  const { updateCompany, updateCompanyLoading } = useCompany()
+  const { content } = useContent()
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     const companyDetials: companyDetailsTypes = {
@@ -57,7 +57,7 @@ const Details = () => {
       city: content?.cities.find(city => city.name === data.city)?._id || ''
     }
 
-    updateMutate(companyDetials, {
+    updateCompany(companyDetials, {
       onSuccess: () => {
         toast.success('اطلاعات شرکت با موفقیت ویرایش شد')
         reset()
@@ -215,14 +215,14 @@ const Details = () => {
       <button
         className={`btn btn-primary mt-5`}
         type={`submit`}
-        disabled={updateMutateLoading}
+        disabled={updateCompanyLoading}
       >
         {
-          updateMutateLoading ? '' : 'ثبت اطلاعات'
+          updateCompanyLoading ? '' : 'ثبت اطلاعات'
         }
         <PulseLoader
           color='white'
-          loading={updateMutateLoading}
+          loading={updateCompanyLoading}
           size={6}
         />
       </button>

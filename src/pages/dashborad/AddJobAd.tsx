@@ -75,9 +75,9 @@ const AddJobAd = () => {
       endOfMilitaryService: '',
     }
   })
-  const { data: content } = useContent()
-  const { data: company } = useCompany()
-  const { mutate, mutatePending } = useJobAdsQuery()
+  const { content } = useContent()
+  const { company } = useCompany()
+  const { addJobAd, addJobAdPending } = useJobAdsQuery()
 
   // TODO: insert to useAddJobAdForm.ts
   const [form, setForm] = useState<customFormTypes>(defaultFormValues)
@@ -137,7 +137,7 @@ const AddJobAd = () => {
         company: company.company._id || ''
       }
 
-      mutate(newJobAd, {
+      addJobAd(newJobAd, {
         onSuccess: () => {
           toast.success('آگهی جدید با موفقیت ثبت شد')
           setSubmittedForm(false)
@@ -510,17 +510,17 @@ const AddJobAd = () => {
           <button
             className={`btn btn-primary mt-5`}
             type={`submit`}
-            disabled={mutatePending}
+            disabled={addJobAdPending}
             onClick={() => {
               setSubmittedForm(true)
             }}
           >
             {
-              mutatePending ? '' : 'ثبت آگهی جدید'
+              addJobAdPending ? '' : 'ثبت آگهی جدید'
             }
             <PulseLoader
               color='white'
-              loading={mutatePending}
+              loading={addJobAdPending}
               size={6}
             />
           </button>

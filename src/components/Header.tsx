@@ -12,7 +12,7 @@ import useAuth from "../hooks/store/useAuth.ts";
 const Header = () => {
 	const redirect = useNavigate()
 	const { isLogin, logOutHandler } = useAuth(s => s)
-	const { data: content } = useContent()
+	const { content } = useContent()
 	const {
 		showMegaMenu,
 		showMobileMenu,

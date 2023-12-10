@@ -160,7 +160,7 @@ type JobsFiltersBarProps = {
   jobAdsSelectHandler: (singleJobAd: JobAdsTypes) => void
 }
 const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
-  const { data: jobAds } = useJobAdsQuery()
+  const { jobAds } = useJobAdsQuery()
   const {
     setFilteredJobAds,
     setSelectedJobAds,

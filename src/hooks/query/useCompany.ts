@@ -18,7 +18,7 @@ const useCompany = () => {
 
   const key = useRef<string>(tokenGenerator())
 
-  const { data, refetch } = useQuery({
+  const { data: company, refetch: refetchCompany } = useQuery({
     queryKey: ['companies'],
     queryFn: async () => {
       addLoadingKey(key.current)
@@ -41,7 +41,7 @@ const useCompany = () => {
     staleTime: 0
   })
 
-  const { mutate, isPending: mutateLoading } = useMutation({
+  const { mutate: addCompany, isPending: addCompanyLoading } = useMutation({
     mutationKey: ['companies'],
     mutationFn: async (newCompany: { email: string, password: string }) => {
       const { data } = await supabase
@@ -51,28 +51,28 @@ const useCompany = () => {
 
       // @ts-ignore
       loginHandler(data[0]._id)
-      refetch()
+      refetchCompany()
 
       return data
     },
   })
 
-  const { mutate: updateMutate, isPending: updateMutateLoading } = useMutation({
+  const { mutate: updateCompany, isPending: updateCompanyLoading } = useMutation({
     mutationKey: ['companies'],
     mutationFn: async (newCompany: companyDetailsTypes) => {
-      const { data: company } = await supabase
+      const { data } = await supabase
         .from('companies')
         .update(newCompany)
-        .eq('_id', data?.company._id)
+        .eq('_id', company?.company._id)
         .select()
 
-      refetch()
+      refetchCompany()
 
-      return company
+      return data
     },
   })
 
-  return { data, mutate, mutateLoading, updateMutate, updateMutateLoading }
+  return { company, refetchCompany, addCompany, updateCompany, addCompanyLoading, updateCompanyLoading }
 }
 
 export default useCompany

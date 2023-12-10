@@ -16,12 +16,12 @@ type ContentTypes = {
   jobAdsMneu: JobAdsMenuTypes[]
 }
 
-function useContent() {
+const useContent = () => {
   const { addLoadingKey, removeLoadingKey } = useLoading(s => s)
 
   const key = useRef<string>(tokenGenerator())
 
-  return useQuery({
+  const { data: content } = useQuery({
     queryKey: ['content'],
     queryFn: async () => {
       addLoadingKey(key.current)
@@ -92,6 +92,8 @@ function useContent() {
       return content
     },
   })
+
+  return { content }
 }
 
 export default useContent
