@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { z } from "zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { AccessTimeRounded, AccountCircleOutlined, ArticleOutlined, HomeWorkOutlined, ImportantDevicesOutlined, LanguageOutlined, LocalAirportRounded, NotesRounded, PaymentsOutlined, PeopleOutlined, PsychologyAltOutlined, SchoolOutlined, StarBorder, TextFieldsRounded, WorkOutlineRounded } from '@mui/icons-material'
+import { AccessTimeRounded, AccountCircleOutlined, ArticleOutlined, ImportantDevicesOutlined, LanguageOutlined, LocalAirportRounded, NotesRounded, PaymentsOutlined, PeopleOutlined, PsychologyAltOutlined, SchoolOutlined, StarBorder, TextFieldsRounded, WorkOutlineRounded } from '@mui/icons-material'
 import { PulseLoader } from 'react-spinners'
 import { Toaster, toast } from 'react-hot-toast'
 
@@ -41,7 +41,6 @@ const gendersTypes = z.enum(['مرد', 'زن', 'فرقی ندارد'])
 const schema = z.object({
   category: z.string().nonempty(),
   title: z.string().nonempty().min(3).max(256),
-  city: z.string().nonempty(),
   isRemote: z.any(),
   isUrgent: z.any(),
   salary_1: z.string().nonempty().regex(/^[0-9]+$/),
@@ -70,7 +69,7 @@ const AddJobAd = () => {
   } = useForm<formTypes>({
     resolver: zodResolver(schema),
     defaultValues: {
-      salary_2: '',
+      salary_2: '0',
       isRemote: '',
       isUrgent: '',
       endOfMilitaryService: '',
@@ -305,24 +304,6 @@ const AddJobAd = () => {
             <WorkOutlineRounded />
           </AutoComplete>
           {/* category */}
-
-          {/* city */}
-          <Title withOutIcon customClass={`mb-2.5 mt-5`}>
-            <label className={`!text-xl`}>
-              شهر
-            </label>
-          </Title>
-          <AutoComplete
-            customClass={`bg-jv-bright`}
-            register={{ ...register('city') }}
-            setValue={setValue}
-            placeholder={`برای مثال برنامه نویسی`}
-            datas={content?.cities.map(city => city.name) || []}
-            error={!!errors.city}
-          >
-            <HomeWorkOutlined />
-          </AutoComplete>
-          {/* city */}
 
           {/* cooperaton types */}
           <Title withOutIcon customClass={`mb-2.5 mt-5`}>

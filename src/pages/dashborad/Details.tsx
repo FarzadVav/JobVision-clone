@@ -15,7 +15,7 @@ import toast from "react-hot-toast"
 
 const schema = z.object({
   name: z.string().nonempty(),
-  aboutCompany: z.string().nonempty().min(16),
+  aboutCompany: z.string().nonempty().min(3),
   year: z.string().nonempty().regex(/^[0-9]+$/).min(4).max(4),
   employees_1: z.string().nonempty().regex(/^[0-9]+$/),
   employees_2: z.string().nonempty().regex(/^[0-9]+$/),
@@ -53,8 +53,8 @@ const Details = () => {
       score: 5,
       knowledgeBased: !!data.knowledgeBased.length,
       employees: +data.employees_2 > +data.employees_1 ? [+data.employees_1, +data.employees_2] : [+data.employees_1, +data.employees_1 + 1],
-      province: data.province,
-      city: data.city
+      province: content?.provinces.find(province => province.name === data.province)?._id || '',
+      city: content?.cities.find(city => city.name === data.city)?._id || ''
     }
 
     updateMutate(companyDetials, {

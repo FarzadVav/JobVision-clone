@@ -9,7 +9,7 @@ import { companyDetailsTypes } from '../../types/Company.types'
 
 const useCompany = () => {
   const { addLoadingKey, removeLoadingKey } = useLoading(s => s)
-  const { loginHandler } = useAuth(s => s)
+  const { loginHandler, company } = useAuth(s => s)
 
   const key = useRef<string>(tokenGenerator())
 
@@ -49,13 +49,11 @@ const useCompany = () => {
   const { mutate: updateMutate, isPending: updateMutateLoading } = useMutation({
     mutationKey: ['companies'],
     mutationFn: async (newCompany: companyDetailsTypes) => {
-      const { error, data } = await supabase
+      const { data } = await supabase
         .from('companies')
-        .update([newCompany])
+        .update(newCompany)
+        .eq('_id', company._id)
         .select()
-
-      console.log(error);
-      console.log(data);
 
       // @ts-ignore
       useAuth.setState({ company: data[0] })
