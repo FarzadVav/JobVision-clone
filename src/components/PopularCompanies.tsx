@@ -9,6 +9,8 @@ import CompanyBox from './CompanyBox';
 
 const testCompany: CompanyTypes = {
   _id: tokenGenerator(),
+  email: '',
+  password: '',
   logo: 'https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=3518088&width=70&height=70',
   name: 'تاکسی ماکسیم',
   score: 4.1,
