@@ -162,6 +162,7 @@ type JobsFiltersBarProps = {
 const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
   const { jobAds } = useJobAdsQuery()
   const {
+    selectedJobAds,
     setFilteredJobAds,
     setSelectedJobAds,
     setJobAdsToDefault,
@@ -253,6 +254,23 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
       }
     }
     setFilteredJobAds(newFilteredJobAds)
+
+    if (!newFilteredJobAds.length) {
+      setSelectedJobAds({} as JobAdsTypes)
+    } else {
+      let selectedJobAdsInFilters: boolean = false
+      newFilteredJobAds.forEach(jobAd => {
+        if (jobAd._id === selectedJobAds._id) {
+          selectedJobAdsInFilters = true
+        }
+      })
+      !selectedJobAdsInFilters && newFilteredJobAds.forEach(jobAd => {
+        if (jobAd._id !== selectedJobAds._id) {
+          setSelectedJobAds({} as JobAdsTypes)
+        }
+      })
+    }
+
   }, [filters, jobAds])
 
   useEffect(() => {
