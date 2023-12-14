@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { Alert } from '@mui/material';
 import { ApartmentOutlined, AssignmentTurnedIn, BusinessCenter, Diversity3Rounded, KeyboardArrowLeftRounded, KeyboardBackspaceRounded } from "@mui/icons-material";
 
 import tokenGenerator from "../utils/tokenGenerator";
@@ -1110,17 +1111,50 @@ const Home = () => {
 				<div className={`mt-12 md:mt-16`}>
 					<Title>
 						<h2>
-							تازه‌ترین آگهی‌های شغلی برای شما
+							{
+								JSON.parse(localStorage.getItem('prevCategories') || '[]').length
+									? 'آگهی‌ های شغلی پیشنهادی برای شما'
+									: 'تازه‌ترین آگهی های شغلی'
+							}
 						</h2>
 					</Title>
 					<div className={`w-full grid gap-4 grid-rows-(1fr_auto) grid-cols-1 mt-6 md:grid-cols-2 lg:grid-cols-3`}>
 						{
-							jobAds?.length ? jobAds.map(jobAd => (
-								<JobAdsBox
-									key={tokenGenerator()}
-									{...jobAd}
-								/>
-							)) : null
+							useMemo(() => {
+								const prevCategories: string[] = JSON.parse(localStorage.getItem('prevCategories') || '[]')
+								if (!jobAds?.length) {
+									return (
+										<div className={`w-full mt-3`} dir='ltr'>
+											<Alert
+												className={`!justify-between`}
+												severity="warning"
+											>
+												آگهی برای پیشنهاد وجود ندارد
+											</Alert>
+										</div>
+									)
+								}
+
+								let suggesttedJobAds = jobAds.filter(jobAd => {
+									if (prevCategories.includes(jobAd.category._id)) return jobAd
+								})
+
+
+								if (suggesttedJobAds.length < 6) {
+									const otherJobAds = jobAds.filter((jobAd, i) => {
+										if (i + 1 + suggesttedJobAds.length <= 6
+											&& !suggesttedJobAds.map(j => j._id).includes(jobAd._id)) return jobAd
+									})
+									suggesttedJobAds = [...suggesttedJobAds, ...otherJobAds]
+								}
+
+								return suggesttedJobAds.map(jobAd => (
+									<JobAdsBox
+										key={tokenGenerator()}
+										{...jobAd}
+									/>
+								))
+							}, [jobAds])
 						}
 						<div className={`w-full flex justify-center mt-8 md:col-span-2 md:mt-12 lg:col-span-3`}>
 							<Link
