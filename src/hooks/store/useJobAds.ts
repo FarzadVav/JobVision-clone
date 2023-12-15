@@ -7,8 +7,8 @@ type useJobAdsStoreTypes = {
   selectedJobAds: JobAdsTypes;
   hasFilter: boolean;
   setFilteredJobAds: (newJobAds: JobAdsTypes[]) => void;
-  setJobAdsToDefault: () => void,
-  setSelectedJobAds: (jobAd: JobAdsTypes) => void
+  setJobAdsToDefault: () => void;
+  setSelectedJobAds: (jobAd: JobAdsTypes) => void;
   setHasFilter: (state: boolean) => void
 }
 

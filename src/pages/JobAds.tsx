@@ -556,7 +556,7 @@ const Jobs = () => {
 												</Alert>
 											</div>
 										) : null
-									}, [hasFilter, filteredJobAds])
+									}, [hasFilter, filteredJobAds, selectedJobAds])
 								}
 								{
 									useMemo(() => {
