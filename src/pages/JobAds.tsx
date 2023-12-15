@@ -1,4 +1,4 @@
-import { ReactNode, useState, useEffect, useRef } from 'react'
+import { ReactNode, useState, useEffect, useRef, useMemo } from 'react'
 import { CloseRounded, FavoriteBorderRounded, HelpRounded, InfoOutlined, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined, StarRateRounded, Verified } from "@mui/icons-material";
 import { Alert } from '@mui/material';
 
@@ -409,7 +409,7 @@ const Jobs = () => {
 				)
 			},
 			{
-				id: 'other-jobAds',
+				id: tokenGenerator(),
 				title: 'سایر آگهی های این شرکت',
 				content: (
 					<>
@@ -517,8 +517,7 @@ const Jobs = () => {
 
 					<div className={`flex mt-3 lg:relative`}>
 						{/* jobAds list */}
-						<aside className={`bg-white w-full h-max flex flex-col items-center p-3 mb-6 rounded lg:ml-3 lg:w-5/12
-						xl:w-4/12`}>
+						<aside className={`bg-white w-full h-max flex flex-col items-center p-3 mb-6 rounded lg:ml-3 lg:w-5/12 xl:w-4/12`}>
 							<div className={`w-full flex justify-between items-center`}>
 								<p>
 									{hasFilter ? filteredJobAds.length : jobAds?.length} آگهی
@@ -532,47 +531,51 @@ const Jobs = () => {
 							</div>
 							<div className={`w-full flex flex-col items-center gap-3 mt-3`}>
 								{
-									(hasFilter && filteredJobAds.length) ? filteredJobAds.map(job => (
-										<div
-											key={job._id}
-											className={`w-full`}
-											onClick={() => {
-												jobAdsSelectHandler(job)
-												setSelectedJobAds(job)
-											}}
-										>
-											<JobAdsBox
-												{...job}
-												selected={selectedJobAds._id === job._id}
-											/>
-										</div>
-									)) : hasFilter ? (
-										<div className={`w-full mt-3`} dir='ltr'>
-											<Alert
-												className={`!justify-between`}
-												severity="warning"
+									useMemo(() => {
+										return (hasFilter && filteredJobAds.length) ? filteredJobAds.map(job => (
+											<div
+												key={job._id}
+												className={`w-full`}
+												onClick={() => {
+													jobAdsSelectHandler(job)
+													setSelectedJobAds(job)
+												}}
 											>
-												آگهی با این فیلتر وجود ندارد
-											</Alert>
-										</div>
-									) : null
+												<JobAdsBox
+													{...job}
+													selected={selectedJobAds._id === job._id}
+												/>
+											</div>
+										)) : hasFilter ? (
+											<div className={`w-full mt-3`} dir='ltr'>
+												<Alert
+													className={`!justify-between`}
+													severity="warning"
+												>
+													آگهی با این فیلتر وجود ندارد
+												</Alert>
+											</div>
+										) : null
+									}, [hasFilter, filteredJobAds])
 								}
 								{
-									!hasFilter && jobAds?.length ? jobAds.map(job => (
-										<div
-											key={job._id}
-											className={`w-full`}
-											onClick={() => {
-												jobAdsSelectHandler(job)
-												setSelectedJobAds(job)
-											}}
-										>
-											<JobAdsBox
-												{...job}
-												selected={selectedJobAds._id === job._id}
-											/>
-										</div>
-									)) : null
+									useMemo(() => {
+										return (!hasFilter && jobAds?.length) ? jobAds.map(job => (
+											<div
+												key={job._id}
+												className={`w-full`}
+												onClick={() => {
+													jobAdsSelectHandler(job)
+													setSelectedJobAds(job)
+												}}
+											>
+												<JobAdsBox
+													{...job}
+													selected={selectedJobAds._id === job._id}
+												/>
+											</div>
+										)) : null
+									}, [hasFilter, jobAds, selectedJobAds])
 								}
 							</div>
 						</aside>
