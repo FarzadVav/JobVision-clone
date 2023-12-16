@@ -2,7 +2,7 @@ import { z } from "zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { PulseLoader } from "react-spinners"
-import { ManageSearchRounded, CalendarMonthRounded, HelpOutlineRounded, PeopleOutlineRounded, LocationOnOutlined } from "@mui/icons-material"
+import { ManageSearchRounded, CalendarMonthRounded, HelpOutlineRounded, PeopleOutlineRounded, LocationOnOutlined, DriveFileRenameOutlineOutlined } from "@mui/icons-material"
 
 import useContent from "../../hooks/query/useContent"
 import Title from "../../components/Title"
@@ -79,11 +79,11 @@ const Details = () => {
       <TextInput
         customClass={`bg-jv-bright`}
         register={{ ...register('name') }}
-        placeholder={`برای مثال 1390`}
+        placeholder={`برای مثال جاب ویژن`}
         error={!!errors.name}
         numeric
       >
-        <CalendarMonthRounded />
+        <DriveFileRenameOutlineOutlined />
       </TextInput>
       {/* name */}
 
