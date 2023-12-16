@@ -6,6 +6,8 @@ type LazyPageProps = {
 	children: ReactNode;
 }
 const LazyPage = ({ children }: LazyPageProps) => {
+	window.scrollTo(0, 0)
+
 	return (
 		<Suspense
 			fallback={skeleton()}
