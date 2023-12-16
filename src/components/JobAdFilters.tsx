@@ -183,9 +183,12 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
     }
 
     let newFilteredJobAds: JobAdsTypes[] = jobAds || []
+    let selectedJobAdsInFilters: boolean = false
+
     if (filters.q_id) {
       const newFilteredJobAdsFromId = newFilteredJobAds.find(job => job._id === filters.q_id)
       if (newFilteredJobAdsFromId) {
+        selectedJobAdsInFilters = true
         newFilteredJobAds = [newFilteredJobAdsFromId]
         setSelectedJobAds(newFilteredJobAdsFromId)
         jobAdsSelectHandler(newFilteredJobAdsFromId)
@@ -258,7 +261,6 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
     if (!newFilteredJobAds.length) {
       setSelectedJobAds({} as JobAdsTypes)
     } else {
-      let selectedJobAdsInFilters: boolean = false
       newFilteredJobAds.forEach(jobAd => {
         if (jobAd._id === selectedJobAds._id) {
           selectedJobAdsInFilters = true
@@ -312,6 +314,7 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
         }
       }
     }
+
     return state
   }
 

@@ -17,7 +17,7 @@ export type useJobAdsFiltersTypes = {
   setFiltersToDefault: () => void
 }
 
-const initialValues: useJobAdsFiltersTypes = {
+const initialValues: Omit<useJobAdsFiltersTypes, 'setFiltersToDefault'> = {
   q_id: null,
   q_search: null,
   q_category: null,
@@ -29,8 +29,7 @@ const initialValues: useJobAdsFiltersTypes = {
   remote: false,
   knowledgeBasedCompany: false,
   cooprationType: null,
-  salaryType: null, 
-  setFiltersToDefault: () => { }
+  salaryType: null
 }
 
 const useJobAdsFilters = create<useJobAdsFiltersTypes>(set => ({
