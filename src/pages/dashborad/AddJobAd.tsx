@@ -39,22 +39,22 @@ const genders = ['مرد', 'زن', 'فرقی ندارد']
 const gendersTypes = z.enum(['مرد', 'زن', 'فرقی ندارد'])
 
 const schema = z.object({
-  category: z.string().nonempty(),
-  title: z.string().nonempty().min(3).max(256),
-  isRemote: z.any(),
-  isUrgent: z.any(),
-  salary_1: z.string().nonempty().regex(/^[0-9]+$/),
-  salary_2: z.string().regex(/^[0-9]+$/),
-  workTimes: z.string().nonempty().min(3).max(256),
-  cooperationType: z.string().nonempty(),
-  businessTrips: z.string().nonempty(),
-  description: z.string().nonempty().min(3).max(256),
-  age_1: z.string().nonempty().regex(/^[0-9]+$/),
-  age_2: z.string().nonempty().regex(/^[0-9]+$/),
+  category: z.string().min(1),
+  title: z.string().min(3).max(256),
+  isRemote: z.boolean(),
+  isUrgent: z.boolean(),
+  salary_1: z.string().min(1).regex(/^[0-9]+$/),
+  salary_2: z.string(),
+  workTimes: z.string().min(3).max(256),
+  cooperationType: z.string().min(1),
+  businessTrips: z.string().min(1),
+  description: z.string().min(3).max(256),
+  age_1: z.string().min(2).max(2).regex(/^[0-9]+$/),
+  age_2: z.string().min(2).max(2).regex(/^[0-9]+$/),
   gender: gendersTypes,
-  endOfMilitaryService: z.any(),
+  endOfMilitaryService: z.boolean(),
   // for sinc react-hook-form whith custom form
-  customFormFields: z.string().nonempty()
+  customFormFields: z.string().min(1)
 })
 
 type formTypes = z.infer<typeof schema>
@@ -68,12 +68,6 @@ const AddJobAd = () => {
     reset
   } = useForm<formTypes>({
     resolver: zodResolver(schema),
-    defaultValues: {
-      salary_2: '0',
-      isRemote: '',
-      isUrgent: '',
-      endOfMilitaryService: '',
-    }
   })
   const { content } = useContent()
   const { company } = useCompany()
@@ -120,9 +114,9 @@ const AddJobAd = () => {
         description: data.description,
         workTimes: data.workTimes,
         businessTrips: data.businessTrips,
-        isRemote: !!data.isRemote.length,
-        isUrgent: !!data.isUrgent.length,
-        endOfMilitaryService: !!data.endOfMilitaryService.length,
+        isRemote: !!data.isRemote,
+        isUrgent: !!data.isUrgent,
+        endOfMilitaryService: !!data.endOfMilitaryService,
         gender: data.gender === 'مرد' ? true : data.gender === 'زن' ? false : null,
         cooperationType: content?.cooperationType.find(type => type.name === data.cooperationType)?._id || '',
         category: content?.categories.find(cat => cat.name === data.category)?._id || '',
@@ -463,7 +457,9 @@ const AddJobAd = () => {
                 id='isRemote'
                 value='isRemote'
                 className={`mr-2`}
-                {...register('isRemote')}
+                onChange={e => {
+                  setValue('isRemote', e.target.checked)
+                }}
                 type="checkbox"
               />
             </div>
@@ -481,7 +477,9 @@ const AddJobAd = () => {
                 id='isUrgent'
                 value={`isUrgent`}
                 className={`mr-2`}
-                {...register('isUrgent')}
+                onChange={e => {
+                  setValue('isUrgent', e.target.checked)
+                }}
                 type="checkbox"
               />
             </div>
@@ -499,7 +497,9 @@ const AddJobAd = () => {
                 id='endOfMilitaryService'
                 value={`endOfMilitaryService`}
                 className={`mr-2`}
-                {...register('endOfMilitaryService')}
+                onChange={e => {
+                  setValue('endOfMilitaryService', e.target.checked)
+                }}
                 type="checkbox"
               />
             </div>
