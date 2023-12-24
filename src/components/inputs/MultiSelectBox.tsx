@@ -8,25 +8,26 @@ type MultiSelectBoxProps = {
   placeholder: string;
   error?: boolean;
   datas: string[];
-  list: string[];
-  addItemHandler: (item: string) => void;
+  onChangeList: (list: string[]) => void;
   resetHandler: Function;
-  unSelectHandler: (item: string) => void;
 }
 
 const MultiSelectBox = ({
-  customClass, placeholder, error, datas, list, addItemHandler, resetHandler, unSelectHandler
+  customClass, placeholder, error, datas, onChangeList, resetHandler,
 }: MultiSelectBoxProps) => {
   const [focus, setFocus] = useState<boolean>(false)
   const [value, setValue] = useState<string>('')
+  const [selectedList, setSelectedList] = useState<string[]>([])
   const [searchedDatas, setSearchedDatas] = useState<typeof datas>(datas)
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    window.addEventListener('click', () => {
-      setFocus(false)
-    })
-  }, [])
+    // window.addEventListener('click', () => {
+    //   setFocus(false)
+    // })
+
+    onChangeList(selectedList)
+  }, [selectedList])
 
   const searchedDatasHandler = (value: string) => {
     setSearchedDatas([])
@@ -82,13 +83,14 @@ const MultiSelectBox = ({
             absolute -top-1.5 z-10`}></div>
           <ul className={`list-scrollbar w-full max-h-72 pl-3 overflow-y-auto z-20`}>
             {
-              list.length ? (
+              selectedList.length ? (
                 <li className={`w-full flex items-center justify-end`}>
                   <div
                     className={`btn-sm btn-danger`}
                     onClick={() => {
                       setValue('')
                       resetHandler()
+                      setSelectedList([])
                     }}
                   >
                     پاک کردن
@@ -102,16 +104,16 @@ const MultiSelectBox = ({
                   key={tokenGenerator()}
                   className={`bg-jv-bright border-b border-solid border-jv-light w-full py-2 pr-2 cursor-pointer flex items-center group/verify hover:brightness-[0.97] last:border-none`}
                   onMouseDown={() => {
-                    if (list.includes(data)) {
-                      unSelectHandler(data)
+                    if (selectedList.includes(data)) {
+                      setSelectedList(prev => prev.filter(item => item !== data))
                     } else {
-                      addItemHandler(data)
+                      setSelectedList(prev => ([...prev, data]))
                     }
                     setValue('')
                   }}
                 >
                   <DoneRounded
-                    className={`text-jv-primary ${list.includes(data) ? '' : '!hidden'} ml-3  group-hover/verify:text-jv-danger`}
+                    className={`text-jv-primary ${selectedList.includes(data) ? '' : '!hidden'} ml-3  group-hover/verify:text-jv-danger`}
                     fontSize="small"
                   />
                   {data}
@@ -122,9 +124,9 @@ const MultiSelectBox = ({
         </div>
       </div>
       {
-        list.length ? (
+        selectedList.length ? (
           <span className={`text-sm mt-3`}>
-            {list.length} مورد اضافه شده
+            {selectedList.length} مورد اضافه شده
           </span>
         ) : null
       }

@@ -39,6 +39,7 @@ const genders = ['مرد', 'زن', 'فرقی ندارد']
 const gendersTypes = z.enum(['مرد', 'زن', 'فرقی ندارد'])
 
 const schema = z.object({
+  tags: z.string().array().min(1),
   category: z.string().min(1),
   title: z.string().min(3).max(256),
   isRemote: z.boolean(),
@@ -64,6 +65,7 @@ const AddJobAd = () => {
     register,
     handleSubmit,
     setValue,
+    // getValues,
     formState: { errors },
     reset
   } = useForm<formTypes>({
@@ -345,11 +347,9 @@ const AddJobAd = () => {
             customClass={`bg-jv-bright`}
             placeholder='برای مثال Front-End'
             datas={content?.tags.map(tag => tag.name) || []}
-            list={form.tags}
-            error={(submittedForm && form.tags.length <= 0)}
-            addItemHandler={(item: string) => setForm(prev => ({ ...prev, tags: [...prev.tags, item] }))}
+            error={!!errors.tags}
+            onChangeList={(item: string[]) => setValue('tags', item)}
             resetHandler={() => setForm(prev => ({ ...prev, tags: [] }))}
-            unSelectHandler={(item: string) => setForm(prev => ({ ...prev, tags: prev.tags.filter(tag => tag !== item) }))}
           />
           {/* tags */}
 
