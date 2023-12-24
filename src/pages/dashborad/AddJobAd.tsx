@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { z } from "zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -20,6 +19,7 @@ import useCompany from '../../hooks/query/useCompany'
 const genders = ['مرد', 'زن', 'فرقی ندارد']
 const gendersTypes = z.enum(['مرد', 'زن', 'فرقی ندارد'])
 const arraySchema = z.string().array().min(1)
+const regexSchema = z.string().regex(/^[0-9]+$/)
 
 const schema = z.object({
   title: z.string().min(3).max(256),
@@ -38,9 +38,15 @@ const schema = z.object({
   educations: arraySchema,
   languages: arraySchema,
   technologies: arraySchema,
-  age_1: z.string().min(2).max(2).regex(/^[0-9]+$/),
-  age_2: z.string().min(2).max(2).regex(/^[0-9]+$/),
-  salary_1: z.string().min(1).regex(/^[0-9]+$/),
+  age_1: regexSchema.min(2).max(2),
+  age_2: regexSchema.min(2).max(2),
+  salary: z.object({
+    from: regexSchema.min(1).max(3),
+    to: regexSchema.min(1).max(3),
+    showBoth: z.boolean()
+  })
+    .refine(value => value.showBoth && (parseInt(value.to) <= parseInt(value.from)), { message: 'ERROR' }),
+  salary_1: regexSchema.min(1).max(3),
   salary_2: z.string()
 })
 
@@ -51,7 +57,7 @@ const AddJobAd = () => {
     register,
     handleSubmit,
     setValue,
-    // getValues,
+    getValues,
     formState: { errors },
     reset
   } = useForm<formTypes>({
@@ -60,12 +66,6 @@ const AddJobAd = () => {
   const { content } = useContent()
   const { company } = useCompany()
   const { addJobAd, addJobAdPending } = useJobAdsQuery()
-
-  const [twoStepForms, setTwoStepsForms] = useState<{
-    salary: boolean
-  }>({
-    salary: false
-  })
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     if (!company?.company.name
@@ -189,17 +189,17 @@ const AddJobAd = () => {
           <div className={`w-full flex flex-col items-center justify-center sm:flex-row`}>
             <TextInput
               customClass={`bg-jv-bright`}
-              register={{ ...register('salary_1') }}
-              placeholder={`برای مثال ${twoStepForms.salary ? 'از ' : ''}20 میلیون تومان`}
-              error={!!errors.salary_1}
+              register={{ ...register('salary.from') }}
+              placeholder={`برای مثال ${getValues('salary.showBoth') ? 'از ' : ''}20 میلیون تومان`}
+              error={!!errors.salary?.from}
             >
               <PaymentsOutlined />
             </TextInput>
             <TextInput
-              customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3 ${twoStepForms.salary ? '' : 'hidden'}`}
-              register={{ ...register('salary_2') }}
+              customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3 ${getValues('salary.showBoth') ? '' : 'hidden'}`}
+              register={{ ...register('salary.to') }}
               placeholder={`تا 30 میلیون تومان`}
-              error={!!errors.salary_2}
+              error={!!errors.salary?.to}
             >
               <PaymentsOutlined />
             </TextInput>
@@ -207,16 +207,16 @@ const AddJobAd = () => {
           <div className={`w-full flex items-center mt-5`}>
             <label
               className={`cursor-pointer`}
-              htmlFor="salary_2"
+              htmlFor="salary"
             >
               ایجاد بازه قیمتی
             </label>
             <input
-              id='salary_2'
+              id='salary'
               className={`mr-2`}
               type="checkbox"
               onChange={event => {
-                setTwoStepsForms(prev => ({ ...prev, salary: event.target.checked }))
+                setValue('salary.showBoth', event.target.checked)
               }}
             />
           </div>
