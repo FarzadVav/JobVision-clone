@@ -19,12 +19,18 @@ const MultiSelectBox = ({
   const [value, setValue] = useState<string>('')
   const [selectedList, setSelectedList] = useState<string[]>([])
   const [searchedDatas, setSearchedDatas] = useState<typeof datas>(datas)
+
   const inputRef = useRef<HTMLInputElement>(null)
+  const firstMountRef = useRef<boolean>(true)
 
   useEffect(() => {
-    // window.addEventListener('click', () => {
-    //   setFocus(false)
-    // })
+    if (firstMountRef.current) {
+      window.addEventListener('click', () => {
+        setFocus(false)
+      })
+    } else {
+      firstMountRef.current = false
+    }
 
     onChangeList(selectedList)
   }, [selectedList])

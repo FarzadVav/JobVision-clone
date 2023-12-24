@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { z } from "zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -17,45 +17,31 @@ import useJobAdsQuery from '../../hooks/query/useJobAds'
 import { newJobAdTypes } from '../../types/JobAds.types'
 import useCompany from '../../hooks/query/useCompany'
 
-type customFormTypes = {
-  tags: string[];
-  benefits: string[];
-  abilityForBoss: string[];
-  education: string[];
-  languages: string[];
-  techs: string[]
-}
-
-const defaultFormValues: customFormTypes = {
-  tags: [],
-  benefits: [],
-  abilityForBoss: [],
-  education: [],
-  languages: [],
-  techs: []
-}
-
 const genders = ['مرد', 'زن', 'فرقی ندارد']
 const gendersTypes = z.enum(['مرد', 'زن', 'فرقی ندارد'])
+const arraySchema = z.string().array().min(1)
 
 const schema = z.object({
-  tags: z.string().array().min(1),
-  category: z.string().min(1),
   title: z.string().min(3).max(256),
+  description: z.string().min(3).max(256),
+  workTimes: z.string().min(3).max(256),
+  businessTrips: z.string().min(1),
   isRemote: z.boolean(),
   isUrgent: z.boolean(),
-  salary_1: z.string().min(1).regex(/^[0-9]+$/),
-  salary_2: z.string(),
-  workTimes: z.string().min(3).max(256),
+  gender: gendersTypes,
   cooperationType: z.string().min(1),
-  businessTrips: z.string().min(1),
-  description: z.string().min(3).max(256),
+  endOfMilitaryService: z.boolean(),
+  category: z.string().min(1),
+  tags: arraySchema,
+  benefits: arraySchema,
+  abilties: arraySchema,
+  educations: arraySchema,
+  languages: arraySchema,
+  technologies: arraySchema,
   age_1: z.string().min(2).max(2).regex(/^[0-9]+$/),
   age_2: z.string().min(2).max(2).regex(/^[0-9]+$/),
-  gender: gendersTypes,
-  endOfMilitaryService: z.boolean(),
-  // for sinc react-hook-form whith custom form
-  customFormFields: z.string().min(1)
+  salary_1: z.string().min(1).regex(/^[0-9]+$/),
+  salary_2: z.string()
 })
 
 type formTypes = z.infer<typeof schema>
@@ -75,30 +61,11 @@ const AddJobAd = () => {
   const { company } = useCompany()
   const { addJobAd, addJobAdPending } = useJobAdsQuery()
 
-  // TODO: insert to useAddJobAdForm.ts
-  const [form, setForm] = useState<customFormTypes>(defaultFormValues)
   const [twoStepForms, setTwoStepsForms] = useState<{
     salary: boolean
   }>({
     salary: false
   })
-  const [submittedForm, setSubmittedForm] = useState<boolean>(false)
-
-  // for sinc react-hook-form whith custom form
-  useEffect(() => {
-    let state: boolean = true
-    for (const field in form) {
-      if (!form[field as keyof customFormTypes].length) {
-        state = false
-        break
-      }
-    }
-    if (state) {
-      setValue('customFormFields', 'VALID')
-    } else {
-      setValue('customFormFields', '')
-    }
-  }, [form])
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     if (!company?.company.name
@@ -122,12 +89,12 @@ const AddJobAd = () => {
         gender: data.gender === 'مرد' ? true : data.gender === 'زن' ? false : null,
         cooperationType: content?.cooperationType.find(type => type.name === data.cooperationType)?._id || '',
         category: content?.categories.find(cat => cat.name === data.category)?._id || '',
-        tags: content?.tags.filter(tag => form.tags.includes(tag.name)).map(t => t._id) || [''],
-        benefits: form.benefits,
-        abilityForBoss: form.abilityForBoss,
-        education: form.education,
-        languages: form.languages,
-        techs: form.techs,
+        tags: content?.tags.filter(tag => data.tags.includes(tag.name)).map(t => t._id) || [''],
+        benefits: data.benefits,
+        abilityForBoss: data.abilties,
+        education: data.educations,
+        languages: data.languages,
+        techs: data.technologies,
         age: +data.age_2 > +data.age_1 ? [+data.age_1, +data.age_2] : [+data.age_1, +data.age_1 + 1],
         salary: +data.salary_2 > +data.salary_1 ? [+data.salary_1, +data.salary_2] : [+data.salary_1],
         company: company.company._id || ''
@@ -136,8 +103,6 @@ const AddJobAd = () => {
       addJobAd(newJobAd, {
         onSuccess: () => {
           toast.success('آگهی جدید با موفقیت ثبت شد')
-          setSubmittedForm(false)
-          setForm(defaultFormValues)
           reset()
         }
       })
@@ -348,8 +313,8 @@ const AddJobAd = () => {
             placeholder='برای مثال Front-End'
             datas={content?.tags.map(tag => tag.name) || []}
             error={!!errors.tags}
-            onChangeList={(item: string[]) => setValue('tags', item)}
-            resetHandler={() => setForm(prev => ({ ...prev, tags: [] }))}
+            onChangeList={(list: string[]) => setValue('tags', list)}
+            resetHandler={() => setValue('tags', [])}
           />
           {/* tags */}
 
@@ -362,10 +327,9 @@ const AddJobAd = () => {
           <ComboBox
             customClass={`bg-jv-bright`}
             placeholder='برای مثال بیمه'
-            error={(submittedForm && form.benefits.length <= 0)}
-            list={form.benefits}
-            addItemHandler={(item: string) => setForm(prev => ({ ...prev, benefits: [...prev.benefits, item] }))}
-            resetHandler={() => setForm(prev => ({ ...prev, benefits: [] }))}
+            error={!!errors.benefits}
+            onChangeList={(list: string[]) => setValue('benefits', list)}
+            resetHandler={() => setValue('benefits', [])}
           >
             <StarBorder />
           </ComboBox>
@@ -380,10 +344,9 @@ const AddJobAd = () => {
           <ComboBox
             customClass={`bg-jv-bright`}
             placeholder='برای مثال 1 سال سابقه کار'
-            error={(submittedForm && form.abilityForBoss.length <= 0)}
-            list={form.abilityForBoss}
-            addItemHandler={(item: string) => setForm(prev => ({ ...prev, abilityForBoss: [...prev.abilityForBoss, item] }))}
-            resetHandler={() => setForm(prev => ({ ...prev, abilityForBoss: [] }))}
+            error={!!errors.abilties}
+            onChangeList={(list: string[]) => setValue('abilties', list)}
+            resetHandler={() => setValue('abilties', [])}
           >
             <PsychologyAltOutlined />
           </ComboBox>
@@ -398,10 +361,9 @@ const AddJobAd = () => {
           <ComboBox
             customClass={`bg-jv-bright`}
             placeholder='برای مثال لیسانس مهندسی کامپیوتر'
-            error={(submittedForm && form.education.length <= 0)}
-            list={form.education}
-            addItemHandler={(item: string) => setForm(prev => ({ ...prev, education: [...prev.education, item] }))}
-            resetHandler={() => setForm(prev => ({ ...prev, education: [] }))}
+            error={!!errors.educations}
+            onChangeList={(list: string[]) => setValue('educations', list)}
+            resetHandler={() => setValue('educations', [])}
           >
             <SchoolOutlined />
           </ComboBox>
@@ -416,10 +378,9 @@ const AddJobAd = () => {
           <ComboBox
             customClass={`bg-jv-bright`}
             placeholder='برای مثال زبان انگلیسی'
-            error={(submittedForm && form.languages.length <= 0)}
-            list={form.languages}
-            addItemHandler={(item: string) => setForm(prev => ({ ...prev, languages: [...prev.languages, item] }))}
-            resetHandler={() => setForm(prev => ({ ...prev, languages: [] }))}
+            error={!!errors.languages}
+            onChangeList={(list: string[]) => setValue('languages', list)}
+            resetHandler={() => setValue('languages', [])}
           >
             <LanguageOutlined />
           </ComboBox>
@@ -434,10 +395,9 @@ const AddJobAd = () => {
           <ComboBox
             customClass={`bg-jv-bright`}
             placeholder='برای مثال Typescript'
-            error={(submittedForm && form.techs.length <= 0)}
-            list={form.techs}
-            addItemHandler={(item: string) => setForm(prev => ({ ...prev, techs: [...prev.techs, item] }))}
-            resetHandler={() => setForm(prev => ({ ...prev, techs: [] }))}
+            error={!!errors.technologies}
+            onChangeList={(list: string[]) => setValue('technologies', list)}
+            resetHandler={() => setValue('technologies', [])}
           >
             <ImportantDevicesOutlined />
           </ComboBox>
@@ -511,9 +471,6 @@ const AddJobAd = () => {
             className={`btn btn-primary mt-5`}
             type={`submit`}
             disabled={addJobAdPending}
-            onClick={() => {
-              setSubmittedForm(true)
-            }}
           >
             {
               addJobAdPending ? '' : 'ثبت آگهی جدید'

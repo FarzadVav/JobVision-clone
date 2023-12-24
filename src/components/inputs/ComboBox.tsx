@@ -1,20 +1,24 @@
 import { AddCircle } from "@mui/icons-material";
-import { ReactNode, useMemo, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import tokenGenerator from "../../utils/tokenGenerator";
 
 type ComboBoxProps = {
   customClass?: string;
   placeholder: string;
   error?: boolean;
-  list: string[];
-  addItemHandler: (item: string) => void;
+  onChangeList: (item: string[]) => void;
   resetHandler: Function;
   children: ReactNode
 }
 
-const ComboBox = ({ customClass, placeholder, error, list, addItemHandler, resetHandler, children }: ComboBoxProps) => {
+const ComboBox = ({ customClass, placeholder, error, onChangeList, resetHandler, children }: ComboBoxProps) => {
   const [focus, setFocus] = useState<boolean>(false)
   const [value, setValue] = useState<string>('')
+  const [list, setList] = useState<string[]>([])
+
+  useEffect(() => {
+    onChangeList(list)
+  }, [list])
 
   return (
     <div className={`w-full flex flex-col`}>
@@ -35,9 +39,9 @@ const ComboBox = ({ customClass, placeholder, error, list, addItemHandler, reset
           className={`combo-btn ${error ? 'text-jv-danger group-hover:text-jv-danger' : (focus && !error) ? 'text-jv-primary' : 'group-hover:text-jv-primary'}`}
           onClick={() => {
             if (value.length) {
-              addItemHandler(value)
+              setList(prev => ([...prev, value]))
+              setValue('')
             }
-            setValue('')
           }}
         >
           <AddCircle />
@@ -64,7 +68,10 @@ const ComboBox = ({ customClass, placeholder, error, list, addItemHandler, reset
             <li>
               <div
                 className={`btn-sm btn-danger mt-2`}
-                onClick={() => resetHandler()}
+                onClick={() => {
+                  setList([])
+                  resetHandler()
+                }}
               >
                 حدف همه
               </div>
