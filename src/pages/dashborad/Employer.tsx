@@ -59,7 +59,7 @@ const Employer = () => {
       {/* dashboard sidebar */}
 
       {/* dashboard contents */}
-      <section className={`bg-jv-bright w-full h-max max-h-screen p-5 rounded-md overflow-y-auto lg:w-9/12 lg:mr-3`}>
+      <section className={`list-scrollbar bg-jv-bright w-full h-max max-h-screen p-5 rounded-md overflow-y-auto lg:w-9/12 lg:mr-3`}>
         <Outlet />
       </section>
       {/* dashboard contents */}
