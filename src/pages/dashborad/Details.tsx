@@ -18,8 +18,16 @@ const schema = z.object({
   name: NON_EMPTY_STRING,
   aboutCompany: z.string().min(3),
   year: NUMERIC_STRING.min(4).max(4),
-  employees_1: NUMERIC_STRING,
-  employees_2: NUMERIC_STRING,
+  employees: z.object({
+    from: NUMERIC_STRING,
+    to: NUMERIC_STRING,
+  })
+    .superRefine(({ from, to }, ctx) => {
+      if ((+from >= +to)) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR', path: ['to'] })
+      }
+      return z.NEVER
+    }),
   activity: NON_EMPTY_STRING,
   province: NON_EMPTY_STRING,
   city: NON_EMPTY_STRING,
@@ -50,7 +58,7 @@ const Details = () => {
       year: +data.year,
       score: 5,
       knowledgeBased: !!data.knowledgeBased,
-      employees: +data.employees_2 > +data.employees_1 ? [+data.employees_1, +data.employees_2] : [+data.employees_1, +data.employees_1 + 1],
+      employees: [+data.employees.from, +data.employees.to],
       province: content?.provinces.find(province => province.name === data.province)?._id || '',
       city: content?.cities.find(city => city.name === data.city)?._id || ''
     }
@@ -173,18 +181,18 @@ const Details = () => {
       <div className={`w-full flex flex-col items-center justify-center sm:flex-row`}>
         <TextInput
           customClass={`bg-jv-bright`}
-          register={{ ...register('employees_1') }}
+          register={{ ...register('employees.from') }}
           placeholder={`از این تعداد`}
-          error={!!errors.employees_1}
+          error={!!errors.employees?.from}
           numeric
         >
           <PeopleOutlineRounded />
         </TextInput>
         <TextInput
           customClass={`bg-jv-bright mt-3 sm:mr-3 sm:mt-0`}
-          register={{ ...register('employees_2') }}
+          register={{ ...register('employees.to') }}
           placeholder={`تا این تعداد`}
-          error={!!errors.employees_2}
+          error={!!errors.employees?.to}
           numeric
         >
           <PeopleOutlineRounded />

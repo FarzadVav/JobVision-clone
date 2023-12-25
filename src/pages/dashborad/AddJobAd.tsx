@@ -210,7 +210,7 @@ const AddJobAd = () => {
               customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3 ${showBothSalary ? '' : 'hidden'}`}
               register={{ ...register('salary.to') }}
               placeholder={`تا 30 میلیون تومان`}
-              error={!!errors.salary?.to || !!errors.salary?.root}
+              error={!!errors.salary?.to}
             >
               <PaymentsOutlined />
             </TextInput>
@@ -251,7 +251,7 @@ const AddJobAd = () => {
               customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3`}
               register={{ ...register('age.to') }}
               placeholder={`تا 25 سال`}
-              error={!!errors.age?.to || !!errors.age?.root}
+              error={!!errors.age?.to}
             >
               <AccountCircleOutlined />
             </TextInput>
