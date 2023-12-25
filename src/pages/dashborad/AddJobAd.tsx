@@ -43,7 +43,7 @@ const schema = z.object({
     to: regexSchema,
   })
     .superRefine(({ from, to }, ctx) => {
-      if ((parseInt(from) >= parseInt(to))) {
+      if ((+from >= +to)) {
         ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR' })
       }
       return z.NEVER
@@ -54,7 +54,7 @@ const schema = z.object({
     showBoth: z.boolean().optional()
   })
     .superRefine(({ from, to, showBoth }, ctx) => {
-      if (showBoth && (parseInt(from) >= parseInt(to))) {
+      if (showBoth && (+from >= +to)) {
         ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR' })
       }
       return z.NEVER
@@ -70,10 +70,12 @@ const AddJobAd = () => {
     setValue,
     getValues,
     formState: { errors },
+    watch,
     reset
   } = useForm<formTypes>({
     resolver: zodResolver(schema),
   })
+  const showBothSalary = watch('salary.showBoth')
   const { content } = useContent()
   const { company } = useCompany()
   const { addJobAd, addJobAdPending } = useJobAdsQuery()
@@ -201,13 +203,13 @@ const AddJobAd = () => {
             <TextInput
               customClass={`bg-jv-bright`}
               register={{ ...register('salary.from') }}
-              placeholder={`برای مثال ${getValues('salary.showBoth') ? 'از ' : ''}20 میلیون تومان`}
+              placeholder={`برای مثال ${showBothSalary ? 'از ' : ''}20 میلیون تومان`}
               error={!!errors.salary?.from}
             >
               <PaymentsOutlined />
             </TextInput>
             <TextInput
-              customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3 ${getValues('salary.showBoth') ? '' : 'hidden'}`}
+              customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3 ${showBothSalary ? '' : 'hidden'}`}
               register={{ ...register('salary.to') }}
               placeholder={`تا 30 میلیون تومان`}
               error={!!errors.salary?.to || !!errors.salary?.root}
@@ -223,12 +225,11 @@ const AddJobAd = () => {
               ایجاد بازه قیمتی
             </label>
             <input
+              name={register('salary.showBoth').name}
               id='salary'
               className={`mr-2`}
               type="checkbox"
-              onChange={event => {
-                setValue('salary.showBoth', event.target.checked)
-              }}
+              onChange={e => setValue('salary.showBoth', e.target.checked)}
             />
           </div>
           {/* salary */}
@@ -482,6 +483,7 @@ const AddJobAd = () => {
             className={`btn btn-primary mt-5`}
             type={`submit`}
             disabled={addJobAdPending}
+            onClick={() => console.log(getValues('salary'))}
           >
             {
               addJobAdPending ? '' : 'ثبت آگهی جدید'
