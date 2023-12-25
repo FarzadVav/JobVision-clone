@@ -26,11 +26,11 @@ const schema = z.object({
   description: z.string().min(3).max(256),
   workTimes: z.string().min(3).max(256),
   businessTrips: z.string().min(1),
-  isRemote: z.boolean(),
-  isUrgent: z.boolean(),
+  isRemote: z.boolean().optional(),
+  isUrgent: z.boolean().optional(),
   gender: gendersTypes,
   cooperationType: z.string().min(1),
-  endOfMilitaryService: z.boolean(),
+  endOfMilitaryService: z.boolean().optional(),
   category: z.string().min(1),
   tags: arraySchema,
   benefits: arraySchema,
@@ -38,16 +38,27 @@ const schema = z.object({
   educations: arraySchema,
   languages: arraySchema,
   technologies: arraySchema,
-  age_1: regexSchema.min(2).max(2),
-  age_2: regexSchema.min(2).max(2),
-  salary: z.object({
-    from: regexSchema.min(1).max(3),
-    to: regexSchema.min(1).max(3),
-    showBoth: z.boolean()
+  age: z.object({
+    from: regexSchema,
+    to: regexSchema,
   })
-    .refine(value => value.showBoth && (parseInt(value.to) <= parseInt(value.from)), { message: 'ERROR' }),
-  salary_1: regexSchema.min(1).max(3),
-  salary_2: z.string()
+    .superRefine(({ from, to }, ctx) => {
+      if ((parseInt(from) >= parseInt(to))) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR' })
+      }
+      return z.NEVER
+    }),
+  salary: z.object({
+    from: regexSchema,
+    to: z.string(),
+    showBoth: z.boolean().optional()
+  })
+    .superRefine(({ from, to, showBoth }, ctx) => {
+      if (showBoth && (parseInt(from) >= parseInt(to))) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR' })
+      }
+      return z.NEVER
+    })
 })
 
 type formTypes = z.infer<typeof schema>
@@ -95,8 +106,8 @@ const AddJobAd = () => {
         education: data.educations,
         languages: data.languages,
         techs: data.technologies,
-        age: +data.age_2 > +data.age_1 ? [+data.age_1, +data.age_2] : [+data.age_1, +data.age_1 + 1],
-        salary: +data.salary_2 > +data.salary_1 ? [+data.salary_1, +data.salary_2] : [+data.salary_1],
+        age: [+data.age.from, +data.age.to],
+        salary: data.salary.showBoth ? [+data.salary.from, +data.salary.to] : [+data.salary.from],
         company: company.company._id || ''
       }
 
@@ -199,7 +210,7 @@ const AddJobAd = () => {
               customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3 ${getValues('salary.showBoth') ? '' : 'hidden'}`}
               register={{ ...register('salary.to') }}
               placeholder={`تا 30 میلیون تومان`}
-              error={!!errors.salary?.to}
+              error={!!errors.salary?.to || !!errors.salary?.root}
             >
               <PaymentsOutlined />
             </TextInput>
@@ -231,17 +242,17 @@ const AddJobAd = () => {
           <div className={`w-full flex flex-col items-center justify-center sm:flex-row`}>
             <TextInput
               customClass={`bg-jv-bright`}
-              register={{ ...register('age_1') }}
+              register={{ ...register('age.from') }}
               placeholder={`برای مثال از 18 سال`}
-              error={!!errors.age_1}
+              error={!!errors.age?.from}
             >
               <AccountCircleOutlined />
             </TextInput>
             <TextInput
               customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3`}
-              register={{ ...register('age_2') }}
+              register={{ ...register('age.to') }}
               placeholder={`تا 25 سال`}
-              error={!!errors.age_2}
+              error={!!errors.age?.to || !!errors.age?.root}
             >
               <AccountCircleOutlined />
             </TextInput>
