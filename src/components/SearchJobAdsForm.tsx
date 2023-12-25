@@ -10,7 +10,7 @@ import { PulseLoader } from "react-spinners";
 import useContent from "../hooks/query/useContent";
 
 const schema = z.object({
-  search: z.string().nonempty('لطفا عنوان شغل را خالی نگذارید').min(2).max(128),
+  search: z.string().min(2).max(128),
   job: z.string(),
   city: z.string()
 })
