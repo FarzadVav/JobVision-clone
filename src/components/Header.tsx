@@ -182,14 +182,34 @@ const Header = () => {
 							alt="لوگوی جاب ویژن"
 						/>
 					</Link>
-					<button
-						className={`h-full flex items-center`}
-						onClick={() => setShowLogin(true)}
-					>
-						<PersonRounded className={`text-white`} fontSize='large' />
-					</button>
+					{
+						location.pathname.includes('employer') ? (
+							<button
+								className={`h-full flex items-center`}
+								onClick={() => {
+									redirect('/')
+									logOutHandler()
+								}}
+							>
+								<LogoutRounded
+									className={`text-white`}
+									fontSize='large'
+								/>
+							</button>
+						) : (
+							<button
+								className={`h-full flex items-center`}
+								onClick={() => isLogin ? redirect('/employer') : setShowLogin(true)}
+							>
+								<PersonRounded
+									className={`text-white`}
+									fontSize='large'
+								/>
+							</button>
+						)
+					}
 				</div>
-			</header>
+			</header >
 
 			<div
 				className={`current-height bg-black bg-opacity-25 backdrop-blur-sm pb-9 fixed top-[4.5rem] left-0 right-0  z-40 ${showMegaMenu ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
