@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { PulseLoader } from "react-spinners"
 import { ManageSearchRounded, CalendarMonthRounded, HelpOutlineRounded, PeopleOutlineRounded, LocationOnOutlined, DriveFileRenameOutlineOutlined } from "@mui/icons-material"
+import toast from "react-hot-toast"
 
 import useContent from "../../hooks/query/useContent"
 import Title from "../../components/Title"
@@ -11,18 +12,18 @@ import TextInput from "../../components/inputs/TextInput"
 import AutoComplete from "../../components/inputs/AutoComplete"
 import { companyDetailsTypes } from "../../types/Company.types"
 import useCompany from "../../hooks/query/useCompany"
-import toast from "react-hot-toast"
+import { NON_EMPTY_STRING, NUMERIC_STRING } from "../../utils/zodSchema"
 
 const schema = z.object({
-  name: z.string().nonempty(),
-  aboutCompany: z.string().nonempty().min(3),
-  year: z.string().nonempty().regex(/^[0-9]+$/).min(4).max(4),
-  employees_1: z.string().nonempty().regex(/^[0-9]+$/),
-  employees_2: z.string().nonempty().regex(/^[0-9]+$/),
-  activity: z.string().nonempty(),
-  province: z.string().nonempty(),
-  city: z.string().nonempty(),
-  knowledgeBased: z.any()
+  name: NON_EMPTY_STRING,
+  aboutCompany: z.string().min(3),
+  year: NUMERIC_STRING.min(4).max(4),
+  employees_1: NUMERIC_STRING,
+  employees_2: NUMERIC_STRING,
+  activity: NON_EMPTY_STRING,
+  province: NON_EMPTY_STRING,
+  city: NON_EMPTY_STRING,
+  knowledgeBased: z.boolean().optional()
 })
 
 type formTypes = z.infer<typeof schema>
@@ -35,10 +36,7 @@ const Details = () => {
     setValue,
     reset
   } = useForm<formTypes>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      knowledgeBased: ''
-    }
+    resolver: zodResolver(schema)
   })
   const { updateCompany, updateCompanyLoading } = useCompany()
   const { content } = useContent()
@@ -51,7 +49,7 @@ const Details = () => {
       activity: data.activity,
       year: +data.year,
       score: 5,
-      knowledgeBased: !!data.knowledgeBased.length,
+      knowledgeBased: !!data.knowledgeBased,
       employees: +data.employees_2 > +data.employees_1 ? [+data.employees_1, +data.employees_2] : [+data.employees_1, +data.employees_1 + 1],
       province: content?.provinces.find(province => province.name === data.province)?._id || '',
       city: content?.cities.find(city => city.name === data.city)?._id || ''
@@ -204,10 +202,9 @@ const Details = () => {
         </label>
         <input
           id='endOfMilitaryService'
-          value={`endOfMilitaryService`}
           className={`mr-2`}
-          {...register('knowledgeBased')}
           type="checkbox"
+          onChange={e => setValue('knowledgeBased', e.target.checked)}
         />
       </div>
       {/* knowledgeBased */}

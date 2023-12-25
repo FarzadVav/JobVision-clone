@@ -15,11 +15,10 @@ import useContent from '../../hooks/query/useContent'
 import useJobAdsQuery from '../../hooks/query/useJobAds'
 import { newJobAdTypes } from '../../types/JobAds.types'
 import useCompany from '../../hooks/query/useCompany'
+import { ARRAY_STRING, NUMERIC_STRING } from '../../utils/zodSchema'
 
 const genders = ['مرد', 'زن', 'فرقی ندارد']
 const gendersTypes = z.enum(['مرد', 'زن', 'فرقی ندارد'])
-const arraySchema = z.string().array().min(1)
-const regexSchema = z.string().regex(/^[0-9]+$/)
 
 const schema = z.object({
   title: z.string().min(3).max(256),
@@ -32,30 +31,30 @@ const schema = z.object({
   cooperationType: z.string().min(1),
   endOfMilitaryService: z.boolean().optional(),
   category: z.string().min(1),
-  tags: arraySchema,
-  benefits: arraySchema,
-  abilties: arraySchema,
-  educations: arraySchema,
-  languages: arraySchema,
-  technologies: arraySchema,
+  tags: ARRAY_STRING,
+  benefits: ARRAY_STRING,
+  abilties: ARRAY_STRING,
+  educations: ARRAY_STRING,
+  languages: ARRAY_STRING,
+  technologies: ARRAY_STRING,
   age: z.object({
-    from: regexSchema,
-    to: regexSchema,
+    from: NUMERIC_STRING,
+    to: NUMERIC_STRING,
   })
     .superRefine(({ from, to }, ctx) => {
       if ((+from >= +to)) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR' })
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR', path: ['to'] })
       }
       return z.NEVER
     }),
   salary: z.object({
-    from: regexSchema,
+    from: NUMERIC_STRING,
     to: z.string(),
     showBoth: z.boolean().optional()
   })
     .superRefine(({ from, to, showBoth }, ctx) => {
       if (showBoth && (+from >= +to)) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR' })
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR', path: ['to'] })
       }
       return z.NEVER
     })
@@ -68,7 +67,6 @@ const AddJobAd = () => {
     register,
     handleSubmit,
     setValue,
-    getValues,
     formState: { errors },
     watch,
     reset
@@ -427,11 +425,8 @@ const AddJobAd = () => {
               </label>
               <input
                 id='isRemote'
-                value='isRemote'
                 className={`mr-2`}
-                onChange={e => {
-                  setValue('isRemote', e.target.checked)
-                }}
+                onChange={e => setValue('isRemote', e.target.checked)}
                 type="checkbox"
               />
             </div>
@@ -447,11 +442,8 @@ const AddJobAd = () => {
               </label>
               <input
                 id='isUrgent'
-                value={`isUrgent`}
                 className={`mr-2`}
-                onChange={e => {
-                  setValue('isUrgent', e.target.checked)
-                }}
+                onChange={e => setValue('isUrgent', e.target.checked)}
                 type="checkbox"
               />
             </div>
@@ -467,11 +459,8 @@ const AddJobAd = () => {
               </label>
               <input
                 id='endOfMilitaryService'
-                value={`endOfMilitaryService`}
                 className={`mr-2`}
-                onChange={e => {
-                  setValue('endOfMilitaryService', e.target.checked)
-                }}
+                onChange={e => setValue('endOfMilitaryService', e.target.checked)}
                 type="checkbox"
               />
             </div>
@@ -483,7 +472,6 @@ const AddJobAd = () => {
             className={`btn btn-primary mt-5`}
             type={`submit`}
             disabled={addJobAdPending}
-            onClick={() => console.log(getValues('salary'))}
           >
             {
               addJobAdPending ? '' : 'ثبت آگهی جدید'
