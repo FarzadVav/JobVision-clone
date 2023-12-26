@@ -473,7 +473,7 @@ const Jobs = () => {
 				<div className={`wrapper`}>
 					{/* alert */}
 					<div
-						className={`bg-jv-primary w-full h-12 flex justify-center items-center fixed z-40 bottom-0 left-0
+						className={`bg-jv-primary w-full h-12 flex justify-center items-center fixed z-30 bottom-0 left-0
 						md:static md:z-0 md:justify-between md:pl-1 md:pr-5 md:rounded`}
 						onClick={() => !showAlert && setShowAlert(prev => !prev)}
 						ref={alertRef}

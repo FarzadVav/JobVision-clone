@@ -17,21 +17,17 @@ const Header = () => {
 		showMegaMenu,
 		showMobileMenu,
 		showMobileMenuJobs,
-		showJobInMobileMenu,
+		showMobileMenuSubJobs,
 		showLogin,
-		setShowMegaMenu,
-		setShowMobileMenu,
-		setShowMobileMenuJobs,
-		setShowLogin,
-		setShowJobInMobileMenu
+		setShowMobileMenuSubJobs
 	} = useHeader(s => s)
 
 	const mobileMenuRef = useRef<HTMLMenuElement>(null)
 
 	useEffect(() => {
-		setShowMegaMenu(false)
-		setShowMobileMenu(false)
-		setShowJobInMobileMenu('', false)
+		useHeader.setState({ showMegaMenu: false })
+		useHeader.setState({ showMobileMenu: false })
+		setShowMobileMenuSubJobs('', false)
 	}, [location.href])
 
 	useEffect(() => {
@@ -47,7 +43,7 @@ const Header = () => {
 			mobileMenuRef?.current?.classList.remove('show-mobile-menu')
 			mobileMenuRef?.current?.classList.add('hide-mobile-menu')
 		} else {
-			setShowMobileMenu(true)
+			useHeader.setState({ showMobileMenu: true })
 		}
 	}
 
@@ -63,7 +59,7 @@ const Header = () => {
 						<ul className={'h-full flex'}>
 							<li
 								className={'h-full'}
-								onClick={() => setShowMegaMenu(!showMegaMenu)}
+								onClick={() => useHeader.setState({ showMobileMenu: !showMegaMenu })}
 							>
 								<button className={`nav-link cursor-pointer group ${showMegaMenu && 'text-jv-primary'}`}>
 									فرصت های شغلی
@@ -134,7 +130,7 @@ const Header = () => {
 								<>
 									<button
 										className={`btn btn-out-primary`}
-										onClick={() => setShowLogin(true)}
+										onClick={() => useHeader.setState({ showLogin: true })}
 									>
 										ورود / ثبت نام
 									</button>
@@ -159,7 +155,7 @@ const Header = () => {
 					</div>
 				</div>
 				<div className={`wrapper h-full flex justify-between items-center px-4 lg:hidden`}>
-					<menu
+					<button
 						className={`h-full flex items-center relative`}
 						onClick={mobileMenuToggleHandler}
 					>
@@ -171,7 +167,7 @@ const Header = () => {
 							className={`text-white absolute ${!showMobileMenu ? 'opacity-0 translate-y-3' : ''}`}
 							fontSize='large'
 						/>
-					</menu>
+					</button>
 					<Link
 						className={`nav-link`}
 						to={`/`}
@@ -199,7 +195,7 @@ const Header = () => {
 						) : (
 							<button
 								className={`h-full flex items-center`}
-								onClick={() => isLogin ? redirect('/employer') : setShowLogin(true)}
+								onClick={() => isLogin ? redirect('/employer') : useHeader.setState({ showLogin: true })}
 							>
 								<PersonRounded
 									className={`text-white`}
@@ -219,7 +215,7 @@ const Header = () => {
 						{
 							content?.jobAdsMneu.map(menu => (
 								<li
-									key={menu.id}
+									key={tokenGenerator()}
 									className={`h-full flex items-center cursor-pointer group hover:text-jv-primary`}>
 									<span
 										className={`border-l border-solid border-jv-light h-1/2 flex items-center px-6 dana-bold`}>
@@ -330,166 +326,168 @@ const Header = () => {
 			{
 				showMobileMenu && (
 					<menu
+						className={`show-mobile-menu w-full h-full fixed bottom-0 origin-bottom z-40 lg:hidden`}
 						ref={mobileMenuRef}
-						className={`show-mobile-menu bg-jv-primary flex flex-col items-center rounded-t-[2rem] fixed bottom-0 top-56 right-0 left-0 origin-bottom overflow-hidden z-50 lg:hidden`}
+						onClick={mobileMenuToggleHandler}
 						onAnimationEnd={(event: AnimationEvent<HTMLElement>) => {
 							if (event.animationName === 'hide-mobile-menu') {
-								setShowMobileMenu(false)
+								useHeader.setState({ showMobileMenu: false })
 							}
 						}}
 					>
-						<div className={`bg-jv-primary brightness-125 w-12 h-1 rounded-full absolute top-3`}></div>
+						<section
+							className={`bg-jv-primary w-full flex flex-col items-center rounded-t-[2rem] overflow-hidden absolute bottom-0 top-56`}
+							onClick={e => e.stopPropagation()}
+						>
+							<div className={`bg-jv-primary brightness-125 w-12 h-1 rounded-full absolute top-3`}></div>
 
-						<ul className={`w-full h-full flex flex-col px-6 pb-14 absolute top-9 duration-500 cubic-1
-						${(!showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : '-translate-x-full'}`}>
-							<li
-								className={`w-full flex justify-between items-center py-2 cursor-pointer`}
-								onClick={() => setShowMobileMenuJobs(true)}
-							>
-								<span className={`text-white text-xl`}>
-									فرصت های شغلی
-								</span>
-								<NavigateBeforeRounded className={`text-white`} />
-							</li>
-							<li className={`w-full flex justify-between items-center py-2 mt-3`}>
-								<Link
-									className={`text-white text-xl`}
-									to={`/`}
+							<ul className={`w-full h-full flex flex-col px-6 pb-14 absolute top-9 duration-500 cubic-1 ${(!showMobileMenuJobs && !showMobileMenuSubJobs.state) ? 'translate-x-0' : '-translate-x-full'}`}>
+								<li
+									className={`w-full flex justify-between items-center py-2 cursor-pointer`}
+									onClick={() => useHeader.setState({ showMobileMenuJobs: true })}
 								>
-									محصولات
-								</Link>
-							</li>
-							<li className={`w-full flex justify-between items-center py-2 mt-3`}>
-								<Link
-									className={`text-white text-xl`}
-									to={`/`}
-								>
-									رده بندی شرکت ها
-								</Link>
-							</li>
-							<li
-								className={`border-b border-solid border-[#ffffff25] border-opacity-25 w-full flex justify-between items-center pt-2 pb-5 mt-3`}>
-								<Link
-									className={`text-white text-xl`}
-									to={`/`}
-								>
-									رزومه ساز
-								</Link>
-							</li>
-							<li className={`w-full flex justify-between items-center py-2 mt-4`}>
-								<Link
-									className={`text-white text-xl`}
-									to={`/`}
-								>
-									کارفرمایان
-								</Link>
-							</li>
-							<li className={`w-full flex justify-between items-center mt-auto`}>
-								<Link
-									className={`btn btn-danger text-xl w-full`}
-									to={`/`}
-								>
-									گزارش کارنامه بازار کار
-								</Link>
-							</li>
-						</ul>
-
-						<ul className={`w-full flex flex-col px-6 pb-9 absolute top-9 duration-500 cubic-1
-						${(showMobileMenuJobs && !showJobInMobileMenu.state) ? 'translate-x-0' : (!showMobileMenuJobs && showJobInMobileMenu.state) ? '-translate-x-full' : 'translate-x-full'}`}>
-							<li
-								className={`border-b border-solid border-[#ffffff25] brightness-125 w-full flex justify-between items-center 
-								pt-2 pb-5 cursor-pointer`}
-								onClick={() => setShowMobileMenuJobs(false)}
-							>
-								<button className={`text-white text-xl`}>
-									بازگشت
-								</button>
-								<NavigateBeforeRounded className={`text-white rotate-180`} />
-							</li>
-							<li className={`w-full flex justify-between items-center py-2 mt-4 cursor-pointer`}>
-								<Link
-									className={`text-jv-warning underline w-full text-xl`}
-									to={'/jobs'}
-								>
-									همه آگهی ها
-								</Link>
-							</li>
-							{
-								content?.jobAdsMneu.map(menu => (
-									<li
-										key={menu.id}
-										className={`w-full flex justify-between items-center py-2 mt-4 cursor-pointer`}
-										onClick={() => {
-											setShowMobileMenuJobs(false)
-											setShowJobInMobileMenu(menu.id, true)
-										}}
+									<span className={`text-white text-xl`}>
+										فرصت های شغلی
+									</span>
+									<NavigateBeforeRounded className={`text-white`} />
+								</li>
+								<li className={`w-full flex justify-between items-center py-2 mt-3`}>
+									<Link
+										className={`text-white text-xl`}
+										to={`/`}
 									>
-										<span className={`text-white text-xl`}>
-											{menu.title}
-										</span>
-										<NavigateBeforeRounded className={`text-white`} />
-									</li>
-								))
-							}
-						</ul>
+										محصولات
+									</Link>
+								</li>
+								<li className={`w-full flex justify-between items-center py-2 mt-3`}>
+									<Link
+										className={`text-white text-xl`}
+										to={`/`}
+									>
+										رده بندی شرکت ها
+									</Link>
+								</li>
+								<li
+									className={`border-b border-solid border-[#ffffff25] border-opacity-25 w-full flex justify-between items-center pt-2 pb-5 mt-3`}>
+									<Link
+										className={`text-white text-xl`}
+										to={`/`}
+									>
+										رزومه ساز
+									</Link>
+								</li>
+								<li className={`w-full flex justify-between items-center py-2 mt-4`}>
+									<Link
+										className={`text-white text-xl`}
+										to={`/`}
+									>
+										کارفرمایان
+									</Link>
+								</li>
+								<li className={`w-full flex justify-between items-center mt-auto`}>
+									<Link
+										className={`btn btn-danger text-xl w-full`}
+										to={`/`}
+									>
+										گزارش کارنامه بازار کار
+									</Link>
+								</li>
+							</ul>
 
-						<ul className={`w-full h-full flex flex-col px-6 pb-9 absolute top-9 overflow-y-auto duration-500 cubic-1
-						${(!showMobileMenuJobs && showJobInMobileMenu.state) ? 'translate-x-0' : 'translate-x-full'}`}>
-							<li
-								className={`bg-jv-primary border-b border-solid border-[#ffffff25] w-full flex justify-between items-center sticky top-0 pt-2 pb-5 mb-4 cursor-pointer`}
-								onClick={() => {
-									setShowMobileMenuJobs(true)
-									setShowJobInMobileMenu('', false)
-								}}
-							>
-								<button className={`text-white text-xl`}>
-									بازگشت
-								</button>
-								<NavigateBeforeRounded className={`text-white rotate-180`} />
-							</li>
-							{
-								content?.jobAdsMneu.map(menu => {
-									if (menu.id === showJobInMobileMenu.id) {
-										return menu.links.map(link => (
-											<li
-												key={tokenGenerator()}
-												className={`w-full flex flex-col my-2 cursor-pointer`}
-											>
-												<button
-													className={`w-full text-white text-xl text-right`}
-													onClick={() => megaMenuButtonLinkHandler(`/jobs?${menu.query}=${link.link}`)}
+							<ul className={`w-full flex flex-col px-6 pb-9 absolute top-9 duration-500 cubic-1 ${(showMobileMenuJobs && !showMobileMenuSubJobs.state) ? 'translate-x-0' : (!showMobileMenuJobs && showMobileMenuSubJobs.state) ? '-translate-x-full' : 'translate-x-full'}`}>
+								<li
+									className={`border-b border-solid border-[#ffffff25] brightness-125 w-full flex justify-between items-center pt-2 pb-5 cursor-pointer`}
+									onClick={() => useHeader.setState({ showMobileMenuJobs: false })}
+								>
+									<button className={`text-white text-xl`}>
+										بازگشت
+									</button>
+									<NavigateBeforeRounded className={`text-white rotate-180`} />
+								</li>
+								<li className={`w-full flex justify-between items-center py-2 mt-4 cursor-pointer`}>
+									<Link
+										className={`text-jv-warning underline w-full text-xl`}
+										to={'/jobs'}
+									>
+										همه آگهی ها
+									</Link>
+								</li>
+								{
+									content?.jobAdsMneu.map(menu => (
+										<li
+											key={tokenGenerator()}
+											className={`w-full flex justify-between items-center py-2 mt-4 cursor-pointer`}
+											onClick={() => {
+												useHeader.setState({ showMobileMenuJobs: false })
+												setShowMobileMenuSubJobs(menu.id, true)
+											}}
+										>
+											<span className={`text-white text-xl`}>
+												{menu.title}
+											</span>
+											<NavigateBeforeRounded className={`text-white`} />
+										</li>
+									))
+								}
+							</ul>
+
+							<ul className={`w-full h-full flex flex-col px-6 pb-9 absolute top-9 overflow-y-auto duration-500 cubic-1 ${(!showMobileMenuJobs && showMobileMenuSubJobs.state) ? 'translate-x-0' : 'translate-x-full'}`}>
+								<li
+									className={`bg-jv-primary border-b border-solid border-[#ffffff25] w-full flex justify-between items-center sticky top-0 pt-2 pb-5 mb-4 cursor-pointer`}
+									onClick={() => {
+										useHeader.setState({ showMobileMenuJobs: true })
+										setShowMobileMenuSubJobs('', false)
+									}}
+								>
+									<button className={`text-white text-xl`}>
+										بازگشت
+									</button>
+									<NavigateBeforeRounded className={`text-white rotate-180`} />
+								</li>
+								{
+									content?.jobAdsMneu.map(menu => {
+										if (menu.id === showMobileMenuSubJobs.id) {
+											return menu.links.map(link => (
+												<li
+													key={tokenGenerator()}
+													className={`w-full flex flex-col my-2 cursor-pointer`}
 												>
-													{link.link}
-												</button>
-												{
-													link.subLinks.length ? (
-														<ul className={`w-full flex flex-col my-4`}>
-															{
-																link.subLinks.map(subLink => (
-																	<li
-																		key={tokenGenerator()}
-																		className={`py-1 my-1 first:pt-0 first:mt-0 last:pb-0 last:mb-0`}
-																	>
-																		<Link
-																			className={`dana-base w-full block text-white text-base`}
-																			to={`/jobs?${link.query2}=${subLink}`}
+													<button
+														className={`w-full text-white text-xl text-right`}
+														onClick={() => megaMenuButtonLinkHandler(`/jobs?${menu.query}=${link.link}`)}
+													>
+														{link.link}
+													</button>
+													{
+														link.subLinks.length ? (
+															<ul className={`w-full flex flex-col my-4`}>
+																{
+																	link.subLinks.map(subLink => (
+																		<li
+																			key={tokenGenerator()}
+																			className={`py-1 my-1 first:pt-0 first:mt-0 last:pb-0 last:mb-0`}
 																		>
-																			<span className={`ml-1.5`}>-</span> {link.query2 === 'cooperationType-city' ? `در ${subLink.split('_')[1]}` : subLink}
-																		</Link>
-																	</li>
-																))
-															}
-														</ul>
-													) : null
-												}
-											</li>
-										))
-									} else {
-										return null
-									}
-								})
-							}
-						</ul>
+																			<Link
+																				className={`dana-base w-full block text-white text-base`}
+																				to={`/jobs?${link.query2}=${subLink}`}
+																			>
+																				<span className={`ml-1.5`}>-</span> {link.query2 === 'cooperationType-city' ? `در ${subLink.split('_')[1]}` : subLink}
+																			</Link>
+																		</li>
+																	))
+																}
+															</ul>
+														) : null
+													}
+												</li>
+											))
+										} else {
+											return null
+										}
+									})
+								}
+							</ul>
+						</section>
 					</menu>
 				)
 			}

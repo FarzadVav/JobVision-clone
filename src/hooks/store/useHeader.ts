@@ -5,15 +5,11 @@ type useHeaderProps = {
   showMobileMenu: boolean;
   showMobileMenuJobs: boolean;
   showLogin: boolean;
-  showJobInMobileMenu: {
+  showMobileMenuSubJobs: {
     id: string;
     state: boolean
   }
-  setShowMegaMenu: (state: boolean) => void;
-  setShowMobileMenu: (state: boolean) => void;
-  setShowMobileMenuJobs: (state: boolean) => void;
-  setShowLogin: (state: boolean) => void
-  setShowJobInMobileMenu: (id: string, state: boolean) => void
+  setShowMobileMenuSubJobs: (id: string, state: boolean) => void
 }
 
 const useHeader = create<useHeaderProps>(set => ({
@@ -21,15 +17,11 @@ const useHeader = create<useHeaderProps>(set => ({
   showMobileMenu: false,
   showMobileMenuJobs: false,
   showLogin: false,
-  showJobInMobileMenu: {
+  showMobileMenuSubJobs: {
     id: '',
     state: false
   },
-  setShowMegaMenu: state => set({ showMegaMenu: state }),
-  setShowMobileMenu: state => set({ showMobileMenu: state }),
-  setShowMobileMenuJobs: state => set({ showMobileMenuJobs: state }),
-  setShowLogin: state => set({ showLogin: state }),
-  setShowJobInMobileMenu: (id, state) => set({ showJobInMobileMenu: { id, state } }),
+  setShowMobileMenuSubJobs: (id, state) => set({ showMobileMenuSubJobs: { id, state } }),
 }))
 
 export default useHeader
