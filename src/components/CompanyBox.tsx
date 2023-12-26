@@ -3,9 +3,9 @@ import { Star } from "@mui/icons-material"
 
 import CompanyTypes from "../types/Company.types"
 
+const jobs = [1, 2, 3]
+
 const CompanyBox = ({ _id, logo, name, score }: CompanyTypes) => {
-  const jobs = [1, 2, 3]
-  
   return (
     <Link
       className={`bg-white text-jv-dark border border-solid border-jv-light w-52 p-2 flex flex-col rounded-md`}
