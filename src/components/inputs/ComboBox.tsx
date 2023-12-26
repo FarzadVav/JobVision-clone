@@ -16,9 +16,7 @@ const ComboBox = ({ customClass, placeholder, error, onChangeList, resetHandler,
   const [value, setValue] = useState<string>('')
   const [list, setList] = useState<string[]>([])
 
-  useEffect(() => {
-    onChangeList(list)
-  }, [list])
+  useEffect(() => onChangeList(list), [list])
 
   return (
     <div className={`w-full flex flex-col`}>

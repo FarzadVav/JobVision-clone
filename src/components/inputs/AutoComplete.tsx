@@ -34,8 +34,8 @@ const AutoComplete = ({ customClass, register, setValue, placeholder, error, chi
         {...register}
         placeholder={placeholder}
         autoComplete="off"
-        onChange={(event) => searchedDatasHandler(event.target.value)}
-        onFocus={(event) => {
+        onChange={event => searchedDatasHandler(event.target.value)}
+        onFocus={event => {
           searchedDatasHandler(event.target.value)
           setFocus(true)
         }}

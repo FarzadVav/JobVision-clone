@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { CloseRounded, DoneRounded, KeyboardArrowDownRounded } from "@mui/icons-material";
 
 import tokenGenerator from "../../utils/tokenGenerator";
+import useFirstMount from "../../hooks/useFirstMount";
 
 type MultiSelectBoxProps = {
   customClass?: string;
@@ -12,24 +13,20 @@ type MultiSelectBoxProps = {
   resetHandler: Function;
 }
 
-const MultiSelectBox = ({
-  customClass, placeholder, error, datas, onChangeList, resetHandler,
-}: MultiSelectBoxProps) => {
+const MultiSelectBox = ({ customClass, placeholder, error, datas, onChangeList, resetHandler }: MultiSelectBoxProps) => {
   const [focus, setFocus] = useState<boolean>(false)
   const [value, setValue] = useState<string>('')
   const [selectedList, setSelectedList] = useState<string[]>([])
   const [searchedDatas, setSearchedDatas] = useState<typeof datas>(datas)
+  const firstMount = useFirstMount()
 
   const inputRef = useRef<HTMLInputElement>(null)
-  const firstMountRef = useRef<boolean>(true)
 
   useEffect(() => {
-    if (firstMountRef.current) {
+    if (firstMount) {
       window.addEventListener('click', () => {
         setFocus(false)
       })
-    } else {
-      firstMountRef.current = false
     }
 
     onChangeList(selectedList)
