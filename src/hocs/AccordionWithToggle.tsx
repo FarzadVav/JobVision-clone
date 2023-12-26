@@ -1,4 +1,5 @@
 import { FC, useEffect, useRef, useState } from "react"
+
 import AccordionTypes from "../types/Accordion.types";
 
 const AccordionWithToggle = (Component: FC<any>, moreSpace?: number) => {
@@ -9,21 +10,25 @@ const AccordionWithToggle = (Component: FC<any>, moreSpace?: number) => {
 
     useEffect(() => {
       if (toggle) {
-        accordionRef.current ? accordionRef.current.style.maxHeight = `${accordionRef.current?.scrollHeight + (moreSpace || 0)}px` : null
+        accordionRef.current
+          ? accordionRef.current.style.maxHeight = `${accordionRef.current?.scrollHeight + (moreSpace || 0)}px`
+          : null
       } else {
-        accordionRef.current ? accordionRef.current.style.maxHeight = '0' : null
+        accordionRef.current
+          ? accordionRef.current.style.maxHeight = '0'
+          : null
       }
     }, [toggle])
 
-    const toggleHandler = () => setToggle(prev => !prev)
-
-    return <Component
-      {...props}
-      toggle={toggle}
-      setToggle={setToggle}
-      accordionRef={accordionRef}
-      toggleHandler={toggleHandler}
-    />
+    return (
+      <Component
+        {...props}
+        toggle={toggle}
+        setToggle={setToggle}
+        accordionRef={accordionRef}
+        toggleHandler={() => setToggle(prev => !prev)}
+      />
+    )
   }
 
   return NewComponent

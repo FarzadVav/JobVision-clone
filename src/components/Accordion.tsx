@@ -1,20 +1,21 @@
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
+import { KeyboardCapslockRounded } from "@mui/icons-material"
+
 import AccordionWithToggle from "../hocs/AccordionWithToggle"
 import AccordionTypes from "../types/Accordion.types"
 import Title from "./Title"
-import { KeyboardCapslockRounded } from "@mui/icons-material"
 
 const Accordion = ({ toggle, accordionRef, setToggle, toggleHandler, length, title, text }: AccordionTypes) => {
   const accordionParrentRef = useRef<HTMLLIElement>(null)
 
-  window.addEventListener('scroll', () => {
-    if (
-      ((accordionParrentRef.current?.getBoundingClientRect().top || 0) <= (window.innerHeight / 1.6))
-      && length === 1
-    ) {
-      setToggle(true)
-    }
-  })
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      if (((accordionParrentRef.current?.getBoundingClientRect().top || 0) <= (window.innerHeight / 1.6))
+        && length === 1) {
+        setToggle(true)
+      }
+    })
+  }, [])
 
   return (
     <>

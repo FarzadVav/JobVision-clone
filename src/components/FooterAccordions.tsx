@@ -1,4 +1,5 @@
 import { KeyboardArrowLeftRounded } from "@mui/icons-material"
+
 import AccordionWithToggle from "../hocs/AccordionWithToggle"
 import AccordionTypes from "../types/Accordion.types"
 import Title from "./Title"
@@ -10,7 +11,7 @@ const FooterAccordion = ({ toggle, accordionRef, toggleHandler, length, title, t
         className={`h-12 flex items-center`}
         onClick={toggleHandler}
       >
-        <span className={``}>
+        <span>
           {length}
         </span>
         <Title withOutIcon>

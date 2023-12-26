@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import tokenGenerator from "../utils/tokenGenerator";
 import Title from "./Title"
-import FooterAccordion, { FooterLinksAccordion } from "./FooterAccordion";
+import FooterAccordion, { FooterLinksAccordion } from "./FooterAccordions";
 import { Instagram, KeyboardArrowDownRounded, LinkedIn, Telegram, Twitter } from "@mui/icons-material";
 
 const accordions = [
