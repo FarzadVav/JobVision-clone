@@ -46,18 +46,14 @@ const JobBox = ({
     >
       <div
         className={`border border-solid w-full h-full flex flex-col justify-between rounded-md cursor-pointer p-3 ${selected ? 'border-jv-primary text-jv-primary' : 'border-jv-light text-jv-dark'}`}
-        onClick={() => {
-          if (!window.location.pathname.includes('/jobs')) {
-            redirect(`/jobs?id=${_id}`)
-          }
-        }}
+        onClick={() => !window.location.pathname.includes('/jobs') ? redirect(`/jobs?id=${_id}`) : null}
       >
         <div className={`flex`}>
           <div className={`col-span-3 flex flex-col items-center`}>
             <div className={`w-20 h-20 flex justify-center items-center rounded-md`}>
               <img
                 className={`w-full h-full object-fill object-center rounded-md`}
-                // src={company.logo}
+                src={company.logo}
                 alt={`لوگوی شرکت ${company.name}`}
                 loading={`lazy`}
               />

@@ -2,22 +2,25 @@ import { NavLink, Outlet } from "react-router-dom"
 import Title from "./../../components/Title"
 import { createPortal } from "react-dom"
 import { AssessmentRounded, InfoRounded, PersonRounded } from "@mui/icons-material"
+import useCompany from "../../hooks/query/useCompany"
 
 const Employer = () => {
+  const { company } = useCompany()
+
   return (
     <div className={`wrapper flex mt-3 pb-[4.75rem] lg:mt-12 lg:pb-12`}>
       {/* dashboard sidebar */}
       <aside className={`bg-jv-primary w-3/12 h-max hidden flex-col justify-center items-center p-5 rounded-md sticky top-[5.25rem] overflow-hidden lg:flex`}>
-        <div className={`bg-white w-20 h-20 flex justify-center items-center rounded-md relative`}>
+        <div className={`bg-slate-50 bg-opacity-20 w-24 h-24 flex justify-center items-center rounded-md relative`}>
           {/* this image is for light shadow in back orginal image */}
           <img
-            className={`w-32 h-32 object-cover object-center rounded-md absolute blur-2xl opacity-50`}
-            src="https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=151196&width=70&height=70"
+            className={`w-32 h-32 object-cover object-center rounded-md absolute opacity-75 blur-xl`}
+            src={company?.company.logo}
             alt="لوگوی شرکت"
           />
           <img
-            className={`w-full h-full object-cover object-center rounded-md absolute`}
-            src="https://fileapi.jobvision.ir/api/v1.0/files/getimage?fileid=151196&width=70&height=70"
+            className={`w-20 h-20 rounded-md object-cover object-center absolute`}
+            src={company?.company.logo}
             alt="لوگوی شرکت"
           />
         </div>
@@ -26,7 +29,7 @@ const Employer = () => {
           withOutIcon
         >
           <h1 className={`text-white !text-xl`}>
-            نام شرکت!!!
+            {company?.company.name}
           </h1>
         </Title>
         <ul className={`w-full flex flex-col justify-center items-center mt-4`}>

@@ -161,13 +161,7 @@ type JobsFiltersBarProps = {
 }
 const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
   const { jobAds } = useJobAdsQuery()
-  const {
-    selectedJobAds,
-    setFilteredJobAds,
-    setSelectedJobAds,
-    setJobAdsToDefault,
-    setHasFilter
-  } = useJobAds(s => s)
+  const { selectedJobAds, setFilteredJobAds, setSelectedJobAds, setJobAdsToDefault, setHasFilter } = useJobAds(s => s)
   const filters = useJobAdsFilters(s => s)
   const [searchParams] = useSearchParams()
   const redirect = useNavigate()
