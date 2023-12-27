@@ -12,6 +12,7 @@ import Tabs from '../components/Tabs'
 import PopularCompanies from '../components/PopularCompanies';
 import useJobAds from '../hooks/store/useJobAds';
 import useJobAdsQuery from '../hooks/query/useJobAds';
+import useFirstMount from '../hooks/useFirstMount';
 
 const Jobs = () => {
 	const { jobAds } = useJobAdsQuery()
@@ -24,19 +25,22 @@ const Jobs = () => {
 		title: string;
 		content: ReactNode
 	}[]>([])
+	const firstMount = useFirstMount()
 
 	const alertRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
 		// hide alertBox on scroll to footer (in mobile size)
-		window.addEventListener('scroll', () => {
-			const footer = document.querySelector('footer')
-			if ((footer?.getBoundingClientRect().top || 0) <= window.innerHeight) {
-				alertRef.current?.classList.add('opacity-0', 'invisible')
-			} else {
-				alertRef.current?.classList.remove('opacity-0', 'invisible')
-			}
-		})
+		if (firstMount) {
+			window.addEventListener('scroll', () => {
+				const footer = document.querySelector('footer')
+				if ((footer?.getBoundingClientRect().top || 0) <= window.innerHeight) {
+					alertRef.current?.classList.add('opacity-0', 'invisible')
+				} else {
+					alertRef.current?.classList.remove('opacity-0', 'invisible')
+				}
+			})
+		}
 
 		// cancell scrolling when selected a jobAd (in mobile size)
 		if (window.innerWidth < 1024) {
@@ -57,7 +61,7 @@ const Jobs = () => {
 				id: singleJobAd._id || '',
 				title: 'درباره شغل',
 				content: (
-					<div key={1} className={`w-full flex flex-col`}>
+					<div className={`w-full flex flex-col`}>
 						<Title withIcon>
 							<span className='!text-xl'>
 								مشخصات موقعیت شغلی
@@ -243,9 +247,9 @@ const Jobs = () => {
 								</span>
 								<span>
 									{
-										singleJobAd.techs.length ? singleJobAd.techs.map((tech, i) => (
+										singleJobAd.techs.length ? singleJobAd.techs.map(tech => (
 											<div
-												key={i}
+												key={tokenGenerator()}
 												className={`bg-jv-light min-w-max text-xs px-3 py-0.5 ml-1.5 rounded last:ml-0`}
 											>
 												{tech}
@@ -287,7 +291,7 @@ const Jobs = () => {
 													if (i < 6 && job.category.name === singleJobAd.category.name && job._id !== singleJobAd._id) {
 														return (
 															<div
-																key={job._id}
+																key={tokenGenerator()}
 																className={`w-full`}
 																onClick={() => {
 																	jobAdsSelectHandler(job)
@@ -419,14 +423,13 @@ const Jobs = () => {
 								? (
 									<div className={`w-full grid grid-cols-1 gap-3 sm:grid-cols-2`}>
 										{
-											jobAds.map((job) => {
+											jobAds.map(job => {
 												if (job.company._id === singleJobAd.company._id && job._id !== singleJobAd._id) {
 													return (
 														<div
-															key={job._id}
+															key={tokenGenerator()}
 															className={`w-full`}
 															onClick={() => {
-																// removeSelectedJobAd()
 																jobAdsSelectHandler(job)
 																setSelectedJobAds(job)
 															}}
@@ -532,7 +535,7 @@ const Jobs = () => {
 									useMemo(() => {
 										return (hasFilter && filteredJobAds.length) ? filteredJobAds.map(job => (
 											<div
-												key={job._id}
+												key={tokenGenerator()}
 												className={`w-full`}
 												onClick={() => {
 													jobAdsSelectHandler(job)
@@ -560,7 +563,7 @@ const Jobs = () => {
 									useMemo(() => {
 										return (!hasFilter && jobAds?.length) ? jobAds.map(job => (
 											<div
-												key={job._id}
+												key={tokenGenerator()}
 												className={`w-full`}
 												onClick={() => {
 													jobAdsSelectHandler(job)
