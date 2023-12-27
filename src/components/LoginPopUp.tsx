@@ -31,7 +31,6 @@ const LoginPopUp = () => {
   const redirect = useNavigate()
   const { loginHandler } = useAuth(s => s)
   const { company, refetchCompany, addCompany, addCompanyLoading } = useCompany()
-  const { setShowLogin } = useHeader(s => s)
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     let hasUser = false
@@ -43,7 +42,7 @@ const LoginPopUp = () => {
           toast.success('با موفقیت وارد حسابتان شدید')
           reset()
           setTimeout(() => {
-            setShowLogin(false)
+            useHeader.setState({ showLogin: false })
             redirect('/employer')
           }, 1750);
         } else {
@@ -59,9 +58,10 @@ const LoginPopUp = () => {
           toast.success('با موفقیت ثبت نام شدید')
           reset()
           setTimeout(() => {
-            setShowLogin(false)
+            useHeader.setState({ showLogin: false })
+
             redirect('/employer')
-          }, 1750);
+          }, 1500);
         }
       })
     }
@@ -71,7 +71,7 @@ const LoginPopUp = () => {
     <>
       <div
         className={`backdrop-blur-2xl w-full h-screen fixed top-0 right-0 z-50 flex justify-center items-center`}
-        onClick={() => setShowLogin(false)}
+        onClick={() => useHeader.setState({ showLogin: false })}
       >
         <form
           className={`bg-white border border-solid border-jv-light w-full h-full flex flex-col justify-center items-stretch p-6 rounded-md relative sm:w-96 sm:h-max`}
@@ -82,7 +82,7 @@ const LoginPopUp = () => {
         >
           <button
             className={`btn-sm absolute top-5 left-1.5 sm:hidden`}
-            onClick={() => setShowLogin(false)}
+            onClick={() => useHeader.setState({ showLogin: false })}
             type='button'
           >
             <CloseRounded className={`text-jv-danger`} />
