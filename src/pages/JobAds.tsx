@@ -1,5 +1,5 @@
 import { ReactNode, useState, useEffect, useRef, useMemo } from 'react'
-import { CloseRounded, FavoriteBorderRounded, HelpRounded, InfoOutlined, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined, StarRateRounded, Verified } from "@mui/icons-material";
+import { CloseRounded, FavoriteBorderRounded, HelpRounded, InfoOutlined, NotificationAddRounded, PeopleAltRounded, Send, ShareOutlined, StarRateRounded } from "@mui/icons-material";
 import { Alert } from '@mui/material';
 
 import SearchJobForm from "../components/SearchJobAdsForm";
@@ -58,13 +58,13 @@ const Jobs = () => {
 				title: 'درباره شغل',
 				content: (
 					<div key={1} className={`w-full flex flex-col`}>
-						<Title withOutIcon>
+						<Title withIcon>
 							<span className='!text-xl'>
 								مشخصات موقعیت شغلی
 							</span>
 						</Title>
 						<div className={`w-full flex flex-wrap gap-y-3 mt-3`}>
-							<div className={`w-full px-3 sm:w-1/2`}>
+							<div className={`w-full sm:w-1/2`}>
 								<span className={`dana-bold block`}>
 									روز و ساعت کاری
 								</span>
@@ -72,7 +72,7 @@ const Jobs = () => {
 									{singleJobAd.workTimes}
 								</span>
 							</div>
-							<div className={`w-full px-3 sm:w-1/2`}>
+							<div className={`w-full sm:w-1/2`}>
 								<span className={`dana-bold block`}>
 									نوع همکاری
 								</span>
@@ -80,7 +80,7 @@ const Jobs = () => {
 									{singleJobAd.cooperationType.name}
 								</span>
 							</div>
-							<div className={`w-full px-3 sm:w-1/2`}>
+							<div className={`w-full sm:w-1/2`}>
 								<span className={`dana-bold block`}>
 									سفر های کاری
 								</span>
@@ -88,7 +88,7 @@ const Jobs = () => {
 									{singleJobAd.businessTrips.length ? singleJobAd.businessTrips : 'ندارد'}
 								</span>
 							</div>
-							<div className={`w-full px-3 sm:w-1/2`}>
+							<div className={`w-full sm:w-1/2`}>
 								<span className={`dana-bold block`}>
 									مزایا و تسهیلات
 								</span>
@@ -125,8 +125,8 @@ const Jobs = () => {
 						</div>
 
 						<Title
-							customClass={`mt-6 sm:mt-3`}
-							withOutIcon
+							customClass={`mt-6`}
+							withIcon
 						>
 							<span className='!text-xl'>
 								شاخص های کلیدی از نظر کارفرما
@@ -137,9 +137,8 @@ const Jobs = () => {
 								singleJobAd.abilityForBoss.length ? singleJobAd.abilityForBoss.map(ability => (
 									<li
 										key={tokenGenerator()}
-										className={`flex items-center mt-2 pr-2 first:mt-3`}
+										className={`bg-jv-bright w-max flex items-center justify-center px-3 py-1.5 mt-2 first:mt-3`}
 									>
-										<Verified className='text-jv-primary ml-3' fontSize='small' />
 										{ability}
 									</li>
 								)) : 'مهم نیست'
@@ -148,7 +147,7 @@ const Jobs = () => {
 
 						<Title
 							customClass={`mt-6`}
-							withOutIcon
+							withIcon
 						>
 							<span className='!text-xl'>
 								شرح شغل و وظایف
@@ -160,18 +159,18 @@ const Jobs = () => {
 
 						<Title
 							customClass={`mt-6`}
-							withOutIcon
+							withIcon
 						>
 							<span className='!text-xl'>
 								شرایط احراز شغل
 							</span>
 						</Title>
 						<ul className={`w-full flex flex-col mt-3`}>
-							<li className={`w-full flex items-center`}>
-								<span className={`bg-jv-bright block w-4/12 px-3 py-1.5 ml-2 sm:w-2/12`}>
+							<li className={`single-jobAd-ability`}>
+								<span>
 									سن
 								</span>
-								<span className={`bg-jv-bright block w-8/12 px-3 py-1.5 sm:w-10/12`}>
+								<span>
 									{
 										singleJobAd.age.length === 1 ? `${singleJobAd.age[0]} سال`
 											: singleJobAd.age.map((price, index) => {
@@ -184,31 +183,31 @@ const Jobs = () => {
 									}
 								</span>
 							</li>
-							<li className={`w-full flex items-center mt-2`}>
-								<span className={`bg-jv-bright block w-4/12 px-3 py-1.5 ml-2 sm:w-2/12`}>
+							<li className={`single-jobAd-ability mt-2`}>
+								<span>
 									جنسیت
 								</span>
-								<span className={`bg-jv-bright block w-8/12 px-3 py-1.5 sm:w-10/12`}>
+								<span>
 									{
 										typeof singleJobAd.gender === 'object' ? 'فرقی ندارد' : singleJobAd.gender ? 'مرد' : 'زن'
 									}
 								</span>
 							</li>
-							<li className={`w-full flex items-center mt-2`}>
-								<span className={`bg-jv-bright block w-4/12 px-3 py-1.5 ml-2 sm:w-2/12`}>
+							<li className={`single-jobAd-ability mt-2`}>
+								<span>
 									سربازی
 								</span>
-								<span className={`bg-jv-bright block w-8/12 px-3 py-1.5 sm:w-10/12`}>
+								<span>
 									{
 										singleJobAd.endOfMilitaryService ? 'پایان خدمت یا معاف از سربازی' : 'مهم نیست'
 									}
 								</span>
 							</li>
-							<li className={`w-full flex items-center mt-2`}>
-								<span className={`bg-jv-bright block w-4/12 px-3 py-1.5 ml-2 sm:w-2/12`}>
+							<li className={`single-jobAd-ability mt-2`}>
+								<span>
 									تحصیلات
 								</span>
-								<span className={`list-scrollbar bg-jv-bright flex items-center w-8/12 p-1.5 overflow-x-auto sm:w-10/12`}>
+								<span>
 									{
 										singleJobAd.education.length ? singleJobAd.education.map((education, i) => (
 											<div
@@ -221,11 +220,11 @@ const Jobs = () => {
 									}
 								</span>
 							</li>
-							<li className={`w-full flex items-center mt-2`}>
-								<span className={`bg-jv-bright block w-4/12 px-3 py-1.5 ml-2 sm:w-2/12`}>
+							<li className={`single-jobAd-ability mt-2`}>
+								<span>
 									زبان ها
 								</span>
-								<span className={`list-scrollbar bg-jv-bright flex items-center w-8/12 p-1.5 overflow-x-auto sm:w-10/12`}>
+								<span>
 									{
 										singleJobAd.languages.length ? singleJobAd.languages.map((language, i) => (
 											<div
@@ -238,11 +237,11 @@ const Jobs = () => {
 									}
 								</span>
 							</li>
-							<li className={`w-full flex items-center mt-2`}>
-								<span className={`bg-jv-bright block w-4/12 px-3 py-1.5 ml-2 sm:w-2/12`}>
+							<li className={`single-jobAd-ability mt-2`}>
+								<span>
 									تکنولوژی ها
 								</span>
-								<span className={`list-scrollbar bg-jv-bright flex items-center w-8/12 p-1.5 overflow-x-auto sm:w-10/12`}>
+								<span>
 									{
 										singleJobAd.techs.length ? singleJobAd.techs.map((tech, i) => (
 											<div
@@ -269,7 +268,7 @@ const Jobs = () => {
 
 						<Title
 							customClass={`mt-6`}
-							withOutIcon
+							withIcon
 						>
 							<span className='!text-xl'>
 								فرصت‌های شغلی مشابه
@@ -291,7 +290,6 @@ const Jobs = () => {
 																key={job._id}
 																className={`w-full`}
 																onClick={() => {
-																	// removeSelectedJobAd()
 																	jobAdsSelectHandler(job)
 																	setSelectedJobAds(job)
 																}}
@@ -315,7 +313,7 @@ const Jobs = () => {
 									)
 							}
 						</>
-					</div>
+					</div >
 				)
 			},
 			{
@@ -323,7 +321,7 @@ const Jobs = () => {
 				title: 'درباره شرکت',
 				content: (
 					<div className={`w-full flex flex-col`}>
-						<Title withOutIcon>
+						<Title withIcon>
 							<span className='!text-xl'>
 								امتیاز سازمان
 							</span>
@@ -352,7 +350,7 @@ const Jobs = () => {
 
 						<Title
 							customClass={`mt-6`}
-							withOutIcon
+							withIcon
 						>
 							<span className='!text-xl'>
 								درباره {singleJobAd.company.name}
@@ -364,7 +362,7 @@ const Jobs = () => {
 
 						<Title
 							customClass={`mt-6`}
-							withOutIcon
+							withIcon
 						>
 							<span className='!text-xl'>
 								{singleJobAd.company.name} در یک نگاه
@@ -481,7 +479,7 @@ const Jobs = () => {
 						<div className={`h-full flex items-center absolute ${showAlert ? 'opacity-0 translate-x-full' : ''}
 						md:opacity-100 md:translate-x-0 md:static`}>
 							<NotificationAddRounded className={`text-white ml-3`} />
-							<Title withOutIcon>
+							<Title>
 								<h1 className={`!dana-base text-white !text-base`}>
 									باخبر شدن از جدید ترین آگهی های مرتبط
 								</h1>
@@ -611,7 +609,7 @@ const Jobs = () => {
 													</div>
 												</div>
 												<div className={`w-full flex justify-between`}>
-													<Title withOutIcon>
+													<Title>
 														<h2>
 															{selectedJobAds.title}
 														</h2>

@@ -1,17 +1,17 @@
 import { ReactElement } from "react";
-import { AutoAwesome } from "@mui/icons-material";
+import { AutoAwesomeRounded } from "@mui/icons-material";
 
 type TitleProps = {
   customClass?: string;
   children: ReactElement;
-  withOutIcon?: boolean
+  withIcon?: boolean
 }
 
-const Title = ({ customClass, children, withOutIcon }: TitleProps) => {
+const Title = ({ customClass, children, withIcon }: TitleProps) => {
   return (
     <div className={`title ${customClass || ''}`}>
       {
-        !withOutIcon ? <AutoAwesome /> : null
+        withIcon ? <AutoAwesomeRounded /> : null
       }
       {children}
     </div>

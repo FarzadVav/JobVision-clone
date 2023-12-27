@@ -56,10 +56,7 @@ const Home = () => {
 				lg:grid-rows-[1fr_3rem] md:gap-y-16`}>
 					{/* details */}
 					<div className={`flex flex-col justify-center items-center text-center md:text-right md:items-start`}>
-						<Title
-							customClass={`justify-center md:justify-start`}
-							withOutIcon
-						>
+						<Title customClass={`justify-center md:justify-start`}>
 							<h1 className={`md:mt-16`}>
 								در
 								<span className={`text-jv-primary`}>
@@ -105,7 +102,7 @@ const Home = () => {
 
 				{/* suggested jobAds */}
 				<div className={`mt-12 md:mt-16`}>
-					<Title>
+					<Title withIcon>
 						<h2>
 							{
 								JSON.parse(localStorage.getItem('prevCategories') || '[]').length
@@ -178,10 +175,7 @@ const Home = () => {
 					md:flex-row md:justify-evenly md:mt-16 md:px-0 md:py-9`}
 				>
 					<div className={`flex flex-col justify-center items-center md:items-start md:w-1/2`}>
-						<Title
-							customClass={`justify-center md:justify-start`}
-							withOutIcon
-						>
+						<Title customClass={`justify-center md:justify-start`}>
 							<h3 >
 								استخدام‌های سراسری و دولتی
 							</h3>
@@ -294,10 +288,7 @@ const Home = () => {
 				sm:from-white sm:via-jv-bright sm:to-white`}></div>
 				<div className={`flex flex-col justify-between items-center py-11 px-5 absolute top-0 bottom-0 right-0 left-0
 				z-10 sm:py-12`}>
-					<Title
-						customClass={`justify-center`}
-						withOutIcon
-					>
+					<Title customClass={`justify-center`}>
 						<h2 className={`text-jv-primary text-center sm:!text-4xl`}>
 							زندگی شغلی رویایی خود را با <br className={`sm:hidden`} /> جاب ویژن بسازید
 						</h2>

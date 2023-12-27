@@ -150,7 +150,7 @@
   }
 
   .title svg {
-    @apply text-jv-primary w-7 h-7 ml-2 md:w-8 md:h-8;
+    @apply text-jv-primary w-7 h-7 ml-1 md:w-9 md:h-9;
   }
 
   .active-circle {
@@ -194,6 +194,18 @@
 
   .none-scrollbar::-webkit-scrollbar-thumb {
     background: transparent;
+  }
+
+  .single-jobAd-ability {
+    @apply w-full flex items-center;
+  }
+
+  .single-jobAd-ability span {
+    @apply list-scrollbar bg-jv-bright flex items-center w-4/12 px-3 py-1.5 rounded overflow-x-auto sm:w-2/12;
+  }
+
+  .single-jobAd-ability span:last-child {
+    @apply w-8/12 mr-2 sm:w-10/12;
   }
 }
 
