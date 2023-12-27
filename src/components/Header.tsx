@@ -59,7 +59,7 @@ const Header = () => {
 						<ul className={'h-full flex'}>
 							<li
 								className={'h-full'}
-								onClick={() => useHeader.setState({ showMobileMenu: !showMegaMenu })}
+								onClick={() => useHeader.setState({ showMegaMenu: !showMegaMenu })}
 							>
 								<button className={`nav-link cursor-pointer group ${showMegaMenu && 'text-jv-primary'}`}>
 									فرصت های شغلی
@@ -208,9 +208,13 @@ const Header = () => {
 			</header >
 
 			<div
-				className={`current-height bg-black bg-opacity-25 backdrop-blur-sm pb-9 fixed top-[4.5rem] left-0 right-0  z-40 ${showMegaMenu ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+				className={`current-height bg-black bg-opacity-25 backdrop-blur-sm pb-9 fixed top-[4.5rem] left-0 right-0 cursor-zoom-out z-40 ${showMegaMenu ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+				onClick={() => useHeader.setState({ showMegaMenu: false })}
+			>
 				<div
-					className={`bg-white w-11/12 h-full mx-auto rounded-b-xl flex flex-col relative duration-300 ${showMegaMenu ? 'translate-0' : '-translate-y-9 scale-x-[0.975]'}`}>
+					className={`bg-white w-11/12 h-full mx-auto rounded-b-xl flex flex-col relative duration-300 ${showMegaMenu ? 'translate-0' : '-translate-y-9 scale-x-[0.975]'}`}
+					onClick={e => e.stopPropagation()}
+				>
 					<ul className={`mega-menu light-shadow w-full h-16 flex px-6`}>
 						{
 							content?.jobAdsMneu.map(menu => (
