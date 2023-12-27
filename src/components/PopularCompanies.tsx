@@ -5,6 +5,7 @@ import 'swiper/css/navigation';
 
 import CompanyBox from './CompanyBox';
 import useCompany from "../hooks/query/useCompany";
+import tokenGenerator from "../utils/tokenGenerator";
 
 const PopularCompanies = () => {
   const { company } = useCompany()
@@ -33,7 +34,10 @@ const PopularCompanies = () => {
       >
         {
           company?.companies.map(company => (
-            <SwiperSlide className={`!w-52`}>
+            <SwiperSlide
+              key={tokenGenerator()}
+              className={`!w-52`}
+            >
               <CompanyBox {...company} />
             </SwiperSlide>
           ))

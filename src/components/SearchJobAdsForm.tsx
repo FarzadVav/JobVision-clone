@@ -27,8 +27,8 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
   } = useForm<formTypes>({
     resolver: zodResolver(schema)
   })
-  const { content } = useContent()
   const redirect = useNavigate()
+  const { content } = useContent()
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     await new Promise((resolve) => setTimeout(() => {
