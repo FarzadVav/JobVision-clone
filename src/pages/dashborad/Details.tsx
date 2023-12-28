@@ -51,7 +51,7 @@ const Details = () => {
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     const companyDetials: companyDetailsTypes = {
-      logo: 'logo.png',
+      logo: 'https://s6.uupload.ir/files/icons8-google-144_v88g.png',
       name: data.name,
       aboutCompany: data.aboutCompany,
       activity: data.activity,
@@ -77,7 +77,7 @@ const Details = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       {/* name */}
-      <Title withOutIcon customClass={`mb-2.5`}>
+      <Title customClass={`mb-2.5`}>
         <label className={`!text-xl`}>
           نام شرکت
         </label>
@@ -94,7 +94,7 @@ const Details = () => {
       {/* name */}
 
       {/* about company */}
-      <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+      <Title customClass={`mb-2.5 mt-5`}>
         <label className={`!text-xl`}>
           درباره شرکت
         </label>
@@ -110,7 +110,7 @@ const Details = () => {
       {/* about company */}
 
       {/* year */}
-      <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+      <Title customClass={`mb-2.5 mt-5`}>
         <label className={`!text-xl`}>
           سال تاسیس
         </label>
@@ -127,7 +127,7 @@ const Details = () => {
       {/* year */}
 
       {/* city */}
-      <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+      <Title customClass={`mb-2.5 mt-5`}>
         <label className={`!text-xl`}>
           مکان شرکت
         </label>
@@ -157,7 +157,7 @@ const Details = () => {
       {/* city */}
 
       {/* activity */}
-      <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+      <Title customClass={`mb-2.5 mt-5`}>
         <label className={`!text-xl`}>
           حوزه فعالیت
         </label>
@@ -173,7 +173,7 @@ const Details = () => {
       {/* activity */}
 
       {/* employees */}
-      <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+      <Title customClass={`mb-2.5 mt-5`}>
         <label className={`!text-xl`}>
           تعداد کارکنان
         </label>

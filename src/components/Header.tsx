@@ -212,7 +212,7 @@ const Header = () => {
 				onClick={() => useHeader.setState({ showMegaMenu: false })}
 			>
 				<div
-					className={`bg-white w-11/12 h-full mx-auto rounded-b-xl flex flex-col relative duration-300 ${showMegaMenu ? 'translate-0' : '-translate-y-9 scale-x-[0.975]'}`}
+					className={`bg-white w-11/12 h-full mx-auto rounded-b-xl flex flex-col relative duration-300 cursor-default ${showMegaMenu ? 'translate-0' : '-translate-y-9 scale-x-[0.975]'}`}
 					onClick={e => e.stopPropagation()}
 				>
 					<ul className={`mega-menu light-shadow w-full h-16 flex px-6`}>

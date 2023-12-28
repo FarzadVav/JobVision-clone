@@ -128,7 +128,7 @@ const AddJobAd = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           {/* job title */}
-          <Title withOutIcon customClass={`mb-2.5`}>
+          <Title customClass={`mb-2.5`}>
             <label className={`!text-xl`}>
               عنوان آگهی
             </label>
@@ -144,7 +144,7 @@ const AddJobAd = () => {
           {/* job title */}
 
           {/* description */}
-          <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <Title customClass={`mb-2.5 mt-5`}>
             <label className={`!text-xl`}>
               توضیحات
             </label>
@@ -160,7 +160,7 @@ const AddJobAd = () => {
           {/* description */}
 
           {/* work times */}
-          <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <Title customClass={`mb-2.5 mt-5`}>
             <label className={`!text-xl`}>
               شرح ساعت کاری
             </label>
@@ -176,7 +176,7 @@ const AddJobAd = () => {
           {/* work times */}
 
           {/* business trips */}
-          <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <Title customClass={`mb-2.5 mt-5`}>
             <label className={`!text-xl`}>
               شرح سفر های کاری
             </label>
@@ -192,7 +192,7 @@ const AddJobAd = () => {
           {/* business trips */}
 
           {/* salary */}
-          <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <Title customClass={`mb-2.5 mt-5`}>
             <label className={`!text-xl`}>
               میزان حقوق
             </label>
@@ -233,7 +233,7 @@ const AddJobAd = () => {
           {/* salary */}
 
           {/* age */}
-          <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <Title customClass={`mb-2.5 mt-5`}>
             <label className={`!text-xl`}>
               میزان سن
             </label>
@@ -259,7 +259,7 @@ const AddJobAd = () => {
           {/* age */}
 
           {/* category */}
-          <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <Title customClass={`mb-2.5 mt-5`}>
             <label className={`!text-xl`}>
               دسته بندی شغلی
             </label>
@@ -277,7 +277,7 @@ const AddJobAd = () => {
           {/* category */}
 
           {/* cooperaton types */}
-          <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <Title customClass={`mb-2.5 mt-5`}>
             <label className={`!text-xl`}>
               نوع قرارداد
             </label>
@@ -295,7 +295,7 @@ const AddJobAd = () => {
           {/* cooperaton types */}
 
           {/* gender */}
-          <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <Title customClass={`mb-2.5 mt-5`}>
             <label className={`!text-xl`}>
               جنسیت
             </label>
@@ -313,7 +313,7 @@ const AddJobAd = () => {
           {/* gender */}
 
           {/* tags */}
-          <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <Title customClass={`mb-2.5 mt-5`}>
             <label className={`!text-xl`}>
               تگ های شغلی
             </label>
@@ -329,7 +329,7 @@ const AddJobAd = () => {
           {/* tags */}
 
           {/* benefits */}
-          <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <Title customClass={`mb-2.5 mt-5`}>
             <label className={`!text-xl`}>
               مزیت های شغلی
             </label>
@@ -346,7 +346,7 @@ const AddJobAd = () => {
           {/* benefits */}
 
           {/* abilties */}
-          <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <Title customClass={`mb-2.5 mt-5`}>
             <label className={`!text-xl`}>
               شاخص های کلیدی فرد
             </label>
@@ -363,7 +363,7 @@ const AddJobAd = () => {
           {/* abilties */}
 
           {/* educations */}
-          <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <Title customClass={`mb-2.5 mt-5`}>
             <label className={`!text-xl`}>
               مدارک تحصیلی
             </label>
@@ -380,7 +380,7 @@ const AddJobAd = () => {
           {/* educations */}
 
           {/* languages */}
-          <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <Title customClass={`mb-2.5 mt-5`}>
             <label className={`!text-xl`}>
               زبان های بین المللی
             </label>
@@ -397,7 +397,7 @@ const AddJobAd = () => {
           {/* languages */}
 
           {/* technologies */}
-          <Title withOutIcon customClass={`mb-2.5 mt-5`}>
+          <Title customClass={`mb-2.5 mt-5`}>
             <label className={`!text-xl`}>
               تکنولوژی ها
             </label>
