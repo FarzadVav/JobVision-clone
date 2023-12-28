@@ -13,8 +13,8 @@ import useHeader from '../hooks/store/useHeader';
 import useCompany from '../hooks/query/useCompany';
 
 const schema = z.object({
-  email: z.string().nonempty().email(),
-  password: z.string().nonempty().min(4).max(128)
+  email: z.string().email(),
+  password: z.string().min(4).max(128)
 })
 
 type formTypes = z.infer<typeof schema>
@@ -30,41 +30,44 @@ const LoginPopUp = () => {
   })
   const redirect = useNavigate()
   const { loginHandler } = useAuth(s => s)
-  const { company, refetchCompany, addCompany, addCompanyLoading } = useCompany()
+  const { refetchCompany, addCompany, addCompanyLoading } = useCompany()
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     let hasUser = false
-    company?.companies?.forEach(company => {
-      if (company.email === data.email) {
-        if (company.password === data.password) {
-          loginHandler(company._id || '')
-          refetchCompany()
-          toast.success('با موفقیت وارد حسابتان شدید')
-          reset()
-          setTimeout(() => {
-            useHeader.setState({ showLogin: false })
-            redirect('/employer')
-          }, 1750);
-        } else {
-          toast.error('رمز عبور اشتباه است')
-        }
-        return hasUser = true
-      }
-    })
 
-    if (!hasUser) {
-      addCompany(data, {
-        onSuccess: () => {
-          toast.success('با موفقیت ثبت نام شدید')
-          reset()
-          setTimeout(() => {
-            useHeader.setState({ showLogin: false })
+    refetchCompany()
+      .then(res => {
+        res.data?.companies?.forEach(company => {
+          if (company.email === data.email) {
+            if (company.password === data.password) {
+              refetchCompany()
+              loginHandler(company._id || '')
+              reset()
+              setTimeout(() => {
+                useHeader.setState({ showLogin: false })
+                redirect('/employer')
+              }, 1500);
+              toast.success('با موفقیت وارد حسابتان شدید')
+            } else {
+              toast.error('رمز عبور اشتباه است')
+            }
+            return hasUser = true
+          }
+        })
 
-            redirect('/employer')
-          }, 1500);
+        if (!hasUser) {
+          addCompany(data, {
+            onSuccess: () => {
+              toast.success('با موفقیت ثبت نام شدید')
+              reset()
+              setTimeout(() => {
+                useHeader.setState({ showLogin: false })
+                redirect('/employer')
+              }, 1500);
+            }
+          })
         }
       })
-    }
   }
 
   return createPortal(

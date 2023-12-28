@@ -37,8 +37,7 @@ const useCompany = () => {
       }
 
       return datas
-    },
-    staleTime: 0
+    }
   })
 
   const { mutate: addCompany, isPending: addCompanyLoading } = useMutation({

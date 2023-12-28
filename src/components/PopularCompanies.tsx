@@ -6,9 +6,11 @@ import 'swiper/css/navigation';
 import CompanyBox from './CompanyBox';
 import useCompany from "../hooks/query/useCompany";
 import tokenGenerator from "../utils/tokenGenerator";
+import useJobAds from "../hooks/query/useJobAds";
 
 const PopularCompanies = () => {
   const { company } = useCompany()
+  const { jobAds } = useJobAds()
 
   return (
     <div className={`w-full`}>
@@ -33,12 +35,15 @@ const PopularCompanies = () => {
         modules={[Autoplay, Navigation]}
       >
         {
-          company?.companies.map(company => (
+          company?.companies?.map(company => (
             <SwiperSlide
               key={tokenGenerator()}
               className={`!w-52`}
             >
-              <CompanyBox {...company} />
+              <CompanyBox
+                {...company}
+                jobAds={jobAds?.filter(jobAd => jobAd.company._id === company._id) || []}
+              />
             </SwiperSlide>
           ))
         }
