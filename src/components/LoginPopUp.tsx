@@ -30,7 +30,7 @@ const LoginPopUp = () => {
   })
   const redirect = useNavigate()
   const { loginHandler } = useAuth(s => s)
-  const { refetchCompany, addCompany, addCompanyLoading } = useCompany()
+  const { refetchCompany, addCompany, fetchingCompany, addCompanyLoading } = useCompany()
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     let hasUser = false
@@ -40,7 +40,6 @@ const LoginPopUp = () => {
         res.data?.companies?.forEach(company => {
           if (company.email === data.email) {
             if (company.password === data.password) {
-              refetchCompany()
               loginHandler(company._id || '')
               reset()
               setTimeout(() => {
@@ -112,14 +111,14 @@ const LoginPopUp = () => {
           <button
             className={`btn btn-primary w-full mt-3`}
             type={`submit`}
-            disabled={addCompanyLoading}
+            disabled={addCompanyLoading || fetchingCompany}
           >
             {
-              addCompanyLoading ? '' : 'ورود'
+              (addCompanyLoading || fetchingCompany) ? '' : 'ورود'
             }
             <PulseLoader
               color='white'
-              loading={addCompanyLoading}
+              loading={(addCompanyLoading || fetchingCompany)}
               size={6}
             />
           </button>

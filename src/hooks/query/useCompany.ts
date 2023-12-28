@@ -18,7 +18,7 @@ const useCompany = () => {
 
   const key = useRef<string>(tokenGenerator())
 
-  const { data: company, refetch: refetchCompany } = useQuery({
+  const { data: company, refetch: refetchCompany, isFetching: fetchingCompany } = useQuery({
     queryKey: ['companies'],
     queryFn: async () => {
       addLoadingKey(key.current)
@@ -50,7 +50,6 @@ const useCompany = () => {
 
       // @ts-ignore
       loginHandler(data[0]._id)
-      refetchCompany()
 
       return data
     },
@@ -71,7 +70,7 @@ const useCompany = () => {
     },
   })
 
-  return { company, refetchCompany, addCompany, updateCompany, addCompanyLoading, updateCompanyLoading }
+  return { company, refetchCompany, addCompany, updateCompany, fetchingCompany, addCompanyLoading, updateCompanyLoading }
 }
 
 export default useCompany

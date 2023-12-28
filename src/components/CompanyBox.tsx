@@ -24,7 +24,7 @@ const CompanyBox = ({ _id, logo, name, score, jobAds }: CompanyTypes & CompanyBo
         />
       </div>
       <span className={`block dana-bold mt-4`}>
-        {name}
+        {name || 'شرکت ناشناس'}
       </span>
       <div className={`badge pr-0 mt-3`}>
         <Star className={`text-jv-warning`} fontSize="small" />
@@ -44,7 +44,7 @@ const CompanyBox = ({ _id, logo, name, score, jobAds }: CompanyTypes & CompanyBo
           ) : null
         }
       </span>
-    <button className={`btn btn-light hover-dark dana-bold w-full mt-3`}>
+      <button className={`btn btn-light hover-dark dana-bold w-full mt-3`}>
         دنبال کردن
       </button>
     </Link>

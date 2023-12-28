@@ -3,9 +3,14 @@ import Title from "./../../components/Title"
 import { createPortal } from "react-dom"
 import { AssessmentRounded, InfoRounded, PersonRounded } from "@mui/icons-material"
 import useCompany from "../../hooks/query/useCompany"
+import { useEffect } from "react"
 
 const Employer = () => {
-  const { company } = useCompany()
+  const { company, refetchCompany } = useCompany()
+
+  useEffect(() => {
+    refetchCompany()
+  }, [])
 
   return (
     <div className={`wrapper flex mt-3 pb-[4.75rem] lg:mt-12 lg:pb-12`}>
@@ -24,10 +29,7 @@ const Employer = () => {
             alt="لوگوی شرکت"
           />
         </div>
-        <Title
-          customClass={`justify-center mt-5 z-10`}
-          withOutIcon
-        >
+        <Title customClass={`justify-center mt-5 z-10`}>
           <h1 className={`text-white !text-xl`}>
             {company?.company.name}
           </h1>
