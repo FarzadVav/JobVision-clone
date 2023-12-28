@@ -16,7 +16,7 @@ const useOneScroll = (elements: ElementsTypes) => {
       element?.classList.add('duration-500')
 
       window.addEventListener('scroll', () => {
-        if ((element?.getBoundingClientRect().top || 0) <= (window.innerHeight / 1.35)) {
+        if ((element?.getBoundingClientRect().top || 0) <= (window.innerHeight / 1.25)) {
           if (typeof elem === 'object') {
             setTimeout(() => {
               element?.classList.remove('scroll-fade-down')
