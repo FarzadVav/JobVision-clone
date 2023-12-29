@@ -30,7 +30,7 @@ const LoginPopUp = () => {
   })
   const redirect = useNavigate()
   const { loginHandler } = useAuth(s => s)
-  const { refetchCompany, addCompany, fetchingCompany, addCompanyLoading } = useCompany()
+  const { refetchCompany, addCompany, updateCompany, fetchingCompany, addCompanyLoading } = useCompany()
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     let hasUser = false
@@ -41,6 +41,7 @@ const LoginPopUp = () => {
           if (company.email === data.email) {
             if (company.password === data.password) {
               loginHandler(company._id || '')
+              updateCompany(data)
               reset()
               setTimeout(() => {
                 useHeader.setState({ showLogin: false })

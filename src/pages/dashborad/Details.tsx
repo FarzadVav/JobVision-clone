@@ -10,7 +10,6 @@ import Title from "../../components/Title"
 import TextArea from "../../components/inputs/TextArea"
 import TextInput from "../../components/inputs/TextInput"
 import AutoComplete from "../../components/inputs/AutoComplete"
-import { companyDetailsTypes } from "../../types/Company.types"
 import useCompany from "../../hooks/query/useCompany"
 import { NON_EMPTY_STRING, NUMERIC_STRING } from "../../utils/zodSchema"
 
@@ -50,7 +49,7 @@ const Details = () => {
   const { content } = useContent()
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
-    const companyDetials: companyDetailsTypes = {
+    const companyDetials = {
       logo: 'https://s6.uupload.ir/files/icons8-google-144_v88g.png',
       name: data.name,
       aboutCompany: data.aboutCompany,

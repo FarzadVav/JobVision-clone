@@ -3,35 +3,36 @@ import Title from "./../../components/Title"
 import { createPortal } from "react-dom"
 import { AssessmentRounded, InfoRounded, PersonRounded } from "@mui/icons-material"
 import useCompany from "../../hooks/query/useCompany"
-import { useEffect } from "react"
 
 const Employer = () => {
-  const { company, refetchCompany } = useCompany()
-
-  useEffect(() => {
-    refetchCompany()
-  }, [])
+  const { company } = useCompany()
 
   return (
     <div className={`wrapper flex mt-3 pb-[4.75rem] lg:mt-12 lg:pb-12`}>
       {/* dashboard sidebar */}
       <aside className={`bg-jv-primary w-3/12 h-max hidden flex-col justify-center items-center p-5 rounded-md sticky top-[5.25rem] overflow-hidden lg:flex`}>
         <div className={`bg-slate-50 bg-opacity-20 w-24 h-24 flex justify-center items-center rounded-md relative`}>
-          {/* this image is for light shadow in back orginal image */}
-          <img
-            className={`w-32 h-32 object-cover object-center rounded-md absolute opacity-75 blur-xl`}
-            src={company?.company.logo}
-            alt="لوگوی شرکت"
-          />
-          <img
-            className={`w-20 h-20 rounded-md object-cover object-center absolute`}
-            src={company?.company.logo}
-            alt="لوگوی شرکت"
-          />
+          {
+            company?.company.logo ? (
+              <>
+                {/* this image is for light shadow in back orginal image */}
+                <img
+                  className={`w-32 h-32 object-cover object-center rounded-md absolute opacity-75 blur-xl`}
+                  src={company?.company.logo}
+                  alt="لوگوی شرکت"
+                />
+                <img
+                  className={`w-20 h-20 rounded-md object-cover object-center absolute`}
+                  src={company?.company.logo}
+                  alt="لوگوی شرکت"
+                />
+              </>
+            ) : null
+          }
         </div>
         <Title customClass={`justify-center mt-5 z-10`}>
           <h1 className={`text-white !text-xl`}>
-            {company?.company.name}
+            {company?.company.name || 'شرکت ناشناس'}
           </h1>
         </Title>
         <ul className={`w-full flex flex-col justify-center items-center mt-4`}>

@@ -1,11 +1,11 @@
-import { useRef } from 'react'
-import { useQuery, useMutation } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
 import supabase from '../../utils/supabase'
 import useLoading from '../store/useLoading'
 import tokenGenerator from '../../utils/tokenGenerator'
 import useAuth from '../store/useAuth'
-import CompanyTypes, { companyDetailsTypes } from '../../types/Company.types'
+import CompanyTypes from '../../types/Company.types'
+import { COMPANY } from "../../utils/keys"
 
 type DatasTypes = {
   companies: CompanyTypes[];
@@ -13,60 +13,77 @@ type DatasTypes = {
 }
 
 const useCompany = () => {
+  const queryClient = useQueryClient()
   const { addLoadingKey, removeLoadingKey } = useLoading(s => s)
   const { loginHandler, getToken } = useAuth(s => s)
 
-  const key = useRef<string>(tokenGenerator())
+  const createCompanies = (data: CompanyTypes[]): DatasTypes => {
+    const myToken = getToken()
+    return {
+      companies: data,
+      company: data?.find(company => company._id === myToken) || {} as CompanyTypes
+    }
+  }
 
   const { data: company, refetch: refetchCompany, isFetching: fetchingCompany } = useQuery({
-    queryKey: ['companies'],
+    queryKey: [COMPANY],
     queryFn: async () => {
-      addLoadingKey(key.current)
-
-      const myToken = getToken()
+      addLoadingKey(COMPANY)
 
       const { data } = await supabase
         .from('companies')
         .select('*')
 
-      removeLoadingKey(key.current)
-
-      const datas: DatasTypes = {
-        companies: data as CompanyTypes[],
-        company: data?.find(company => company._id === myToken) || {} as CompanyTypes
-      }
-
-      return datas
+      removeLoadingKey(COMPANY)
+      return createCompanies(data as CompanyTypes[])
     }
   })
 
   const { mutate: addCompany, isPending: addCompanyLoading } = useMutation({
-    mutationKey: ['companies'],
+    mutationKey: [COMPANY],
     mutationFn: async (newCompany: { email: string, password: string }) => {
-      const { data } = await supabase
+      const key = tokenGenerator()
+      addLoadingKey(key)
+
+      const { data: singleData } = await supabase
         .from('companies')
         .insert([newCompany])
         .select()
 
-      // @ts-ignore
-      loginHandler(data[0]._id)
+      const { data: datas } = await supabase
+        .from('companies')
+        .select('*')
 
-      return data
+      // @ts-ignore
+      loginHandler(datas?.find(data => data._id === singleData[0]._id)._id)
+
+      queryClient.setQueryData([COMPANY], createCompanies(datas as CompanyTypes[]))
+
+      removeLoadingKey(key)
+      return datas
     },
   })
 
   const { mutate: updateCompany, isPending: updateCompanyLoading } = useMutation({
-    mutationKey: ['companies'],
-    mutationFn: async (newCompany: companyDetailsTypes) => {
-      const { data } = await supabase
+    mutationKey: [COMPANY],
+    mutationFn: async (newCompany: {}) => {
+      const key = tokenGenerator()
+      addLoadingKey(key)
+
+      await supabase
         .from('companies')
         .update(newCompany)
-        .eq('_id', company?.company._id)
+        .eq('_id', getToken())
         .select()
 
-      refetchCompany()
+      const { data: datas } = await supabase
+        .from('companies')
+        .select('*')
 
-      return data
+      queryClient.setQueryData([COMPANY], createCompanies(datas as CompanyTypes[]))
+
+      removeLoadingKey(key)
+      return datas
     },
   })
 

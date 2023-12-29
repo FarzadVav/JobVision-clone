@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { useQuery } from "@tanstack/react-query"
 import supabase from "../../utils/supabase"
 
@@ -6,6 +5,7 @@ import useLoading from "../store/useLoading"
 import tokenGenerator from "../../utils/tokenGenerator"
 import CooperationTypes from "../../types/CooperationTypes.type"
 import JobAdsMenuTypes from "../../types/JobAdsMenu.types"
+import { CONTENT } from "../../utils/keys"
 
 type ContentTypes = {
   categories: { _id: string; name: string }[];
@@ -19,12 +19,10 @@ type ContentTypes = {
 const useContent = () => {
   const { addLoadingKey, removeLoadingKey } = useLoading(s => s)
 
-  const key = useRef<string>(tokenGenerator())
-
   const { data: content } = useQuery({
-    queryKey: ['content'],
+    queryKey: [CONTENT],
     queryFn: async () => {
-      addLoadingKey(key.current)
+      addLoadingKey(CONTENT)
 
       let content: ContentTypes = {} as ContentTypes
 
@@ -88,7 +86,7 @@ const useContent = () => {
         ]
       }
 
-      removeLoadingKey(key.current)
+      removeLoadingKey(CONTENT)
       return content
     },
   })

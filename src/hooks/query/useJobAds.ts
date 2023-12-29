@@ -1,20 +1,19 @@
-import { useRef } from "react"
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import supabase from "../../utils/supabase"
 
 import useLoading from "../store/useLoading"
 import tokenGenerator from "../../utils/tokenGenerator"
 import { newJobAdTypes } from "../../types/JobAds.types"
+import { JOB_ADS } from "../../utils/keys"
 
 function useJobAds() {
+  const queryClient = useQueryClient()
   const { addLoadingKey, removeLoadingKey } = useLoading(s => s)
-  const key = useRef<string>(tokenGenerator())
 
-
-  const { data: jobAds, refetch: refetchJobAds } = useQuery({
-    queryKey: ['jobAds'],
+  const { data: jobAds } = useQuery({
+    queryKey: [JOB_ADS],
     queryFn: async () => {
-      addLoadingKey(key.current)
+      addLoadingKey(JOB_ADS)
 
       const { data: jobAds } = await supabase
         .from('jobAds')
@@ -73,21 +72,26 @@ function useJobAds() {
         jobAd.tags = jobAd.tags.map((tag: string) => tags?.find(tag2 => tag === tag2._id))
       })
 
-      removeLoadingKey(key.current)
+      removeLoadingKey(JOB_ADS)
       return jobAds
     }
   })
 
   const { mutate: addJobAd, isPending: addJobAdPending } = useMutation({
-    mutationKey: ['jobAds'],
+    mutationKey: [JOB_ADS],
     mutationFn: async (newJobAd: newJobAdTypes) => {
+      const key = tokenGenerator()
+      addLoadingKey(key)
+
       // @ts-ignore
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from('jobAds')
         .insert([newJobAd])
         .select()
 
-      refetchJobAds()
+      queryClient.setQueryData([JOB_ADS], data)
+
+      removeLoadingKey(key)
       return data
     },
   })
