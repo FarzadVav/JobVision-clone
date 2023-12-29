@@ -14,7 +14,7 @@ const FooterAccordion = ({ toggle, accordionRef, toggleHandler, length, title, t
         <span>
           {length}
         </span>
-        <Title withOutIcon>
+        <Title>
           <span className={`!text-base truncate !dana-base mr-6`}>
             {title}
           </span>
@@ -38,7 +38,7 @@ const LinksAccordion = ({ toggle, accordionRef, toggleHandler, title, text }: Ac
         className={`h-12 flex justify-between items-center`}
         onClick={toggleHandler}
       >
-        <Title withOutIcon>
+        <Title>
           <span className={`!text-base !dana-base`}>
             {title}
           </span>

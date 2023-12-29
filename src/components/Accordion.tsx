@@ -30,7 +30,7 @@ const Accordion = ({ toggle, accordionRef, setToggle, toggleHandler, length, tit
           text-2xl sm:flex ${toggle ? 'text-jv-primary' : ''}`}>
           {length}
         </div>
-        <Title withOutIcon>
+        <Title>
           <span className={`w-[calc(100%-2rem)] truncate !text-sm !leading-loose group-hover:text-jv-primary
               ${toggle ? 'text-jv-primary' : ''} sm:!text-base md:!text-xl sm:!leading-normal`}>
             {title}

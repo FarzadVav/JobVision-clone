@@ -73,10 +73,7 @@ const footerSocials: { link: string; svg: ReactNode }[] = [
 
 const FooterTitle = ({ children, margin }: { children: ReactNode, margin?: boolean }) => {
   return (
-    <Title
-      customClass={`justify-center sm:justify-start ${margin ? 'mt-6' : ''}`}
-      withOutIcon
-    >
+    <Title customClass={`justify-center sm:justify-start ${margin ? 'mt-6' : ''}`}>
       <h6 className={` text-center sm:text-right`}>
         {children}
       </h6>

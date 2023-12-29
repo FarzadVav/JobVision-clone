@@ -21,10 +21,7 @@ const CtaBox = ({ id, src, title, text, btn }: CtaBoxProps) => {
         src={src}
       />
       <div className={`flex flex-col justify-center items-center mt-5 lg:mt-0 lg:mr-5 lg:items-start`}>
-        <Title
-          customClass={`justify-center lg:justify-start`}
-          withOutIcon
-        >
+        <Title customClass={`justify-center lg:justify-start`}>
           <h5 className={`!text-xl`}>
             {title}
           </h5>
@@ -36,7 +33,7 @@ const CtaBox = ({ id, src, title, text, btn }: CtaBoxProps) => {
           {btn}
         </button>
       </div>
-    </Link>
+    </Link >
   )
 }
 
