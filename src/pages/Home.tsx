@@ -132,13 +132,16 @@ const Home = () => {
 									if (prevCategories.includes(jobAd.category._id)) return jobAd
 								})
 
-
-								if (suggesttedJobAds.length < 6) {
-									const otherJobAds = jobAds.filter((jobAd, i) => {
-										if (i + 1 + suggesttedJobAds.length <= 6
-											&& !suggesttedJobAds.map(j => j._id).includes(jobAd._id)) return jobAd
+								if (suggesttedJobAds.length <= 6) {
+									const otherJobAds = jobAds.filter(jobAd => {
+										if (!suggesttedJobAds.map(j => j._id).includes(jobAd._id)) return jobAd
 									})
-									suggesttedJobAds = [...suggesttedJobAds, ...otherJobAds]
+									suggesttedJobAds = [
+										...suggesttedJobAds,
+										...otherJobAds.slice(0, 6 - (suggesttedJobAds.length < 6 ? suggesttedJobAds.length : 6))
+									]
+								} else {
+									suggesttedJobAds = [...suggesttedJobAds.slice(0, 6)]
 								}
 
 								return suggesttedJobAds.map(jobAd => (

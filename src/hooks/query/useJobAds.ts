@@ -74,7 +74,7 @@ function useJobAds() {
       })
 
       removeLoadingKey(JOB_ADS)
-      return jobAds
+      return jobAds?.reverse()
     }
   })
 
@@ -93,7 +93,7 @@ function useJobAds() {
       reFetchJobAds()
 
       // ! the following line will work with real API
-      // queryClient.setQueryData([JOB_ADS], data)
+      // queryClient.setQueryData([JOB_ADS], data?.reverse())
 
       removeLoadingKey(key)
       return data
