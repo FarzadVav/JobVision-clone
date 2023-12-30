@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Alert } from '@mui/material';
 import { ApartmentOutlined, AssignmentTurnedIn, BusinessCenter, Diversity3Rounded, KeyboardArrowLeftRounded, KeyboardBackspaceRounded } from "@mui/icons-material";
 
 import tokenGenerator from "../utils/tokenGenerator";
@@ -113,44 +112,12 @@ const Home = () => {
 					</Title>
 					<div className={`w-full grid gap-4 grid-rows-(1fr_auto) grid-cols-1 mt-6 md:grid-cols-2 lg:grid-cols-3`}>
 						{
-							useMemo(() => {
-								const prevCategories: string[] = JSON.parse(localStorage.getItem('prevCategories') || '[]')
-								if (!jobAds?.length) {
-									return (
-										<div className={`w-full mt-3`} dir='ltr'>
-											<Alert
-												className={`!justify-between`}
-												severity="warning"
-											>
-												آگهی برای پیشنهاد وجود ندارد
-											</Alert>
-										</div>
-									)
-								}
-
-								let suggesttedJobAds = jobAds.filter(jobAd => {
-									if (prevCategories.includes(jobAd.category._id)) return jobAd
-								})
-
-								if (suggesttedJobAds.length <= 6) {
-									const otherJobAds = jobAds.filter(jobAd => {
-										if (!suggesttedJobAds.map(j => j._id).includes(jobAd._id)) return jobAd
-									})
-									suggesttedJobAds = [
-										...suggesttedJobAds,
-										...otherJobAds.slice(0, 6 - (suggesttedJobAds.length < 6 ? suggesttedJobAds.length : 6))
-									]
-								} else {
-									suggesttedJobAds = [...suggesttedJobAds.slice(0, 6)]
-								}
-
-								return suggesttedJobAds.map(jobAd => (
-									<JobAdsBox
-										key={tokenGenerator()}
-										{...jobAd}
-									/>
-								))
-							}, [jobAds])
+							jobAds?.slice(0, 6)?.map(jobAd => (
+								<JobAdsBox
+									key={tokenGenerator()}
+									{...jobAd}
+								/>
+							))
 						}
 						<div className={`w-full flex justify-center mt-8 md:col-span-2 md:mt-12 lg:col-span-3`}>
 							<Link

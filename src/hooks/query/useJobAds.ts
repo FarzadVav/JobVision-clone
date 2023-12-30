@@ -73,8 +73,15 @@ function useJobAds() {
         jobAd.tags = jobAd.tags.map((tag: string) => tags?.find(tag2 => tag === tag2._id))
       })
 
+      // suggested jobAds
+      const prevCategories: string[] = JSON.parse(localStorage.getItem('prevCategories') || '[]')
+
+      const suggesttedJobAds = jobAds?.filter(jobAd => prevCategories.includes(jobAd.category._id)) || []
+      const otherJobAds = jobAds?.filter(jobAd => !suggesttedJobAds.map(j => j._id).includes(jobAd._id)) || []
+      // suggested jobAds
+
       removeLoadingKey(JOB_ADS)
-      return jobAds?.reverse()
+      return [...suggesttedJobAds.reverse(), ...otherJobAds.reverse()]
     }
   })
 
