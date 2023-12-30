@@ -79,7 +79,8 @@ const AddJobAd = () => {
   const { addJobAd, addJobAdPending } = useJobAdsQuery()
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
-    if (!company?.company.name
+    if (!company?.company.logo
+      || !company?.company.name
       || !company?.company.activity
       || !company?.company.city
       || company?.company.employees.length < 2

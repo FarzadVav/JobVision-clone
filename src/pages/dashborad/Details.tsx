@@ -2,7 +2,7 @@ import { z } from "zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { PulseLoader } from "react-spinners"
-import { ManageSearchRounded, CalendarMonthRounded, HelpOutlineRounded, PeopleOutlineRounded, LocationOnOutlined, DriveFileRenameOutlineOutlined } from "@mui/icons-material"
+import { ManageSearchRounded, CalendarMonthRounded, HelpOutlineRounded, PeopleOutlineRounded, LocationOnOutlined, DriveFileRenameOutlineOutlined, InsertLinkRounded } from "@mui/icons-material"
 import toast from "react-hot-toast"
 
 import useContent from "../../hooks/query/useContent"
@@ -15,6 +15,7 @@ import { NON_EMPTY_STRING, NUMERIC_STRING } from "../../utils/zodSchema"
 
 const schema = z.object({
   name: NON_EMPTY_STRING,
+  logo: NON_EMPTY_STRING.startsWith('https://'),
   aboutCompany: z.string().min(3),
   year: NUMERIC_STRING.min(4).max(4),
   employees: z.object({
@@ -36,6 +37,7 @@ const schema = z.object({
 type formTypes = z.infer<typeof schema>
 
 const Details = () => {
+  const { company, updateCompany, updateCompanyLoading } = useCompany()
   const {
     register,
     handleSubmit,
@@ -43,14 +45,27 @@ const Details = () => {
     setValue,
     reset
   } = useForm<formTypes>({
-    resolver: zodResolver(schema)
+    resolver: zodResolver(schema),
+    defaultValues: {
+      logo: company?.company.logo,
+      name: company?.company.name,
+      aboutCompany: company?.company.aboutCompany,
+      activity: company?.company.activity,
+      year: company?.company.year.toString(),
+      knowledgeBased: company?.company.knowledgeBased,
+      employees: {
+        from: company?.company.employees[0].toString(),
+        to: company?.company.employees[1].toString(),
+      },
+      province: company?.company.province.name,
+      city: company?.company.city.name
+    }
   })
-  const { updateCompany, updateCompanyLoading } = useCompany()
   const { content } = useContent()
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     const companyDetials = {
-      logo: 'https://s6.uupload.ir/files/icons8-google-144_v88g.png',
+      logo: data.logo,
       name: data.name,
       aboutCompany: data.aboutCompany,
       activity: data.activity,
@@ -91,6 +106,23 @@ const Details = () => {
         <DriveFileRenameOutlineOutlined />
       </TextInput>
       {/* name */}
+
+      {/* logo */}
+      <Title customClass={`mb-2.5 mt-5`}>
+        <label className={`!text-xl`}>
+          آدرس لوگو
+        </label>
+      </Title>
+      <TextInput
+        customClass={`bg-jv-bright`}
+        register={{ ...register('logo') }}
+        placeholder={`//:https`}
+        error={!!errors.logo}
+        numeric
+      >
+        <InsertLinkRounded />
+      </TextInput>
+      {/* logo */}
 
       {/* about company */}
       <Title customClass={`mb-2.5 mt-5`}>
