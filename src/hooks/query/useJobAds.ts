@@ -1,4 +1,5 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
+// import { useQueryClient } from "@tanstack/react-query"
 import supabase from "../../utils/supabase"
 
 import useLoading from "../store/useLoading"
@@ -7,10 +8,10 @@ import { newJobAdTypes } from "../../types/JobAds.types"
 import { JOB_ADS } from "../../utils/keys"
 
 function useJobAds() {
-  const queryClient = useQueryClient()
+  // const queryClient = useQueryClient()
   const { addLoadingKey, removeLoadingKey } = useLoading(s => s)
 
-  const { data: jobAds } = useQuery({
+  const { data: jobAds, refetch: reFetchJobAds } = useQuery({
     queryKey: [JOB_ADS],
     queryFn: async () => {
       addLoadingKey(JOB_ADS)
@@ -89,7 +90,10 @@ function useJobAds() {
         .insert([newJobAd])
         .select()
 
-      queryClient.setQueryData([JOB_ADS], data)
+      reFetchJobAds()
+
+      // ! the following line will work with real API
+      // queryClient.setQueryData([JOB_ADS], data)
 
       removeLoadingKey(key)
       return data
