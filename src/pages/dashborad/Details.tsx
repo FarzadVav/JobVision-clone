@@ -54,8 +54,8 @@ const Details = () => {
       year: (company?.company.year || '').toString(),
       knowledgeBased: company?.company.knowledgeBased,
       employees: {
-        from: (company?.company.employees[0] || '').toString(),
-        to: (company?.company.employees[1] || '').toString(),
+        from: (company?.company.employees.from || '').toString(),
+        to: (company?.company.employees.to || '').toString(),
       },
       province: company?.company.province?.name || '',
       city: company?.company.city?.name || ''

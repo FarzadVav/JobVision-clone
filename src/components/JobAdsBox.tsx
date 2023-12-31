@@ -88,6 +88,9 @@ const JobBox = ({
               </span>
               <span className={`text-jv-success border-r border-solid border-jv-light text-xs pr-2 mr-2`}>
                 {
+                  salary ? `${salary.from} ${salary.to ? `تا ${salary.to}` : ''}` : 'حقوق توافقی'
+                }
+                {/* {
                   salary === null ? 'حقوق توافقی'
                     : salary.length === 1 ? `${salary} میلیون`
                       : salary.map((price, index) => {
@@ -97,7 +100,7 @@ const JobBox = ({
                           return `${price} تا `
                         }
                       })
-                }
+                } */}
               </span>
             </div>
           </div>

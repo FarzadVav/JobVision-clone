@@ -83,7 +83,8 @@ const AddJobAd = () => {
       || !company?.company.name
       || !company?.company.activity
       || !company?.company.city
-      || company?.company.employees.length < 2
+      || !company.company.employees.from
+      || !company.company.employees.to
       || !company?.company.logo
       || !company?.company.name
       || !company?.company.province
@@ -107,8 +108,14 @@ const AddJobAd = () => {
         education: data.educations,
         languages: data.languages,
         techs: data.technologies,
-        age: [+data.age.from, +data.age.to],
-        salary: data.salary.showBoth ? [+data.salary.from, +data.salary.to] : [+data.salary.from],
+        age: {
+          from: +data.age.from,
+          to: +data.age.to
+        },
+        salary: {
+          from: +data.salary.from,
+          ...(+data.salary.to ? { to: +data.salary.to } : {})
+        },
         company: company.company._id || ''
       }
 

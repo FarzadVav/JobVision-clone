@@ -12,6 +12,8 @@ type JobAdsTypes = {
   isUrgent: boolean;
   endOfMilitaryService: boolean;
   gender: boolean | null;
+  age: { from: number; to: number };
+  salary: { from: number; to?: number };
   cooperationType: { _id: string; name: CooperationTypes };
   category: { _id: string; name: string };
   tags: { _id: string; name: string }[];
@@ -20,8 +22,6 @@ type JobAdsTypes = {
   education: string[];
   languages: string[];
   techs: string[];
-  age: number[];
-  salary: number[] | null;
   company: CompanyTypes;
 }
 

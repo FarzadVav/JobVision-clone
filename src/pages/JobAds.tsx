@@ -176,14 +176,7 @@ const Jobs = () => {
 								</span>
 								<span>
 									{
-										singleJobAd.age.length === 1 ? `${singleJobAd.age[0]} سال`
-											: singleJobAd.age.map((price, index) => {
-												if (index + 1 === singleJobAd.age.length) {
-													return `${price} سال`
-												} else {
-													return `${price} تا `
-												}
-											})
+										`${singleJobAd.age.from} تا ${singleJobAd.age.to}`
 									}
 								</span>
 							</li>
@@ -387,14 +380,7 @@ const Jobs = () => {
 								</span>
 								<span className={`opacity-75 block text-sm mt-1`}>
 									{
-										singleJobAd.company.employees.length === 1 ? `${singleJobAd.company.employees[0]} نفر`
-											: singleJobAd.company.employees.map((price, index) => {
-												if (index + 1 === singleJobAd.company.employees.length) {
-													return `${price} نفر`
-												} else {
-													return `${price} تا `
-												}
-											})
+										`${singleJobAd.company.employees.from} تا ${singleJobAd.company.employees.to}`
 									}
 								</span>
 							</div>
@@ -646,15 +632,11 @@ const Jobs = () => {
 												<div className={`w-full flex items-center justify-between mt-4`}>
 													<span className={`text-jv-success`}>
 														{
-															selectedJobAds.salary === null ? 'حقوق توافقی'
-																: selectedJobAds.salary.length === 1 ? `${selectedJobAds.salary} میلیون`
-																	: selectedJobAds.salary.map((price, index) => {
-																		if (index + 1 === selectedJobAds.salary?.length) {
-																			return `${price} میلیون`
-																		} else {
-																			return `${price} تا `
-																		}
-																	})
+															selectedJobAds.salary
+																? `${selectedJobAds.salary.from} ${selectedJobAds.salary.to
+																	? `تا ${selectedJobAds.salary.to}`
+																	: ''}`
+																: 'حقوق توافقی'
 														}
 													</span>
 													<div className={`flex items-center`}>
@@ -679,14 +661,7 @@ const Jobs = () => {
 													<PeopleAltRounded className={`text-jv-light brightness-75`} />
 													<span className={`mr-3`}>
 														{
-															selectedJobAds.company.employees.length === 1 ? `${selectedJobAds.company.employees[0]} نفر`
-																: selectedJobAds.company.employees.map((price, index) => {
-																	if (index + 1 === selectedJobAds.company.employees.length) {
-																		return `${price} نفر`
-																	} else {
-																		return `${price} تا `
-																	}
-																})
+															`${selectedJobAds.company.employees.from} تا ${selectedJobAds.company.employees.to}`
 														}
 													</span>
 												</div>

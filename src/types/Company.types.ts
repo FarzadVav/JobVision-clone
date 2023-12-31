@@ -9,7 +9,7 @@ type CompanyTypes = {
   year: number;
   score: number;
   knowledgeBased: boolean;
-  employees: number[];
+  employees: { from: number; to: number };
   province: { _id: string; name: string; };
   city: { _id: string; name: string; }
 }

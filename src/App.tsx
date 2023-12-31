@@ -26,6 +26,8 @@ const App = () => {
 			})
 
 			!validation && logOutHandler()
+		} else {
+			useAuth.setState({ isLogin: false })
 		}
 	}, [company])
 
