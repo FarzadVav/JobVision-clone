@@ -668,7 +668,7 @@ const Jobs = () => {
 												<div className={`flex items-center mt-1.5 md:mr-6 md:mt-0`}>
 													<HelpRounded className={`text-jv-light brightness-75`} />
 													<p className={`mr-3`}>
-														{selectedJobAds.company.activity}
+														{selectedJobAds.company.activity.slice(0, 75)}
 													</p>
 												</div>
 											</div>

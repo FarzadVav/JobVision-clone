@@ -22,7 +22,7 @@ const gendersTypes = z.enum(['مرد', 'زن', 'فرقی ندارد'])
 
 const schema = z.object({
   title: z.string().min(3).max(256),
-  description: z.string().min(3).max(256),
+  description: z.string().min(3),
   workTimes: z.string().min(3).max(256),
   businessTrips: z.string().min(1),
   isRemote: z.boolean().optional(),
