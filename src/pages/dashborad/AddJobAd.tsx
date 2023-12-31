@@ -18,19 +18,22 @@ import useCompany from '../../hooks/query/useCompany'
 import { ARRAY_STRING, NUMERIC_STRING } from '../../utils/zodSchema'
 
 const genders = ['مرد', 'زن', 'فرقی ندارد']
-const gendersTypes = z.enum(['مرد', 'زن', 'فرقی ندارد'])
+const gendersTypes = z.enum(
+  ['مرد', 'زن', 'فرقی ندارد'],
+  { errorMap: () => ({ message: 'لطفا یک مورد را انتخاب کنید' }) }
+)
 
 const schema = z.object({
-  title: z.string().min(3).max(256),
-  description: z.string().min(3),
-  workTimes: z.string().min(3).max(256),
-  businessTrips: z.string().min(1),
+  title: z.string().min(3, { message: 'این فیلد الزامی است' }).max(256),
+  description: z.string().min(3, { message: 'این فیلد الزامی است' }),
+  workTimes: z.string().min(3, { message: 'این فیلد الزامی است' }).max(256),
+  businessTrips: z.string().min(1, { message: 'این فیلد الزامی است' }),
   isRemote: z.boolean().optional(),
   isUrgent: z.boolean().optional(),
   gender: gendersTypes,
-  cooperationType: z.string().min(1),
+  cooperationType: z.string().min(1, { message: 'لطفا یک مورد را انتخاب کنید' }),
   endOfMilitaryService: z.boolean().optional(),
-  category: z.string().min(1),
+  category: z.string().min(1, { message: '' }),
   tags: ARRAY_STRING,
   benefits: ARRAY_STRING,
   abilties: ARRAY_STRING,
@@ -43,7 +46,7 @@ const schema = z.object({
   })
     .superRefine(({ from, to }, ctx) => {
       if ((+from >= +to)) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR', path: ['to'] })
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'این عدد باید بزرگ تر از قبلی باشد', path: ['to'] })
       }
       return z.NEVER
     }),
@@ -55,11 +58,11 @@ const schema = z.object({
     .superRefine(({ from, to, showBoth }, ctx) => {
       if (showBoth) {
         if (+from >= +to) {
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR', path: ['to'] })
+          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'این عدد باید بزرگ تر از قبلی باشد', path: ['to'] })
         } else if ((+from < 20) && (+to - +from) > 5) {
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR', path: ['to'] })
+          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'فاصله دو عدد نباید بیشتر از 5 میلیون باشد', path: ['to'] })
         } else if ((+from >= 20) && (+to - +from) > 10) {
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR', path: ['to'] })
+          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'فاصله دو عدد نباید بیشتر از 10 میلیون باشد', path: ['to'] })
         }
       }
       return z.NEVER
@@ -83,6 +86,8 @@ const AddJobAd = () => {
   const { content } = useContent()
   const { company } = useCompany()
   const { addJobAd, addJobAdPending } = useJobAdsQuery()
+
+  console.log(errors.tags);
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     if (!company?.company.logo
@@ -151,7 +156,7 @@ const AddJobAd = () => {
             customClass={`bg-jv-bright`}
             register={{ ...register('title') }}
             placeholder={`برای مثال استخدام آقای اکیس`}
-            error={!!errors.title}
+            error={errors.title}
           >
             <TextFieldsRounded className={`-scale-x-100`} />
           </TextInput>
@@ -167,7 +172,7 @@ const AddJobAd = () => {
             customClass={`bg-jv-bright`}
             register={{ ...register('description') }}
             placeholder={`آگهی شغلی تان را شرح دهید...`}
-            error={!!errors.description}
+            error={errors.description}
           >
             <NotesRounded className={`-scale-x-100`} />
           </TextArea>
@@ -183,7 +188,7 @@ const AddJobAd = () => {
             customClass={`bg-jv-bright`}
             register={{ ...register('workTimes') }}
             placeholder={`برای مثال از 7 صبح تا 4 بعد از ظهر`}
-            error={!!errors.workTimes}
+            error={errors.workTimes}
           >
             <AccessTimeRounded />
           </TextInput>
@@ -199,7 +204,7 @@ const AddJobAd = () => {
             customClass={`bg-jv-bright`}
             register={{ ...register('businessTrips') }}
             placeholder={`برای مثال 1 هفته در سال`}
-            error={!!errors.businessTrips}
+            error={errors.businessTrips}
           >
             <LocalAirportRounded />
           </TextInput>
@@ -211,23 +216,27 @@ const AddJobAd = () => {
               میزان حقوق
             </label>
           </Title>
-          <div className={`w-full flex flex-col items-center justify-center sm:flex-row`}>
+          <div className={`w-full flex flex-col items-center justify-center sm:flex-row sm:items-start`}>
             <TextInput
               customClass={`bg-jv-bright`}
               register={{ ...register('salary.from') }}
               placeholder={`برای مثال ${showBothSalary ? 'از ' : ''}20 میلیون تومان`}
-              error={!!errors.salary?.from}
+              error={errors.salary?.from}
             >
               <PaymentsOutlined />
             </TextInput>
-            <TextInput
-              customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3 ${showBothSalary ? '' : 'hidden'}`}
-              register={{ ...register('salary.to') }}
-              placeholder={`تا 30 میلیون تومان`}
-              error={!!errors.salary?.to}
-            >
-              <PaymentsOutlined />
-            </TextInput>
+            {
+              showBothSalary ? (
+                <TextInput
+                  customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3`}
+                  register={{ ...register('salary.to') }}
+                  placeholder={`تا 30 میلیون تومان`}
+                  error={errors.salary?.to}
+                >
+                  <PaymentsOutlined />
+                </TextInput>
+              ) : null
+            }
           </div>
           <div className={`w-full flex items-center mt-5`}>
             <label
@@ -252,12 +261,12 @@ const AddJobAd = () => {
               میزان سن
             </label>
           </Title>
-          <div className={`w-full flex flex-col items-center justify-center sm:flex-row`}>
+          <div className={`w-full flex flex-col items-center justify-center sm:flex-row sm:items-start`}>
             <TextInput
               customClass={`bg-jv-bright`}
               register={{ ...register('age.from') }}
               placeholder={`برای مثال از 18 سال`}
-              error={!!errors.age?.from}
+              error={errors.age?.from}
             >
               <AccountCircleOutlined />
             </TextInput>
@@ -265,7 +274,7 @@ const AddJobAd = () => {
               customClass={`show-fade bg-jv-bright mt-3 sm:mt-0 sm:mr-3`}
               register={{ ...register('age.to') }}
               placeholder={`تا 25 سال`}
-              error={!!errors.age?.to}
+              error={errors.age?.to}
             >
               <AccountCircleOutlined />
             </TextInput>
@@ -284,7 +293,7 @@ const AddJobAd = () => {
             setValue={setValue}
             placeholder={`برای مثال برنامه نویسی`}
             datas={content?.categories.map(cat => cat.name) || []}
-            error={!!errors.category}
+            error={errors.category}
           >
             <WorkOutlineRounded />
           </AutoComplete>
@@ -302,7 +311,7 @@ const AddJobAd = () => {
             setValue={setValue}
             placeholder={`برای مثال برنامه نویسی`}
             datas={content?.cooperationType.map(type => type.name) || []}
-            error={!!errors.cooperationType}
+            error={errors.cooperationType}
           >
             <ArticleOutlined />
           </AutoComplete>
@@ -320,7 +329,7 @@ const AddJobAd = () => {
             setValue={setValue}
             placeholder={`برای مثال فرقی ندارد`}
             datas={genders}
-            error={!!errors.gender}
+            error={errors.gender}
           >
             <PeopleOutlined />
           </AutoComplete>
@@ -336,7 +345,7 @@ const AddJobAd = () => {
             customClass={`bg-jv-bright`}
             placeholder='برای مثال Front-End'
             datas={content?.tags.map(tag => tag.name) || []}
-            error={!!errors.tags}
+            error={errors.tags}
             onChangeList={(list: string[]) => setValue('tags', list)}
             resetHandler={() => setValue('tags', [])}
           />
@@ -351,7 +360,7 @@ const AddJobAd = () => {
           <ComboBox
             customClass={`bg-jv-bright`}
             placeholder='برای مثال بیمه'
-            error={!!errors.benefits}
+            error={errors.benefits}
             onChangeList={(list: string[]) => setValue('benefits', list)}
             resetHandler={() => setValue('benefits', [])}
           >
@@ -368,7 +377,7 @@ const AddJobAd = () => {
           <ComboBox
             customClass={`bg-jv-bright`}
             placeholder='برای مثال 1 سال سابقه کار'
-            error={!!errors.abilties}
+            error={errors.abilties}
             onChangeList={(list: string[]) => setValue('abilties', list)}
             resetHandler={() => setValue('abilties', [])}
           >
@@ -385,7 +394,7 @@ const AddJobAd = () => {
           <ComboBox
             customClass={`bg-jv-bright`}
             placeholder='برای مثال لیسانس مهندسی کامپیوتر'
-            error={!!errors.educations}
+            error={errors.educations}
             onChangeList={(list: string[]) => setValue('educations', list)}
             resetHandler={() => setValue('educations', [])}
           >
@@ -402,7 +411,7 @@ const AddJobAd = () => {
           <ComboBox
             customClass={`bg-jv-bright`}
             placeholder='برای مثال زبان انگلیسی'
-            error={!!errors.languages}
+            error={errors.languages}
             onChangeList={(list: string[]) => setValue('languages', list)}
             resetHandler={() => setValue('languages', [])}
           >
@@ -419,7 +428,7 @@ const AddJobAd = () => {
           <ComboBox
             customClass={`bg-jv-bright`}
             placeholder='برای مثال Typescript'
-            error={!!errors.technologies}
+            error={errors.technologies}
             onChangeList={(list: string[]) => setValue('technologies', list)}
             resetHandler={() => setValue('technologies', [])}
           >

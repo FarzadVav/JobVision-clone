@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { CloseRounded, DoneRounded, KeyboardArrowDownRounded } from "@mui/icons-material";
+import { FieldError, Merge } from "react-hook-form";
 
 import tokenGenerator from "../../utils/tokenGenerator";
 import useFirstMount from "../../hooks/useFirstMount";
@@ -7,7 +8,7 @@ import useFirstMount from "../../hooks/useFirstMount";
 type MultiSelectBoxProps = {
   customClass?: string;
   placeholder: string;
-  error?: boolean;
+  error?: Merge<FieldError, (FieldError | undefined)[]>;
   datas: string[];
   onChangeList: (list: string[]) => void;
   resetHandler: Function;
@@ -42,7 +43,7 @@ const MultiSelectBox = ({ customClass, placeholder, error, datas, onChangeList, 
   }
 
   return (
-    <div className={`w-full flex flex-col`}>
+    <div className={`input-wrapper`}>
       <div
         className={`input-bg group ${error ? 'border-jv-danger hover:border-jv-danger' : (focus && !error) ? 'border-jv-primary' : ''} ${focus ? 'rounded-b-none !border-b-transparent' : ''} ${customClass}`}
         onClick={event => {
@@ -127,7 +128,19 @@ const MultiSelectBox = ({ customClass, placeholder, error, datas, onChangeList, 
         </div>
       </div>
       {
-        selectedList.length ? (
+        error ? (
+          <p className={`input-error`}>
+            <span>
+              *
+            </span>
+            <span>
+              {error.message}
+            </span>
+          </p>
+        ) : null
+      }
+      {
+        !error && selectedList.length ? (
           <span className={`text-sm mt-3`}>
             {selectedList.length} مورد اضافه شده
           </span>

@@ -1,11 +1,13 @@
+import { ReactNode, useEffect, useState } from "react";
 import { AddCircle } from "@mui/icons-material";
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { FieldError, Merge } from "react-hook-form";
+
 import tokenGenerator from "../../utils/tokenGenerator";
 
 type ComboBoxProps = {
   customClass?: string;
   placeholder: string;
-  error?: boolean;
+  error?: Merge<FieldError, (FieldError | undefined)[]>;
   onChangeList: (item: string[]) => void;
   resetHandler: Function;
   children: ReactNode
@@ -19,7 +21,7 @@ const ComboBox = ({ customClass, placeholder, error, onChangeList, resetHandler,
   useEffect(() => onChangeList(list), [list])
 
   return (
-    <div className={`w-full flex flex-col`}>
+    <div className={`input-wrapper`}>
       <div className={`input-bg group ${error ? 'border-jv-danger hover:border-jv-danger' : (focus && !error) ? 'border-jv-primary' : ''} ${customClass}`}>
         <input
           className={`combo`}
@@ -45,38 +47,57 @@ const ComboBox = ({ customClass, placeholder, error, onChangeList, resetHandler,
           <AddCircle />
         </div>
       </div>
-      <ul className={`w-full flex flex-col mt-3`}>
-        {
-          useMemo(() => {
-            return list.length ? list.map(item => (
-              <li key={tokenGenerator()}>
-                {item}
-              </li>
-            )) : (
-              <li>
-                <span className={`text-sm`}>
-                  آیتمی اضافه نشده است
-                </span>
-              </li>
-            )
-          }, [list])
-        }
-        {
-          list.length ? (
-            <li>
-              <div
-                className={`btn-sm btn-danger mt-2`}
-                onClick={() => {
-                  setList([])
-                  resetHandler()
-                }}
-              >
-                حدف همه
-              </div>
-            </li>
-          ) : null
-        }
-      </ul>
+
+      {
+        error ? (
+          <p className={`input-error`}>
+            <span>
+              *
+            </span>
+            <span>
+              {error.message}
+            </span>
+          </p>
+        ) : null
+      }
+
+      {
+        !error ? (
+          <ul className={`w-full flex flex-col mt-3`}>
+            {
+              list.length ? list.map(item => (
+                <li key={tokenGenerator()}>
+                  {item}
+                </li>
+              )) : (
+                <li>
+                  <span className={`text-sm`}>
+                    آیتمی اضافه نشده است
+                  </span>
+                </li>
+              )
+            }
+            {
+              list.length ? (
+                <li>
+                  <span className={`text-sm mt-3`}>
+                    {list.length} مورد اضافه شده
+                  </span>
+                  <div
+                    className={`btn-sm btn-danger mt-2`}
+                    onClick={() => {
+                      setList([])
+                      resetHandler()
+                    }}
+                  >
+                    حدف همه
+                  </div>
+                </li>
+              ) : null
+            }
+          </ul>
+        ) : null
+      }
     </div>
   )
 }
