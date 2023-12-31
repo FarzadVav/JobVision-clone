@@ -47,21 +47,25 @@ const Details = () => {
   } = useForm<formTypes>({
     resolver: zodResolver(schema),
     defaultValues: {
-      logo: company?.company.logo,
-      name: company?.company.name,
-      aboutCompany: company?.company.aboutCompany,
-      activity: company?.company.activity,
-      year: company?.company.year.toString(),
+      logo: company?.company.logo || '',
+      name: company?.company.name || '',
+      aboutCompany: company?.company.aboutCompany || '',
+      activity: company?.company.activity || '',
+      year: (company?.company.year || '').toString(),
       knowledgeBased: company?.company.knowledgeBased,
       employees: {
-        from: company?.company.employees[0].toString(),
-        to: company?.company.employees[1].toString(),
+        from: (company?.company.employees[0] || '').toString(),
+        to: (company?.company.employees[1] || '').toString(),
       },
-      province: company?.company.province.name,
-      city: company?.company.city.name
+      province: company?.company.province?.name || '',
+      city: company?.company.city?.name || ''
     }
   })
   const { content } = useContent()
+
+  // Object.entries(company?.company || {}).forEach(i => {
+  //   console.log(i[0], '=>', i[1])
+  // })
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     const companyDetials = {
