@@ -12,6 +12,7 @@ import TextInput from "../../components/inputs/TextInput"
 import AutoComplete from "../../components/inputs/AutoComplete"
 import useCompany from "../../hooks/query/useCompany"
 import { NON_EMPTY_STRING, NUMERIC_STRING } from "../../utils/zodSchema"
+import { newCompanyTypes } from "../../types/Company.types"
 
 const schema = z.object({
   name: NON_EMPTY_STRING,
@@ -43,7 +44,6 @@ const Details = () => {
     handleSubmit,
     formState: { errors },
     setValue,
-    reset
   } = useForm<formTypes>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -54,8 +54,8 @@ const Details = () => {
       year: (company?.company.year || '').toString(),
       knowledgeBased: company?.company.knowledgeBased,
       employees: {
-        from: (company?.company.employees.from || '').toString(),
-        to: (company?.company.employees.to || '').toString(),
+        from: (company?.company.employees?.from || '').toString(),
+        to: (company?.company.employees?.to || '').toString(),
       },
       province: company?.company.province?.name || '',
       city: company?.company.city?.name || ''
@@ -63,12 +63,8 @@ const Details = () => {
   })
   const { content } = useContent()
 
-  // Object.entries(company?.company || {}).forEach(i => {
-  //   console.log(i[0], '=>', i[1])
-  // })
-
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
-    const companyDetials = {
+    const companyDetials: newCompanyTypes = {
       logo: data.logo,
       name: data.name,
       aboutCompany: data.aboutCompany,
@@ -76,7 +72,10 @@ const Details = () => {
       year: +data.year,
       score: 5,
       knowledgeBased: !!data.knowledgeBased,
-      employees: [+data.employees.from, +data.employees.to],
+      employees: {
+        from: +data.employees.from,
+        to: +data.employees.to
+      },
       province: content?.provinces.find(province => province.name === data.province)?._id || '',
       city: content?.cities.find(city => city.name === data.city)?._id || ''
     }
@@ -84,7 +83,6 @@ const Details = () => {
     updateCompany(companyDetials, {
       onSuccess: () => {
         toast.success('اطلاعات شرکت با موفقیت ویرایش شد')
-        reset()
       }
     })
   }

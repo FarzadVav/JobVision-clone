@@ -14,4 +14,9 @@ type CompanyTypes = {
   city: { _id: string; name: string; }
 }
 
+export interface newCompanyTypes extends Omit<CompanyTypes, 'email' | 'password' | 'province' | 'city'> {
+  province: string;
+  city: string
+}
+
 export default CompanyTypes

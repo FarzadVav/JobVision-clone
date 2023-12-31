@@ -83,8 +83,8 @@ const AddJobAd = () => {
       || !company?.company.name
       || !company?.company.activity
       || !company?.company.city
-      || !company.company.employees.from
-      || !company.company.employees.to
+      || !company.company.employees?.from
+      || !company.company.employees?.to
       || !company?.company.logo
       || !company?.company.name
       || !company?.company.province
