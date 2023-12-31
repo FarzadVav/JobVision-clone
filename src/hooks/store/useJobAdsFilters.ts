@@ -13,7 +13,10 @@ export type useJobAdsFiltersTypes = {
   remote: boolean;
   knowledgeBasedCompany: boolean;
   cooprationType: CooperationTypes | null;
-  salaryType: [number, number] | null;
+  salaryType: {
+    from: number;
+    to: number
+  } | null;
   setFiltersToDefault: () => void
 }
 

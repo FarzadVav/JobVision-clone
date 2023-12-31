@@ -53,8 +53,14 @@ const schema = z.object({
     showBoth: z.boolean().optional()
   })
     .superRefine(({ from, to, showBoth }, ctx) => {
-      if (showBoth && (+from >= +to)) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR', path: ['to'] })
+      if (showBoth) {
+        if (+from >= +to) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR', path: ['to'] })
+        } else if ((+from < 20) && (+to - +from) > 5) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR', path: ['to'] })
+        } else if ((+from >= 20) && (+to - +from) > 10) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR', path: ['to'] })
+        }
       }
       return z.NEVER
     })

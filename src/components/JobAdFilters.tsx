@@ -236,8 +236,8 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
         newFilteredJobAds = newFilteredJobAds.filter(job => {
           if (job.salary !== null
             && filters.salaryType !== null
-            && job.salary[0] >= filters.salaryType[0]
-            && job.salary[job.salary.length - 1] <= filters.salaryType[1]) {
+            && job.salary.from >= filters.salaryType.from
+            && (job.salary.to || 0) <= filters.salaryType.to) {
             return job
           }
         })
@@ -367,28 +367,32 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
           title={'حقوق'}
           filters={[
             {
-              title: 'تا 4 میلیون',
-              filterHandler: () => useJobAdsFilters.setState({ salaryType: [0, 4] })
+              title: 'تا 5 میلیون',
+              filterHandler: () => useJobAdsFilters.setState({ salaryType: { from: 0, to: 5 } })
             },
             {
-              title: '4 تا 8 میلیون',
-              filterHandler: () => useJobAdsFilters.setState({ salaryType: [4, 8] })
+              title: '5 تا 10 میلیون',
+              filterHandler: () => useJobAdsFilters.setState({ salaryType: { from: 5, to: 10 } })
             },
             {
-              title: 'از 8 تا 15 میلیون',
-              filterHandler: () => useJobAdsFilters.setState({ salaryType: [8, 15] })
+              title: 'از 10 تا 15 میلیون',
+              filterHandler: () => useJobAdsFilters.setState({ salaryType: { from: 10, to: 15 } })
             },
             {
-              title: 'از 15 تا 25 میلیون',
-              filterHandler: () => useJobAdsFilters.setState({ salaryType: [15, 25] })
+              title: 'از 15 تا 20 میلیون',
+              filterHandler: () => useJobAdsFilters.setState({ salaryType: { from: 15, to: 20 } })
             },
             {
-              title: 'از 25 تا 40 میلیون',
-              filterHandler: () => useJobAdsFilters.setState({ salaryType: [25, 40] })
+              title: 'از 20 تا 30 میلیون',
+              filterHandler: () => useJobAdsFilters.setState({ salaryType: { from: 20, to: 30 } })
             },
             {
-              title: 'از 40 تا 75 میلیون',
-              filterHandler: () => useJobAdsFilters.setState({ salaryType: [40, 75] })
+              title: 'از 30 تا 40 میلیون',
+              filterHandler: () => useJobAdsFilters.setState({ salaryType: { from: 30, to: 40 } })
+            },
+            {
+              title: 'بیشتر از 40 میلیون',
+              filterHandler: () => useJobAdsFilters.setState({ salaryType: { from: 40, to: 999 } })
             },
           ]}
           unFilterHandler={() => useJobAdsFilters.setState({ salaryType: null })}
