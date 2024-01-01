@@ -15,7 +15,7 @@ import useContent from '../../hooks/query/useContent'
 import useJobAdsQuery from '../../hooks/query/useJobAds'
 import { newJobAdTypes } from '../../types/JobAds.types'
 import useCompany from '../../hooks/query/useCompany'
-import { ARRAY_STRING, NUMERIC_STRING } from '../../utils/zodSchema'
+import { ARRAY_STRING, NON_EMPTY_STRING, NUMERIC_STRING } from '../../utils/zodSchema'
 
 const genders = ['مرد', 'زن', 'فرقی ندارد']
 const gendersTypes = z.enum(
@@ -33,7 +33,7 @@ const schema = z.object({
   gender: gendersTypes,
   cooperationType: z.string().min(1, { message: 'لطفا یک مورد را انتخاب کنید' }),
   endOfMilitaryService: z.boolean().optional(),
-  category: z.string().min(1, { message: '' }),
+  category: NON_EMPTY_STRING,
   tags: ARRAY_STRING,
   benefits: ARRAY_STRING,
   abilties: ARRAY_STRING,
@@ -86,8 +86,6 @@ const AddJobAd = () => {
   const { content } = useContent()
   const { company } = useCompany()
   const { addJobAd, addJobAdPending } = useJobAdsQuery()
-
-  console.log(errors.tags);
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     if (!company?.company.logo

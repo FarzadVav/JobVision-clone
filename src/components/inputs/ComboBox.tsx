@@ -80,9 +80,6 @@ const ComboBox = ({ customClass, placeholder, error, onChangeList, resetHandler,
             {
               list.length ? (
                 <li>
-                  <span className={`text-sm mt-3`}>
-                    {list.length} مورد اضافه شده
-                  </span>
                   <div
                     className={`btn-sm btn-danger mt-2`}
                     onClick={() => {
