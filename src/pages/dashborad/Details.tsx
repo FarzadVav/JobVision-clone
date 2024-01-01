@@ -16,16 +16,16 @@ import { newCompanyTypes } from "../../types/Company.types"
 
 const schema = z.object({
   name: NON_EMPTY_STRING,
-  logo: NON_EMPTY_STRING.startsWith('https://'),
-  aboutCompany: z.string().min(3),
-  year: NUMERIC_STRING.min(4).max(4),
+  logo: NON_EMPTY_STRING.startsWith('https://', { message: 'آدرس وارد شده صحیح نیست' }),
+  aboutCompany: NON_EMPTY_STRING,
+  year: NUMERIC_STRING.min(4, { message: 'حداقل و حداکثر 4 رقم مجاز است' }).max(4, { message: 'حداقل و حداکثر 4 رقم مجاز است' }),
   employees: z.object({
     from: NUMERIC_STRING,
     to: NUMERIC_STRING,
   })
     .superRefine(({ from, to }, ctx) => {
       if ((+from >= +to)) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'ERROR', path: ['to'] })
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'این عدد باید بزرگ تر از قبلی باشد', path: ['to'] })
       }
       return z.NEVER
     }),
@@ -102,7 +102,7 @@ const Details = () => {
         customClass={`bg-jv-bright`}
         register={{ ...register('name') }}
         placeholder={`برای مثال جاب ویژن`}
-        error={!!errors.name}
+        error={errors.name}
         numeric
       >
         <DriveFileRenameOutlineOutlined />
@@ -119,7 +119,7 @@ const Details = () => {
         customClass={`bg-jv-bright`}
         register={{ ...register('logo') }}
         placeholder={`//:https`}
-        error={!!errors.logo}
+        error={errors.logo}
         numeric
       >
         <InsertLinkRounded />
@@ -136,7 +136,7 @@ const Details = () => {
         customClass={`bg-jv-bright`}
         register={{ ...register('aboutCompany') }}
         placeholder={`درباره شرکت`}
-        error={!!errors.aboutCompany}
+        error={errors.aboutCompany}
       >
         <HelpOutlineRounded />
       </TextArea>
@@ -152,7 +152,7 @@ const Details = () => {
         customClass={`bg-jv-bright`}
         register={{ ...register('year') }}
         placeholder={`برای مثال 1390`}
-        error={!!errors.year}
+        error={errors.year}
         numeric
       >
         <CalendarMonthRounded />
@@ -165,14 +165,14 @@ const Details = () => {
           مکان شرکت
         </label>
       </Title>
-      <div className={`w-full flex flex-col items-center justify-center sm:flex-row`}>
+      <div className={`w-full flex flex-col justify-center sm:flex-row`}>
         <AutoComplete
           customClass={`bg-jv-bright`}
           register={{ ...register('province') }}
           setValue={setValue}
           placeholder={`استان`}
           datas={content?.provinces.map(province => province.name) || []}
-          error={!!errors.province}
+          error={errors.province}
         >
           <LocationOnOutlined />
         </AutoComplete>
@@ -182,7 +182,7 @@ const Details = () => {
           setValue={setValue}
           placeholder={`شهر`}
           datas={content?.cities.map(city => city.name) || []}
-          error={!!errors.city}
+          error={errors.city}
         >
           <LocationOnOutlined />
         </AutoComplete>
@@ -199,7 +199,7 @@ const Details = () => {
         customClass={`bg-jv-bright`}
         register={{ ...register('activity') }}
         placeholder={`برای مثال برنامه نویسی`}
-        error={!!errors.activity}
+        error={errors.activity}
       >
         <ManageSearchRounded />
       </TextArea>
@@ -211,12 +211,12 @@ const Details = () => {
           تعداد کارکنان
         </label>
       </Title>
-      <div className={`w-full flex flex-col items-center justify-center sm:flex-row`}>
+      <div className={`w-full flex flex-col justify-center sm:flex-row`}>
         <TextInput
           customClass={`bg-jv-bright`}
           register={{ ...register('employees.from') }}
           placeholder={`از این تعداد`}
-          error={!!errors.employees?.from}
+          error={errors.employees?.from}
           numeric
         >
           <PeopleOutlineRounded />
@@ -225,7 +225,7 @@ const Details = () => {
           customClass={`bg-jv-bright mt-3 sm:mr-3 sm:mt-0`}
           register={{ ...register('employees.to') }}
           placeholder={`تا این تعداد`}
-          error={!!errors.employees?.to}
+          error={errors.employees?.to}
           numeric
         >
           <PeopleOutlineRounded />

@@ -1,4 +1,5 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useQuery, useMutation } from '@tanstack/react-query'
+// import { useQueryClient } from "@tanstack/react-query"
 
 import supabase from '../../utils/supabase'
 import useLoading from '../store/useLoading'
@@ -13,7 +14,7 @@ type DatasTypes = {
 }
 
 const useCompany = () => {
-  const queryClient = useQueryClient()
+  // const queryClient = useQueryClient()
   const { addLoadingKey, removeLoadingKey } = useLoading(s => s)
   const { loginHandler, getToken } = useAuth(s => s)
 
@@ -30,12 +31,33 @@ const useCompany = () => {
     queryFn: async () => {
       addLoadingKey(COMPANY)
 
-      const { data } = await supabase
+      const { data: companies } = await supabase
         .from('companies')
         .select('*')
 
+      const { data: provinces } = await supabase
+        .from('provinces')
+        .select('*')
+
+      const { data: cities } = await supabase
+        .from('cities')
+        .select('*')
+
+      companies?.forEach(company => {
+        provinces?.forEach(province => {
+          if (company.province === province._id) {
+            company.province = province
+          }
+        })
+        cities?.forEach(city => {
+          if (company.city === city._id) {
+            company.city = city
+          }
+        })
+      })
+
       removeLoadingKey(COMPANY)
-      return createCompanies(data as CompanyTypes[])
+      return createCompanies(companies as CompanyTypes[])
     }
   })
 
@@ -57,7 +79,10 @@ const useCompany = () => {
       // @ts-ignore
       loginHandler(datas?.find(data => data._id === singleData[0]._id)._id)
 
-      queryClient.setQueryData([COMPANY], createCompanies(datas as CompanyTypes[]))
+      refetchCompany()
+
+      // ! the following line will work with real API
+      // queryClient.setQueryData([COMPANY], createCompanies(datas as CompanyTypes[]))
 
       removeLoadingKey(key)
       return datas
@@ -80,7 +105,10 @@ const useCompany = () => {
         .from('companies')
         .select('*')
 
-      queryClient.setQueryData([COMPANY], createCompanies(datas as CompanyTypes[]))
+      refetchCompany()
+
+      // ! the following line will work with real API
+      // queryClient.setQueryData([COMPANY], createCompanies(datas as CompanyTypes[]))
 
       removeLoadingKey(key)
       return datas
