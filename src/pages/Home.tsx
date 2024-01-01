@@ -51,50 +51,53 @@ const Home = () => {
 		<>
 			<div className={`wrapper mt-12 md:mt-3`}>
 				{/* hero section */}
-				<main className={`h-max grid grid-rows-[1fr_13.5rem] grid-cols-1 gap-y-9 sm:grid-rows-[1fr_10rem] md:grid-cols-2
-				lg:grid-rows-[1fr_3rem] md:gap-y-16`}>
-					{/* details */}
-					<div className={`flex flex-col justify-center items-center text-center md:text-right md:items-start`}>
-						<Title customClass={`justify-center md:justify-start`}>
-							<h1 className={`md:mt-16`}>
-								در
-								<span className={`text-jv-primary`}>
-									484
-								</span>
-								شهر
-								<span className={`text-jv-primary`}>
-									37,540
-								</span>
-								آگهی شغلی <br className={`sm:hidden`} /> ثبت شده
-							</h1>
-						</Title>
-						<p className={`text-sm leading-loose mt-3.5 md:text-base md:leading-relaxed`}>
-							لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
-						</p>
-						<div className={`hidden items-center mt-5 lg:flex`}>
-							<Link
-								className={`text-jv-primary`}
-								to={'/'}
-							>
-								ثبت شرکت
-							</Link>
-							<Link
-								className={`text-jv-primary border-r border-solid border-slate-200 pr-3 mr-4`}
-								to={'/'}
-							>
-								ساخت رزومه
-							</Link>
+				<main className={`w-full flex flex-col justify-center items-center`}>
+					<div className={`w-full flex justify-center items-center`}>
+						{/* details */}
+						<div className={`w-full flex flex-col justify-center items-center text-center md:w-1/2 md:text-right md:items-start`}>
+							<Title customClass={`justify-center md:justify-start`}>
+								<h1 className={`md:mt-16`}>
+									در
+									<span className={`text-jv-primary`}>
+										484
+									</span>
+									شهر
+									<span className={`text-jv-primary`}>
+										37,540
+									</span>
+									آگهی شغلی <br className={`sm:hidden`} /> ثبت شده
+								</h1>
+							</Title>
+							<p className={`text-sm leading-loose mt-3.5 md:text-base md:leading-relaxed`}>
+								لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
+							</p>
+							<div className={`hidden items-center mt-5 lg:flex`}>
+								<Link
+									className={`text-jv-primary`}
+									to={'/'}
+								>
+									ثبت شرکت
+								</Link>
+								<Link
+									className={`text-jv-primary border-r border-solid border-slate-200 pr-3 mr-4`}
+									to={'/'}
+								>
+									ساخت رزومه
+								</Link>
+							</div>
 						</div>
-					</div>
-					{/* details */}
-					{/* iran map animation */}
-					<div className={`hidden justify-center items-center md:flex`}>
-						<IranAnimation />
+						{/* details */}
+						{/* iran map animation */}
+						<div className={`w-1/2 hidden justify-center items-center md:flex`}>
+							<IranAnimation />
+						</div>
 					</div>
 					{/* iran map animation */}
 
 					{/* filter jobAds with searchBar */}
-					<SearchJobForm />
+					<div className={`w-full mt-12`}>
+						<SearchJobForm />
+					</div>
 					{/* filter jobAds with searchBar */}
 				</main>
 				{/* Hero section */}

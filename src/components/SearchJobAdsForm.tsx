@@ -6,18 +6,19 @@ import { WorkOutlineRounded, SearchRounded, LocationOnOutlined } from "@mui/icon
 
 import TextInput from "./inputs/TextInput";
 import AutoComplete from "./inputs/AutoComplete";
-import { PulseLoader } from "react-spinners";
 import useContent from "../hooks/query/useContent";
+import { PulseLoader } from "react-spinners";
+import { NON_EMPTY_STRING } from "../utils/zodSchema";
 
 const schema = z.object({
-  search: z.string().min(2).max(128),
+  search: NON_EMPTY_STRING,
   job: z.string(),
   city: z.string()
 })
 
 type formTypes = z.infer<typeof schema>
 
-const SearchJobForm = ({ customClass }: { customClass?: string }) => {
+const SearchJobForm = () => {
   const {
     register,
     handleSubmit,
@@ -47,38 +48,40 @@ const SearchJobForm = ({ customClass }: { customClass?: string }) => {
 
   return (
     <form
-      className={`w-full h-max grid grid-rows-3 grid-cols-1 gap-2 sm:col-span-2 sm:grid-cols-2 lg:grid-rows-1 lg:grid-cols-8
-      lg:gap-3 ${customClass}`}
+      className={`w-full h-max flex flex-wrap justify-center gap-2`}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <TextInput
-        customClass={`sm:col-span-2 lg:col-span-3`}
-        register={{ ...register('search') }}
-        placeholder={`عنوان شغلی یا شرکت`}
-        error={!!errors.search}
-      >
-        <SearchRounded />
-      </TextInput>
-      <AutoComplete
-        customClass={`lg:col-span-2`}
-        register={{ ...register('job') }}
-        setValue={setValue}
-        placeholder={`گروه شغلی`}
-        datas={content?.categories.map(cat => cat.name) || []}
-      >
-        <WorkOutlineRounded />
-      </AutoComplete>
-      <AutoComplete
-        customClass={`lg:col-span-2`}
-        register={{ ...register('city') }}
-        setValue={setValue}
-        placeholder={`شهر`}
-        datas={content?.cities.map(city => city.name) || []}
-      >
-        <LocationOnOutlined />
-      </AutoComplete>
+      <div className={`w-full md:w-[calc(40%-(0.5rem-0.5rem/4))]`}>
+        <TextInput
+          register={{ ...register('search') }}
+          placeholder={`عنوان شغلی یا شرکت`}
+          error={errors.search}
+        >
+          <SearchRounded />
+        </TextInput>
+      </div>
+      <div className={`w-full sm:w-[calc(40%-(0.5rem-0.5rem/3))] md:w-[calc(25%-(0.5rem-0.5rem/4))]`}>
+        <AutoComplete
+          register={{ ...register('job') }}
+          setValue={setValue}
+          placeholder={`گروه شغلی`}
+          datas={content?.categories.map(cat => cat.name) || []}
+        >
+          <WorkOutlineRounded />
+        </AutoComplete>
+      </div>
+      <div className={`w-full sm:w-[calc(40%-(0.5rem-0.5rem/3))] md:w-[calc(25%-(0.5rem-0.5rem/4))]`}>
+        <AutoComplete
+          register={{ ...register('city') }}
+          setValue={setValue}
+          placeholder={`شهر`}
+          datas={content?.cities.map(city => city.name) || []}
+        >
+          <LocationOnOutlined />
+        </AutoComplete>
+      </div>
       <button
-        className={`btn btn-primary w-full sm:col-span-2 lg:col-span-1`}
+        className={`btn btn-primary w-full sm:w-[calc(20%-(0.5rem-0.5rem/3))] md:w-[calc(10%-(0.5rem-0.5rem/4))]`}
         type={`submit`}
         disabled={isSubmitting}
       >
