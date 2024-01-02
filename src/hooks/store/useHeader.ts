@@ -5,6 +5,7 @@ type useHeaderProps = {
   showMobileMenu: boolean;
   showMobileMenuJobs: boolean;
   showLogin: boolean;
+  showLogOut: boolean;
   showMobileMenuSubJobs: {
     id: string;
     state: boolean
@@ -17,6 +18,7 @@ const useHeader = create<useHeaderProps>(set => ({
   showMobileMenu: false,
   showMobileMenuJobs: false,
   showLogin: false,
+  showLogOut: false,
   showMobileMenuSubJobs: {
     id: '',
     state: false

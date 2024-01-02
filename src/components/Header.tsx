@@ -4,7 +4,7 @@ import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownR
 import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded, NavigateBeforeRounded, LogoutRounded } from '@mui/icons-material';
 
 import tokenGenerator from "../utils/tokenGenerator.ts";
-import LoginPopUp from "./LoginPopUp.tsx";
+import LoginPopUp from "./LoginDialog.tsx";
 import useHeader from "../hooks/store/useHeader.ts";
 import useContent from "../hooks/query/useContent.ts";
 import useAuth from "../hooks/store/useAuth.ts";
@@ -18,7 +18,6 @@ const Header = () => {
 		showMobileMenu,
 		showMobileMenuJobs,
 		showMobileMenuSubJobs,
-		showLogin,
 		setShowMobileMenuSubJobs
 	} = useHeader(s => s)
 
@@ -496,7 +495,7 @@ const Header = () => {
 				)
 			}
 
-			{showLogin && <LoginPopUp />}
+			<LoginPopUp />
 		</>
 	);
 };

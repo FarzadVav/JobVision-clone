@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { ApartmentOutlined, AssignmentTurnedIn, BusinessCenter, CheckCircleRounded, Diversity3Rounded, EmojiEmotionsRounded, FingerprintRounded, HowToRegRounded, KeyboardArrowLeftRounded, KeyboardBackspaceRounded, SentimentVerySatisfiedRounded, TouchAppRounded } from "@mui/icons-material";
+import { ApartmentOutlined, AssignmentTurnedIn, BusinessCenter, Diversity3Rounded, KeyboardBackspaceRounded, TouchAppRounded } from "@mui/icons-material";
 
 import tokenGenerator from "../utils/tokenGenerator";
 import SearchJobForm from "../components/SearchJobAdsForm";
