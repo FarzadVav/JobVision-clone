@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { ApartmentOutlined, AssignmentTurnedIn, BusinessCenter, Diversity3Rounded, KeyboardArrowLeftRounded, KeyboardBackspaceRounded } from "@mui/icons-material";
+import { ApartmentOutlined, AssignmentTurnedIn, BusinessCenter, CheckCircleRounded, Diversity3Rounded, EmojiEmotionsRounded, FingerprintRounded, HowToRegRounded, KeyboardArrowLeftRounded, KeyboardBackspaceRounded, SentimentVerySatisfiedRounded, TouchAppRounded } from "@mui/icons-material";
 
 import tokenGenerator from "../utils/tokenGenerator";
 import SearchJobForm from "../components/SearchJobAdsForm";
@@ -255,29 +255,23 @@ const Home = () => {
 			</div>
 
 			{/* CTA section in end */}
-			<div className={`bg-jv-bright h-80 relative group mt-7 overflow-hidden sm:mt-12 md:h-72 md:mt-16`}>
-				<div className={`bg-gradient-to-t from-jv-bright via-jv-bright to-white absolute top-0 bottom-0
-				right-0 left-0 duration-300 sm:group-hover:opacity-0 sm:bg-gradient-to-r
-				sm:from-white sm:via-jv-bright sm:to-white`}></div>
-				<div className={`flex flex-col justify-between items-center py-11 px-5 absolute top-0 bottom-0 right-0 left-0
-				z-10 sm:py-12`}>
-					<Title customClass={`justify-center`}>
-						<h2 className={`text-jv-primary text-center sm:!text-4xl`}>
-							زندگی شغلی رویایی خود را با <br className={`sm:hidden`} /> جاب ویژن بسازید
-						</h2>
-					</Title>
-					<p className={`text-center leading-loose`}>
+			<div className={`hidden w-full relative group mt-12 sm:block md:mt-16`}>
+				<div className={`bg-gradient-to-t from-jv-light to-white w-full h-full absolute left-0 top-0`}></div>
+				<div className={`w-full flex flex-col justify-center items-center py-9 relative`}>
+					<p className={`text-center text-xl leading-loose px-5 rounded-full`}>
 						از آخرین فرصت‌های شغلی معتبرترین شرکت‌های ایران باخبر شده و در آنها استخدام شوید.
 					</p>
-					<Link
-						className={`bg-jv-primary text-white text-xl p-1.5 pr-7 flex justify-center items-center rounded-md`}
-						to={``}
+					<button
+						className={`bg-jv-primary text-white h-14 flex justify-center items-center px-6 mt-6 rounded-md cursor-pointer`}
+						onClick={() => { }}
 					>
-						ثبت نام کنید
-						<div className={`bg-white text-jv-primary w-12 h-12 flex justify-center items-center rounded-md mr-7`}>
-							<KeyboardArrowLeftRounded fontSize="large" />
-						</div>
-					</Link>
+						<span className={`dana-bold h-full leading-[3.5rem] inline-block text-lg`}>
+							ثبت نام کنید
+						</span>
+						<TouchAppRounded className={`h-full mr-3`} />
+						{/* <div className={`bg-white text-jv-primary w-10 h-10 flex justify-center items-center rounded-md mr-7`}>
+						</div> */}
+					</button>
 				</div>
 			</div>
 			{/* CTA section in end */}
