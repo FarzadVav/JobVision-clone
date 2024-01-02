@@ -4,16 +4,18 @@ import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownR
 import { MenuRounded, CloseRounded, KeyboardArrowLeftRounded, PersonRounded, NavigateBeforeRounded, LogoutRounded } from '@mui/icons-material';
 
 import tokenGenerator from "../utils/tokenGenerator.ts";
-import LoginPopUp from "./LoginDialog.tsx";
+import LoginDialog from "./LoginDialog.tsx";
 import useHeader from "../hooks/store/useHeader.ts";
 import useContent from "../hooks/query/useContent.ts";
 import useAuth from "../hooks/store/useAuth.ts";
+import ActionDialog from "./ActionDialog.tsx";
 
 const Header = () => {
 	const redirect = useNavigate()
 	const { isLogin, logOutHandler } = useAuth(s => s)
 	const { content } = useContent()
 	const {
+		showLogOut,
 		showMegaMenu,
 		showMobileMenu,
 		showMobileMenuJobs,
@@ -109,10 +111,7 @@ const Header = () => {
 										location.pathname.includes('/employer') ? (
 											<button
 												className={`btn btn-out-danger`}
-												onClick={() => {
-													redirect('/')
-													logOutHandler()
-												}}
+												onClick={() => useHeader.setState({ showLogOut: true })}
 											>
 												<LogoutRounded />
 											</button>
@@ -153,7 +152,8 @@ const Header = () => {
 						</Link>
 					</div>
 				</div>
-				<div className={`wrapper h-full flex justify-between items-center px-4 lg:hidden`}>
+				{/* mobile nav */}
+				<nav className={`wrapper h-full flex justify-between items-center px-4 lg:hidden`}>
 					<button
 						className={`h-full flex items-center relative`}
 						onClick={mobileMenuToggleHandler}
@@ -181,10 +181,7 @@ const Header = () => {
 						location.pathname.includes('employer') ? (
 							<button
 								className={`h-full flex items-center`}
-								onClick={() => {
-									redirect('/')
-									logOutHandler()
-								}}
+								onClick={() => useHeader.setState({ showLogOut: true })}
 							>
 								<LogoutRounded
 									className={`text-white`}
@@ -203,9 +200,11 @@ const Header = () => {
 							</button>
 						)
 					}
-				</div>
+				</nav>
+				{/* mobile nav */}
 			</header >
 
+			{/* mega menu */}
 			<div
 				className={`current-height bg-black bg-opacity-25 backdrop-blur-sm pb-9 fixed top-[4.5rem] left-0 right-0 cursor-zoom-out z-40 ${showMegaMenu ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
 				onClick={() => useHeader.setState({ showMegaMenu: false })}
@@ -325,7 +324,9 @@ const Header = () => {
 					</div>
 				</div>
 			</div>
+			{/* mega menu */}
 
+			{/* mobile menu */}
 			{
 				showMobileMenu && (
 					<menu
@@ -494,8 +495,21 @@ const Header = () => {
 					</menu>
 				)
 			}
+			{/* mobile menu */}
 
-			<LoginPopUp />
+			{/* dialog's */}
+			<LoginDialog />
+			
+			<ActionDialog
+				show={showLogOut}
+				closeHandler={() => useHeader.setState({ showLogOut: false })}
+				text={`آیا برای خارج شدن از حساب مطمئن هستید؟`}
+				action={() => {
+					redirect('/')
+					logOutHandler()
+				}}
+			/>
+			{/* dialog's */}
 		</>
 	);
 };

@@ -13,7 +13,7 @@ const Dialog = ({ show, closeHandler, children }: DialogTypes) => {
     return createPortal(
       <>
         <div
-          className={`bg-black bg-opacity-5 backdrop-blur-2xl w-full h-screen fixed top-0 right-0 z-50 flex justify-center items-center p-6 sm:p-12`}
+          className={`bg-black bg-opacity-5 backdrop-blur-2xl w-full h-screen fixed top-0 right-0 z-50 flex justify-center items-center p-6 cursor-zoom-out sm:p-12`}
           onClick={closeHandler}
         >
           <button
@@ -24,7 +24,7 @@ const Dialog = ({ show, closeHandler, children }: DialogTypes) => {
             <CloseRounded className={`text-white`} />
           </button>
           <div
-            className={`max-w-full max-h-full flex justify-center items-center`}
+            className={`max-w-full max-h-full flex justify-center items-center cursor-auto`}
             onClick={e => e.stopPropagation()}
           >
             {children}
