@@ -24,10 +24,10 @@ const gendersTypes = z.enum(
 )
 
 const schema = z.object({
-  title: z.string().min(3, { message: 'این فیلد الزامی است' }).max(256),
-  description: z.string().min(3, { message: 'این فیلد الزامی است' }),
-  workTimes: z.string().min(3, { message: 'این فیلد الزامی است' }).max(256),
-  businessTrips: z.string().min(1, { message: 'این فیلد الزامی است' }),
+  title: NON_EMPTY_STRING,
+  description: NON_EMPTY_STRING,
+  workTimes: NON_EMPTY_STRING,
+  businessTrips: NON_EMPTY_STRING,
   isRemote: z.boolean().optional(),
   isUrgent: z.boolean().optional(),
   gender: gendersTypes,
@@ -73,19 +73,20 @@ type formTypes = z.infer<typeof schema>
 
 const AddJobAd = () => {
   const {
-    register,
-    handleSubmit,
-    setValue,
     formState: { errors },
+    handleSubmit,
+    register,
+    setValue,
     watch,
     reset
   } = useForm<formTypes>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schema)
   })
-  const showBothSalary = watch('salary.showBoth')
   const { content } = useContent()
   const { company } = useCompany()
   const { addJobAd, addJobAdPending } = useJobAdsQuery()
+
+  const showBothSalary = watch('salary.showBoth')
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
     if (!company?.company.logo
