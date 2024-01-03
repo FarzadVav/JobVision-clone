@@ -44,7 +44,7 @@ const Jobs = () => {
 
 		// cancell scrolling when selected a jobAd (in mobile size)
 		if (window.innerWidth < 1024) {
-			if (Object.keys(selectedJobAds).length) {
+			if (Object.keys(selectedJobAds || {}).length) {
 				setTimeout(() => {
 					document.body?.classList.add('overflow-hidden')
 				}, 750);
@@ -58,7 +58,7 @@ const Jobs = () => {
 	const jobAdsSelectHandler = (singleJobAd: JobAdsTypes) => {
 		setJobAdsTabs([
 			{
-				id: singleJobAd._id || '',
+				id: tokenGenerator(),
 				title: 'درباره شغل',
 				content: (
 					<div className={`w-full flex flex-col`}>
@@ -291,7 +291,7 @@ const Jobs = () => {
 																	setSelectedJobAds(job)
 																}}
 															>
-																<JobAdsBox {...job} />
+																<JobAdsBox jobAd={job} />
 															</div>
 														)
 													}
@@ -314,7 +314,7 @@ const Jobs = () => {
 				)
 			},
 			{
-				id: singleJobAd.company._id || '',
+				id: tokenGenerator(),
 				title: 'درباره شرکت',
 				content: (
 					<div className={`w-full flex flex-col`}>
@@ -420,7 +420,7 @@ const Jobs = () => {
 																setSelectedJobAds(job)
 															}}
 														>
-															<JobAdsBox {...job} />
+															<JobAdsBox jobAd={job} />
 														</div>
 													)
 												}
@@ -528,10 +528,7 @@ const Jobs = () => {
 													setSelectedJobAds(job)
 												}}
 											>
-												<JobAdsBox
-													{...job}
-													selected={selectedJobAds._id === job._id}
-												/>
+												<JobAdsBox jobAd={job} />
 											</div>
 										)) : hasFilter ? (
 											<div className={`w-full mt-3`} dir='ltr'>
@@ -556,10 +553,7 @@ const Jobs = () => {
 													setSelectedJobAds(job)
 												}}
 											>
-												<JobAdsBox
-													{...job}
-													selected={selectedJobAds._id === job._id}
-												/>
+												<JobAdsBox jobAd={job} />
 											</div>
 										)) : null
 									}, [hasFilter, jobAds, selectedJobAds])
@@ -570,12 +564,12 @@ const Jobs = () => {
 
 						{/* selected jobAd */}
 						<main className={`w-full h-screen fixed top-0 right-0 duration-700 z-50
-						${Object.keys(selectedJobAds).length ? '' : 'translate-y-full opacity-0 invisible'} lg:pb-6 lg:opacity-100
+						${Object.keys(selectedJobAds || {}).length ? '' : 'translate-y-full opacity-0 invisible'} lg:pb-6 lg:opacity-100
 						lg:visible lg:translate-y-0 lg:current-height lg:w-7/12 lg:sticky lg:top-[calc(4.5rem+0.75rem)] lg:z-auto
 						xl:w-8/12`}>
 							<div className={`list-scrollbar bg-white w-full h-full flex flex-col px-3 py-4 rounded overflow-y-auto`}>
 								{
-									Object.keys(selectedJobAds).length ? (
+									Object.keys(selectedJobAds || {}).length ? (
 										<>
 											<div className={`w-full`}>
 												<div className={`w-full flex justify-between items-center mb-6 lg:hidden`}>
@@ -587,7 +581,7 @@ const Jobs = () => {
 													</button>
 													<div className={`flex items-center`}>
 														<span className={`text-sm`}>
-															{new Date(selectedJobAds.created_at || '').toLocaleDateString('fa-ir')}
+															{new Date(selectedJobAds?.created_at || '').toLocaleDateString('fa-ir')}
 														</span>
 														<button className={`btn-sm bg-blue-50 rounded-full mr-4`}>
 															<ShareOutlined className={`text-jv-primary cursor-pointer`} />
@@ -600,29 +594,29 @@ const Jobs = () => {
 												<div className={`w-full flex justify-between`}>
 													<Title>
 														<h2>
-															{selectedJobAds.title}
+															{selectedJobAds?.title}
 														</h2>
 													</Title>
 													<span className={`min-w-max hidden text-sm lg:block`}>
-														{new Date(selectedJobAds.created_at || '').toLocaleDateString('fa-ir')}
+														{new Date(selectedJobAds?.created_at || '').toLocaleDateString('fa-ir')}
 													</span>
 												</div>
 												<div className={`flex items-center mt-4 lg:mt-6`}>
 													<span className={`text-jv-primary`}>
-														{selectedJobAds.company.name}
+														{selectedJobAds?.company.name}
 													</span>
 													<span className={`border-r border-solid border-jv-light italic pr-3 mr-3`}>
-														{selectedJobAds.company.province.name}، {selectedJobAds.company.city.name}
+														{selectedJobAds?.company.province.name}، {selectedJobAds?.company.city.name}
 													</span>
 													{
-														selectedJobAds.isRemote && (
+														selectedJobAds?.isRemote && (
 															<span className={`border-r border-solid border-jv-light italic pr-3 mr-3`}>
 																امکان دورکاری
 															</span>
 														)
 													}
 													{
-														selectedJobAds.isUrgent && (
+														selectedJobAds?.isUrgent && (
 															<span className={`text-jv-danger border-r border-solid border-jv-light italic pr-3 mr-3`}>
 																فوری
 															</span>
@@ -632,9 +626,9 @@ const Jobs = () => {
 												<div className={`w-full flex items-center justify-between mt-4`}>
 													<span className={`text-jv-success`}>
 														{
-															selectedJobAds.salary
-																? `${selectedJobAds.salary.from} ${selectedJobAds.salary.to
-																	? `تا ${selectedJobAds.salary.to}`
+															selectedJobAds?.salary
+																? `${selectedJobAds?.salary.from} ${selectedJobAds?.salary.to
+																	? `تا ${selectedJobAds?.salary.to}`
 																	: ''}`
 																: 'حقوق توافقی'
 														}
@@ -649,7 +643,7 @@ const Jobs = () => {
 														</button>
 														<img
 															className={`w-10 h-10 mr-3 rounded-full`}
-															src={selectedJobAds.company.logo}
+															src={selectedJobAds?.company.logo}
 														/>
 													</div>
 												</div>
@@ -661,14 +655,14 @@ const Jobs = () => {
 													<PeopleAltRounded className={`text-jv-light brightness-75`} />
 													<span className={`mr-3`}>
 														{
-															`${selectedJobAds.company.employees.from} تا ${selectedJobAds.company.employees.to}`
+															`${selectedJobAds?.company.employees.from} تا ${selectedJobAds?.company.employees.to}`
 														}
 													</span>
 												</div>
 												<div className={`flex items-center mt-1.5 md:mr-6 md:mt-0`}>
 													<HelpRounded className={`text-jv-light brightness-75`} />
 													<p className={`mr-3`}>
-														{selectedJobAds.company.activity.slice(0, 75)}
+														{selectedJobAds?.company.activity.slice(0, 75)}
 													</p>
 												</div>
 											</div>

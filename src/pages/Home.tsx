@@ -118,7 +118,7 @@ const Home = () => {
 							jobAds?.slice(0, 6)?.map(jobAd => (
 								<JobAdsBox
 									key={tokenGenerator()}
-									{...jobAd}
+									jobAd={jobAd}
 								/>
 							))
 						}

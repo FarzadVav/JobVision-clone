@@ -1,14 +1,11 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import tokenGenerator from '../utils/tokenGenerator';
+import TabsTypes from '../types/Tabs.types';
 
 type TabsProps = {
   customClass?: string;
-  tabs: {
-    id: string;
-    title: string;
-    content: ReactNode
-  }[]
+  tabs: TabsTypes
 }
 
 const Tabs = ({ customClass, tabs }: TabsProps) => {

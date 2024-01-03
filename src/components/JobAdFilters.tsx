@@ -256,12 +256,12 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
       setSelectedJobAds({} as JobAdsTypes)
     } else {
       newFilteredJobAds.forEach(jobAd => {
-        if (jobAd._id === selectedJobAds._id) {
+        if (jobAd._id === selectedJobAds?._id) {
           selectedJobAdsInFilters = true
         }
       })
       !selectedJobAdsInFilters && newFilteredJobAds.forEach(jobAd => {
-        if (jobAd._id !== selectedJobAds._id) {
+        if (jobAd._id !== selectedJobAds?._id) {
           setSelectedJobAds({} as JobAdsTypes)
         }
       })
