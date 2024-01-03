@@ -155,13 +155,9 @@ const MultiFilterJob = ({ selected, title, filters, unFilterHandler }: MultiFilt
   )
 }
 
-// handle query params, FilterJob and MultiFilterJob filters
-type JobsFiltersBarProps = {
-  jobAdsSelectHandler: (singleJobAd: JobAdsTypes) => void
-}
-const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
+const JobsFiltersBar = () => {
   const { jobAds } = useJobAdsQuery()
-  const { selectedJobAds, setFilteredJobAds, setSelectedJobAds, setJobAdsToDefault, setHasFilter } = useJobAds(s => s)
+  const { singleJobAd, setJobAdsToDefault } = useJobAds(s => s)
   const filters = useJobAdsFilters(s => s)
   const [searchParams] = useSearchParams()
   const redirect = useNavigate()
@@ -170,10 +166,10 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
   useEffect(() => {
     if (chekFilters()) {
       setShowClearFilters(true)
-      setHasFilter(true)
+      useJobAds.setState({ hasFilter: true })
     } else {
       setShowClearFilters(false)
-      setHasFilter(false)
+      useJobAds.setState({ hasFilter: false })
     }
 
     let newFilteredJobAds: JobAdsTypes[] = jobAds || []
@@ -184,8 +180,7 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
       if (newFilteredJobAdsFromId) {
         selectedJobAdsInFilters = true
         newFilteredJobAds = [newFilteredJobAdsFromId]
-        setSelectedJobAds(newFilteredJobAdsFromId)
-        jobAdsSelectHandler(newFilteredJobAdsFromId)
+        useJobAds.setState({ singleJobAd: newFilteredJobAdsFromId })
       } else {
         newFilteredJobAds = []
       }
@@ -250,19 +245,19 @@ const JobsFiltersBar = ({ jobAdsSelectHandler }: JobsFiltersBarProps) => {
         })
       }
     }
-    setFilteredJobAds(newFilteredJobAds)
+    useJobAds.setState({ filteredJobAds: newFilteredJobAds })
 
     if (!newFilteredJobAds.length) {
-      setSelectedJobAds({} as JobAdsTypes)
+      useJobAds.setState({ singleJobAd: {} as JobAdsTypes })
     } else {
       newFilteredJobAds.forEach(jobAd => {
-        if (jobAd._id === selectedJobAds?._id) {
+        if (jobAd._id === singleJobAd?._id) {
           selectedJobAdsInFilters = true
         }
       })
       !selectedJobAdsInFilters && newFilteredJobAds.forEach(jobAd => {
-        if (jobAd._id !== selectedJobAds?._id) {
-          setSelectedJobAds({} as JobAdsTypes)
+        if (jobAd._id !== singleJobAd?._id) {
+          useJobAds.setState({ singleJobAd: {} as JobAdsTypes })
         }
       })
     }

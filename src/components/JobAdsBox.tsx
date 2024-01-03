@@ -5,7 +5,7 @@ import JobAdsTypes from "../types/JobAds.types"
 import useJobAds from "../hooks/store/useJobAds"
 
 const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
-  const { selectedJobAds } = useJobAds(s => s)
+  const { singleJobAd } = useJobAds(s => s)
   const redirect = useNavigate()
 
   const prevCategoriesHandler = () => {
@@ -25,19 +25,22 @@ const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
     }
   }
 
+  const selectJobAdHandler = () => {
+    useJobAds.setState({ singleJobAd: jobAd })
+    !window.location.pathname.includes('/jobs') && redirect(`/jobs?id=${jobAd._id}`)
+  }
+
   return (
     <article
       className={`bg-white w-full group`}
       onClick={() => {
         prevCategoriesHandler()
+        selectJobAdHandler()
       }}
       data-id={jobAd._id}
       data-category={jobAd.category}
     >
-      <div
-        className={`border border-solid w-full h-full flex flex-col justify-between rounded-md cursor-pointer p-3 ${selectedJobAds?._id === jobAd._id ? 'border-jv-primary text-jv-primary' : 'border-jv-light text-jv-dark'}`}
-        onClick={() => !window.location.pathname.includes('/jobs') ? redirect(`/jobs?id=${jobAd._id}`) : null}
-      >
+      <div className={`border border-solid w-full h-full flex flex-col justify-between rounded-md cursor-pointer p-3 ${singleJobAd?._id === jobAd._id ? 'border-jv-primary text-jv-primary' : 'border-jv-light text-jv-dark'}`}>
         <div className={`flex`}>
           <div className={`col-span-3 flex flex-col items-center`}>
             <div className={`w-20 h-20 flex justify-center items-center rounded-md`}>
@@ -85,7 +88,7 @@ const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
           </div>
         </div>
         <div className={`border-t border-dashed col-span-12 flex justify-between items-center pt-3 mt-5
-        ${selectedJobAds?._id === jobAd._id ? 'border-jv-primary' : 'border-jv-light'}`}>
+        ${singleJobAd?._id === jobAd._id ? 'border-jv-primary' : 'border-jv-light'}`}>
           {
             jobAd.isUrgent ? (
               <span className={`badge badge-danger`}>
@@ -99,7 +102,7 @@ const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
           }
           {
             jobAd.company.score ? (
-              <div className={`badge ${selectedJobAds?._id === jobAd._id ? 'mr-auto' : 'ml-auto lg:opacity-0 group-hover:opacity-100'}`}>
+              <div className={`badge ${singleJobAd?._id === jobAd._id ? 'mr-auto' : 'ml-auto lg:opacity-0 group-hover:opacity-100'}`}>
                 <Star className={`text-jv-warning`} fontSize="small" />
                 <span className={`text-jv-dark text-xs inline-block h-3`}>
                   {jobAd.company.score}
@@ -108,7 +111,7 @@ const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
             ) : null
           }
           {
-            selectedJobAds?._id !== jobAd._id && (
+            singleJobAd?._id !== jobAd._id && (
               <button
                 className={`btn-sm btn-success`}
               >
