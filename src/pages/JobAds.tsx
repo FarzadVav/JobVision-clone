@@ -14,9 +14,9 @@ import useFirstMount from '../hooks/useFirstMount';
 import SingleJobAd from '../components/SingleJobAd';
 
 const Jobs = () => {
+	const [showAlert, setShowAlert] = useState<boolean>(false)
 	const { jobAds } = useJobAdsQuery()
 	const { filteredJobAds, singleJobAd, hasFilter } = useJobAds(s => s)
-	const [showAlert, setShowAlert] = useState<boolean>(false)
 	const firstMount = useFirstMount()
 
 	const alertRef = useRef<HTMLDivElement>(null)

@@ -38,7 +38,7 @@ const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
 
   const selectJobAdHandler = () => {
     useJobAds.setState({ singleJobAd: jobAd })
-    if (window.innerWidth > 1024) {
+    if (window.innerWidth >= 1024) {
       !window.location.pathname.includes('/jobs') && redirect(`/jobs?id=${jobAd._id}`)
     } else {
       redirect('/single')
