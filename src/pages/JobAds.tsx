@@ -143,10 +143,7 @@ const Jobs = () => {
 						{/* jobAds list */}
 
 						{/* selected jobAd */}
-						<main className={`w-full h-screen fixed top-0 right-0 duration-700 z-50
-						${Object.keys(singleJobAd || {}).length ? '' : 'translate-y-full opacity-0 invisible'} lg:pb-6 lg:opacity-100
-						lg:visible lg:translate-y-0 lg:current-height lg:w-7/12 lg:sticky lg:top-[calc(4.5rem+0.75rem)] lg:z-auto
-						xl:w-8/12`}>
+						<main className={`w-7/12 current-height hidden pb-6 sticky top-[calc(4.5rem+0.75rem)] lg:block xl:w-8/12`}>
 							<SingleJobAd />
 						</main>
 						{/* selected jobAd */}

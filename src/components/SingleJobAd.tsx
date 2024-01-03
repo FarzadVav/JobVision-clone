@@ -9,6 +9,7 @@ import Title from "./Title"
 import Tabs from "./Tabs"
 import useJobAds from "../hooks/query/useJobAds"
 import JobAdsBox from "./JobAdsBox"
+import { Link } from "react-router-dom";
 
 const SingleJobAd = () => {
   const { jobAds } = useJobAds()
@@ -394,13 +395,14 @@ const SingleJobAd = () => {
           <>
             <div className={`w-full`}>
               <div className={`w-full flex justify-between items-center mb-6 lg:hidden`}>
-                <button
+                <Link
                   className={`btn-sm btn-bright`}
+                  to={'/jobs'}
                   onClick={() => useJobAdsStore.setState({ singleJobAd: {} as JobAdsTypes })}
                 >
                   بستن
                   <CloseRounded fontSize='inherit' />
-                </button>
+                </Link>
                 <div className={`flex items-center`}>
                   <span className={`text-sm`}>
                     {new Date(singleJobAd?.created_at || '').toLocaleDateString('fa-ir')}

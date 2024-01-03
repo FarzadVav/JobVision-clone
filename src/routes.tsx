@@ -3,7 +3,8 @@ import LazyPage from "./components/LazyPage.tsx";
 
 // import pages component as lazy for optimization app bundle size
 const Home = lazy(() => import('./pages/Home.tsx'))
-const Jobs = lazy(() => import('./pages/JobAds.tsx'))
+const JobAds = lazy(() => import('./pages/JobAds.tsx'))
+const SingleJobAd = lazy(() => import('./pages/SingleJobAd.tsx'))
 const Employer = lazy(() => import('./pages/dashborad/Employer.tsx'))
 const EmployerDashboard = lazy(() => import('./pages/dashborad/EmployerDashboard.tsx'))
 const Details = lazy(() => import('./pages/dashborad/Details.tsx'))
@@ -32,7 +33,15 @@ const routes: routesProps[] = [
 		path: '/jobs',
 		element: (
 			<LazyPage>
-				<Jobs />
+				<JobAds />
+			</LazyPage>
+		)
+	},
+	{
+		path: '/single',
+		element: (
+			<LazyPage>
+				<SingleJobAd />
 			</LazyPage>
 		)
 	},

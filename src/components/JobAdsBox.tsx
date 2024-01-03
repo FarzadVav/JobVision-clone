@@ -3,10 +3,21 @@ import { Star } from "@mui/icons-material"
 
 import JobAdsTypes from "../types/JobAds.types"
 import useJobAds from "../hooks/store/useJobAds"
+import { useEffect } from "react"
+import useFirstMount from "../hooks/useFirstMount"
 
 const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
   const { singleJobAd } = useJobAds(s => s)
   const redirect = useNavigate()
+  const firstMount = useFirstMount()
+
+  useEffect(() => {
+    if (firstMount && !location.pathname.includes('/single')) {
+      window.addEventListener('resize', () => {
+        window.innerWidth < 1024 && useJobAds.setState({ singleJobAd: {} as JobAdsTypes })
+      })
+    }
+  }, [])
 
   const prevCategoriesHandler = () => {
     const prevCategories: string[] = JSON.parse(localStorage.getItem('prevCategories') || '[]')
@@ -27,7 +38,11 @@ const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
 
   const selectJobAdHandler = () => {
     useJobAds.setState({ singleJobAd: jobAd })
-    !window.location.pathname.includes('/jobs') && redirect(`/jobs?id=${jobAd._id}`)
+    if (window.innerWidth > 1024) {
+      !window.location.pathname.includes('/jobs') && redirect(`/jobs?id=${jobAd._id}`)
+    } else {
+      redirect('/single')
+    }
   }
 
   return (
