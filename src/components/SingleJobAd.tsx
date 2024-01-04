@@ -227,7 +227,7 @@ const SingleJobAd = () => {
                 <div className={`w-full mt-6`}>
                   {
                     (jobAds?.length && jobAds.filter(job => (job.category?.name === singleJobAd?.category?.name && job._id !== singleJobAd?._id)).length) ? (
-                      <div className={`grid grid-cols-1 gap-3 sm:grid-cols-2`}>
+                      <div className={`w-full grid grid-cols-1 gap-3 sm:grid-cols-2`}>
                         {
                           jobAds.map((job, i) => {
                             if (i < 6 && job.category?.name === singleJobAd?.category?.name && job._id !== singleJobAd?._id) {

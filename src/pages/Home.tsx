@@ -113,7 +113,7 @@ const Home = () => {
 							}
 						</h2>
 					</Title>
-					<div className={`w-full grid gap-4 grid-rows-(1fr_auto) grid-cols-1 mt-6 md:grid-cols-2 lg:grid-cols-3`}>
+					<div className={`w-full grid grid-cols-1 gap-3 mt-6 md:grid-cols-2 lg:grid-cols-3`}>
 						{
 							jobAds?.slice(0, 6)?.map(jobAd => (
 								<JobAdsBox
