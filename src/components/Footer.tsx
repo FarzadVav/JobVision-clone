@@ -52,23 +52,27 @@ const footerLinks: { title: string; links: { title: string; link: string }[] }[]
   },
 ]
 
-const footerSocials: { link: string; svg: ReactNode }[] = [
+const footerSocials: { link: string; svg: ReactNode, title: string }[] = [
   {
-    link: '/',
-    svg: <Instagram fontSize="large" />
+    link: 'https://www.instagram.com',
+    svg: <Instagram fontSize="large" />,
+    title: 'instagram'
   },
   {
-    link: '/',
-    svg: <Telegram fontSize="large" />
+    link: 'https://www.telegram.org',
+    svg: <Telegram fontSize="large" />,
+    title: 'telegram'
   },
   {
-    link: '/',
-    svg: <Twitter fontSize="large" />
+    link: 'https://www.twitter.com',
+    svg: <Twitter fontSize="large" />,
+    title: 'twitter'
   },
   {
-    link: '/',
-    svg: <LinkedIn fontSize="large" />
-  },
+    link: 'https://www.linkedin.com',
+    svg: <LinkedIn fontSize="large" />,
+    title: 'linkeding'
+  }
 ]
 
 const FooterTitle = ({ children, margin }: { children: ReactNode, margin?: boolean }) => {
@@ -261,6 +265,7 @@ const Footer = () => {
               className={`w-full h-full object-cover object-center`}
               src={`/images/enamad.webp`}
               alt={`لوگوی ای نماد`}
+              loading={`lazy`}
             />
           </Link>
           <Link
@@ -271,13 +276,14 @@ const Footer = () => {
               className={`w-full h-full object-cover object-center`}
               src={`/images/samandehi.webp`}
               alt={`لوگوی سامان‌دهی`}
+              loading={`lazy`}
             />
           </Link>
         </div>
 
         {
           footerLinks.length ? (
-            <div className={`w-full flex-col justify-center items-center mt-6 sm:hidden`}>
+            <ul className={`w-full flex-col justify-center items-center mt-6 sm:hidden`}>
               {
                 footerLinks.map((link, index) => {
                   if (index <= 2) {
@@ -286,14 +292,14 @@ const Footer = () => {
                         key={tokenGenerator()}
                         title={link.title}
                         text={link.links.length ? (
-                          <ul className={`w-full flex flex-col justify-center items-center`}>
+                          <ul className={`w-full flex flex-col justify-center items-center asasas`}>
                             {
                               link.links.map((sublink, index) => {
                                 if (index <= 4) {
                                   return (
                                     <li
                                       key={tokenGenerator()}
-                                      className={`w-full mt-3 first:mt-0`}
+                                      className={`w-full mt-3 first:mt-0 wwwww`}
                                     >
                                       <Link
                                         to={sublink.link}
@@ -313,7 +319,7 @@ const Footer = () => {
                   }
                 })
               }
-            </div>
+            </ul>
           ) : null
         }
 
@@ -344,13 +350,15 @@ const Footer = () => {
               footerSocials.length ? footerSocials.map((social, index) => {
                 if (index <= 3) {
                   return (
-                    <Link
+                    <a
                       key={tokenGenerator()}
                       className={`text-white mr-6 first:mr-0 hover:-translate-y-0.5`}
-                      to={social.link}
+                      href={social.link}
+                      target={`_blank`}
+                      title={social.title}
                     >
                       {social.svg}
-                    </Link>
+                    </a>
                   )
                 }
               }) : null

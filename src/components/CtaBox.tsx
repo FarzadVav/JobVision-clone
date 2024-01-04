@@ -19,6 +19,7 @@ const CtaBox = ({ id, src, title, text, btn }: CtaBoxProps) => {
     >
       <img
         src={src}
+        alt={`دعوت به اقدام`}
       />
       <div className={`flex flex-col justify-center items-center mt-5 lg:mt-0 lg:mr-5 lg:items-start`}>
         <Title customClass={`justify-center lg:justify-start`}>

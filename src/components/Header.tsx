@@ -157,6 +157,7 @@ const Header = () => {
 					<button
 						className={`h-full flex items-center relative`}
 						onClick={mobileMenuToggleHandler}
+						name={`menu`}
 					>
 						<MenuRounded
 							className={`text-white ${showMobileMenu ? 'opacity-0 -translate-y-3' : ''}`}
@@ -182,6 +183,7 @@ const Header = () => {
 							<button
 								className={`h-full flex items-center`}
 								onClick={() => useHeader.setState({ showLogOut: true })}
+								name={`logout`}
 							>
 								<LogoutRounded
 									className={`text-white`}
@@ -192,6 +194,7 @@ const Header = () => {
 							<button
 								className={`h-full flex items-center`}
 								onClick={() => isLogin ? redirect('/employer') : useHeader.setState({ showLogin: true })}
+								name={`account`}
 							>
 								<PersonRounded
 									className={`text-white`}
@@ -499,7 +502,7 @@ const Header = () => {
 
 			{/* dialog's */}
 			<LoginDialog />
-			
+
 			<ActionDialog
 				show={showLogOut}
 				closeHandler={() => useHeader.setState({ showLogOut: false })}
