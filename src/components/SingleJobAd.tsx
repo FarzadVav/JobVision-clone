@@ -24,7 +24,7 @@ const SingleJobAd = () => {
             title: 'درباره شغل',
             content: (
               <div className={`w-full flex flex-col`}>
-                <Title withIcon>
+                <Title>
                   <span className='!text-xl'>
                     مشخصات موقعیت شغلی
                   </span>
@@ -90,10 +90,7 @@ const SingleJobAd = () => {
                   </div>
                 </div>
 
-                <Title
-                  customClass={`mt-6`}
-                  withIcon
-                >
+                <Title customClass={`mt-6`}>
                   <span className='!text-xl'>
                     شاخص های کلیدی از نظر کارفرما
                   </span>
@@ -111,10 +108,7 @@ const SingleJobAd = () => {
                   }
                 </ul>
 
-                <Title
-                  customClass={`mt-6`}
-                  withIcon
-                >
+                <Title customClass={`mt-6`}>
                   <span className='!text-xl'>
                     شرح شغل و وظایف
                   </span>
@@ -123,10 +117,7 @@ const SingleJobAd = () => {
                   {singleJobAd?.description}
                 </p>
 
-                <Title
-                  customClass={`mt-6`}
-                  withIcon
-                >
+                <Title customClass={`mt-6`}>
                   <span className='!text-xl'>
                     شرایط احراز شغل
                   </span>
@@ -233,10 +224,10 @@ const SingleJobAd = () => {
                     فرصت‌های شغلی مشابه
                   </span>
                 </Title>
-                <>
+                <div className={`w-full mt-6`}>
                   {
                     (jobAds?.length && jobAds.filter(job => (job.category?.name === singleJobAd?.category?.name && job._id !== singleJobAd?._id)).length) ? (
-                      <div className={`w-full grid grid-cols-1 gap-3 mt-3 sm:grid-cols-2`}>
+                      <div className={`grid grid-cols-1 gap-3 sm:grid-cols-2`}>
                         {
                           jobAds.map((job, i) => {
                             if (i < 6 && job.category?.name === singleJobAd?.category?.name && job._id !== singleJobAd?._id) {
@@ -251,7 +242,7 @@ const SingleJobAd = () => {
                         }
                       </div>
                     ) : (
-                      <div className={`w-full mt-3`} dir='ltr'>
+                      <div dir='ltr'>
                         <Alert
                           className={`!justify-between`}
                           severity="warning"
@@ -261,7 +252,7 @@ const SingleJobAd = () => {
                       </div>
                     )
                   }
-                </>
+                </div>
               </div >
             )
           },
@@ -270,7 +261,7 @@ const SingleJobAd = () => {
             title: 'درباره شرکت',
             content: (
               <div className={`w-full flex flex-col`}>
-                <Title withIcon>
+                <Title>
                   <span className='!text-xl'>
                     امتیاز سازمان
                   </span>
@@ -297,10 +288,7 @@ const SingleJobAd = () => {
                   }
                 </div>
 
-                <Title
-                  customClass={`mt-6`}
-                  withIcon
-                >
+                <Title customClass={`mt-6`}>
                   <span className='!text-xl'>
                     درباره {singleJobAd?.company?.name}
                   </span>
@@ -309,10 +297,7 @@ const SingleJobAd = () => {
                   {singleJobAd?.company.aboutCompany}
                 </p>
 
-                <Title
-                  customClass={`mt-6`}
-                  withIcon
-                >
+                <Title customClass={`mt-6`}>
                   <span className='!text-xl'>
                     {singleJobAd?.company?.name} در یک نگاه
                   </span>
@@ -471,13 +456,12 @@ const SingleJobAd = () => {
               </div>
             </div>
 
-            <div className={`bg-jv-bright w-full flex flex-col p-3 mt-6 rounded md:flex-row md:items-center md:px-5
-          md:py-2`}>
+            <div className={`bg-jv-bright w-full flex flex-col p-3 mt-6 rounded md:flex-row md:items-center md:px-5 md:py-2`}>
               <div className={`flex items-center`}>
                 <PeopleAltRounded className={`text-jv-light brightness-75`} />
                 <span className={`mr-3`}>
                   {
-                    `${singleJobAd?.company.employees.from} تا ${singleJobAd?.company.employees.to}`
+                    `${singleJobAd?.company.employees.from} تا ${singleJobAd?.company.employees.to} نفر`
                   }
                 </span>
               </div>
@@ -498,6 +482,7 @@ const SingleJobAd = () => {
           <div className={`w-full flex flex-col items-center mt-3`}>
             <img
               src="/images/job-detail-empty-state.svg"
+              alt="job detials"
             />
             <span className={`text-center opacity-50 -translate-y-6`}>
               جهت مشاهده اطلاعات آگهی شغلی یکی از موارد را از سمت <br /> راست انتخاب کنید.
