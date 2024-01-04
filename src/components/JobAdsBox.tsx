@@ -96,7 +96,9 @@ const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
               </span>
               <span className={`text-jv-success border-r border-solid border-jv-light text-xs pr-2 mr-2`}>
                 {
-                  jobAd.salary ? `${jobAd.salary.from} ${jobAd.salary.to ? `تا ${jobAd.salary.to}` : ''}` : 'حقوق توافقی'
+                  jobAd.salary
+                    ? `${jobAd.salary.from} ${jobAd.salary.to ? `تا ${jobAd.salary.to} تومان` : 'تومان'}`
+                    : 'حقوق توافقی'
                 }
               </span>
             </div>

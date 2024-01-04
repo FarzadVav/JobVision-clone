@@ -451,9 +451,7 @@ const SingleJobAd = () => {
                 <span className={`text-jv-success`}>
                   {
                     singleJobAd?.salary
-                      ? `${singleJobAd?.salary.from} ${singleJobAd?.salary.to
-                        ? `تا ${singleJobAd?.salary.to}`
-                        : ''}`
+                      ? `${singleJobAd?.salary.from} ${singleJobAd?.salary.to ? `تا ${singleJobAd?.salary.to} تومان` : 'تومان'}`
                       : 'حقوق توافقی'
                   }
                 </span>
