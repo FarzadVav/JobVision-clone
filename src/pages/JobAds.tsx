@@ -5,13 +5,13 @@ import { Alert } from '@mui/material';
 import SearchJobForm from "../components/SearchJobAdsForm";
 import JobAdFilters from "../components/JobAdFilters";
 import Title from "../components/Title";
+import SingleJobAd from './SingleJobAd';
 import tokenGenerator from "../utils/tokenGenerator";
 import JobAdsBox from "../components/JobAdsBox";
 import PopularCompanies from '../components/PopularCompanies';
 import useJobAds from '../hooks/store/useJobAds';
 import useJobAdsQuery from '../hooks/query/useJobAds';
 import useFirstMount from '../hooks/useFirstMount';
-import SingleJobAd from '../components/SingleJobAd';
 
 const Jobs = () => {
 	const [showAlert, setShowAlert] = useState<boolean>(false)
