@@ -3,21 +3,10 @@ import { Star } from "@mui/icons-material"
 
 import JobAdsTypes from "../types/JobAds.types"
 import useJobAds from "../hooks/store/useJobAds"
-import { useEffect } from "react"
-import useFirstMount from "../hooks/useFirstMount"
 
 const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
-  const { singleJobAd } = useJobAds(s => s)
   const redirect = useNavigate()
-  const firstMount = useFirstMount()
-
-  useEffect(() => {
-    if (firstMount && !location.pathname.includes('/single')) {
-      window.addEventListener('resize', () => {
-        window.innerWidth < 1024 && useJobAds.setState({ singleJobAd: {} as JobAdsTypes })
-      })
-    }
-  }, [])
+  const { singleJobAd } = useJobAds(s => s)
 
   const prevCategoriesHandler = () => {
     const prevCategories: string[] = JSON.parse(localStorage.getItem('prevCategories') || '[]')
@@ -55,7 +44,7 @@ const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
       data-id={jobAd._id}
       data-category={jobAd.category}
     >
-      <div className={`border border-solid w-full h-full flex flex-col justify-between rounded-md cursor-pointer p-3 ${singleJobAd?._id === jobAd._id ? 'border-jv-primary text-jv-primary' : 'border-jv-light text-jv-dark'}`}>
+      <div className={`text-jv-dark border border-solid border-jv-light w-full h-full flex flex-col justify-between rounded-md cursor-pointer p-3 ${singleJobAd?._id === jobAd._id ? 'lg:border-jv-primary lg:text-jv-primary' : ''}`}>
         <div className={`flex`}>
           <div className={`col-span-3 flex flex-col items-center`}>
             <div className={`w-20 h-20 flex justify-center items-center rounded-md`}>
@@ -104,8 +93,8 @@ const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
             </div>
           </div>
         </div>
-        <div className={`border-t border-dashed col-span-12 flex justify-between items-center pt-3 mt-5
-        ${singleJobAd?._id === jobAd._id ? 'border-jv-primary' : 'border-jv-light'}`}>
+        <div className={`border-t border-dashed border-jv-light col-span-12 flex justify-between items-center pt-3 mt-5
+        ${singleJobAd?._id === jobAd._id ? 'lg:border-jv-primary' : ''}`}>
           {
             jobAd.isUrgent ? (
               <span className={`badge badge-danger`}>

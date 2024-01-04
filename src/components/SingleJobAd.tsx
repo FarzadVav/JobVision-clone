@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { Link } from "react-router-dom";
 import { CloseRounded, FavoriteBorderRounded, HelpRounded, InfoOutlined, PeopleAltRounded, ShareOutlined, StarRateRounded } from "@mui/icons-material"
 import { Alert } from '@mui/material';
 
@@ -9,7 +10,6 @@ import Title from "./Title"
 import Tabs from "./Tabs"
 import useJobAds from "../hooks/query/useJobAds"
 import JobAdsBox from "./JobAdsBox"
-import { Link } from "react-router-dom";
 
 const SingleJobAd = () => {
   const { jobAds } = useJobAds()
