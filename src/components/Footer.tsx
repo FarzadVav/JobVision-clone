@@ -259,7 +259,7 @@ const Footer = () => {
           >
             <img
               className={`w-full h-full object-cover object-center`}
-              src={`/images/enamad.png`}
+              src={`/images/enamad.webp`}
               alt={`لوگوی ای نماد`}
             />
           </Link>
@@ -269,8 +269,8 @@ const Footer = () => {
           >
             <img
               className={`w-full h-full object-cover object-center`}
-              src={`/images/samandehi.png`}
-              alt={`لوگوی ای نماد`}
+              src={`/images/samandehi.webp`}
+              alt={`لوگوی سامان‌دهی`}
             />
           </Link>
         </div>
