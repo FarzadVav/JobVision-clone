@@ -2,17 +2,17 @@ import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ApartmentOutlined, AssignmentTurnedIn, BusinessCenter, Diversity3Rounded, KeyboardBackspaceRounded, TouchAppRounded } from "@mui/icons-material";
 
-import tokenGenerator from "../utils/tokenGenerator";
+import IranAnimation from "../components/IranAnimation";
 import SearchJobForm from "../components/SearchJobAdsForm";
 import Title from "../components/Title";
 import JobAdsBox from "../components/JobAdsBox";
-import HonorBox from "../components/HonorBox";
-import CtaBox from "../components/CtaBox";
-import Accordion from "../components/Accordion";
-import useOneScroll from "../hooks/useOnScrool";
 import PopularCompanies from "../components/PopularCompanies";
-import useJobAdsQuery from "../hooks/query/useJobAds";
-import IranAnimation from "../components/IranAnimation";
+import CtaBox from "../components/CtaBox";
+import HonorBox from "../components/HonorBox";
+import Accordion from "../components/Accordion";
+import tokenGenerator from "../utils/tokenGenerator";
+import useOneScroll from "../hooks/useOnScrool";
+import useJobAds from "../hooks/query/useJobAds";
 
 // accordions
 const accordions: { title: string; text: string }[] = [
@@ -43,7 +43,7 @@ const accordions: { title: string; text: string }[] = [
 ]
 
 const Home = () => {
-	const { jobAds } = useJobAdsQuery()
+	const { jobAds } = useJobAds()
 	// custom hook for scroll effects
 	useOneScroll(['employee-baner', 'cta-1', { id: 'cta-2', delay: 150 }])
 

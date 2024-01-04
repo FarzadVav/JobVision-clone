@@ -3,10 +3,19 @@ import { Star } from "@mui/icons-material"
 
 import JobAdsTypes from "../types/JobAds.types"
 import useJobAds from "../hooks/store/useJobAds"
+import { useEffect } from "react"
 
 const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
   const redirect = useNavigate()
   const { singleJobAd } = useJobAds(s => s)
+
+  const selected = singleJobAd?._id === jobAd._id
+
+  useEffect(() => {
+    if (!['/single', '/jobs'].includes(location.pathname) && Object.entries(singleJobAd || {}).length) {
+      useJobAds.setState({ singleJobAd: {} as JobAdsTypes })
+    }
+  }, [location.pathname])
 
   const prevCategoriesHandler = () => {
     const prevCategories: string[] = JSON.parse(localStorage.getItem('prevCategories') || '[]')
@@ -44,7 +53,7 @@ const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
       data-id={jobAd._id}
       data-category={jobAd.category}
     >
-      <div className={`text-jv-dark border border-solid border-jv-light w-full h-full flex flex-col justify-between rounded-md cursor-pointer p-3 ${singleJobAd?._id === jobAd._id ? 'lg:border-jv-primary lg:text-jv-primary' : ''}`}>
+      <div className={`text-jv-dark border border-solid border-jv-light w-full h-full flex flex-col justify-between rounded-md cursor-pointer p-3 ${selected ? 'lg:border-jv-primary lg:text-jv-primary' : ''}`}>
         <div className={`flex`}>
           <div className={`col-span-3 flex flex-col items-center`}>
             <div className={`w-20 h-20 flex justify-center items-center rounded-md`}>
@@ -94,7 +103,7 @@ const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
           </div>
         </div>
         <div className={`border-t border-dashed border-jv-light col-span-12 flex justify-between items-center pt-3 mt-5
-        ${singleJobAd?._id === jobAd._id ? 'lg:border-jv-primary' : ''}`}>
+        ${selected ? 'lg:border-jv-primary' : ''}`}>
           {
             jobAd.isUrgent ? (
               <span className={`badge badge-danger`}>
@@ -108,7 +117,7 @@ const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
           }
           {
             jobAd.company.score ? (
-              <div className={`badge ${singleJobAd?._id === jobAd._id ? 'mr-auto' : 'ml-auto lg:opacity-0 group-hover:opacity-100'}`}>
+              <div className={`badge ml-auto ${selected ? 'lg:ml-0' : 'lg:opacity-0 group-hover:opacity-100'}`}>
                 <Star className={`text-jv-warning`} fontSize="small" />
                 <span className={`text-jv-dark text-xs inline-block h-3`}>
                   {jobAd.company.score}
@@ -116,15 +125,11 @@ const JobAdsBox = ({ jobAd }: { jobAd: JobAdsTypes }) => {
               </div>
             ) : null
           }
-          {
-            singleJobAd?._id !== jobAd._id && (
-              <button
-                className={`btn-sm btn-success`}
-              >
-                ارسال رزومه
-              </button>
-            )
-          }
+          <button
+            className={`btn-sm btn-success ${selected ? 'lg:hidden' : ''}`}
+          >
+            ارسال رزومه
+          </button>
         </div>
       </div>
     </article>
