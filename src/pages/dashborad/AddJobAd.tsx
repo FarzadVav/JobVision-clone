@@ -52,16 +52,16 @@ const schema = z.object({
     }),
   salary: z.object({
     from: NUMERIC_STRING,
-    to: z.string(),
+    to: z.string().optional(),
     showBoth: z.boolean().optional()
   })
     .superRefine(({ from, to, showBoth }, ctx) => {
       if (showBoth) {
-        if (+from >= +to) {
+        if (+from >= +(to || '')) {
           ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'این عدد باید بزرگ تر از قبلی باشد', path: ['to'] })
-        } else if ((+from < 20) && (+to - +from) > 5) {
+        } else if ((+from < 20) && (+(to || '') - +from) > 5) {
           ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'فاصله دو عدد نباید بیشتر از 5 میلیون باشد', path: ['to'] })
-        } else if ((+from >= 20) && (+to - +from) > 10) {
+        } else if ((+from >= 20) && (+(to || '') - +from) > 10) {
           ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'فاصله دو عدد نباید بیشتر از 10 میلیون باشد', path: ['to'] })
         }
       }
@@ -89,6 +89,7 @@ const AddJobAd = () => {
   const showBothSalary = watch('salary.showBoth')
 
   const onSubmit: SubmitHandler<formTypes> = async (data) => {
+    console.log(data);
     if (!company?.company.logo
       || !company?.company.name
       || !company?.company.activity
@@ -124,7 +125,7 @@ const AddJobAd = () => {
         },
         salary: {
           from: +data.salary.from,
-          ...(+data.salary.to ? { to: +data.salary.to } : {})
+          ...(+(data.salary.to || '') ? { to: +(data.salary.to || '') } : {})
         },
         company: company.company._id || ''
       }
@@ -494,6 +495,7 @@ const AddJobAd = () => {
             className={`btn btn-primary mt-5`}
             type={`submit`}
             disabled={addJobAdPending}
+            onClick={() => console.log(errors)}
           >
             {
               addJobAdPending ? '' : 'ثبت آگهی جدید'

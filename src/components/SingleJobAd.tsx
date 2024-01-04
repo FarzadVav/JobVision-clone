@@ -90,17 +90,17 @@ const SingleJobAd = () => {
                   </div>
                 </div>
 
-                <Title customClass={`mt-6`}>
+                <Title customClass={`mt-6 mb-3`}>
                   <span className='!text-xl'>
                     شاخص های کلیدی از نظر کارفرما
                   </span>
                 </Title>
-                <ul className={`w-full flex flex-col`}>
+                <ul className={`w-full flex flex-wrap gap-2`}>
                   {
                     singleJobAd?.abilityForBoss.length ? singleJobAd?.abilityForBoss.map(ability => (
                       <li
                         key={tokenGenerator()}
-                        className={`bg-jv-bright w-max flex items-center justify-center px-3 py-1.5 mt-2 first:mt-3`}
+                        className={`bg-jv-bright min-w-max flex-1 text-center px-3 py-1.5`}
                       >
                         {ability}
                       </li>
