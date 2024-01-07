@@ -6,11 +6,12 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+package-lock.json
+liara_nginx.conf
 
 node_modules
 dist
 dist-ssr
-liara_nginx.conf
 *.local
 
 # Editor directories and files
