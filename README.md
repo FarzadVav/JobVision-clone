@@ -45,7 +45,7 @@ This project is a clone from [jobvision.ir](https://jobvision.ir). I implemented
 
 ---
 
-# Running app
+### Run app
 ```bash
 npm run start
 ```
