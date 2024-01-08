@@ -35,16 +35,6 @@ This project is a clone from [jobvision.ir](https://jobvision.ir). I implemented
 - Swiper slider
 - Supabase (API)
 
----
-
-<p align="center">
-  <a href="https://jobvision-cone.liara.run">
-    💻 View online 💻
-  </a>  
-</p>
-
----
-
 ### Run app
 ```bash
 npm run start
