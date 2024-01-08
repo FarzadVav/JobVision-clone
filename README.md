@@ -14,7 +14,7 @@ This project is a clone from [jobvision.ir](https://jobvision.ir). I implemented
 
 ---
   
-### Project features:
+### Project features :
 - Use of advanced technologies
 - Smart requests to API
 - Showing job ads based on previously viewed categories
@@ -22,7 +22,7 @@ This project is a clone from [jobvision.ir](https://jobvision.ir). I implemented
 - Implementation of complex forms
 - Login & Register & Add job ads
 
-### Tech stack:
+### Tech stack :
 - Vite
 - Typescript
 - React.js
@@ -33,6 +33,7 @@ This project is a clone from [jobvision.ir](https://jobvision.ir). I implemented
 - Tailwind css
 - Material UI
 - Swiper slider
+- Supabase (API)
 
 ---
 
